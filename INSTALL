@@ -1,33 +1,30 @@
 File id
 
-        This is INSTALL file of Procmail Module Library
-        <http://www.sourceforge.net/pm-lib>. Procmail is a tool to
-        manipulate mail messages. This library includes many ready to use
-        plug-in modules to be used from `~/.procmailrc' with INCLUDERC calls,
-        like:
+        Procmail is a tool to manipulate mail messages and this
+        library includes many plug-in modules ready to be used from
+        `~/.procmailrc' with INCLUDERC calls, like:
 
-            INCLUDERC = /path/to/procmail-lib/module.rc
+            INCLUDERC = /path/to/procmail-lib/<module>.rc
 
 Preconditions
 
-        You need procmail Mail Delivery Agent (MDA) before files in this
-        library are useful; visit <http://www.procmail.org>. The Mail
-        Transport Agent (MTA) must have been configured to support
-        procmail.
+        You need Procmail Mail Delivery Agent (MDA) before files in
+        this library are useful; visit <http://www.procmail.org>. The
+        Mail Transport Agent (MTA) must have been configured to
+        support Procmail.
 
-        Activating procmail support depends on operating system and
-        selected MTA. Activating procmail for individual accounts may need
-        setting up a `~/.forward' file. For more information, refer to
-        manual pages procmail(1) and procmailrc(5) or contact local system
+        Activating procmail for individual accounts may need setting
+        up a `~/.forward' file. For more information, refer to manual
+        pages procmail(1) and procmailrc(5) or contact local system
         administrator how to activate procmail support.
 
 How to install
 
         Installation requires GNU make. The default location is
         /usr/local/share/procmail-lib for modules and
-        /usr/local/doc/procmail-lib for documentation. To run system wide
-        install with different directoy, supply `prefix' and/or `exec_prefix'
-        to make(1) call:
+        /usr/local/doc/procmail-lib for documentation. To run system
+        wide install with different directoy, supply `prefix' and/or
+        `exec_prefix' to make(1) call:
 
             make prefix=/usr/share install
 
@@ -37,27 +34,18 @@ How to install
 
 How to sart using modules
 
-        Following libraries are included:
-
-        o   Alan Stebben's modules (under directory `lib-stebbens')
-        o   Jari Aalto's modules (under directory `lib'; files pm-ja*.rc)
-
-        Refer to README* files for each library to find out what the
-        modules can do and how they are called. The whole library is taken
-        into use by defining a module directory variable in
-        `~/.procmailrc':
+        Refer to README file to find out what the modules can do and
+        how they are called. The whole library is taken into use by
+        defining a simple directory variable in `~/.procmailrc':
 
             #  PM = Procmail, SRC = source files.
- 	    #  The variable name MUST be 'PMSRC'. Other library files
-	    #  depend on it.
 
             PMSRC = /usr/local/share/procmail-lib
 
-        After this variable the modules can be used. Any input parameters
-        should be set before calling the modules. Consult included
-        documentation or read the comments at the beginning od each module
-        file. Here is an example of using Unsolicited Bulk Email aka spam
-        module:
+        Any input parameters should be set before calling a module.
+        Consult included documentation or read the comments at the
+        beginning od each module file. Here is an example of using
+        Unsolicited Bulk Email, aka spam, module:
 
             INCLUDERC = $PMSRC/pm-jaube.rc
 
@@ -68,8 +56,8 @@ How to sart using modules
 
 Examples
 
-        There are some examples of procmail rc files included under the
-        documentation directories. See under `*/examples/' dicrectories.
+        There are some examples of procmail setup files included under
+        the documentation directory `examples/'.
 
 Further reading
 
