@@ -1,0 +1,78 @@
+# pm-jasrv-check.rc -- check FILE validity, subroutine for File Server
+# $Id: pm-jasrv-check.rc,v 2.6 2006/02/19 15:02:45 jaalto Exp $
+#
+#   File id
+#
+#	.Copyright (C)   1998-2006 Jari Aalto
+#	.$Keywords:      procmail, file server $
+#
+#       This code is free software in terms of GNU Gen. pub. Lic. v2 or later
+#	Refer to http://www.gnu.org/copyleft/gpl.html
+#
+#   Description
+#
+#       This subroutine is part of the TPFS or MPFS file server.
+#       Check FILE for nonvalid filenames or other access problems.
+#
+#   Input
+#
+#       o   JA_SRV_F_FILE_CASE_SENSITIVE, flag
+#       o   FILE, filename to check. possibly converted to lowercase.
+#
+#   Output
+#
+#       o   stat, set to "ok" if filename is acceptable. Otherwise contains
+#           brief error reason;
+#
+#
+#   Change Log (none)
+
+# ............................................................ &init ...
+
+id    = "pm-jasrv-check.rc"
+dummy = "
+========================================================================
+$id: init:
+"
+
+
+stat = "ok"
+
+
+# .................................................. &conversion ...
+# Should we ignore spelling mistakes? File.txt --> file.txt
+
+:0 D
+* JA_SRV_F_FILE_CASE_SENSITIVE ?? no
+*                         FILE ?? [A-Z]
+{
+    FILE = `echo "$FILE" | $TR A-Z a-z`
+}
+
+# ........................................................... &check ...
+#	Do not accept wildcard names, because
+#
+#	    % test -r file*txt
+#
+#	would succeed, but there is no no such individual file
+
+:0
+*  FILE ?? [][*?{}()<>&!'$;]
+{
+    stat = "invalid-characters"
+}
+
+
+# Check that filename does not have "../" security risk.
+# Or dos styled "..\" -- perhaps for NT?
+
+:0
+*  FILE ?? \.\.[/\]
+{
+    stat = "invalid-directory-access"
+}
+
+
+dummy = "$id: end: STAT = $stat"
+
+# Enf of pm-jasrv-check.rc

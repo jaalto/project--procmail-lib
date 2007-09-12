@@ -1,0 +1,47 @@
+# ~/.procmailrc.bayesian
+#
+# This module demonstrates "Using battery of Bayesian shields from procmail"
+# described in README.txt of Procmail Module library. Please read that document
+# before trying to use this file. You need to install external programs first.
+#
+# Copy this file to suitable location, modify it as needed, and
+# include file from ~/.procmailrc with call:
+#
+#       INCLUDERC = $HOME/.procmailrc.bayesian
+
+SHELL       = /bin/sh
+PMSRC       = /usr/share/procmail-lib
+INCLUDERC   = $PMSRC/pm-javar.rc    # Define variables
+
+#   If you have one of these programs installed,
+#   simply remove *comment* from the line.
+
+# JA_UBE_ANNOYANCE_PRG    = "/usr/bin/annoyance-filter"
+# JA_UBE_BMF_PRG          = "/usr/bin/bmf" # Bayesian Mail Filter
+# JA_UBE_BSFILTER_PRG     = "/usr/bin/bsfilter"
+# JA_UBE_BOGOFILTER_PRG   = "/usr/bin/bogofilter"
+# JA_UBE_IFILE_PRG        = "/usr/bin/ifile"
+# JA_UBE_SPAMASSASSIN_PRG = "/usr/bin/spamassassin" # or use 'spamc'
+# JA_UBE_SPAMORACLE_PRG   = "/usr/bin/spamoracle"
+# JA_UBE_SPAMPROBE_PRG    = "/usr/bin/spamprobe"
+
+#   This module is "umbrella" for all Bayesian programs.
+#   Variable ERROR is set if any of the programs classify
+#   message as spam.
+
+INCLUDERC = $PMSRC/pm-jaube-prg-runall.rc
+
+:0 :
+* ERROR ?? ^()\/.+
+spam.mbox
+
+#   Program `ifile' is special. It can be trained to detect several kinds
+#   of messages. Header X-Spamifile will appear
+
+INCLUDERC = $PMSRC/pm-jaube-prg-ifile.rc
+
+:0 :
+* ERROR ?? \/[a-z]+
+$MATCH.mbox
+
+# End of file

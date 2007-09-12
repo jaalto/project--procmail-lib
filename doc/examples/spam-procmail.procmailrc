@@ -1,0 +1,48 @@
+# ~/.procmailrc.spam-procmail
+#
+# This module is demonstrated in "A  lightweight UBE block system with pure procmail"
+# README.txt of Procmail Module library. Please read that document
+# before trying to use this file. No external programs need to be installed.
+#
+# Copy this file to suitable location, modify JA_UBE_VALID_ADDR and other
+# variables as needed, and include file from ~/.procmailrc with call:
+#
+#       INCLUDERC = $HOME/.procmailrc.spam-procmail
+#
+
+PMSRC       = /usr/share/procmail-lib
+INCLUDERC   = $PMSRC/pm-javar.rc    # Define variables
+
+enabled = "yes"     # Set to "no" to disable following block
+
+:0
+* enabled ?? "yes"
+{
+    saved   = $VERBOSE  # Don't record logs
+    VERBOSE = "off"
+
+        JA_UBE_ATTACHMENT_ILLEGAL_KILL = "yes"
+        JA_UBE_VALID_ADDR = "(me@example.com|another@example.com)"
+        INCLUDERC         = $PMSRC/pm-jaube.rc
+
+        #  If ERROR is empty, it means the previous module
+        #  did not see anything special. Try another
+        #  spam detection module: search bad keywords
+
+        :0
+        * ERROR ?? ^^^^
+        {
+            INCLUDERC = $PMSRC/pm-jaube-keywords.rc
+        }
+
+    VERBOSE = $saved
+
+    #   If ERROR was set, the message was classified as UBE.
+    #   The "\/" records reason to procmail's log file
+
+    :0 :
+    * ERROR ?? ()\/.+
+    spam.mbox
+}
+
+# End of file

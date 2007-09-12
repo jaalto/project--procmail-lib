@@ -1,0 +1,14 @@
+2004-12-16 Thu  Jari Aalto  <jari dot aalto A T cante dot net>
+
+        * Makefile: 1.4 CODEDIR changed to DATADIR.
+        (EXDIR): Changed.
+        (NAME): New.
+
+2004-09-21 Tue  Jari Aalto  <jari dot aalto A T cante dot net>
+
+        * proclint: 1.1  Changed /usr/local/bin/perl to
+        /usr/bin/perl
+
+        * list-addr.rc: 1.1 Changed /usr/local/bin/procmail to
+        /usr/bin/procmail
+

@@ -1,0 +1,71 @@
+# pm-jasrv-msg.rc -- send message, subroutine for File Server
+# $Id: pm-jasrv-msg.rc,v 2.6 2006/02/19 15:02:45 jaalto Exp $
+#
+#   File id
+#
+#	.Copyright (C)   1998-2006 Jari Aalto
+#	.$Keywords:      procmail, file server $
+#
+#       This code is free software in terms of GNU Gen. pub. Lic. v2 or later
+#	Refer to http://www.gnu.org/copyleft/gpl.html
+#
+#   Description
+#
+#       This subroutine is part of the TPFS or MPFS file server. Run $CODE
+#       and return resutls to to user. Subroutine is meant to be used for
+#       informational messages.
+#
+#   Input
+#
+#       o   code, code to run in shell
+#       o   stat, status message for user
+#
+#   Change Log (none)
+
+# ............................................................ &init ...
+
+id    = "pm-jasrv-msg.rc"
+dummy = "
+========================================================================
+$id: init:
+"
+
+
+
+head        = ""
+
+
+dummy       = "$id: Check if subject notify is on "
+
+:0
+* JA_SRV_F_SUBJ_NOTIFY ?? yes
+{
+    header = "-ISubject: Re: $JA_SRV_SUBJECT [$stat]"
+}
+
+:0 fhw
+|   $FORMAIL                                                                \
+    ${header+"$header"}                                                     \
+    -A "$JA_SRV_X_HEADER: $stat $FILE" -I "From "
+
+
+:0          # Just for logging purposes, record TO in MATCH
+* ^To:\/.*
+{ }
+
+dummy = "$id: Running code [$code] and sending to [$MATCH]"
+
+:0 hwc:
+|   ( $CAT -; $code )  |                                                    \
+    $SENDMAIL ;                                                             \
+    echo "    [ja-srv; $stat $FILE; $JA_SRV_FROM;]"                         \
+    >> $JA_SRV_LOG;
+
+MBOX        = $JA_SRV_MSG_MBOX
+INCLUDERC   = $JA_SRV_RC_MBOX
+
+
+dummy = "$id: end:"
+
+
+# Enf of pm-jasrv-msg.rc

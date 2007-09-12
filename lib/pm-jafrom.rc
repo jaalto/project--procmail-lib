@@ -1,0 +1,88 @@
+# pm-jafrom.rc -- get message's best FROM field without calling `formail'
+# $Id: pm-jafrom.rc,v 2.7 2006/02/19 15:02:45 jaalto Exp $
+#
+#   File id
+#
+#       Copyright (C)   1997-2006 Jari Aalto
+#       $keywords:      procmail,  subroutine, extract FROM $
+#
+#       This code is free software in terms of GNU Gen. pub. Lic. v2 or later
+#	Refer to http://www.gnu.org/copyleft/gpl.html
+#
+#   Description
+#
+#	This includerc extracts the most likely FROM address from the
+#       message. The order of the search is Reply-to, From_, Sender, From
+#       and if none found, then as a last resort, call `formail'. You would
+#       usually use the returned value for logging purposes.
+#
+#       Avoiding extra formail call could be usefull if you receive lot
+#       of messages per day.
+#
+#       Example input
+#
+#           (none)
+#
+#       Returned values
+#
+#           OUTPUT, containing the derived FROM field
+#
+#   Required settings
+#
+#	PMSRC must point to source directory of procmail code. This subroutine
+#       will include pm-javar.rc from there. You nee procmail 3.11pre7 in
+#       order to use this subroutine. (due to formail -z switch)
+#
+#   Call arguments (variables to set before calling)
+#
+#       (none)
+#
+#   Usage example
+#
+#	INCLUDERC = $PMSRC/pm-jafrom.rc
+#	FROM      = $OUTPUT   # now we have the 'best' FROM field
+#
+#   Change Log (none)
+
+# .................................................... &initialising ...
+
+
+id    = "pm-jafrom.rc"
+dummy = "
+========================================================================
+$id: init:
+"
+
+:0
+* !  WSPC ?? [ ]
+{
+    INCLUDERC = $PMSRC/pm-javar.rc
+}
+
+# ..................................................... &output-vars ...
+# output variables
+
+OUTPUT
+
+# ........................................................... &do-it ...
+#	Check that input is something like: Thu, 13 Nov 1997
+
+dummy = "$id: Get message's FROM field."
+
+:0
+*$ ! ^Reply-to: *\/$NSPC.*
+*$ ! ^From: *\/$NSPC.*
+*$ ! ^Sender: *\/$NSPC.*
+*$ ! ^From *\/$NSPC+
+{
+    OUTPUT = `formail -zxFrom:`
+}
+:0 E
+{
+    OUTPUT = $MATCH
+}
+
+
+dummy = "$id: end:"
+
+# end of file pm-jafrom.rc

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML VERSION="2.0">
+<HEAD>
+<TITLE>AKS Procmail Library Description</TITLE>
+</HEAD>
+<BODY ALINK="#ffff00" VLINK="#621ea0" LINK="#ff040e" BGCOLOR="#b4eded">
+<CENTER><H1 ALIGN="CENTER">AKS Procmail Library</H1>
+</CENTER><P>The <A HREF="http://anywhere.engr.sgi.com/~aks/mail/procmail-lib.shar">AKS Procmail Library</A> contains the following files:</P>
+<DL>
+<DT><B>Makefile</B>
+<DD>a Unix Makefile to help install these libary files in <CODE>/usr/local</CODE>, or another location.
+<DT><B>ackmail.rc</B>
+<DD>a set of recipes which perfom auto-acknowledgement of incoming mail. This
+file uses <B>guess-mua.rc</B> and <B>unread-mh.rc</B>. See <I>ackmail.3 </I>for details.
+<DT><B>commands.help</B>
+<DD>A file of information sent in response to a mail request of &quot;Subject: help
+info&quot;. See &quot;<CODE>commands.rc</CODE>&quot;.
+<DT><B>commands.rc</B>
+<DD>A set of recipes which recognize commands in the Subject: header and perform
+them. A log is kept of all such commands. 
+<DT><B>comm-reply-file.rc</B>
+<DD> A recipe file which replaces the body of the current message with a 
+named, or generates an error report.  A "subroutine" recipe file for
+"commands.rc".
+<DT><B>correct-addr.rc</B>
+<DD>A recipe file which can help do mail forwarding
+for users who have moved or changed email addresses.  
+<B><EM>Currently not well tested.</EM><B>
+<DT><B>dupcheck.rc</B>
+<DD>A recipe file which removes duplicate mail.
+<DT><B>get-from.rc</B>
+<DD>A recipe file which extracts the &quot;best&quot; address, including 
+personal information from the various originating address fields.
+<DT><B>guess-mua.rc</B>
+<DD>A recipe file which attempts to guess the current MUA (Mail User Agent).
+Not needed of MUA is explicitly defined.
+<DT><B>headers.rc</B>
+<DD>Defines some variables which can be used for matching against headers.
+<DT><B>list-addr.rc</B>
+<DD>A recipe file which trys to determine if the current
+mail is from a mailing list or not.  This is still
+<em>experimental</em> and <B><EM>not well tested</EM></B>.
+<DT><B>procmail-lib.html</B>
+<DD>An HTML file which describes the Procmail Library.
+<DT><B>unread-mh.rc</B>
+<DD>A recipe file which attempts to compute how many unread messages there are
+for an MH user. 
+</DL>
+<P>If you have improvements or contributions to this collection of recipes,
+please send them to me at &lt;<CITE><A HREF="mailto:aks@sgi.com">aks@sgi.com</CITE></A>&gt;. I may not respond quickly to any submissions, but I always appreciate
+suggestions for improvement.</P>
+<HR>
+<P><B>Procmail</B> is a mail filtering program, with which a user can process incoming mail
+in an infinite number of ways. Procmail is publicly available at no cost,
+other than your time. The current version of procmail is always available
+at:</P>
+<P>The latest version of procmail can be obtained directly from the FTP archive: </P>
+<P><A HREF="telnet://ftp.informatik.rwth-aachen.de">ftp.informatik.rwth-aachen.de</A> (<A HREF="telnet://137.226.225.3">137.226.225.3</A>) </P>
+<P>as (g)zipped tar file: <TT>/pub/packages/procmail/procmail.tar.gz</TT> &lt;160KB </P>
+<P>as compressed tar file: <TT>/pub/packages/procmail/procmail.tar.Z</TT> &lt;224KB </P>
+<P>Procmail, SmartList, and my procmail and SmartList libraries are also available
+via FTP: </P>
+<P><A HREF="ftp://hub.ucsb.edu/pub/mail/procmail-3.11pre3.tar.gz">ftp://hub.ucsb.edu/pub/mail/procmail.tar.gz</A></P>
+<P><A HREF="ftp://hub.ucsb.edu/pub/mail/SmartList-3.11pre3.tar.gz">ftp://hub.ucsb.edu/pub/mail/SmartList.tar.gz</A></P>
+<P><A HREF="ftp://hub.ucsb.edu/pub/mail/procmail-lib.shar">ftp://hub.ucsb.edu/pub/mail/procmail-lib.shar</A></P>
+<P><A HREF="ftp://hub.ucsb.edu/pub/mail/smartlist-lib.shar">ftp://hub.ucsb.edu/pub/mail/smartlist-lib.shar</A></P>
+<P>If you have any questions about using procmail, there is a mailing list
+with lots of helpful members: &lt;<A HREF="mailto:procmail@informatik.rwth-aachen.de">procmail@informatik.rwth-aachen.de</A>&gt;. Use the address: &lt;<A HREF="mailto:procmail-request@informatik.rwth-aachen.de">procmail-request@informatik.rwth-aachen.de</A>&gt; to subscribe to the list.</P>
+</BODY>
+</HTML>

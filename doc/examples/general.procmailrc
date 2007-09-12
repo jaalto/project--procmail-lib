@@ -1,0 +1,89 @@
+# ~/.procmailrc -- Example
+# .................................................................
+#   Initial procmail setup.
+#
+#   You could change variable DEFAULT, but it is not changed here:
+#   - That is where mail is delivered by default at the very
+#     end of ~/.procmailrc when no other recipe has handled it
+#   - Usually /var/mail/<your login name>
+
+VERBOSE     = "on"
+LOGABSTRACT = "all"
+LOGFILE     = $HOME/tmp/pm.log
+
+#   SHELL
+#   - it is highly important that shell is set to /bin/sh. See faq
+#
+
+SHELL       = /bin/sh       # VERY IMPORTANT
+UMASK       = 007           # James Bond :-)
+LINEBUF     = 8192          # make sure procmail won't choke
+
+#   PATH
+#   - be sure the `sendmail' is along PATH. Typically /usr/sbin
+#  - This is a generic path structure that will work accross
+#    various platforms: SunOS, HP-UX, Linux. Actually It doesn't
+#    matter if there are non-exixtent paths; it only slightly
+#    decreases performance to find a particular program, like
+#    `awk'. Place the "best paths" first.
+
+PATH =\
+:$HOME/bin\
+:/bin\
+:/usr/bin\
+:/opt/bin\
+:/vol/bin\
+:/usr/sbin\
+:/usr/local/bin\
+:/usr/local/sbin\
+:/opt/local/bin\
+:/vol/local/bin\
+:/usr/contrib/bin\
+:/usr/ucb\
+:/usr/lib\
+:/vol/lib\
+:/usr/ccs/bin\
+:${PATH}
+
+# .................................................................
+
+#  Using Procmail Module Library http://sf.net/projects/pm-lib
+#
+#  The variable's name must be `PMSRC' - All pm-ja*.rc
+#  depend on it.
+
+PMSRC  = /usr/share/procmail-lib
+
+#  Load the central initial startup code. This will define all
+#  modules an variables
+
+INCLUDERC = $PMSRC/pm-javar.rc
+
+# .................................................................
+# Now, start using modules.
+
+#  Alan K. Stebbens's libraries do not include central setup.
+#  Peek inside every code. Here the "date" module is called.
+
+INCLUDERC   = $PMSRC/date.rc
+
+# The complete list of defined $RC_* variables is defined in
+# pm-javar.rc, peek there.
+
+#   Activate mailing list detection module.
+
+JA_LIST_CONVERSION = "\
+jde       java.jde,\
+java      java.lang,\
+FLAMENCO  flamenco,\
+"
+
+INCLUDERC = $RC_LIST
+
+:0 :
+* ! LIST ?? ^^^^
+mailinglist.$LIST
+
+# ... other modules ... other recipes ...
+
+# End of ~/.procmailrc example

@@ -1,0 +1,79 @@
+# pm-jasrv-req.rc -- server request check, subroutine for File Server
+# $Id: pm-jasrv-req.rc,v 2.6 2006/02/19 15:02:45 jaalto Exp $
+#
+#   File id
+#
+#	.Copyright (C)   1998-2006 Jari Aalto
+#	.$Keywords:      procmail FileServer subroutine $
+#
+#       This code is free software in terms of GNU Gen. pub. Lic. v2 or later
+#	Refer to http://www.gnu.org/copyleft/gpl.html
+#
+#   Description
+#
+#       This subroutine is part of the MPFS file server.
+#       Check if file server request is on the JA_SRV_SUBJECT and
+#       do case or incasensitive check.
+#
+#	To Dry run this module use following skeleton. Substitute keywods
+#	as needed to reflect your system setup:
+#
+#           % procmail DEFAULT=/dev/null VERBOSE=on LOGABSTRACT=all     \
+#             PMSRC=$HOME/txt JA_SRV_CMD_STRING=send                    \
+#             JA_SRV_SUBJECT="send newbie_article.rtf noconv"		\
+#             txt/pm-jasrv-req.rc < ~/test.mail
+#
+#   Input
+#
+#       o   JA_SRV_F_CMD_CASE_SENSITIVE; if "yes" then server request
+#           is case sensitive.
+#       o   JA_SRV_FORMAIL_FROM. the email From field
+#
+#   Output
+#
+#       o   stat, set to "ok" if request is accepted
+#
+#   Change Log (none)
+
+# ............................................................ &init ...
+# - no leading periods(.) are accepted in the filename
+# - Invalid filename access "../" is tested later
+
+id    = "pm-jasrv-req.rc"
+dummy = "
+========================================================================
+$id: init:
+"
+
+:0
+* !  WSPC ?? ( )
+{
+    INCLUDERC = $PMSRC/pm-javar.rc
+}
+
+
+regexp  = "^^$s*$JA_SRV_CMD_STRING$s+$NSPC+"
+subj	= $JA_SRV_SUBJECT
+stat    = ""
+
+
+dummy = "$NL$id: do we use case sensitive request keyword?$NL"
+
+:0
+*  JA_SRV_F_CMD_CASE_SENSITIVE ?? yes
+{
+    flags = "D"
+}
+
+dummy = "$NL$is: check if this is request $NL"
+
+:0 $flags
+*$ subj ?? $regexp
+{
+    stat = "ok"
+}
+
+dummy = "$id: end:"
+
+
+# Enf of pm-jasrv-req.rc

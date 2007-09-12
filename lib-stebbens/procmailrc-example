@@ -1,0 +1,296 @@
+# This is an annotated example ~/.procmailrc file
+#
+# Use it as a guide to creating your own ~/.procmailrc file.
+#
+#  You must edit this before installing it;
+#  *** IT WILL NOT WORK AS IS ***.
+#
+# $Id: procmailrc-example,v 1.1 2002/01/01 22:25:33 jaalto Exp $
+#
+#    Copyright (C) 1995  Alan K. Stebbens <aks@sgi.com>
+#
+#    This program is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License
+#    along with this program; if not, write to the Free Software
+#    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+#
+# It is a good idea to define SHELL to /bin/sh, so that no
+# unexpected surprises occur.  Some systems redefine SHELL to
+# your default login shell, which may not be a Bourne-shell compatible
+# shell.  Since most procmail recipes use Bourne-shell language
+# features, SHELL=/bin/sh is a good idea.
+
+SHELL=/bin/sh
+
+# Defining the path to include the directories where procmail is
+# installed is necessary if the system default path doesn't include
+# them.  Typically, ~/.procmailrc is invoked by procmail via
+# sendmail, and the PATH may not be sufficient as it is.
+
+PATH=$PATH:/usr/local/bin:/usr/local/mh/bin
+
+# Defining MAILDIR does a "cd $MAILDIR".  So, define it to the
+# directory which contains most of your mail recipes.  I use 
+# $HOME/Mail.
+
+MAILDIR=$HOME/Mail
+
+# It is an important feature to keep a log of your mail -- just so you
+# have some kind of idea what is happening to it.  Note that plain
+# filenames are relative to MAILDIR, since procmail always sets the
+# current directory to MAILDIR.  So, if you keep your recipe and log
+# files in $MAILDIR, then you can name the files by their basename.
+
+LOGFILE=Log
+
+# I use FAILDROP to define a mail drop location which is on a 
+# *different* filesystem than my $DEFAULT maildrop.  This allows
+# me to write conditional recipes, which are invoked only if
+# the $DEFAULT or other delivery fails.
+FAILDROP=/other/spool.mail
+
+# If you use MH as your MUA (as I do), then defining several
+# folders here make it easy to globally change them later.
+# MH folders are indicated by the trailing "/.".
+INBOX=inbox/.
+ADMIN=admin/.
+OTHER=other/.
+BADMAIL=errs/.
+
+# I use this in many recipes to identify myself, and to 
+# annotate filtered mail with "X-Loop: $MY_ADDR" headers as
+# part of a loop detection algorithm.
+
+MY_ADDR=myname@myhost.mydomain.dom
+
+# I use $MY_NAMES variable to recognize the various aliases 
+# which all lead to my incoming maildrop.  If you have an 
+# AOL and Compuserve and Internet account all forwarded to 
+# the same address, you would define this as the all of the 
+# varying alternatives.
+
+MY_NAMES="(First Mi. Lastname|First|Lastname|First\.Lastname|\
+	   F.Lastname|FML)@(myhost\.mydomain\.dom|aol\.com|\
+	   compuserv.com)
+
+# Define FROMSIG to your standard "From:" signature line.
+
+FROMSIG="First's Mailer-Daemon <$MY_ADDR>"
+
+
+# I include "dupcheck.rc" to avoid duplicate incoming mail.  Note that
+# this will not identify mail duplicated by different mailers, just
+# duplicate mail from the same origin.
+
+INCLUDERC=$LIB/dupcheck.rc
+
+
+# Pull in the standard header patterns
+INCLUDERC=$LIB/headers.rc
+
+
+# If I am on vacation, I create a file called ~/Mail/vacation.msg 
+# into which I place my notice explaining my absence.  This file
+# is examined by "ackmail.rc" (see below).
+
+# However, some of my other recipes below varying their behavior
+# depending upon the value of $VACATION.  In vacation mode,
+# more things get tossed than otherwise.
+
+# So, set VACATION to "yes" in vacation mode
+:0
+* ? test -f vacation.msg
+{ VACATION=yes }
+
+# The rest of the recipe is broken into two basic parts:
+#
+#    a.  process mail if it is addressed *directly* to me,
+#	 on either a "To:" or "Cc:" header.
+#
+#    b.  process other mail (mail to me via any mailing 
+#	 lists of which I am a member).
+#
+#
+# I like the variable $USER (since I grew up on a BSD system),
+# so let's define it using the SysV equivalent (which procmail
+# sets up).
+
+USER=${USER:-$LOGNAME}
+
+# If the mail is to me ($USER), do some special things
+:0
+* $ ^TO($USER)
+{
+
+    # First -- since I allow a selected set of commands
+    # on the Subject: line, I use "commands.rc" to recognize
+    # and perform them.
+
+    # Check for any commands on the Subject line
+    # (but only if commands.rc is present).
+    :0 
+    * ? test -f commands.rc
+    { INCLUDERC=commands.rc }
+
+    # I also like to have mail to me acknowledged, to I use
+    # ackmail.rc.  Include it
+
+    :0
+    * ? test -f ackmail.rc
+    { INCLUDERC=ackmail.rc }
+
+    # So far, the mail is not a command, and it has been
+    # acknowledged, so now we can safely file it away.
+
+    # If the mail is directly to me, -> +inbox
+    :0:
+    $INBOX
+	
+	# If the drop to $INBOX failed, then let's try dropping
+	# it into $DEFAULT (which is where it would have gone
+	# our recipe hadn't tried filtering it).
+	:0 e:
+	$DEFAULT
+
+	    # Well, the $DEFAULT drop didn't work, so let's try
+	    # yet another filesystem.
+	    :0 e:
+	    $FAILDROP
+
+}
+
+# Okay -- mail below here came to me indirectly -- from some
+# mailing list.
+
+# In vacation mode, let's trash any root mail -- someone else 
+# get's to worry about this
+
+:0 h
+* VACATION ?? yes
+* ^(To|From):.*root([ ,>]|$)
+/dev/null
+
+# I've occasionally written an addition to this basic procmail
+# recipe by writing small, special case filtering recipes.  I
+# Then "include" them using the method below.  This allows me
+# to later disable the special case filtering by removing the
+# file, or moving it to another name.
+
+# A common special case is where you develop a group of 
+# users who share a common interest for a while.  I then
+# write such a small recipe to detect the incoming mail of interest
+# and redirect it to these interested users.  A kind of
+# "home brew" mailng list. 
+#
+# This way, I can share the mail to me by relaying it to them without
+# having to inform (and educate) them about mailing lists.  Typically,
+# some of these users are either adminstrative types or highly
+# non-technical types who do not wish to learn about mailing lists, but
+# do wish to share in the mail of interest.
+
+# This is only a short term solution -- setting up a mailing
+# list is the proper thing to do for longer term distributions.
+
+:0
+* ? test -f mac-users.rc
+{ INCLUDERC=mac-users.rc }
+
+# I treat junkmail filtering as a "special case", and keep it
+# in a separate file.  Basically, all the mail delivered in
+# this file goes to /dev/null.
+
+:0
+* ? test -f junkmail.rc
+{ INCLUDERC=junkmail.rc }
+
+# Here's an example of a piece of mail which you might
+# wish to have printed regularly when it arrives, and
+# even auto-filed, but still show up in your +inbox for
+# online perusal.
+
+# Check on edupage; automatically print it (unless I'm on vacation)
+# and auto-file it.  Leave it also in my inbox to be read and deleted.
+:0
+* ^Sender: *owner-edupage
+* ^To:.*\<edupage@.*\.educom\.edu
+* ^Subject: *Edupage
+{
+
+  # File it into its proper place (use "c" to "copy" the mail)
+  :0c:
+   info/edupage/.
+
+  LOCATION=$LASTFOLDER
+  
+  # If I'm not on vacation, print the thing automatically
+  :0
+  * ! VACATION ?? yes
+  * ! ^X-Printed:
+  {
+    # Mark it as printed (so I don't print it twice)
+    :0fh
+    | formail -I"X-Printed: `date`"
+
+    # Here I print it using a special shell script called "printmail"
+    # which is a little wrapper around "enscript", using "-b" to
+    # set the mailbox name, and -i to set the subject.
+    :0c
+    | sh -c "PRINTER=ps; export PRINTER ; $HOME/bin/printmail $LOCATION"
+  }
+}
+
+# On vacation, trash these
+
+:0
+* VACATION ?? yes
+* ^TO(((help|info|bug)-)?gnu-(emacs|utils|([0-9a-zA-Z]+-)?sources)(-bug)?|\
+	mh-users|com-priv-digest-dist|amd-workers|edb-list|sybase-l)@
+/dev/null
+
+# If it is mail to one my lists, put into +other
+:0:
+* ^TO(((help|info|bug)-)?gnu-(emacs|utils|([0-9a-zA-Z]+-)?sources)(-bug)?|\
+	mh-users|procmail|SmartList|MailAgent|Majordomo(-(users|workers))?|\
+	list-managers|com-priv-digest-dist|amd-workers|req|edb-list|\
+	perl-users|sybase-l|(info-)?ietf(-announce(-request)?)?)(:;)?@
+$OTHER
+    :0e:
+    $DEFAULT
+	:0e:
+	$FAILDROP
+
+
+# When I'm on vacation, throw mailer-daemon errors away (someone
+# else has to deal with it).
+
+:0 h
+* VACATION ?? yes
+* ^FROM_MAILER
+/dev/null
+
+# If mail is from some kind of daemon, drop it in the +admin folder
+:0:
+* ^FROM_MAILER
+$ADMIN
+    :0e:
+    $DEFAULT
+	:0e:
+	$FAILDROP
+
+# Drop any remaining into my $INBOX
+:0:
+$INBOX
+    :0e:
+    $DEFAULT
+	:0e:
+	$FAILDROP
