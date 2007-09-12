@@ -1,15 +1,25 @@
 # pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
-# $Id: pm-jaube-prg-bmf.rc,v 1.22 2006/02/16 11:03:22 jaalto Exp $
 #
 #   File id
 #
-#       .Copyright (C)  2004 Jari Aalto
-#       .$Keywords:     procmail, subroutine, UBE, spam, filter $
+#       Copyright (C) 1997-2007 Jari Aalto
 #
-
-#       This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-#       Refer to http://www.gnu.org/copyleft/gpl.html
-
+#       This program is free software; you can redistribute it and/or
+#       modify it under the terms of the GNU General Public License as
+#       published by the Free Software Foundation; either version 2 of the
+#       License, or (at your option) any later version
+#
+#       This program is distributed in the hope that it will be useful, but
+#       WITHOUT ANY WARRANTY; without even the implied warranty of
+#       MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#       General Public License for more details.
+#
+#       You should have received a copy of the GNU General Public License
+#       along with program; see the file COPYING. If not, write to the
+#       Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+#       Boston, MA 02110-1301, USA.
+#
+#       Visit <http://www.gnu.org/copyleft/gpl.html>
 #
 #   Warning
 #
