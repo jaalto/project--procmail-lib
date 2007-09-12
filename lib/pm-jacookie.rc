@@ -47,20 +47,20 @@
 #       Unsolicited Bulk Email aka Spam is crawling from every possible
 #       domain thinkable, so you might think that a challenge-response
 #       policy could be deployed to regular email communication as well.
-#       The idea would be that unknown people are requested to 
-#       "join" to a white list, before discussion is initiated with them. 
-#       Bulk email shotguns do not reply to challenges (here: cookies), 
-#       so confirmations are not returned. Individual people that want to 
-#       talk, *may* want to return the cookies. 
+#       The idea would be that unknown people are requested to
+#       "join" to a white list, before discussion is initiated with them.
+#       Bulk email shotguns do not reply to challenges (here: cookies),
+#       so confirmations are not returned. Individual people that want to
+#       talk, *may* want to return the cookies.
 #
 #       Sounds like a perfect Unsolicited Bulk Email shield? No more
 #       non-invited mail? Wrong. Don't use this module for that. The
 #       whole idea of challenge-response is flawed and causes trouble
 #       for every person who tries to contact. Imagine for 10 people
-#       using C-R systems; they would all need to authenticate 
+#       using C-R systems; they would all need to authenticate
 #       themselves. Who is going to believe that he is not replying to
 #       a spammer who is collecting email addresses? And what about
-#       automatic messages that might be received -- there is no 
+#       automatic messages that might be received -- there is no
 #       artificial intelligence to deparate "human" messages from
 #       automatically generated messages, so challenges just
 #       increase the overall mail traffic. Every C-R system doubles
@@ -68,10 +68,8 @@
 #
 #       In short, don't use this module for implementing a C-R system
 #       to block regular mail to you. The reasons why all C-R systems
-#       are the worst kind of spam is better described in Procmail
-#       Module Library's README.txt also available at
-#       http://pm-lib.sourceforge.net/README.html in section titled
-#       "Challenge-Response policy make matters worse"
+#       are the worst kind of spam is described in document
+#       'Thoughts about increasing spam annoyance'.
 #
 #   How it works
 #
@@ -166,7 +164,7 @@
 #               * ! ERROR ?? known-user
 #               $UBE_SPOOL
 #
-#               #  ... Past this point: it was user in whitelist, so the 
+#               #  ... Past this point: it was user in whitelist, so the
 #               #  recipes after this block will take care of it
 #           }
 #
@@ -178,7 +176,7 @@
 #           ...Your work messages filed here..
 #
 #           TO            = `formail -rt -zxTo:`  # We need this elswhere
-#           JA_COOKIE_TO  = $TO                   
+#           JA_COOKIE_TO  = $TO
 #
 #           #   For List-X all subscribe requests must
 #           #   be confirmaed
@@ -240,7 +238,7 @@ JA_COOKIE_RC         = ${JA_COOKIE_RC:-$PMSRC/pm-jacookie1.rc}
 JA_COOKIE_XLOOP      = ${JA_COOKIE_XLOOP:-"\
 Procmail Authentication service (PAS)"}
 
-JA_COOKIE_SUBJECT_TAG= ${JA_COOKIE_SUBJECT_TAG:-"PAS-cookie-"}	     
+JA_COOKIE_SUBJECT_TAG= ${JA_COOKIE_SUBJECT_TAG:-"PAS-cookie-"}
 JA_COOKIE_HEADER     = ${JA_COOKIE_HEADER:-"X-PAS-Auth-Key:"}
 cookie = ""
 
@@ -265,13 +263,13 @@ JA_COOKIE_DEVNULL = ${JA_COOKIE_DEVNULL:-/dev/null}
 jaCookieData = ""
 jaCookieKey  = ""
 
-:0 
+:0
 *$ $SUPREME^0 H ?? ^Subject:()\/.* +$JA_COOKIE_SUBJECT_TAG[0-9]+
 *$ $SUPREME^0 B ?? ^Subject:()\/.* +$JA_COOKIE_SUBJECT_TAG[0-9]+
 {
-    jaCookieSubject = $MATCH	
+    jaCookieSubject = $MATCH
 
-    :0 
+    :0
     * ^FROM_DAEMON
     {
         #   The sender is not there, drop this message
@@ -294,7 +292,7 @@ jaCookieKey  = ""
 
     #   Remove cookie from subject
 
-    :0 
+    :0
     *$ jaCookieSubject  ?? ^()\/.* +$JA_COOKIE_SUBJECT_TAG
     *$ MATCH            ?? ^()\/.*[ ]
     *$ MATCH            ?? ^()\/.*[^ ]
@@ -323,12 +321,12 @@ jaCookieWhitelist = ""
 * ? $GREP '\<$JA_COOKIE_FROM\>' $JA_COOKIE_WHITELIST
 {
     jaCookieWhitelist = "yes"
-    ERROR             = "known-user"  
+    ERROR             = "known-user"
 }
-    
+
 # ........................................................... &do-it ...
 
-jaCookieNewUser     = "yes"            
+jaCookieNewUser     = "yes"
 jaCookieDate        = $YYYY-$MM-$DD
 
 #   - Mail arrived, check cache. Use regional lock because formail
@@ -349,12 +347,12 @@ dummy       = "pm-jacookie.rc: Testing new user"
 LOCKFILE
 mail = ""
 
-#   He is not in whitelist (ERROR="") and he did not return 
+#   He is not in whitelist (ERROR="") and he did not return
 #   the cookie (cookie="")
 
 dummy ="pm-jacookie.rc: Check if white [$jaCookieWhitelist] ERROR [$ERROR] cookie [$cookie]"
 
-:0 
+:0
 * jaCookieWhitelist ?? ^^^^
 * jaCookieNewUser   ?? no
 {
@@ -362,7 +360,7 @@ dummy ="pm-jacookie.rc: Check if white [$jaCookieWhitelist] ERROR [$ERROR] cooki
 
     :0
     * jaCookieData ?? [0-9]
-    { 
+    {
 	#  This user has returned confirmation. Check that it is correct
 
         dummy = "pm-jacookie.rc: confirming the cookie"
@@ -371,7 +369,7 @@ dummy ="pm-jacookie.rc: Check if white [$jaCookieWhitelist] ERROR [$ERROR] cooki
 	*$ ? $GREP ".*$JA_COOKIE_FROM.+$jaCookieData" $JA_COOKIE_KEYS
 	{
 	    dummy = "pm-jacookie.rc: Adding to whitelist"
-            msg   = "$JA_COOKIE_FROM"	
+            msg   = "$JA_COOKIE_FROM"
 
 	    :0 hwc : $JA_COOKIE_WHITELIST$LOCKEXT
 	    | echo "$msg" >> $JA_COOKIE_WHITELIST
@@ -401,14 +399,14 @@ dummy ="pm-jacookie.rc: Check if white [$jaCookieWhitelist] ERROR [$ERROR] cooki
 {
     saved = $ERROR
 
-        INPUT       = $JA_COOKIE_FROM   
-        INCLUDERC   = $JA_COOKIE_RC   
+        INPUT       = $JA_COOKIE_FROM
+        INCLUDERC   = $JA_COOKIE_RC
         jaCookieKey = $OUTPUT
-   
+
     ERROR         = $saved  #  restore value that got changed in subroutine
 
     jaCookieMail  = "yes"
-    jaCookieMsg   = "$jaCookieDate $JA_COOKIE_FROM $jaCookieKey"  
+    jaCookieMsg   = "$jaCookieDate $JA_COOKIE_FROM $jaCookieKey"
     dummy         = `echo "$jaCookieMsg" >> $JA_COOKIE_KEYS`
 }
 
@@ -416,7 +414,7 @@ dummy = "pm-jacookie.rc: If new user/mismatched key, maybe send mail [$jaCookieM
 
 :0
 *     jaCookieMail              ?? yes
-*     jaCookieWhitelist         ?? ^^^^  
+*     jaCookieWhitelist         ?? ^^^^
 *     JA_COOKIE_SEND            ?? yes
 *  !  jaCookieKey               ?? ^^^^
 *$ ! ^X-Loop:.*$JA_COOKIE_XLOOP
@@ -443,7 +441,7 @@ dummy = "pm-jacookie.rc: If new user/mismatched key, maybe send mail [$jaCookieM
         -A "X-Loop: $JA_COOKIE_XLOOP";                                      \
         echo "You Authentication key is: $jaCookieKey";                     \
         echo "$JA_COOKIE_MSG";                                              \
-        ) | $SENDMAIL $SENDMAIL_FLAGS 					
+        ) | $SENDMAIL $SENDMAIL_FLAGS
 
 }
 

@@ -27,14 +27,14 @@
 #	Make sure there are no stale lock files, or the spamprobe and this
 #	subroutine will hang infinitely:
 #
-#	    $ rm -f ~/.spamprobe/lock 
+#	    $ rm -f ~/.spamprobe/lock
 #
 #   Overview of features
 #
 #       o   Implements interface to http://freshmeat.net/projects/spamprobe/
 #           project.
 #       o   variable `ERROR' is set if the message was UBE.
-#       o   Results are available by default in header 
+#       o   Results are available by default in header
 #           `X-Spam-Spamprobe-Status'.
 #
 #   Description
@@ -80,7 +80,7 @@
 #       o   `JA_UBE_SPAMPROBE_HEADER', the header name where the results
 #           are put. If not defined, no header is added.
 #           Defaults to *X-Spam-Spamprobe-Status*
-#       o   `JA_UBE_SPAMPROBE_FORCE', if set to _yes_ then call program 
+#       o   `JA_UBE_SPAMPROBE_FORCE', if set to _yes_ then call program
 #           no matter what. Normally if there already is
 #           *X-Spam-Spamprobe-Status* header, it is assumed that the
 #           message has already been checked and no new checking is
@@ -109,7 +109,7 @@
 #
 #       The layout of this file is managed by Emacs packages tinyprocmail.el
 #       and tinytab.el for the 4 tab text placement.
-#       See project http://tiny-tools.sourceforge.net/
+#       See project http://freshmeat.net/projects/emacs-tiny-tools/
 #
 #   Change Log
 #
@@ -161,7 +161,7 @@ ERROR   # Kill variable
     #   Check for failures; require (A)and condition
     #
     #   procmail: Executing "/usr/bin/spamprobe,score"
-    #   error: unable to open database ....spamprobe/sp_words: 
+    #   error: unable to open database ....spamprobe/sp_words:
     #   Cannot allocate memory
     #   warning: berkeley db reported error: env close: Invalid argument (22)
     #   caught runtime exception: unable to open words database

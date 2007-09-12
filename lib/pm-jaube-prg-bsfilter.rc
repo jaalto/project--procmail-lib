@@ -29,7 +29,7 @@
 #       o   Implements interface to project
 #           http://packages.debian.org/testing/mail/bsfilter
 #       o   variable `ERROR' is set if the message was UBE.
-#       o   Results are available by default in header 
+#       o   Results are available by default in header
 #           `X-Spam-Bsfilter-Status'.
 #
 #   Description
@@ -103,7 +103,7 @@
 #
 #       The layout of this file is managed by Emacs packages tinyprocmail.el
 #       and tinytab.el for the 4 tab text placement.
-#       See project http://tiny-tools.sourceforge.net/
+#       See project http://freshmeat.net/projects/emacs-tiny-tools/
 #
 #   Change Log
 #
@@ -126,7 +126,7 @@ JA_UBE_BSFILTER_PRG_OPT       = ${JA_UBE_BSFILTER_PRG_OPT:-""}
 
 #   The header prefix name. If this variable is empty, then external
 #   formail call is saved - results can still be checked from variable
-#   ERROR. 
+#   ERROR.
 
 JA_UBE_BSFILTER_HEADER = ${JA_UBE_BSFILTER_HEADER:-"\
 X-Spam-Bsfilter-"}
@@ -164,18 +164,18 @@ ERROR  # Kill variable
     jaubeBsfilterFlag
     jaubeBsfilterStatus
 
-    :0 
+    :0
     * jaubeBsfilterData ?? X-Spam-Revision: \/.*bsfilter
     {
         jaubeBsfilterVer = $MATCH
 
-        :0 
+        :0
         * jaubeBsfilterData ?? X-Spam-Flag: \/.+
         {
-            jaubeBsfilterFlag = $MATCH            
+            jaubeBsfilterFlag = $MATCH
         }
 
-        :0 
+        :0
         * jaubeBsfilterData ?? X-Spam-Probability: \/.+
         {
             jaubeBsfilterStatus = $MATCH
@@ -185,13 +185,13 @@ ERROR  # Kill variable
         * jaubeBsfilterFlag ?? yes
         {
             ERROR = "yes"
-    
+
             :0
             * ! jaubeBsfilterStatus ?? ^^^^
             {
                 ERROR = "$ERROR $jaubeBsfilterStatus"
             }
-        } 
+        }
     }
 
     :0 fw
@@ -200,7 +200,7 @@ ERROR  # Kill variable
     | ${FORMAIL:-formail}                                        \
       -I "${JA_UBE_BSFILTER_HEADER}Flag: $jaubeBsfilterFlag"     \
       -I "${JA_UBE_BSFILTER_HEADER}Status: $jaubeBsfilterStatus" \
-      -I "${JA_UBE_BSFILTER_HEADER}Version: $jaubeBsfilterVer" 
+      -I "${JA_UBE_BSFILTER_HEADER}Version: $jaubeBsfilterVer"
 }
 
 dummy = "pm-jaube-prg-bsfilter.rc: end: $ERROR"

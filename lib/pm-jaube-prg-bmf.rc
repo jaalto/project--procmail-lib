@@ -48,7 +48,7 @@
 #       good or bad, or if you like, ham and spam. All the Bayesian programs
 #       are not the same, so if you want to achive magic 99.99% probability
 #       the only methodology to do that is to chain several programs in
-#       serially. There is no single program that can solve the 
+#       serially. There is no single program that can solve the
 #       UBE detection.
 #
 #       For serious discussion of strenghts of the different programs,
@@ -142,7 +142,7 @@
 #
 #       The layout of this file is managed by Emacs packages tinyprocmail.el
 #       and tinytab.el for the 4 tab text placement.
-#       See project http://tiny-tools.sourceforge.net/
+#       See project http://freshmeat.net/projects/emacs-tiny-tools/
 #
 #   Change Log
 #
@@ -176,7 +176,7 @@ JA_UBE_BMF_HEADER_PREFIX = ${JA_UBE_BMF_HEADER_PREFIX:-"X-Spam-Bmf-"}
 #   o   We don't trust the local MDA's result (if it had invoked
 #       bmf for us), because we want' to run the message
 #       through our own trained database
-#   o   Or, we're simply testing and have several INCLUDERC=$RC_UBE_BMF 
+#   o   Or, we're simply testing and have several INCLUDERC=$RC_UBE_BMF
 #       calls in our ~/.procmailrc to find out what location would be the
 #       best (beginning, middle, last) by examining the procmail LOGFILE.
 

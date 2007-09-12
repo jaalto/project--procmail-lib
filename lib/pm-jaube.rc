@@ -109,7 +109,7 @@
 #
 #           BIFF      = $HOME/Mail/mail.log
 #	    INCLUDERC = $PMSRC/pm-jadate.rc
-#	    ...	
+#	    ...
 #
 #           :0 hwic:
 #           *$ ! $LISTS
@@ -295,7 +295,7 @@
 #               :0 :
 #               * ERROR ?? ()\/[a-z].*
 #               {
-#                   #  Don't save those *.exe, *.zip UBE attachements 
+#                   #  Don't save those *.exe, *.zip UBE attachements
 #                   :0
 #                   *  ERROR ?? attacment.*file
 #                   /dev/null
@@ -321,9 +321,8 @@
 #   File layout
 #
 #       The layout of this file is managed by Emacs packages tinyprocmal.el
-#       and tinytab.el for the 4 tab text placement. Markers "# {{{"
-#       and "# }}}" are for Emacs fold control package folding.el
-#       See project http://tiny-tools.sourceforge.net/
+#       and tinytab.el for the 4 tab text placement.
+#       See project http://freshmeat.net/projects/emacs-tiny-tools/
 #
 #   Change Log
 #
@@ -664,9 +663,9 @@ jaubeHTML = "no"               # set initial value for flag
 
 ERROR_STATUS = "Good"
 
-#   - Kill these variables.   
-#   - The UBE catch reason is stored into ERROR. 
-#   - If something was matched while detecting UBE, te second 
+#   - Kill these variables.
+#   - The UBE catch reason is stored into ERROR.
+#   - If something was matched while detecting UBE, te second
 #     will hold the match.
 
 ERROR
@@ -800,7 +799,7 @@ dummy="pm-jaube.rc: Check attachements"
 #
 #     msg-id      =  "<" addr-spec ">"
 #     addr-spec   =  local-part "@" domain        ; global address
-#     local-part  =  word *("." word)             
+#     local-part  =  word *("." word)
 #     domain      =  sub-domain *("." sub-domain)
 #     =>
 #     Message-Id: word *("." word) "@" sub-domain *("." sub-domain),
@@ -1318,7 +1317,7 @@ dummy = "pm-jaube.rc: Virus message"
 
 :0
 * ERROR ?? ^^^^
-{ 
+{
     regexpBody =  "\
 Attenzione Virus\
 |Returned due to virus\
@@ -1337,7 +1336,7 @@ Attenzione Virus\
 |Vexira ALERT\
 |You sent potentially unsafe content\
 "
-  
+
     # These are too general to appear in Body.
 
     regexpHeader = "\

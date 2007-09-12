@@ -37,8 +37,8 @@ Document id
 
             % perl -S t2html.pl                                           \
               --html-frame                                                \
-              --base http://pm-lib.sourceforge.net/                       \
-              --button-previous "http://pm-lib.sourceforge.net/"          \
+              --base http://freshmeat.net/projects/procmail-lib           \
+              --button-previous "http://freshmeat.net/projects/procmail-lib" \
               --title  "Procmail module documentation"                    \
               --author "Jari Aalto"                                       \
               --meta-keywords "procmail, sendmail, programming, library"  \
@@ -4043,7 +4043,7 @@ Pm-jaube-keywords.rc -- Jari's bare bones word list based UBE filter
 
         The layout of this file is managed by Emacs packages tinyprocmal.el
         and tinytab.el for the 4 tab text placement.
-        See project http://tiny-tools.sourceforge.net/
+        See projecthttp://freshmeat.net/projects/tiny-tools
 
 Pm-jaube-prg-spamprobe.rc -- Interface to Annoyance Filter program
 
@@ -4168,7 +4168,7 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Annoyance Filter program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://tiny-tools.sourceforge.net/
+        See projecthttp://freshmeat.net/projects/tiny-tools
 
 Pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
 
@@ -4310,7 +4310,7 @@ Pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://tiny-tools.sourceforge.net/
+        See projecthttp://freshmeat.net/projects/tiny-tools
 
 Pm-jaube-prg-bsfilter.rc -- Interface to Bsfilter program
 
@@ -4416,7 +4416,7 @@ Pm-jaube-prg-bsfilter.rc -- Interface to Bsfilter program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://tiny-tools.sourceforge.net/
+        See projecthttp://freshmeat.net/projects/tiny-tools
 
 Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
 
@@ -4535,7 +4535,7 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://tiny-tools.sourceforge.net/
+        See projecthttp://freshmeat.net/projects/tiny-tools
 
 Pm-jaube-prg-runall.rc -- Interface to all Bayesian filter programs
 
@@ -4648,7 +4648,7 @@ Pm-jaube-prg-runall.rc -- Interface to all Bayesian filter programs
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://tiny-tools.sourceforge.net/
+        See projecthttp://freshmeat.net/projects/tiny-tools
 
 Pm-jaube-prg-spamoracle.rc -- Interface to Spamoracle program
 
@@ -4784,7 +4784,7 @@ Pm-jaube-prg-spamoracle.rc -- Interface to Spamoracle program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://tiny-tools.sourceforge.net/
+        See projecthttp://freshmeat.net/projects/tiny-tools
 
 Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
 
@@ -4895,7 +4895,7 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://tiny-tools.sourceforge.net/
+        See projecthttp://freshmeat.net/projects/tiny-tools
 
 Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
 
@@ -5213,7 +5213,7 @@ Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
     File layout
 
         The layout of this file is managed by Emacs packages tinyprocmal.el
-        See project http://tiny-tools.sourceforge.net/
+        See projecthttp://freshmeat.net/projects/tiny-tools
 
 Pm-javac.rc -- Procmail: Vacation framework recipe (id-cache)
 

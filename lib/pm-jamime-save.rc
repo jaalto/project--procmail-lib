@@ -170,7 +170,7 @@ dummy = "pm-jamime-save.rc: HEADER; $MIME_H_ATTACHMENT"
         #  Kill variable
         jaMimeSaveDate
 
-        :0 
+        :0
         *$ YYYY ?? $d
         {
             jaMimeSaveDate = "$YYYY-$MM-$DD"
@@ -211,7 +211,7 @@ dummy = "pm-jamime-save.rc: HEADER; $MIME_H_ATTACHMENT"
 
         :0 E
         {
-            :0 
+            :0
             *$ LINEBUF ??  ^^([5-9]$d$d$d$d$d|$d$d$d$d$d$d$d)^^
             {
                 # User has set bigger linebuf than our default
@@ -240,7 +240,7 @@ dummy = "pm-jamime-save.rc: BODY check"
 
     #   Try to locate the header where the content type is defined for
     #   file attachment. Note: there is no typo in the regexp, the
-    #   caret(^) matches newline. See http://pm-doc.sourceforge.net/
+    #   caret(^) matches newline.
     #
     #   Content-Type: application/octet-stream
     #   Content-Disposition: attachment; filename="file.txt"
@@ -364,7 +364,7 @@ dummy = "pm-jamime-save.rc: BODY check"
     #  Kill variable
     jaMimeSaveDate
 
-    :0 
+    :0
     *$ YYYY ?? $d
     {
         jaMimeSaveDate = "$YYYY-$MM-$DD"
@@ -391,9 +391,6 @@ dummy = "pm-jamime-save.rc: BODY check"
     }
 
     # ........................................................ &save ...
-    # Those nice backslash lines in the AWK are automatically handled
-    # by Emacs procmail mode (tinyprocmail.el)
-    # See http://tiny-tools.sourceforge.net/
 
     # 1) Locate the positions where the attachment starts
     # 2) When found, start looking for empty line which ends the mime

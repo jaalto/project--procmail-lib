@@ -33,8 +33,8 @@
 #       o   Implements interface to http://freshmeat.net/projects/spamoracle
 #           OCaml language based Bayesian Mail program.
 #       o   Variable `ERROR' is set to "yes" if the message was UBE.
-#       o   Results are available in headers `X-Spam-Spamoracle-Status', 
-#           `X-Spam-Spamoracle-Score', `X-Spam-Spamoracle-Details' and 
+#       o   Results are available in headers `X-Spam-Spamoracle-Status',
+#           `X-Spam-Spamoracle-Score', `X-Spam-Spamoracle-Details' and
 #           `X-Spam-Spamoracle-Attachment'  for further analysis.
 #
 #   Description
@@ -97,7 +97,7 @@
 #   Return values
 #
 #       o   `ERROR', value  "yes" if `JA_UBE_SPAMORACLE_REGEXP' matched.
-#       o   `ERROR_MATCH' contains detailed content of 
+#       o   `ERROR_MATCH' contains detailed content of
 #           `X-Spam-Spamoracle-Score' header.
 #
 #       If headers were enabled, they will contain these values. The
@@ -107,11 +107,11 @@
 #
 #           X-Spam-Spamoracle-Status: yes
 #           X-Spam-Spamoracle-Score: 1.00 -- 15
-#           X-Spam-Spamoracle-Details: refid:98 $$$$:98 surfing:98 asp:95 click:93 
+#           X-Spam-Spamoracle-Details: refid:98 $$$$:98 surfing:98 asp:95 click:93
 #             cable:92 instantly:90 https:88 internet:87 www:86 U4:85 isn't:14 month:81
-#             com:75 surf:75 
+#             com:75 surf:75
 #           X-Spam-Spamoracle-Attachments: cset="GB2312" type="application/octet-stream"
-#             name="Guangwen4.zip" 
+#             name="Guangwen4.zip"
 #
 #   Usage example
 #
@@ -133,7 +133,7 @@
 #
 #       The layout of this file is managed by Emacs packages tinyprocmail.el
 #       and tinytab.el for the 4 tab text placement.
-#       See project http://tiny-tools.sourceforge.net/
+#       See project http://freshmeat.net/projects/emacs-tiny-tools/
 #
 #   Change Log
 #
@@ -174,7 +174,7 @@ X-Spam-Spamoracle-"}
 JA_UBE_SPAMORACLE_FORCE = ${JA_UBE_SPAMORACLE_FORCE:-"no"}
 
 #   This regexp is matched against header like below. If found, the ERROR
-#   is set to "yes" to flag the spam. Range 0.8 - 1.00 and at least 5 
+#   is set to "yes" to flag the spam. Range 0.8 - 1.00 and at least 5
 #   or more interesting words.
 #
 #        X-Spam--Spamoracle-Score: 0.81 -- 5
@@ -190,8 +190,8 @@ $HOME/spamoracle-${USER:-${LOGNAME:-foo}}.tmp}
 # ............................................................ do it ...
 # Kill variables
 
-ERROR        
-ERROR_MATCH 
+ERROR
+ERROR_MATCH
 
 :0
 *  JA_UBE_SPAMORACLE_PRG ??   [a-z]
@@ -215,7 +215,7 @@ ERROR_MATCH
         :0 wc
         | ${CAT:-/bin/cat} > $JA_UBE_SPAMORACLE_TMP_FILE
 
-        :0 w 
+        :0 w
         jaubeSpamoracleData=| $JA_UBE_SPAMORACLE_PRG    \
                               test                      \
                               $JA_UBE_SPAMORACLE_TMP_FILE
@@ -229,10 +229,10 @@ ERROR_MATCH
 
     #   An empty message looks like this
     #
-    #   From: 
-    #   Subject: 
+    #   From:
+    #   Subject:
     #   Score: 0.50 -- 0
-    #   Details: 
+    #   Details:
 
     :0
     * jaubeSpamoracleData ?? ^From: .+

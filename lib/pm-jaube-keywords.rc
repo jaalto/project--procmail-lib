@@ -161,7 +161,7 @@
 #
 #       The layout of this file is managed by Emacs packages tinyprocmal.el
 #       and tinytab.el for the 4 tab text placement.
-#       See project http://tiny-tools.sourceforge.net/
+#       See project http://freshmeat.net/projects/emacs-tiny-tools/
 #
 #   Change Log
 #
@@ -754,7 +754,7 @@ dummy = "pm-jaube-keywords.rc: TEST body keywords"
 
     #  strip leading and trailing whitespace.
 
-    :0 
+    :0
     * ERROR_MATCH ?? ^^[$WSPC]
     * ERROR_MATCH ?? ()\/[^$WSPC].*[^$WSPC]
     {
