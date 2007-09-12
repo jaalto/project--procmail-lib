@@ -1,0 +1,31 @@
+Procmail module library - Collection of plug-in modules
+-------------------------------------------------------
+
+Procmail is a mail processing utility for POSIX operating systems.
+This is collection of plug-in modules include: parse dates, time,
+email addresses, mail forward, pop3, Spam detection, Cron, MIME file
+servers, daemon messages and more.
+
+    doc/            Documentation. Start from doc/source/readme.txt
+    doc/examples/   Procmail startup file examples
+    doc/txt         The source files from which *.html files are generated
+    lib/            The "code". Plug-in modules
+
+Important files
+
+    INSTALL                     Install informatio
+    doc/txt/LICENSE.txt         Licensing information
+    lib/ChangeLog               Project change records
+
+Project contacts
+
+    Homepage
+      http://freshmeat.net/projects/procmail-lib
+
+    Reporting bugs
+      See freshmeat page
+
+    Source code repository
+      See freshmeat page
+
+End of file
