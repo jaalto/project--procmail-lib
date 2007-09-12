@@ -7,7 +7,13 @@
 
 1.0 Thoughts about increasing spam annoyance
 
-        By Jari Aalto (AT cante net)
+        By Jari Aalto (AT cante net).
+
+        License: This material may be distributed only subject to
+        the terms and conditions set forth in GNU General Public
+        License v2 or later; or, at your option, distributed under the
+        terms of GNU Free Documentation License version 1.2 or later
+        (GNU FDL).
 
     1.1 Bouncing messages do no good
 
@@ -1269,7 +1275,7 @@
         o   *Bogofilter.* Well known and actively developed.
             http://freshmeat.net/projects/bogofilter
         o   *Bayesian* *Mail* *Filter.* Very, very accurate, while
-            development activity is unknown. 
+            development activity is unknown.
             http://freshmeat.net/projects/bmf
         o   *Spamprobe.* Another very accurate Bayesian program.
             http://freshmeat.net/projects/spamprobe
@@ -1314,7 +1320,7 @@
             spam filtering as well.
             http://crm114.sf.net/
         o   *MailWasher* server-side spam filtering program.
-            http://sourceforge.net/projects/mailwasher 
+            http://sourceforge.net/projects/mailwasher
 
         Examine mailboxes and manually sort your messages to at least
         three categories: *good*, *bad*, *other*. The "other" category
