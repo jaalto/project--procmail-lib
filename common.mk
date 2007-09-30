@@ -21,10 +21,11 @@
 
 PROJECT		= procmail-lib
 DESTDIR		=
+
 prefix		= /usr/local
 exec_prefix	= $(prefix)
-doc_prefix	= $(prefix)/doc
-man_prefix	= $(prefix)/share
+doc_prefix	= $(prefix)/share/doc
+man_prefix	= $(prefix)/man
 data_prefix	= $(prefix)/share
 
 INSTALL		= install
