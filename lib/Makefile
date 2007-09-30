@@ -37,7 +37,7 @@ distclean: clean
 
 install-procmail:
 	$(INSTALL_BIN) -d $(DATADIR)
-	$(INSTALL_BIN) $(INSTALL_OBJS) $(DATADIR)
+	$(INSTALL_DATA) $(INSTALL_OBJS) $(DATADIR)
 
 install: install-procmail
 

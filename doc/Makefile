@@ -25,9 +25,8 @@ endif
 
 include ../common.mk
 
-NAME		= lib-jaalto
-EXDIR		= $(EXAMPLEDIR)/$(NAME)/examples
-DDIR		= $(DOCDIR)/$(NAME)
+EXDIR		= $(EXAMPLEDIR)/examples
+DDIR		= $(DOCDIR)
 
 INSTALL_EXAMPLE_OBJS = examples/*.procmailrc
 INSTALL_OBJS	     = index.html html/*.html source/*.txt
@@ -48,8 +47,8 @@ install-examples:
 install-doc:
 	$(INSTALL_BIN) -d $(DDIR)
 	$(INSTALL_DATA) $(INSTALL_OBJS) $(DDIR)
-	$(INSTALL_DATA) $(INSTALL_LOG_DOC) $(DDIR)/ChangeLog-of-doc
-	$(INSTALL_DATA) $(INSTALL_LOG_LIB) $(DDIR)/ChangeLog-of-lib
+	$(INSTALL_DATA) $(INSTALL_LOG_DOC) $(DDIR)/ChangeLog.doc
+	$(INSTALL_DATA) $(INSTALL_LOG_LIB) $(DDIR)/ChangeLog.lib
 
 install: install-doc install-examples
 
