@@ -1,5 +1,7 @@
 2006-08-23  Jari Aalto  <jari dot aalto A T cante dot net>
 
+	RELEASE 20070930.1156
+
 	* readme.txt: (3.2 Advice for the normal account): Spamassassin
 	commands updated. --no-rebuild option has been deprecated. Changed
 	to --no-sync. Option --rebuild has been deprecated. Changed to 

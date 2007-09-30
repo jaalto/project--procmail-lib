@@ -1,5 +1,7 @@
 2006-09-20  Jari Aalto  <jari dot aalto A T cante dot net>
 
+	RELEASE 20070930.1156
+
 	* pm-jaube-keywords.rc (jaubeKeywords): Many new additions.
 	(JA_UBE_KEYWORD_HEADER): Recipe moved inside another recipe so
 	that the processing is more logical
