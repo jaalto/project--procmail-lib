@@ -1,10 +1,23 @@
-#	Copyright (C)  Jari Aalto
-#	Keywords:      Makefile, procmail
+#!/usr/bin/make -f
+#
+#	Copyright (C) 1997-2007 Jari Aalto
 #
 #	This program is free software; you can redistribute it and/or
 #	modify it under the terms of the GNU General Public License as
 #	published by the Free Software Foundation; either version 2 of the
 #	License, or (at your option) any later version
+#
+#	This program is distributed in the hope that it will be useful, but
+#	WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#	General Public License for more details.
+#
+#	You should have received a copy of the GNU General Public License
+#	along with program. If not, write to the
+#	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+#	Boston, MA 02110-1301, USA.
+#
+#	Visit <http://www.gnu.org/copyleft/gpl.html>
 
 ifneq (,)
 This makefile requires GNU Make.
@@ -16,36 +29,16 @@ DESTDIR =
 .PHONY: all install clean distclean
 
 all:
-	@echo "There is nothing to make. See INSTALL."
+	@echo "There is nothing to build. See INSTALL."
 
 clean:
 	make -C lib	     clean
-	make -C lib-stebbens clean
 	make -C doc	     clean
 
 distclean: clean
 
 install:
 	make -C lib	     install
-	make -C lib-stebbens install
 	make -C doc	     install
-
-# Rule: deb-nmu -- Non-Debian maintainer packages (NMUs). Do not sign archives.
-deb-nmu:
-	dpkg-buildpackage -uc -us -rfakeroot
-
-# Rule: deb-debuild -- Build *.deb with debuild(1)
-deb-debuild:
-	debuild --lintian --linda -rfakeroot
-
-# Rule: deb-publish-local - Copy *.deb to localhost repository with dput(1)
-deb-publish-local:
-	cd ..; file=$$(ls -t $(PACKAGE)*.changes | head -1); \
-	echo Publishing $$file; \
-	dput --force localhost $$file
-	@echo "Reminder: run debarchiver -so"
-
-deb-publish-public-html:
-	cp ../$(PACKAGE)*_* $(HOME)/public_html/tmp/debian
 
 # End of file
