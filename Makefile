@@ -32,13 +32,13 @@ all:
 	@echo "There is nothing to build. See INSTALL."
 
 clean:
-	make -C lib	     clean
-	make -C doc	     clean
+	$(MAKE) -C lib	     clean
+	$(MAKE) -C doc	     clean
 
 distclean: clean
 
 install:
-	make -C lib	     install
-	make -C doc	     install
+	$(MAKE) -C lib	     install
+	$(MAKE) -C doc	     install
 
 # End of file
