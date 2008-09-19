@@ -2,24 +2,24 @@
 
 	RELEASE 20070930.1156
 
-	* readme.txt: (3.2 Advice for the normal account): Spamassassin
+	* doc/article: (3.2 Advice for the normal account): Spamassassin
 	commands updated. --no-rebuild option has been deprecated. Changed
 	to --no-sync. Option --rebuild has been deprecated. Changed to
 	--sync.
 
 2006-02-16  Jari Aalto  <jari dot aalto A T cante dot net>
 
-	* README.txt: (4.1 Advice for the normal account): Changed
+	* doc/article: (4.1 Advice for the normal account): Changed
 	Bmf, Bogofilter, Bsfilter addresses from sourceforge to freshmeat.net.
 
 2005-08-31  Jari Aalto  <jari dot aalto A T cante dot net>
 
-	* README.txt: (1.3.6 Further reading - Some known C-R systems):
+	* doc/article: (1.3.6 Further reading - Some known C-R systems):
 	Added Perl spamresponder to the list.
 
 2005-05-18 Wed  Jari Aalto  <jari dot aalto A T cante dot net>
 
-	* README.txt: (1.3.6 Further reading - Some known C-R systems):
+	* doc/article: (1.3.6 Further reading - Some known C-R systems):
 	Added qconfirm.
 	(1.3.4 Summary - What are the effects of Challenge-Response
 	systems): Added Adam Shand and his wiki page
@@ -30,11 +30,11 @@
 
 2005-02-11  Jari Aalto  <jari dot aalto A T cante dot net>
 
-	* README.txt: Small typos fixes all over the document.
+	* doc/article: Small typos fixes all over the document.
 
 2004-12-18 Sat  Jari Aalto  <jari dot aalto A T cante dot net>
 
-	* README.txt: 1.79 Run Emacs M-x flyspell-buffer and
+	* doc/article: 1.79 Run Emacs M-x flyspell-buffer and
 	corrected some spelling mistakes.
 	(Challenge-Response is not a doorbell): Explained
 	why 'well behaving C-R' is not any better. Added
@@ -45,7 +45,7 @@
 
 2004-10-10 Sun  Jari Aalto  <jari dot aalto A T cante dt net>
 
-	* README.txt: 1.72 Added URL to IETF memo by Paul Vixie.
+	* doc/article: 1.72 Added URL to IETF memo by Paul Vixie.
 
 2004-10-11  Jari Aalto  <jari.aalto@poboxes.com>
 
@@ -127,7 +127,7 @@
 
 2004-09-25 Sat  Jari Aalto  <jari dot aalto A T cante dt net>
 
-	* README.txt: 1.23 Added Jonathan de Boyne Pollard's opinion that
+	* doc/article: 1.23 Added Jonathan de Boyne Pollard's opinion that
 	nothing works.
 	(3.1 Advice for Debian Exim 4 mail system administor): 1.23
 	Added Murray Watson's comment on SPF: cheese ans mouse chase.
@@ -160,7 +160,7 @@
 
 2004-09-11  Jari Aalto  <jari dot aalto A T cante dt net>
 
-	* README.txt: Small typos corrected. Changes 'Tips' to
+	* doc/article: Small typos corrected. Changes 'Tips' to
 	'advice'.
 	(Sample ~/.procmailrc): Added more examples, like using the
 	mailing list module and UBE module.
@@ -177,5 +177,5 @@
 
 2002-01-24 Thu  Jari Aalto  <jari aalto A T poboxes dt com>
 
-	* pm-lib.txt (Description): 1.1 Corrected the
+	* manual/: (Description): 1.1 Corrected the
 	'Addressing' faq URL to point to www.faqs.org.
