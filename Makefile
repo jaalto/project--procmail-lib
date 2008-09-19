@@ -12,24 +12,16 @@
 #	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
 #	General Public License for more details.
 #
-#	You should have received a copy of the GNU General Public License
-#	along with program. If not, write to the
-#	Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-#	Boston, MA 02110-1301, USA.
-#
 #	Visit <http://www.gnu.org/copyleft/gpl.html>
 
 ifneq (,)
 This makefile requires GNU Make.
 endif
 
-PACKAGE= procmail-lib
-DESTDIR =
-
-.PHONY: all install clean distclean
+include common.mk
 
 all:
-	@echo "There is nothing to build. See INSTALL."
+	@echo "There is nothing to build. See file INSTALL."
 
 clean:
 	$(MAKE) -C lib	     clean
@@ -40,5 +32,7 @@ distclean: clean
 install:
 	$(MAKE) -C lib	     install
 	$(MAKE) -C doc	     install
+
+.PHONY: all install clean distclean
 
 # End of file
