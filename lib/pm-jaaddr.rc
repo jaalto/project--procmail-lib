@@ -25,8 +25,7 @@
 #
 #	This includerc extracts the various components of email address
 #	from variable `INPUT'. You can do quite a lot interesting things with
-#	your email address. Refer to http://www.qz.to/~eli/faqs/addressing.html
-#	for more information. One of the tricks that you could use if you
+#	your email address. One of the tricks that you could use if you
 #	don't have sendmail plus addressing capabilities, is that you put
 #	the additional infomation to the RFC comment. Eg. If you read and
 #	followup to posts in usenet games groups, you could use:

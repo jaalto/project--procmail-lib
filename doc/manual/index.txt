@@ -39,7 +39,7 @@ Document id
             % perl -S t2html.pl                                           \
               --html-frame                                                \
               --base http://freshmeat.net/projects/procmail-lib           \
-              --button-previous "http://freshmeat.net/projects/procmail-lib" \
+              --button-previous http://freshmeat.net/projects/procmail-lib \
               --title  "Procmail module documentation"                    \
               --author "Jari Aalto"                                       \
               --meta-keywords "procmail, sendmail, programming, library"  \
@@ -52,7 +52,8 @@ Document id
         written in Technical Text Format. The perl program `ripdoc.pl' can
         be found at CPAN entry
         http://www.cpan.org/modules/by-authors/id/J/JA/JARIAALTO/ and
-        `t2html.pl' is available at sourceforge project `perl-text2html'.
+        `t2html.pl' is available at project
+	#URL<http://freshmeat.net/projects/perl-text2html><perl-text2html>.
 
 Pm-jaaddr.rc -- extract 'foo@some.com' email address from variable INPUT
 
@@ -68,8 +69,7 @@ Pm-jaaddr.rc -- extract 'foo@some.com' email address from variable INPUT
 
         This includerc extracts the various components of email address
         from variable `INPUT'. You can do quite a lot interesting things with
-        your email address. Refer to http://www.qz.to/~eli/faqs/addressing.html
-        for more information. One of the tricks that you could use if you
+        your email address. One of the tricks that you could use if you
         don't have sendmail plus addressing capabilities, is that you put
         the additional infomation to the RFC comment. Eg. If you read and
         followup to posts in usenet games groups, you could use:
