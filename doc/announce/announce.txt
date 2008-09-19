@@ -3,7 +3,7 @@ CC: Procmail mailing list <procmail@lists.RWTH-Aachen.DE>
 Subject: Procmail Module Library 2004.1216 released
 --text follows this line--
 
-Main page   : http://freshemat.net/projects&procmail-lib
+Main page   : http://freshemat.net/projects/procmail-lib
 Procmail    : http://www.procmail.org/ and
               http://mailman.rwth-aachen.de/mailman/listinfo/procmail
 
@@ -32,10 +32,10 @@ installation. You may be interested in:
 - Mailing list detection module: pm-jalist.rc
 - And many more are included...
 
-There is included document "Procmail strategies against spam" (README.txt)
+There is included document "Thoughts about increasing spam annoyance"
 which outlines lightweight and heavyweight protection methods.
 
-   http://pm-lib.sourceforge.net/README.html
+   https://savannah.nongnu.org/projects/procmail-lib/article
 
     1.0 Thoughts about increasing spam annoyance
         1.1 Bouncing messages do no good
@@ -56,9 +56,5 @@ which outlines lightweight and heavyweight protection methods.
         3.2 Advice for the normal account
         3.3 Configuring  Bayesian programs
         3.4 A heavyweight spam catch setup using procmail
-
-Kindly include word "procmail" in the subject and send comments, tips and
-report bugs directly via email. Include your procmail VERBOSE=on
-LOGABSTRACT=all output and relevant mail messages.
 
 Jari
