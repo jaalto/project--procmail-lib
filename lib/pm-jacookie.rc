@@ -79,9 +79,7 @@
 #       the mail traffic and becomes spam problem by itself.
 #
 #       In short, don't use this module for implementing a C-R system
-#       to block regular mail to you. The reasons why all C-R systems
-#       are the worst kind of spam is described in document
-#       'Thoughts about increasing spam annoyance'.
+#       to block regular mail to you.
 #
 #   How it works
 #

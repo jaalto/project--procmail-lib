@@ -414,11 +414,7 @@ Pm-jacookie.rc -- Handle cookie (unique id) confirmations
         the mail traffic and becomes spam problem by itself.
 
         In short, don't use this module for implementing a C-R system
-        to block regular mail to you. The reasons why all C-R systems
-        are the worst kind of spam is better described in Procmail
-        Module Library's README.txt also available at
-        http://pm-lib.sourceforge.net/README.html in section titled
-        "Challenge-Response policy make matters worse"
+        to block regular mail to you.
 
     How it works
 
