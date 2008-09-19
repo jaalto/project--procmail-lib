@@ -1,0 +1,181 @@
+2006-08-23  Jari Aalto  <jari dot aalto A T cante dot net>
+
+	RELEASE 20070930.1156
+
+	* readme.txt: (3.2 Advice for the normal account): Spamassassin
+	commands updated. --no-rebuild option has been deprecated. Changed
+	to --no-sync. Option --rebuild has been deprecated. Changed to
+	--sync.
+
+2006-02-16  Jari Aalto  <jari dot aalto A T cante dot net>
+
+	* README.txt: (4.1 Advice for the normal account): Changed
+	Bmf, Bogofilter, Bsfilter addresses from sourceforge to freshmeat.net.
+
+2005-08-31  Jari Aalto  <jari dot aalto A T cante dot net>
+
+	* README.txt: (1.3.6 Further reading - Some known C-R systems):
+	Added Perl spamresponder to the list.
+
+2005-05-18 Wed  Jari Aalto  <jari dot aalto A T cante dot net>
+
+	* README.txt: (1.3.6 Further reading - Some known C-R systems):
+	Added qconfirm.
+	(1.3.4 Summary - What are the effects of Challenge-Response
+	systems): Added Adam Shand and his wiki page
+	SpamBlacklistsConsideredHarmful
+	(1.1 Bouncing messages do no good): 1.90 Added
+	www.postini.com/sats picture, added DHA attack and link, added
+	Joe St Sauver Ph.D link and statistics.
+
+2005-02-11  Jari Aalto  <jari dot aalto A T cante dot net>
+
+	* README.txt: Small typos fixes all over the document.
+
+2004-12-18 Sat  Jari Aalto  <jari dot aalto A T cante dot net>
+
+	* README.txt: 1.79 Run Emacs M-x flyspell-buffer and
+	corrected some spelling mistakes.
+	(Challenge-Response is not a doorbell): Explained
+	why 'well behaving C-R' is not any better. Added
+	bullets pass list, block list etc.
+
+	* announce.txt (Procmail): 1.2 Corrected CC addres (list
+	has moved). Added mailman URL link.
+
+2004-10-10 Sun  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* README.txt: 1.72 Added URL to IETF memo by Paul Vixie.
+
+2004-10-11  Jari Aalto  <jari.aalto@poboxes.com>
+
+	* README.txt (3.3 Configuring  Bayesian programs): Changed
+	 required_hits from 9 to 3, and bayes_auto_learn_threshold_spam
+	 from 12 to 9
+	 (1.3 Challenge-Response systems make matters worse): Corrected
+	picture text wording.
+	(3.4 A heavyweight spam catch setup using procmail): Added
+	JA_UBE_BSFILTER_PRG.
+
+2004-10-11  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* README.txt (3.3 Configuring  Bayesian programs): Added
+	more bayes_ignore_header values from new interface modules.
+
+2004-10-06  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* README.txt (3.2 Advice for the normal account): Added bsfilter
+	training instructions.
+	(1.4 Spam appearing in your yard - a story): New.
+
+2004-10-03  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* README.txt (1.3 Challenge-Response systems make matters worse):
+	Added third level headings:
+
+2004-10-02 Sat  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* README.txt (3.1 Advice for Debian Exim 4 mail system
+	administrator): 1.43 Added URL 'Explanations 3: Theory of numeric
+	Status: codes'
+	(1.1 Bouncing messages do no good): 1.43 Added picture mta-viruses.png
+	and explanation why viruses shoudl be dropped, not bounced. Added
+	URL to David A. Wheeler's paper.
+
+	* README.txt (3.1 Advice for Debian Exim 4 mail system administrator):
+	Added Teergrubing FAQ.
+	(3.2 Advice for the normal account): Added ifile discussion list
+	URL.
+	(1.3 Challenge-Response systems make matters worse): Added new
+	picture cr-system-authentication.png
+	(3.1 Advice for Debian Exim 4 mail system
+	administrator): 1.43 Added URL 'Explanations 3: Theory of numeric
+	Status: codes'
+
+2004-10-01  Jari Aalto  <jari.aalto@poboxes.com>
+
+	* README.txt
+	(top level): Added many new pictures. Removed procmail code whic
+	demonstrated where bayesian programs could be put. The removal
+	makes 'Heavyweight' setup more clear.
+
+2004-09-30 Thu  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* (slides.ppt): Added powerpoint file to demontrate flaw in C-R
+	system. => Exported picture cr-system-joe-job.jpg.
+
+2004-09-29  Jari Aalto  jari dot aalto A T cante dt net>
+
+	* README.txt (3.0 A heavyweight UBE blocking system): Removed
+	lisut of programs mentioned in article by Sam Holden.
+
+2004-09-28  Jari Aalto   <jari dot aalto A T cante dt net>
+
+	* README.txt (3.1 Advice for Debian Exim 4 mail system administor):
+	Added link to lwn.net's article:
+	Is Sender ID Dead in the Water? - No MARID Working Group Consensus
+	(Groklaw). Added link to O'Reilly's article:
+	What's New in SpamAssassin 3.0.
+	(3.2 Advice for the normal account): Added instructions for IFILE
+	how to detect multiple message categories. Removed bogofilter's
+	note how to use it to classify different messages. Bogofilter
+	is not desined to that task as ifile. Added OCaml based spamoracle
+	program. Added annoyance filter program.
+	(3.5 Using battery of Bayesian shields from procmail): Use ERROR
+	variable instead of X-Spamifile header to check ifile module's
+	result. Added SHELL setting.
+
+2004-09-25 Sat  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* README.txt: 1.23 Added Jonathan de Boyne Pollard's opinion that
+	nothing works.
+	(3.1 Advice for Debian Exim 4 mail system administor): 1.23
+	Added Murray Watson's comment on SPF: cheese ans mouse chase.
+
+2004-09-23  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* README.txt (3.1 Advice for Debian Exim 4 mail system administor):
+	Spamassassin 3.x was release 2004-09-22 with SPF support.
+	Changed tense from future to present - SPF is there now.
+	(1.3 Challenge-Response systems make matters worse): Many
+	improvements and more user comments added.
+
+2004-09-22  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* README.txt (1.3 Challenge-Response tactics make matters worse):
+	New topic.
+
+2004-09-21 Tue  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* README.txt
+	(1.1 Steps to install): 1.23 Removed. This is
+	now documented in top level INSTALL file.
+	(example ~/.procmailrc): Removed. Moved to another file.
+
+2004-09-14  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* README.txt (4.4 A heavyweight spam catch setup using procmail):
+	Removed Plan A, Plan B and replaced them with new 'umrella'
+	solution whcih will take care of the details.
+
+2004-09-11  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* README.txt: Small typos corrected. Changes 'Tips' to
+	'advice'.
+	(Sample ~/.procmailrc): Added more examples, like using the
+	mailing list module and UBE module.
+	(Thoughts about increasing spam annoyance): Completely new
+	topics written. For Debian admin, lightweight and heavyweight
+	spam protections advice.
+	(Rule based systems are not the solution): Moved 'other related
+	projects' to the end of topic.
+
+2004-08-19 Thu  Jari Aalto  <jari dot aalto A T cante dt net>
+
+	* README.txt (Steps to install): 1.2 More verbose instruction to the
+	installation section.
+
+2002-01-24 Thu  Jari Aalto  <jari aalto A T poboxes dt com>
+
+	* pm-lib.txt (Description): 1.1 Corrected the
+	'Addressing' faq URL to point to www.faqs.org.
