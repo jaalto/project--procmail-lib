@@ -36,6 +36,10 @@ install:
 	$(MAKE) -C lib-stebbens install
 	$(MAKE) -C doc	     	install
 
+install-test:
+	# Maintainer only target
+	make DESTDIR=`pwd`/tmp prefix=/. man_prefix=/. data_prefix=/. install
+
 www:
 	$(MAKE) -C doc www
 
