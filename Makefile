@@ -32,8 +32,9 @@ distclean: clean
 realclean: clean
 
 install:
-	$(MAKE) -C lib	     install
-	$(MAKE) -C doc	     install
+	$(MAKE) -C lib	     	install
+	$(MAKE) -C lib-stebbens install
+	$(MAKE) -C doc	     	install
 
 www:
 	$(MAKE) -C doc www

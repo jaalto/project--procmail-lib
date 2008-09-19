@@ -31,7 +31,7 @@ EXDIR		     = $(EXAMPLEDIR)/$(NAME)/examples
 INSTALL_OBJS	     = proclint
 INSTALL_PM_OBJS	     = `ls *.rc | grep -v example`
 INSTALL_EXAMPLE_OBJS = prefile-example.rc procmailrc-example
-INSTALL_DOC_OBJS     = README README.txt Copyright \
+INSTALL_DOC_OBJS     = 0*README* Copyright \
 		       GNU-LICENSE *.html *tutorial* *.info
 all:
 	@echo "There is nothing to make. See INSTALL."
