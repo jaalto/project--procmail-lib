@@ -32,6 +32,6 @@ MANDIR		= $(DESTDIR)$(man_prefix)/man/man1
 DATADIR		= $(DESTDIR)$(data_prefix)/$(PROJECT)
 
 DOCDIR		= $(DESTDIR)$(doc_prefix)/$(PROJECT)
-EXAMPLEDIR	= $(DOCDIR)
+EXAMPLEDIR	= $(DOCDIR)/examples
 
 # End of file

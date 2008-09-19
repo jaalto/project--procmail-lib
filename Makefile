@@ -29,10 +29,15 @@ clean:
 
 distclean: clean
 
+realclean: clean
+
 install:
 	$(MAKE) -C lib	     install
 	$(MAKE) -C doc	     install
 
-.PHONY: all install clean distclean
+www:
+	$(MAKE) -C doc www
+
+.PHONY: all clean distclean realclean install www
 
 # End of file

@@ -25,31 +25,61 @@ endif
 
 include ../common.mk
 
-EXDIR		= $(EXAMPLEDIR)/examples
-DDIR		= $(DOCDIR)
+INSTALL		= install
+INSTALL_BIN	= $(INSTALL) -m 755
+INSTALL_DATA	= $(INSTALL) -m 644
 
 INSTALL_EXAMPLE_OBJS = examples/*.procmailrc
-INSTALL_OBJS	     = index.html html/*.html source/*.txt
-INSTALL_LOG_DOC	     = source/ChangeLog
+INSTALL_LOG_DOC	     = ChangeLog
 INSTALL_LOG_LIB	     = ../lib/ChangeLog
 
-all:
-	@echo "There is nothing to build."
-
-clean:
-
-distclean:
+all: doc
 
 install-examples:
-	$(INSTALL_BIN) -d $(EXDIR)
-	$(INSTALL_DATA) $(INSTALL_EXAMPLE_OBJS) $(EXDIR)
+	$(INSTALL_BIN) -d $(EXAMPLEDIR)
+	$(INSTALL_DATA) $(INSTALL_EXAMPLE_OBJS) $(EXAMPLEDIR)
 
 install-doc:
-	$(INSTALL_BIN) -d $(DDIR)
-	$(INSTALL_DATA) $(INSTALL_OBJS) $(DDIR)
-	$(INSTALL_DATA) $(INSTALL_LOG_DOC) $(DDIR)/ChangeLog.doc
-	$(INSTALL_DATA) $(INSTALL_LOG_LIB) $(DDIR)/ChangeLog.lib
+	$(INSTALL_BIN) -d $(DOCDIR) $(DOCDIR)/manual $(DOCDIR)/article
+	$(INSTALL_DATA) *.html $(DOCDIR)
+	$(INSTALL_DATA) manual/*.html $(DOCDIR)/manual
+	$(INSTALL_DATA) article/*.html $(DOCDIR)/article
+	$(INSTALL_DATA) $(INSTALL_LOG_DOC) $(DOCDIR)/ChangeLog.doc
+	$(INSTALL_DATA) $(INSTALL_LOG_LIB) $(DOCDIR)/ChangeLog.lib
 
+# Rule: install - install documentation
 install: install-doc install-examples
+
+# Rule: clean - delete temporary files
+clean:
+	rm  -f *[~#] *.tmp
+
+# Rule: www - copy web pages to ../../<project>-www
+www: html
+	name=$$(basename $$(cd .. && pwd)); \
+	to=../../$$name-www; \
+	echo "Copying to $$to"; \
+	find . -type f -name "*.html" | \
+	rsync $${test:+"--dry-run"} \
+	  --files-from=- \
+	  --update \
+	  --progress \
+	  --verbose \
+	  -r \
+	  . \
+	  $$to/
+
+manual: manual/index.txt
+	perl -S t2html.pl --Auto-detect --Out --print-url $<
+
+article: article/index.txt
+	perl -S t2html.pl --Auto-detect --Out --print-url $<
+
+html: manual article
+
+# Rule: doc - Generate or update documentation
+doc: html
+
+.PHONY: all doc html www
 
 # End of file
