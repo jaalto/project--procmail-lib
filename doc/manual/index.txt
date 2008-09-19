@@ -9,7 +9,7 @@ Document id
         #T2HTML-OPTION Note:
         #T2HTML-OPTION --simple
 
-        Copyright (C) 1997-2007 Jari Aalto
+        Copyright (C) 1997-2009 Jari Aalto
 
         License: This material may be distributed only subject to
         the terms and conditions set forth in GNU General Public
@@ -59,7 +59,7 @@ Pm-jaaddr.rc -- extract 'foo@some.com' email address from variable INPUT
 
     File id
 
-        .Copyright (C)   1997-2006 Jari Aalto
+        .Copyright (C)   1997-2009 Jari Aalto
         .$Keywords:      procmail, extract, email address, subroutine $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -249,7 +249,7 @@ Pm-jabup.rc --  Keeep N arriving message backup in separate directory
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$Keywords:     procmail backup recipe $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -312,7 +312,7 @@ Pm-jacookie1.rc -- Generate unique id from INPUT variable.
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$Keywords:     procmail cookieMake subroutine $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -350,7 +350,7 @@ Pm-jacookie.rc -- Handle cookie (unique id) confirmations
 
     File id
 
-        .Copyright (C)  1997-20061 Jari Aalto
+        .Copyright (C)  1997-20091 Jari Aalto
         .$Keywords:     procmail, cookie, confirm, subroutine
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -553,7 +553,7 @@ Pm-jacron.rc -- Procmail: Run cron once a day
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$Keywords:     procmail, cron, framework, subroutine $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -729,7 +729,7 @@ Pm-jadate1.rc -- 'Tue, 31 Dec 1997' date parser from variable INPUT
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$Keywords:     procmail, subroutine, date parsing $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -808,7 +808,7 @@ Pm-jadate2.rc -- 'YYYY-MM-DD' ISO date parser from variable INPUT
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$Keywords:     procmail, subroutine, date parsing $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -858,7 +858,7 @@ Pm-jadate3.rc -- 'Tue Nov 25 19:32:57' date parser from variable INPUT
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$Keywords:     procmail, subroutine, date parsing $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -930,7 +930,7 @@ Pm-jadate4.rc -- make RFC 'Mon, 1 Dec 1997 17:41:09' and parse values
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$keywords:     procmail, subroutine, date, shell $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -1018,7 +1018,7 @@ Pm-jadate5.rc -- 'Fri Jun 19 18:51:56 1998' date parser from var INPUT
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$Keywords:     procmail, subroutine, date parsing $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -1094,7 +1094,7 @@ Pm-jadate.rc -- Read date from the message hdrs: From_, Receved:
 
     File id
 
-        .Copyright (C) 1997-2006 Jari Aalto
+        .Copyright (C) 1997-2009 Jari Aalto
         .$keywords:    procmail, date, subroutine $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -1145,7 +1145,7 @@ Pm-jadup.rc -- Procmail: Handle duplicates; store to separate folder
 
     File id
 
-        .Copyright (C)   1997-2006 Jari Aalto
+        .Copyright (C)   1997-2009 Jari Aalto
         .$Keywords:      procmail, subroutine, filter duplicates $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -1225,7 +1225,7 @@ Pm-jaempty.rc -- check if message body is empty
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$keywords:     procmail, subroutine, check empty message $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -1261,7 +1261,7 @@ Pm-jafrom.rc -- get message's best FROM field without calling `formail'
 
     File id
 
-        Copyright (C)   1997-2006 Jari Aalto
+        Copyright (C)   1997-2009 Jari Aalto
         $keywords:      procmail,  subroutine, extract FROM $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -1304,7 +1304,7 @@ Pm-jafwd.rc -- Controlling forwarding remotedly
 
     File id
 
-        .Copyright (C)   1997-2006 Jari Aalto
+        .Copyright (C)   1997-2009 Jari Aalto
         .$keywords:      procmail, subroutine,  forward mail $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -1455,7 +1455,7 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
 
     File id
 
-        .Copyright (C)  1998-2006 Jari aalto
+        .Copyright (C)  1998-2009 Jari aalto
         .$Keywords:     procmail, subroutine, mailing list detect $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -1820,7 +1820,7 @@ Pm-jamime-decode.rc -- decode MIME body contents; quoted-printable, base64
 
     File id
 
-        .Copyright (C)  1998-2006 Jari Aalto
+        .Copyright (C)  1998-2009 Jari Aalto
         .$Keywords:     procmail, subroutine, mime $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -1894,7 +1894,7 @@ Pm-jamime-kill.rc -- General MIME attachment killer (vcards, html)
 
     File id
 
-        .Copyright (C)   1997-2006 Jari Aalto
+        .Copyright (C)   1997-2009 Jari Aalto
         .$Keywords:      procmail, subroutine, MIME killer $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -2219,7 +2219,7 @@ Pm-jamime.rc -- subroutine to read mime boundary etc. variables
 
     File id
 
-        .Copyright (C)   1997-2006 Jari Aalto
+        .Copyright (C)   1997-2009 Jari Aalto
         .$Keywords:      procmail, subroutine, mime $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -2311,7 +2311,7 @@ Pm-jamime-save.rc -- save message's MIME attachement (one file) to a file
 
     File id
 
-        .Copyright (C)   1998-2006 Jari Aalto
+        .Copyright (C)   1998-2009 Jari Aalto
         .$Keywords:      procmail, subroutine, mime $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -2415,7 +2415,7 @@ Pm-janetmind.rc -- handle http://minder.netmind.com/ messages
 
     File id
 
-        .Copyright (C)    1998-2006 Jari Aalto
+        .Copyright (C)    1998-2009 Jari Aalto
         .$Keywords:       procmail netmind recipe $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -2481,7 +2481,7 @@ Pm-janslookup.rc -- run nslookup on variable INPUT
 
     File id
 
-        .Copyright (C)   1997-2006 Jari Aalto
+        .Copyright (C)   1997-2009 Jari Aalto
         .Keywords:       procmail, nslookup, subroutine
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -2602,7 +2602,7 @@ Pm-jaorig.rc -- Extract embedded original message (simple recipe)
 
     File id
 
-        .Copyright (C)   1998-2006 Jari Aalto
+        .Copyright (C)   1998-2009 Jari Aalto
         .$Keywords:      procmail recipe extract original message $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -2752,7 +2752,7 @@ Pm-japing.rc -- reply shortly to message "Subject: ping"; account ok
 
     File id
 
-        .Copyright (C)   1997-2006 Jari Aalto
+        .Copyright (C)   1997-2009 Jari Aalto
         .$Keywords:      procmail, subroutine, ping auto-ack $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -2800,7 +2800,7 @@ Pm-japop3.rc -- Remotedly download messages by mail command request
 
     File id
 
-        .Copyright (C)   1998-2006 Jari Aalto
+        .Copyright (C)   1998-2009 Jari Aalto
         .$Keywords:      procmail pop3 emulation recipe $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -2896,7 +2896,7 @@ Pm-jarandf.rc -- pick (rand)om line from (f)ile
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$keywords:     procmail. subroutine, random file line $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -2952,7 +2952,7 @@ Pm-jasrv-check.rc -- check FILE validity, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1998-2006 Jari Aalto
+        .Copyright (C)   1998-2009 Jari Aalto
         .$Keywords:      procmail, file server $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -2978,7 +2978,7 @@ Pm-jasrv-daemon.rc -- server request check, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1998-2006 Jari Aalto
+        .Copyright (C)   1998-2009 Jari Aalto
         .$Keywords:      procmail, file server $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -3028,7 +3028,7 @@ Pm-jasrv-from.rc -- compose reply, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1997-2006 Jari Aalto
+        .Copyright (C)   1997-2009 Jari Aalto
         .$Keywords:      procmail, file server $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -3062,7 +3062,7 @@ Pm-jasrv-msg.rc -- send message, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1998-2006 Jari Aalto
+        .Copyright (C)   1998-2009 Jari Aalto
         .$Keywords:      procmail, file server $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -3083,7 +3083,7 @@ Pm-jasrv-multi.rc -- send multipart MIME message, subroutine for FileSrv
 
     File id
 
-        .Copyright (C)   1998-2006 Jari Aalto
+        .Copyright (C)   1998-2009 Jari Aalto
         .$Keywords:      procmail FileServer subroutine $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -3107,7 +3107,7 @@ Pm-jasrv.rc -- MIME capable Procmail File server
 
     File id
 
-        .Copyright (C)   1997-2006 Jari Aalto
+        .Copyright (C)   1997-2009 Jari Aalto
         .$Keywords:      procmail, File Server $
 
         This program is free software; you can redistribute it and/or
@@ -3488,7 +3488,7 @@ Pm-jasrv-req.rc -- server request check, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1998-2006 Jari Aalto
+        .Copyright (C)   1998-2009 Jari Aalto
         .$Keywords:      procmail FileServer subroutine $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -3522,7 +3522,7 @@ Pm-jasrv-send.rc -- server request check, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1998-2006 Jari Aalto
+        .Copyright (C)   1998-2009 Jari Aalto
         .$Keywords:      procmail, file server $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -3573,7 +3573,7 @@ Pm-jastore.rc -- Store messagee to inbox or gzip inbox
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$Keywords:     procmail, subroutine, storing, saving message $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -3629,7 +3629,7 @@ Pm-jasubject.rc -- Subject field cleaner and canonicalizer (Re:)
 
     File id
 
-        .Copyright (C)  1998-2006 Jari Aalto
+        .Copyright (C)  1998-2009 Jari Aalto
         .$Keywords:     procmail, subroutine, subject clean $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -3785,7 +3785,7 @@ Pm-jatime.rc -- "hh:mm:ss" time parser from variable INPUT
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$Keywords:     procmail, subroutine, time parsing $
 
         This program is free software; you can redistribute it and/or
@@ -3861,7 +3861,7 @@ Pm-jaube1.rc -- Jari's UBE filter. Subroutine 1
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .$Keywords:     procmail, UBE, UCE, spam filter $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -5216,7 +5216,7 @@ Pm-javac.rc -- Procmail: Vacation framework recipe (id-cache)
 
     File id
 
-        .Copyright (C)   1997-2006 Jari Aalto
+        .Copyright (C)   1997-2009 Jari Aalto
         .$Keywords:      procmail, vacation framework $
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
@@ -5293,7 +5293,7 @@ Pm-javar.rc -- Global variable definitions
 
     File id
 
-        .Copyright (C)  1997-2006 Jari Aalto
+        .Copyright (C)  1997-2009 Jari Aalto
         .Keywords:      procmail, variable definitions
 
         This code is free software in terms of GNU Gen. pub. Lic. v2 or later
