@@ -6,15 +6,18 @@ This is collection of plug-in modules include: parse dates, time,
 email addresses, mail forward, pop3, Spam detection, Cron, MIME file
 servers, daemon messages and more.
 
-    doc/            Documentation. Start from doc/source/readme.txt
-    doc/examples/   Procmail startup file examples
-    doc/source      The source files from which *.html files are generated
-    lib/            The "code". Plug-in modules
+    doc/            		Documentation
+    doc/examples/   		Procmail startup file examples
+    doc/source/license/         Licensing information
+    lib/            		The "code". Plug-in modules
+
+    lib-stebbens/   		Alan Stebben's orignal modules.
+				Historical; Bug reports are ignored
+				for these.
 
 Important files
 
     INSTALL                     Install information
-    doc/source/LICENSE.txt      Licensing information
     lib/ChangeLog               Project change records
 
 Project contacts

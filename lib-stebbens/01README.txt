@@ -16,6 +16,9 @@ lib-stebbens/01README.txt
         If you have any questions concerning about programs or code in
         this directory, please contact Alan.
 
+	NOTE: There is no support for these modules, so bug reports against
+	them is probably in vain (please report problems directly to Alan).
+
 	-- 2008-09-19 Jari Aalto <jari.aalto@cante.net>
 
 End
