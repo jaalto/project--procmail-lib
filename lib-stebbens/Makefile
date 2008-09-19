@@ -26,7 +26,9 @@ endif
 include ../common.mk
 
 NAME		     = lib-stebbens
-EXDIR		     = $(EXAMPLEDIR)/$(NAME)/examples
+
+BASEDIR		     = $(DOCDIR)/$(NAME)
+EXDIR		     = $(DOCDIR)/examples
 
 INSTALL_OBJS	     = proclint
 INSTALL_PM_OBJS	     = `ls *.rc | grep -v example`
@@ -42,8 +44,8 @@ clean:
 distclean: clean
 
 install-doc:
-	$(INSTALL_BIN) -d $(DOCDIR)/$(NAME)
-	$(INSTALL_DATA) $(INSTALL_DOC_OBJS) $(DOCDIR)/$(NAME)
+	$(INSTALL_BIN) -d $(BASEDIR)
+	$(INSTALL_DATA) $(INSTALL_DOC_OBJS) $(BASEDIR)
 
 install-examples:
 	$(INSTALL_BIN) -d $(EXDIR)
