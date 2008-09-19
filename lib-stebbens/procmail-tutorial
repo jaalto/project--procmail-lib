@@ -1,0 +1,296 @@
+To: procmail
+Cc: procmail-author
+Subject: Using procmail to prefile your mail
+Reply-To: Alan Stebbens <aks@sgi.com>
+--------
+The following is a small procmail tutorial I have written for some
+of my peers, who are greatly inundated with email as part of their
+daily work.
+
+I thought that the procmail community would be a good forum to review it.
+Thanks!
+
+_______________________________________________________________
+Alan Stebbens         <aks@sgi.com>              (415) 933-6437
+Interactive Digital Systems (IDS), Silicon Graphics, Inc. (SGI)
+M/S:9L991, 2011 N. Shoreline Blvd., Mountain View, CA 94043
+
+============================================================
+
+This document describes how you can to use procmail to prefile your
+incoming mail so that the only action you need to take on any prefiled
+message is to delete it.  Since it was prefiled, it is already saved in
+the appropriate folder or folders, thus, you can safely delete it after
+viewing it in your inbox.
+
+Here's how.  There are many ways to do this, but I'll describe two
+basic methods.
+
+Let's assume that you are on the info-gnu, info-gcc, mh-users,
+perl-users, smartlist, and procmail mailing lists.  Let's further assume
+that you use MH-style folders since you use MH as your mailer (as I
+do, with emacs + mh-e "on top").
+
+BTW, Procmail can do both kinds of mail dropping: in numbered, unique
+filenames in directories as folders, or appending to files as folders.
+The syntax for a "plain" file drop is:
+
+    folder
+
+while the syntax for a MH-style folder is:
+
+    folder/.
+
+The basic method is to write a "copy" recipe which recognizes a particular
+mailing list, and copies the mail into the corresponding folder:
+
+    :0c
+    * ^TOinfo-gnu
+    info/gnu/.
+
+    :0c
+    * ^TOinfo-gcc
+    info/gcc/.
+
+    :0c
+    * ^TOmh-users
+    info/mh/.
+
+    :0c
+    * ^TOperl-users
+    info/perl/.
+
+    :0c
+    * ^TOsmartlist
+    info/smartlist/.
+
+    :0c
+    * ^TOprocmail
+    info/procmail/.
+
+and so on.
+
+These recipes have the effect of filing the mail into folders corresponding
+to the mailng lists, and then filing the mail into the $DFAULT maildrop, which
+is your system mailbox.  The "c" flags on the recipe start means "copy", so
+that procmail keeps going.
+
+The problem now is that when you read the mail from the inbox, you don't know
+if the mail has actually been saved or not.  So, it is a good idea to "flag"
+the mail by adding a new header indicating how it was filed.  Here's how:
+
+    :0c
+    * ^TOinfo-gnu
+    info/gnu/.
+
+    :0afh
+    |formail -A"X-Filed: info/gnu"
+
+    :0c
+    * ^TOinfo-gcc
+    info/gcc/.
+
+    :0afh
+    |formail -A"X-Filed: info/gcc"
+
+    :0c
+    * ^TOmh-users
+    info/mh/.
+
+    :0afh
+    |formail -A"X-Filed: info/mh"
+
+
+and so on, for each mailing list you wish to have mail filed for.  The
+"a" flag means that the recipe is an AND condition, applied only if the
+preceding receipe (at the same leve) was successful.  The "f" flag
+means that the recipe is a "filter", meaning that the stdout of the
+process will replace the stdin which was the message;  "formail" is
+designed for this usage.  The "h" means filter only the headers.
+
+Now, when you receive mail in your inbox, if it has been prefiled, the
+header "X-Filed" will appear in the message with the name of the folder
+under which the mail was copied.
+
+There are still some problems with this method:
+
+(a) if the message is sent to several mailing lists (eg: To: info-gnu,
+    info-gcc, .etc), then a "X-Filed:" header for each mailing list
+    will be inserted;
+
+(b) if you are using MH-style folders, multiple identical copies
+    (except for the "X-Filed:" header) of the mail will be filed into
+    several folders, when it could have been hard-linked from the
+    original, saving space;
+
+(c) There are now two recipes per mailing list, and all of the recipes
+    are the same except for the mailing list name, and the
+    corresponding folder.
+
+This leads us to the next method: of creating and using "subroutine"
+recipe files.
+
+Let's assume that we have a "checking" recipe and a "filing" subroutine
+recipe. The "checking" recipe would need an ADDRESS to recognize and a
+corresponding DESTination folder in which to prefile the message.  The
+"filing" recipe would then file the message into the appropriate DEST
+folder as well as insert one "X-File:" header with the names of the
+folders appended.  I'll call the "checking" recipe "pf-check.rc", for
+"prefile check", and I'll call the "filing" recipe "pf-save.rc", for
+"prefile save".
+
+Here's how our main recipe in ~/.procmailrc would now look:
+
+    ADDR=info-gnu
+    DEST=info/gnu/.
+    INCLUDERC=pf-check.rc
+
+    ADDR=info-gcc
+    DEST=info/gcc/.
+    INCLUDERC=pf-check.rc
+
+    ADDR=mh-users
+    DEST=info/mh/.
+    INCLUDERC=pf-check.rc
+
+and so on, for each mailing list.  After all the checking recipes, we
+need to invoke the "saving" recipe:
+
+    INCLUDERC=pf-save.rc
+
+If you are really stuck on brevity, you could write the recipes like
+this, even using tabs to make it look pretty:
+
+    ADDR=info-gnu	DEST=info/gnu/.		INCLUDERC=pf-check.rc
+    ADDR=info-gcc	DEST=info/gcc/.		INCLUDERC=pf-check.rc
+    ADDR=mh-users	DEST=info/mh/.		INCLUDERC=pf-check.rc
+    ADDR=perl-users	DEST=info/perl/.	INCLUDERC=pf-check.rc
+    ADDR=procmail	DEST=info/procmail/.	INCLUDERC=pf-check.rc
+    ...
+    INCLUDERC=pf-save.rc
+
+Of course, all this is vaporware until pf-check.rc and pf-file.rc exist
+(and work :^).  Here's what they look like:
+
+    # pf-check.rc
+    #
+    # Author: Alan K. Stebbens <aks@sgi.com>
+    #
+    # Procmail recipe file to check an address ADDR for filing.
+    # If the address matches, append DEST to PF_DEST.
+    #
+    # After all checks are complete, invoke pf-save.rc to save the
+    # message into the appropriate folders.
+    #
+    # Set these variables before invoking:
+    #
+    # ADDR	Address to which addressed mail will be filed
+    #           into the named folder.
+    #
+    # DEST	Destination into which addressed mail will be
+    #           dropped.
+    #
+    # INCLUDERC=pf-check.rc
+
+    :0
+    * ADDR ?? .
+    * DEST ?? .
+    * $ ^TO$ADDR
+    { PF_DEST="$PF_DEST $DEST" }
+
+Pretty simple, so far.
+
+Here's pf-save.rc:
+
+    # pf-save.rc
+    #
+    # Author: Alan K. Stebbens <aks@sgi.com>
+    #
+    # Procmail recipe file to save the current message to
+    # a list of one or more folders set by pf-check.rc.
+    #
+    # You may wish to set the variable PF_DEST before invoking.
+    #
+    # INCLUDERC=pf-save.rc
+    #
+    # If the message is filed into a folder, LOGABSTRACT is
+    # set to "off" so a duplicate log is not created.
+
+    :0
+    * PF_DEST ?? .
+    {
+
+      # Add a new X-Filed if necessary
+      :0 fh
+      * !^X-Filed:
+      | formail -A "X-Filed: $PF_DEST"
+
+      # Else, if there is already a header, possibly append to it
+      :0 E
+      {
+        OLD_PF_DEST=`formail -zxX-Filed:`
+        :0 fh
+	* $!^X-Filed:.*$PF_DEST
+	|formail -I"X-Filed: $OLD_PF_DEST $PF_DEST"
+      }
+
+      # If filing into MH folders, use one copy and procmail will take
+      # care of linking.
+      :0 c
+      * PF_DEST ?? \.$
+      $PF_DEST
+
+      # If not filing into MH folders, use recursive filing
+      :0 E
+      {
+	DEST=`echo $PF_DEST | cut -d' ' -f1`
+	PF_DEST=`echo $PF_DEST | cut -d' ' -f2-`
+
+	# File into the first folder now
+	:0 c:
+	$DEST
+
+        # Possibly file into the 2nd and other folders with recursion
+	:0 c
+	* PF_DEST ?? ([^ ])
+	|procmail -m PF_DEST="$PF_DEST" PF_RECURSE=1 pf-save.rc
+
+	# If we were recursing, don't file multiple copies into DEFAULT
+	:0
+	PF_RECURSE ?? .
+	{ HOST=_stop_now_ }
+      }
+      LOGABSTRACT=off
+    }
+
+This recipe is a little more complicated because it has to handle both
+MH-style filing (easy) and non-MH-style filing (harder).  IMHO, procmail
+should be consistent in how it handles filing to multiple folders
+but it is not.
+
+Using these recipes will save those of you on many mailing lists at
+least 3 seconds per message (conservatively), as well as help you to
+develop a consistent filing algorithm.
+
+Three seconds may not seem like much time to save, but if you are on
+several mailing lists, you may be receiving up to 100 message per day
+or more.  Do the arithmetic: 3 * 100 = 300 seconds = 5 minutes.  500
+messages a day is almost a half hour of your time just filing email.
+
+And this is based on the assumption that you can make a decision and
+issue the corresponding command to your mailer to file a message within
+3 seconds.   I can do it in 3 seconds with Emacs' help, but not in Pine
+or Zmail, or most other mailers; so, you will spend more time per
+message accomplishing your filing.
+
+Another way to think of it: why should you spend your time making these
+trivial kinds of decisions?
+
+I hope this helps.  Some of you have already indicated that other parts
+of my procmail library have been useful.
+
+I strongly believe that we should make the computers do as much of the
+work as possible.  Email, like any good tool, should enable us to get
+more work done, without creating more of it.
+
+Alan

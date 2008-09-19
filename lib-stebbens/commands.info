@@ -1,0 +1,351 @@
+This file provides detailed information on the commands supported
+by my mail filter (a procmail recipe file called "commands.rc").
+This is $Revision: 1.1 $.
+
+In order to be recognized, the following command phrases must
+occur on the Subject: header line, and not in the body of the
+mail message.  The word "get" may be used instead of "send", and
+the noun phrases with spaces may alternatively be hyphenated
+(ie:  "send emacs setup" or "send emacs-setup").
+
+    send help
+    send info
+    send procmailrc
+    send procmail info
+    send procmail library
+    send emacs setup
+    send pgp key
+    disable autoacks
+    enable autoacks
+
+------------------------------------------------------------------
+
+send help
+=========
+
+    The file $HELPFILE ("commands.help" by default) is sent as a
+    reply.
+
+send info
+=========
+
+    The file $INFOFILE ("commands.info" by default) is sent as a
+    reply.
+
+send procmailrc
+===============
+
+    Returns an annotated, example procmailrc file which must
+    be only slightly modified to achieve a working personal
+    mail filter.  A good example of how to write a variety of
+    procmail filters.
+
+send procmail info
+==================
+
+    Returns information about procmail and how to obtain it;
+    currently, this is maintained in the "procmail.info" file.
+
+send procmail library
+=====================
+
+    A collection of procmail recipe files developed by Alan K.
+    Stebbens <aks@sgi.com> which may make writing procmail
+    recipes easier and more useful.  This library is freely
+    available in the same spirit by which procmail and the GNU
+    utilities are being made available.
+
+    The following are the files currently comprising the library:
+
+  ackmail.rc
+  ----------
+
+    Ackmail.rc is a procmail recipe file which provides the
+    functionality of intelligent auto-acknowledgement of incoming
+    mail.  It uses a file, named "ackmsg" by default, as the
+    prototype message for replies.  The file can contain several
+    variables which are substituted with values determined at the
+    time of the reply.  The variables currently supported are:
+    $SUBJECT, $SENDER, and $UNREAD (the value of $UNREAD is under
+    the control of the owner; see the recipe files
+    "unread-*.rc").
+
+    Ackmail.rc tries very hard not to respond to daemons,
+    mailers, mailing lists, yourself, or a configurable list of
+    addresses and names to which you do not wish automatic
+    replies.  When used in combination with another recipe file,
+    "commands.rc", your recipients can decide for themselves to
+    receive these auto-acknowledgements or not.
+
+    Ackmail.rc will only respond with an auto-acknowledge mail
+    once per day per address.
+
+    Ackmail.rc can detect when you are on vacation (when you
+    create a "vacation.msg" file) and will generate replies with
+    this message instead.
+
+    A "cache" of acknowledgements is maintained in a file, named
+    "ackmail.cache" by default.
+
+    If the "ackmsg" or "vacation.msg" files contain the string
+    $UNREAD, then an attempt to determine the number of unread
+    messages will be made.  This computation will depend upon the
+    value of the variable MUA, which tells the recipe which Mail
+    User Agent (MUA), the user is using.  The value of MUA is
+    then used to derive a recipe filename of "unread-$MUA.rc",
+    which is then included for procmail processing so that it can
+    define  UNREAD correctly for the defined MUA.
+
+    Currently, there are two unread MUA methods:
+
+      MUA	File		    What
+      ===	====		    ===
+      default	unread-default.rc   Counts messages in $DEFAULT
+      mh	unread-mh.rc	    Counts messages in +inbox
+
+    New MUA values can be added and implemented as additional
+    unread-$MUA.rc files
+
+  commands.rc
+  -----------
+
+    Commands.rc is a recipe file for procmail which implements
+    a "Subject: header command parser and implementor.  Commands.rc
+    currently recognizes a given set of commands, but can be
+    easily extended or modified.
+
+  dupcheck.rc
+  -----------
+
+    This procmail recipe file checks for and removes duplicate
+    mail, as determined by the "Message-Id:" header.  If you are
+    subscribed to many mailing lists, this is a very useful
+    recipe to use -- it will detect and remove duplicate messages
+    arriving via different mailing lists but from the same
+    originator.
+
+  get-from.rc
+  -----------
+
+    A little recipe used to extract the "best" address for the
+    sender of the incoming mail.  The result of this recipe is
+    left in the variable FROM, with the personal name portion
+    extracted into the variable FRIENDLY.  The result of this
+    recipe differs from the result of `formail -rt` in that the
+    former includes the complete address, with any comments or
+    quoted strings, while the latter is only the email address.
+
+    For example, with a message of:
+
+	To: you@yourhost.yourdomain
+	From: "Ponce De Leon" <pdl@foo.bar.com>
+
+    the results would be:
+
+	get-from.rc:
+	    FROM="Ponce De Leon" <pdl@foo.bar.com
+	    FRIENDLY="Ponce De Leon"
+
+	`formail -rt`:
+	    pdl@foo.bar.com
+
+  guess-mua.rc
+  ------------
+
+    This recipe attempts to get the Mail User Agent (MUA) being
+    used by the user receiving the incoming mail.  The purpose of
+    this recipe is to provide a hint to "ackmail.rc" so that a
+    proper value of UNREAD can be computed when needed.
+
+    This recipe is only invoked if the user has not explicitly
+    defined MUA.
+
+    In my environment, I define MUA as MUA=mh, since I use
+    procmail to filter my incoming mail into three or more MH
+    folders.
+
+    In a "standard" environment, with the incoming mail being
+    dropped into the $DEFAULT maildrop, MUA should be defined as
+    MUA=default.
+
+    See "ackmail.rc" on details for using this variable.
+
+  headers.rc
+  ----------
+
+    A recipe which defines some variables useful in procmail regexp
+    patterns.  The variables defined are:
+
+    PRE_ADDR_SPAN	Spans (matches) any or no text before
+			the address.
+
+    POST_ADDR_SPAN	Spans any or no text after an address.
+
+    USERADDR		Matches the user portion of an email
+			address.
+
+    HOSTADDR		Matches the host portion of an email
+			address, including fully-qualified domain
+			names.
+
+    HOSTNAME		Matches only the "plain" host name of an
+			email address, not including any domain
+			name.
+
+    ADDRESS		Matches either an RFC822 or UUCP email
+			address.
+
+    FROM		Matches the various headers indicating
+			the originator of the mail.  These
+			headers include "Resent-From:",
+			"Resent-Sender:", "From:", "Sender:",
+			"X-Envelope-From:", and "From ".
+
+    TO                  Matches the various headers indicating
+			the primary recipients of the mail and
+			any text up to but not including the
+			email address; does not include any Cc:
+			fields.
+
+			The primary recipient fields include:
+			"Original-Resent-To", "Resent-To:",
+			"To:", "X-Envelope-To:",
+			"Apparently-To:", and
+			"Apparently-Resent-To:".
+
+    CC			Matches the various headers indicating
+			the secondary recipients of the mail, and
+			any text up to but not including the email
+			address.  Does not include any To:
+			fields.
+
+    TOCC		This is only for "completeness", and is
+			identical to using the builtin procmail
+			macro '^TO'.
+
+    LIST_PRECEDENCE	Matches the Precedence: header with one
+			of the list attributes: "list", "bulk", or
+			"junk".
+
+    LIST_MAILERS	Matches the user names of all common mailing
+			list software.
+
+    FROM_LIST		Matches mail received from a mailing list.
+
+    Notes: when these variables are used in a procmail recipe regexp,
+    be sure to precede the condition line with a '$' so that the
+    variable will be interpreted for its value, rather than used
+    literally.  For example, to write a procmail condition to
+    check for a generic mail list mail and file it into the folder
+    "junk", you could write:
+
+	:0:
+	* $ $FROM_LIST
+	junk
+
+
+  unread-default.rc
+  -----------------
+
+    This recipe is used to compute the number of unread messages
+    sitting in the $DEFAULT system mail drop folder (typically
+    /usr/spool/mail/$LOGNAME or /usr/mail/$LOGNAME, depending
+    upon your system).  The result of this recipe is to set the
+    variable UNREAD to a number or "no".
+
+    This recipe is invoked by "ackmail.rc" when the active reply
+    text (from either ackmsg or vacation.msg) contains the string
+    '$UNREAD'.
+
+    Currently, the recipe uses "egrep -c" to count the messages,
+    which is very fast, but sometimes inaccurate (such as when a
+    mail body contains the pattern "^From ").  If accuracy is
+    more important to you than speed, edit the file and comment
+    out the first recipe, and uncomment the second.
+
+  unread-mh.rc
+  ------------
+
+    A recipe file used to calculate the number of unread messages
+    for MH users.  The variable UNREAD is derived from one of the
+    following methods, attempted in the given order:
+
+    a. the user defines MH_INFOLDERS to one or more MH folders in
+       which incoming mail is filed.  For each of these folders,
+       the sum of the differences between the last and current
+       message numbers is accumulated as the result.
+
+    b. the MH user uses the Unseen-Sequence profile entry to keep
+       track of pre-filed messges in the +inbox folder, and counts
+       the number of messages in this sequence.
+
+    c. the number of messages between the "current" +inbox message
+       and the last message in the +inbox is the count of unread
+       messages.
+
+send emacs setup
+================
+
+    A shar archive of Emacs-lisp files used to provide an Emacs
+    initialization method is sent as the reply.  The "setup"
+    archive is a couple files of Emacs-lisp utility "setup"
+    functions and a collection of "setup" initialization
+    "recipes" for many Emacs modes, utilities, and packages.
+
+    The system manager can configure Emacs to provide these setup
+    "recipes" of initialization sequences so that each Emacs user
+    need only refer, in their ~/.emacs file, to the setup
+    sequence with the expression (setup 'FEATURE) where FEATURE
+    is the desired feature to be initialized.
+
+    Of course, each user can further customize each feature to
+    suit the individual needs or taste, but, by using the "setup"
+    package, it is no longer necessary for each Emacs user to
+    define the complete initialization sequence for all
+    contributed Emacs' packages or utilities.
+
+send pgp key
+============
+
+    My current PGP public key is sent as the reply.  Using this
+    key, you can then send a message encrypted such that only I
+    can read it.  Or, by using my PGP public key, you can verify
+    any digitally signed or encrypted mail from me as being
+    authentic or not.
+
+disable autoacks
+================
+
+    By using "ackmail.rc", my mail filter will automatically
+    reply to incoming mail with an acknowledgement.  If you prefer
+    not to recieve these acknowledgements, you can send me this
+    command and your email address will be added to the "noacks"
+    file of addresses.
+
+    Note: if you send mail from several addresses, you will have
+    to send this command from each of your addresses, unless you
+    have configured your mail agent to use a canonical email
+    address for you on a "From:" or "Reply-To:" header.
+
+enable autoacks
+===============
+
+    If you decide that you wish to recieve acknowledgements from
+    my mail filter after having disabled them, you can send me
+    the "enable autoacks" command and your email address will be
+    removed from my "noacks" file.
+
+    Be sure to send this command from the same address from which
+    you previously sent the "disable" command, or take care to
+    set your "From:" or "Reply-To:" headers to the same address.
+
+
+------------------------------------------------------------------
+
+Send me an e-mail message with the subject "send procmail info"
+for more information about procmail itself.  Use the subject of
+"send procmail library" to get a collection of recipe files, which
+includes the one implementing these commands.
+
+___________________________________________________________
+Alan Stebbens <aks@sgi.com>      http://reality.sgi.com/aks

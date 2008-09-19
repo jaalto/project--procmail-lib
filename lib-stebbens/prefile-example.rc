@@ -1,0 +1,85 @@
+# prefile.rc
+#
+# Example prefile.rc file
+#
+# $Id: prefile-example.rc,v 1.1 2002/01/01 22:25:33 jaalto Exp $
+#
+# Tailor this to suit your taste
+#
+# Use the syntax "FOLDER/." for MH folders.
+# Use the syntax "FOLDER" for BSD Mail folders.
+# Do not mix mingle the styles.  If, for some strange
+# reason, you want to do both kinds of filing, do all
+# the filing of one style first, then do all the other
+# style next.  Eg:
+#
+#  PF_DEST		# do MH style first
+#   ADDR=foo	DEST=foo/.	INCLUDERC=pf-chkto.rc
+#   ADDR=bar	DEST=bar/.	INCLUDERC=pf-check.rc
+#   ...
+#  INCLUDERC=pf-save.rc
+#
+#  PF_DEST		# now do folder-file style
+#   ADDR=foo	DEST=foo	INCLUDERC=pf-chkto.rc
+#   ADDR=bar	DEST=bar	INCLUDERC=pf-check.rc
+#   ...
+#  INCLUDERC=pf-save.rc
+#
+#  ...
+
+PF_DEST			# clear these vars
+PF_FROM
+
+:0
+* ? test pf-chkto.rc
+{
+
+  # Make a series of checks for various mailing lists and
+  # associated folders in which to file them.  If a message
+  # is addressed to multiple lists, it will be filed into
+  # multiple folders (with hardlinks by procmail).
+
+  # These are MH style prefiling recipes
+
+  ADDR=info-gnu-emacs		DEST=gnu/emacs/.	INCLUDERC=pf-chkto.rc
+  ADDR=perl-users		DEST=info/perl/.	INCLUDERC=pf-chkto.rc
+  ADDR=procmail			DEST=info/procmail/.	INCLUDERC=pf-chkto.rc
+  ADDR=bladerunners		DEST=rec/blading/.	INCLUDERC=pf-chkto.rc
+
+  # These are the same recipes for non-MH folders
+  ADDR=info-gnu-emacs		DEST=gnu-emacs		INCLUDERC=pf-chkto.rc
+  ADDR=perl-users		DEST=info-perl		INCLUDERC=pf-chkto.rc
+  ADDR=procmail			DEST=info-procmail	INCLUDERC=pf-chkto.rc
+  ADDR=bladerunners		DEST=rec-blading	INCLUDERC=pf-chkto.rc
+
+}
+
+# Personal mail prefiling -- if the mail is either from an address,
+# or to an address, from me, then it gets prefiled.
+# IN other words, it tracks mail threads to and from an address and
+# yourself.
+
+:0
+* ? test pf-check.rc
+{
+  ADDR="(aks(@.*sgi\.com)?|Alan.*Stebbens)"
+  DEST=priv/Alan.Stebbens/.		# MH style
+  INCLUDERC=pf-check.rc
+
+  ADDR="((vice-)?president@whitehouse.gov|Mr. (Vice-)?President)"
+  DEST=junk/politics/.
+  INCLUDERC=pf-check.rc
+
+  ADDR="(newt@congress.gov|Newt.Gingrich)"
+  DEST=junk/politics/.
+  INCLUDERC=pf-check.rc
+
+  #...
+
+}
+
+# Now save the mail if any there are any destinations
+:0
+* PF_DEST ?? .
+* ? test pf-save.rc
+{ INCLUDERC=pf-save.rc }

@@ -1,0 +1,259 @@
+#!/usr/bin/perl
+#
+# $Id: proclint,v 1.2 2004/09/21 14:01:47 jaalto Exp $
+#
+# proclint [-[no]list] [-[no]includerc] [-procmailrc] rcfiles ...
+#
+# Author: Alan K. Stebbens <aks@sgi.com>
+#
+# By default, -noincluderc and -nolist are set.
+#
+# Because debugging procmailrc scripts is difficult
+# I try to encode checks into this script.
+#
+# If -list given, list all lines of the recipe, numbered, and
+# with levels and a type flag character.
+#
+# Current errors caught:
+#
+#  '{' and '}' nesting errors.
+#  Missing '*' on conditions
+#  Lines which aren't recipes or assignments
+#  Unterminated recipes
+#
+
+($DIR,$PROG) = $0 =~ m=^(.*/)?([^/]+)$=;
+$DIR =~ s=/$== || chop($DIR = `pwd`);
+
+$| = 1;
+
+unless ($#ARGV >= $[) {
+    &usage;
+}
+
+while( $_ = shift(@ARGV) ) {
+    if (!index('-list', $_)) {
+        $listlines++;
+    } elsif (!index('-nolist',$_)) {
+        $listlines = '';
+    } elsif (!index('-includerc',$_)) {
+        $includerc++;
+    } elsif (!index('-noincluderc',$_)) {
+        $includerc = '';
+    } elsif (!index('-procmailrc',$_)) {
+        $HOME = $ENV{'HOME'} || (getpwuid($>))[7];
+        push(@ARGV,"$HOME/.procmailrc");
+    } elsif (!index('-help',$_)) {
+        &usage;
+    } elsif (/^-/) {
+        print "Unknown option: '$_'\n";
+        next;
+    } else {
+        &Scan($_);
+    }
+}
+
+$FH_TEMPLATE = 'fh00';
+
+sub Scan {
+    local($file) = shift;
+    return if $Scanned{$file};
+    $Scanned{$file}++;
+    local($fileLevel) = shift || 0;
+    local($mainLevel) = shift || 0;
+    local( $recipe, $errs, $continuation, $line );
+    local( $type, $count, $conditions, $var, $val, $errs );
+    local( $includefile, $depth );
+    local( $level ) = $mainLevel;
+    local( $_ );
+
+    unless ($quiet) {
+        print "\n" if $listlines;
+        print (" " x $fileLevel);
+        print "Scanning file $file:";
+    }
+    local($FH) = $FH_TEMPLATE++;
+    open( $FH , $file ) || do {
+        print "Can't open $file: $!\n";
+        return;
+    };
+    print "\n" unless $quiet;
+    $recipe = '';
+    $errs = '';
+    $continuation = '';
+    $line = '';
+    while( <$FH> ) {
+        chop;
+        $_ = &untab($_) if /\t/;
+        if( $continuation ) {
+            $line .= "\n".$_;
+            $_ = $line;
+            $line = '';
+            $continuation = '';
+        }
+        if( /\\$/ ) {           # continuation?
+            $continuation = 1;
+            chop;               # remove the trailing slash
+            $line = $_;         # make the continuation
+            next;
+        }
+
+        $type = ' ';
+        if( /^\s*\#/ || /^\s*$/ ) {     # ignore comments or blank lines
+            $type = ' ';
+            $_ = ' ' unless length;
+        }
+        elsif( ! $recipe || /^\s*:/) {  # are we looking for a recipe?
+            # This is a state driven scanner
+            # State     Parse   Next    What
+            #   0        :       1      Start recipe parse
+            #   1        *       1      Parse condition
+            #   1    !   0      Parse redirect
+            #   1        |       0      Parse pipe
+            #   1    {   0      Increment recipe level, parse sub-recipe
+            #   1        <other> 0      Parse filename path
+
+            if( /^\s*:\s*(\S.*)?/ ) {   # recipe start?
+                $flags = $1;    # get flags
+                $count = $flags =~ /^(\d+)/ ? $1 :
+                         $flags =~ /[eEaA]/ ? 0 : 1;
+                $recipe = $.;   # we're in a recipe
+                $conditions = 0;
+                $type = 'R';    # set the type
+            } elsif( /^\s*}/ ) {        # end of a nested recipe?
+                $level--;
+                $type = 'R';
+                if ($level < 0) {
+                    $errs .= "Too many close brackets!\n";
+                    $level = 0;
+                }
+            } elsif( /^\s*(\w+)\s*=\s*(\S.*)?/ ) {      # an assignment?
+                $type = '=';                    # assignment
+                ($var,$val) = ($1,$2);
+                if( $includerc ) {
+                    $Assigns{$var} = $val;
+                    if( $var eq 'INCLUDERC' ) {
+                        $newfile = &Eval($val);
+                        if( $newfile && -f $newfile ) {
+                            $includefile = $newfile;
+                        } elsif ( $newfile ) {
+                            $errs .= "Included file \"$newfile\" does not exist.\n";
+                        }
+                    }
+                }
+            } elsif( /^\s*(\w+)\s*$/ ) {        # an un-assignment?
+                $type = '=';                    # unassignment
+            } else {
+                $errs .= "Bad recipe line: \"$_\"\n";
+                $type = 'E';
+            }
+        } else {
+            if( /^\s*\*/ )  {   # a condition?
+                $conditions++;
+                $type = 'C';    # condition
+                $count--;
+            } elsif ( /^\s*!/ && $count <= 0) { # a redirection?
+                $recipe = '';   # an action, we're out of the recipe
+                $type = 'A';    # Action
+            } elsif ( /^\s*\|/ ) {      # a pipe?
+                $recipe = '';   # another action
+                $type = 'A';    # Action
+            } elsif ( /^\s*{/ ) {       # a subrecipe
+                $level++;               # increment the level
+                $recipe = '';   # and we're out of the recipe
+                $type = 'A';    # Action
+                $level-- if /\s+}/;     # decrement count if one-liner
+            } elsif ( --$count >= 0 && !/^\s*[\|{]/) { # more conditions?
+                $conditions++;
+                $type = 'C';    # assume condition
+            } else {            # default is path
+                $type = 'F';    # folder
+                if ( /^\s*[\#*(){}|!?]|^\s*\w+ \w+/ ) { # make reasonable mistake guess
+                    $errs .= "Possibly bad folder name?\n";
+                }
+                $recipe = '';
+            }
+        }
+
+      Print:
+        if ($listlines || $errs) {
+            @lines = split(/\n/,$_);
+            $depth = $level > 0 ? sprintf("<%d>",$level) : "   ";
+            while ($_ = shift(@lines)) {
+                print (" " x $fileLevel);
+                $_ .= "\\" if @lines;
+                printf "%3d:%1s%s %s\n",$.,$type,$depth,$_;
+                $type = '+';
+            }
+        }
+        if( $errs ) {
+            print $errs;
+            $errs = '';
+        }
+        if ($includefile) {
+            &Scan( $includefile, $fileLevel + 1, $level );
+            unless ($quiet) {
+                print "\n" if $listlines;
+                print (" " x $fileLevel);
+                print "Back to file $file:\n";
+            }
+            $includefile = '';
+        }
+    }
+    if ($recipe) {
+        print "$file: EOF: recipe at line $recipe never terminated.\n";
+    }
+    if ($level > $mainLevel) {
+        print "$file: EOF: Unterminated nested recipies.\n";
+    }
+    close $FH;
+}
+
+sub Eval {
+    local($val) = shift;
+
+    while( ( $val =~ /\$(\w+)/ ) ) {
+        if( defined( $Assigns{$1} ) ) {
+            $val = $` . $Assigns{$1} . $';
+        } elsif( defined( $ENV{$1} ) ) {
+            $val = $` . $ENV{$1} . $';
+        } else {
+            $val = $` . $';     # omit the variable -- it's empty
+        }
+    }
+    $val;
+}
+
+sub untab {
+    local($_) = shift;
+    while (($x = index($_,"\t")) >= $[) {
+        substr($_,$x,1) = " " x (((($x / 8) + 1) * 8) - $x)
+    }
+    $_;
+}
+
+sub usage {
+    print <<"EOF"; exit(1);
+usage: $PROG [-options] [rcfiles ...]
+Check procmail rc files for proper syntax, recipe nesting, etc.
+Options (default are marked with '*'):
+  -list         List lines in the procmail recipe files.
+  -nolist*      Do not list lines, except for errors.
+  -includerc    Scan and possibly list files included with INCLUDERC
+  -noinclude*   Do not scan INCLUDERC references
+  -procmailrc   Check \$HOME/.procmailrc
+  -help         This message
+
+The output consists of: 'LINE-NUMBER:FLAG:DEPTH: text'.
+FLAG is one of:
+    'R'         recipe
+    'C'         condition
+    'A'         action (redirect, '!', or pipe, '|')
+    'F'         folder
+    '='         assignment
+    '+'         continuation
+    'E'         *line may be erroneous*
+DEPTH indicates the depth of the recipe nesting and is shown only
+when greater than zero.
+EOF
+}
