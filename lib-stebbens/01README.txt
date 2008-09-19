@@ -1,4 +1,4 @@
-lib-stebbens/README.txt
+lib-stebbens/01README.txt
 
         Alan Stebbens has used procmail for a very long time and these
         files in this directory were imported to the Sourceforge's
@@ -15,5 +15,7 @@ lib-stebbens/README.txt
 
         If you have any questions concerning about programs or code in
         this directory, please contact Alan.
+
+	-- 2008-09-19 Jari Aalto <jari.aalto@cante.net>
 
 End
