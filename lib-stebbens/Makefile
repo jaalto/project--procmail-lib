@@ -28,7 +28,7 @@ include ../common.mk
 NAME		     = lib-stebbens
 
 BASEDIR		     = $(DOCDIR)/$(NAME)
-EXDIR		     = $(DOCDIR)/examples
+EXDIR		     = $(BASEDIR)/examples
 
 INSTALL_OBJS	     = proclint
 INSTALL_PM_OBJS	     = `ls *.rc | grep -v example`
