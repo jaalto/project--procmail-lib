@@ -2,6 +2,7 @@ Document id
 
         #T2HTML-TITLE Procmail Module library documentation
         #T2HTML-METAKEYWORDS Procmail, library, Spam, UBE
+        #T2HTML-OPTION --name-uniq
         #T2HTML-OPTION --html-frame
         #T2HTML-OPTION --css-code-bg
         #T2HTML-OPTION --css-code-note
