@@ -29,6 +29,9 @@ INSTALL		= install
 INSTALL_BIN	= $(INSTALL) -m 755
 INSTALL_DATA	= $(INSTALL) -m 644
 
+BASEDIR		= $(DOCDIR)/lib-aalto
+EXDIR		= $(BASEDIR)/examples
+
 INSTALL_EXAMPLE_OBJS = examples/*.procmailrc
 INSTALL_LOG_DOC	     = ChangeLog
 INSTALL_LOG_LIB	     = ../lib/ChangeLog
@@ -36,16 +39,16 @@ INSTALL_LOG_LIB	     = ../lib/ChangeLog
 all: doc
 
 install-examples:
-	$(INSTALL_BIN) -d $(EXAMPLEDIR)
-	$(INSTALL_DATA) $(INSTALL_EXAMPLE_OBJS) $(EXAMPLEDIR)
+	$(INSTALL_BIN) -d $(EXDIR)
+	$(INSTALL_DATA) $(INSTALL_EXAMPLE_OBJS) $(EXDIR)
 
 install-doc:
-	$(INSTALL_BIN) -d $(DOCDIR) $(DOCDIR)/manual $(DOCDIR)/article
-	$(INSTALL_DATA) *.html $(DOCDIR)
-	$(INSTALL_DATA) manual/*.html $(DOCDIR)/manual
-	$(INSTALL_DATA) article/*.html $(DOCDIR)/article
-	$(INSTALL_DATA) $(INSTALL_LOG_DOC) $(DOCDIR)/ChangeLog.doc
-	$(INSTALL_DATA) $(INSTALL_LOG_LIB) $(DOCDIR)/ChangeLog.lib
+	$(INSTALL_BIN) -d $(BASEDIR) $(BASEDIR)/manual $(BASEDIR)/article
+	$(INSTALL_DATA) *.html $(BASEDIR)
+	$(INSTALL_DATA) manual/*.html $(BASEDIR)/manual
+	$(INSTALL_DATA) article/*.html $(BASEDIR)/article
+	$(INSTALL_DATA) $(INSTALL_LOG_DOC) $(BASEDIR)/ChangeLog.doc
+	$(INSTALL_DATA) $(INSTALL_LOG_LIB) $(BASEDIR)/ChangeLog.lib
 
 # Rule: install - install documentation
 install: install-doc install-examples
