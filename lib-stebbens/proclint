@@ -28,28 +28,29 @@ $DIR =~ s=/$== || chop($DIR = `pwd`);
 $| = 1;
 
 unless ($#ARGV >= $[) {
-    &usage;
+    usage(1);
 }
 
-while( $_ = shift(@ARGV) ) {
-    if (!index('-list', $_)) {
+while( $_ = shift @ARGV ) {
+    warn "$_ => @ARGV";
+    if ( /^(-h|--help)/ ) {
+        usage();
+    } elsif (  / ^(-l|--list)/ ) {
         $listlines++;
-    } elsif (!index('-nolist',$_)) {
+    } elsif ( /^(-L|--nolist)/ ) {
         $listlines = '';
-    } elsif (!index('-includerc',$_)) {
+    } elsif ( /^(-i|--includerc)/ ) {
         $includerc++;
-    } elsif (!index('-noincluderc',$_)) {
+    } elsif ( /^(-I|--noincluderc)/ ) {
         $includerc = '';
-    } elsif (!index('-procmailrc',$_)) {
+    } elsif ( /^(-p|--procmailrc)/ ) {
         $HOME = $ENV{'HOME'} || (getpwuid($>))[7];
         push(@ARGV,"$HOME/.procmailrc");
-    } elsif (!index('-help',$_)) {
-        &usage;
-    } elsif (/^-/) {
+    } elsif ( /^-/ ) {
         print "Unknown option: '$_'\n";
         next;
     } else {
-        &Scan($_);
+        Scan($_);
     }
 }
 
@@ -232,20 +233,24 @@ sub untab {
     $_;
 }
 
-sub usage {
-    print <<"EOF"; exit(1);
-usage: $PROG [-options] [rcfiles ...]
+sub usage ($) {
+    my $code = shift || 0;
+
+    print <<"EOF"; exit $code;
+usage: $PROG [options] <rcfiles ...>
 Check procmail rc files for proper syntax, recipe nesting, etc.
 Options (default are marked with '*'):
-  -list         List lines in the procmail recipe files.
-  -nolist*      Do not list lines, except for errors.
-  -includerc    Scan and possibly list files included with INCLUDERC
-  -noinclude*   Do not scan INCLUDERC references
-  -procmailrc   Check \$HOME/.procmailrc
-  -help         This message
+
+    -h|--help         This message
+    -i|--includerc    Scan and possibly list files included with INCLUDERC
+    -I|--noinclude*   Do not scan INCLUDERC references
+    -l|--list         List lines in the procmail recipe files.
+    -L|--nolist*      Do not list lines, except for errors.
+    -p|--procmailrc   Check \$HOME/.procmailrc
 
 The output consists of: 'LINE-NUMBER:FLAG:DEPTH: text'.
 FLAG is one of:
+
     'R'         recipe
     'C'         condition
     'A'         action (redirect, '!', or pipe, '|')
@@ -253,7 +258,10 @@ FLAG is one of:
     '='         assignment
     '+'         continuation
     'E'         *line may be erroneous*
+
 DEPTH indicates the depth of the recipe nesting and is shown only
 when greater than zero.
 EOF
 }
+
+# End of file

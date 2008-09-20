@@ -27,24 +27,24 @@ proclint - Check procmail rc files for proper syntax
 
 Display short help.
 
-=item B<--includerc>
+=item B<-i|--includerc>
 
 Scan and possibly list files included in code with INCLUDERC
 statements.
 
-=item B<--list>
-
-List lines in the procmail recipe files.
-
-=item B<--noinclude>
+=item B<-I|--noinclude>
 
 Do not scan INCLUDERC references (default).
 
-=item B<--nolist>
+=item B<-l|--list>
+
+List lines in the procmail recipe files.
+
+=item B<-L|--nolist>
 
 Do not list lines, except for errors (default).
 
-=item B<--procmailrc>
+=item B<-p|--procmailrc>
 
 Check $HOME/.procmailrca
 
