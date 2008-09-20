@@ -27,20 +27,19 @@ clean:
 	$(MAKE) -C lib	     clean
 	$(MAKE) -C doc	     clean
 
-distclean: clean
-
 realclean: clean
 
 install:
-	$(MAKE) -C lib	     	install
+	$(MAKE) -C lib		install
 	$(MAKE) -C lib-stebbens install
-	$(MAKE) -C doc	     	install
+	$(MAKE) -C doc		install
 
 install-test:
-	# Maintainer only target
+	# for Maintainer only
 	make DESTDIR=`pwd`/tmp prefix=/. man_prefix=/. data_prefix=/. install
 
 www:
+	# for Maintainer only
 	$(MAKE) -C doc www
 
 .PHONY: all clean distclean realclean install www

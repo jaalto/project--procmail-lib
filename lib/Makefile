@@ -30,15 +30,12 @@ include ../common.mk
 all:
 	@echo "There is nothing to make. See INSTALL"
 
-clean:
-	-rm *[~#] .[~#]* 2> /dev/null
-
-distclean: clean
-
 install-procmail:
 	$(INSTALL_BIN) -d $(DATADIR)
 	$(INSTALL_DATA) $(INSTALL_OBJS) $(DATADIR)
 
 install: install-procmail
+
+.PHONY: install-procmail
 
 # End of file

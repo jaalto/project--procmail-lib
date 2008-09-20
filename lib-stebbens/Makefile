@@ -30,39 +30,38 @@ NAME		     = lib-stebbens
 BASEDIR		     = $(DOCDIR)/$(NAME)
 EXDIR		     = $(BASEDIR)/examples
 
-INSTALL_OBJS	     = proclint
+BIN		     = proclint
+INSTALL_OBJS	     = $(BIN)
 INSTALL_PM_OBJS	     = `ls *.rc | grep -v example`
 INSTALL_EXAMPLE_OBJS = prefile-example.rc procmailrc-example
 INSTALL_DOC_OBJS     = 0*README* Copyright \
 		       GNU-LICENSE *.html *tutorial* *.info
 all: man
 
-clean:
-	-rm -f *[~#] .[~#]*
-
-distclean: clean
-
 man:
-	$(MAKE) -f pod2man.mk BIN=proclint makeman
+	$(MAKE) -f pod2man.mk BIN=$(BIN) makeman
 
 install-doc:
-	$(INSTALL_BIN) -d $(BASEDIR)
-	$(INSTALL_DATA) $(INSTALL_DOC_OBJS) $(BASEDIR)
+	$(INSTALL_BIN) -d $(EXDIR)
+	$(INSTALL_DATA) $(INSTALL_DOC_OBJS) $(EXDIR)/
 
 install-examples:
-	$(INSTALL_BIN) -d $(EXDIR)
-	$(INSTALL_BIN)	  $(INSTALL_EXAMPLE_OBJS) $(EXDIR)
+	$(INSTALL_BIN) -D $(INSTALL_EXAMPLE_OBJS) $(EXDIR)/
 
 install-procmail:
-	$(INSTALL_BIN) -d $(DATADIR)
-	$(INSTALL_BIN)	  $(INSTALL_PM_OBJS) $(DATADIR)
+	$(INSTALL_BIN)	-d  $(DATADIR)
+	$(INSTALL_DATA)	    $(INSTALL_PM_OBJS) $(DATADIR)/
+
+install-man:
+	$(INSTALL_BIN) -D *.1 $(MAN1DIR)/
 
 install-bin:
-	$(INSTALL_BIN) -d $(BINDIR)
-	$(INSTALL_BIN)	  $(INSTALL_OBJS) $(BINDIR)
+	$(INSTALL_BIN) -D $(BIN) $(BINDIR)/$(BIN)
 
-install: install-bin install-procmail install-examples install-doc
+install: all install-bin install-man install-procmail \
+	 install-examples install-doc
 
-.PHONY: install-bin install-procmail install-examples install-doc
+.PHONY: man clean \
+	install-bin install-man install-procmail install-examples install-doc
 
 # End of file
