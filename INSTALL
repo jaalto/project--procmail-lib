@@ -23,7 +23,7 @@ How to install
 
         To install for local account, use:
 
-            make DESTDIR=$HOME prefix=/. man_prefix=/. data_prefix=/. install
+            make DESTDIR=$HOME prefix=/. install
 
 How to sart using modules
 
