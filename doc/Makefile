@@ -48,10 +48,6 @@ install-doc:
 # Rule: install - install documentation
 install: install-doc install-examples
 
-# Rule: clean - delete temporary files
-clean:
-	rm  -f *[~#] *.tmp
-
 # Rule: www - copy web pages to ../../<project>-www
 www: html
 	name=$$(basename $$(cd .. && pwd)); \
@@ -72,6 +68,12 @@ manual: manual/index.txt
 
 article: article/index.txt
 	perl -S t2html.pl --Auto-detect --Out --print-url $<
+
+manual-gen:
+	# Rule gen-manual - Generate documentation from ../lib dir
+	to=manual/index.txt ; \
+	cp manual/index.src $$to ; \
+	ripdoc.pl ../lib/*.rc >> $$to
 
 html: manual article
 
