@@ -138,17 +138,50 @@
 .if n .ad l
 .nh
 .SH "NAME"
-program \- Description
+proclint \- Check procmail rc files for proper syntax
 .SH "SYNOPSIS"
 .IX Header "SYNOPSIS"
 .Vb 1
-\&  program [options]
+\&  proclint [options] *.rc
 .Ve
 .SH "OPTIONS"
 .IX Header "OPTIONS"
-None.
+.IP "\fB\-h|\-\-help\fR" 4
+.IX Item "-h|--help"
+Display short help.
+.IP "\fB\-i|\-\-includerc\fR" 4
+.IX Item "-i|--includerc"
+Scan and possibly list files included in code with \s-1INCLUDERC\s0
+statements.
+.IP "\fB\-I|\-\-noinclude\fR" 4
+.IX Item "-I|--noinclude"
+Do not scan \s-1INCLUDERC\s0 references (default).
+.IP "\fB\-l|\-\-list\fR" 4
+.IX Item "-l|--list"
+List lines in the procmail recipe files.
+.IP "\fB\-L|\-\-nolist\fR" 4
+.IX Item "-L|--nolist"
+Do not list lines, except for errors (default).
+.IP "\fB\-p|\-\-procmailrc\fR" 4
+.IX Item "-p|--procmailrc"
+Check \f(CW$HOME\fR/.procmailrca
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
+Check procmail rc files for proper syntax, recipe nesting, etc. The
+output consists of: '\s-1LINE\-NUMBER:FLAG:DEPTH:\s0 text'. \s-1FLAG\s0 is one of:
+.PP
+.Vb 7
+\&    \*(AqR\*(Aq         recipe
+\&    \*(AqC\*(Aq         condition
+\&    \*(AqA\*(Aq         action (redirect, \*(Aq!\*(Aq, or pipe, \*(Aq|\*(Aq)
+\&    \*(AqF\*(Aq         folder
+\&    \*(Aq=\*(Aq         assignment
+\&    \*(Aq+\*(Aq         continuation
+\&    \*(AqE\*(Aq         *line may be erroneous*
+.Ve
+.PP
+\&\s-1DEPTH\s0 indicates the depth of the recipe nesting and is shown only
+when greater than zero.
 .SH "ENVIRONMENT"
 .IX Header "ENVIRONMENT"
 None.
@@ -157,16 +190,16 @@ None.
 None.
 .SH "SEE ALSO"
 .IX Header "SEE ALSO"
-\&\fIpage\fR\|(1)
+\&\fIprocmail\fR\|(1)
 .SH "AUTHORS"
 .IX Header "AUTHORS"
-This manual page was written by Jari Aalto <jari.aalto@cante.net>, for
-the Debian \s-1GNU\s0 system (but may be used by others). Updated by Jari
-Aalto <jari.aalto@cante.net>. Released under license \s-1GPL\s0 v2 or any
-later version.
+Alan K. Stebbens <aks@sgi.com>
+.PP
+This manual page was written by Jari Aalto <jari.aalto@cante.net>.
+Released under license \s-1GPL\s0 v2 or any later version.
 .SH "POD ERRORS"
 .IX Header "POD ERRORS"
 Hey! \fBThe above document had some coding errors, which are explained below:\fR
-.IP "Around line 28:" 4
-.IX Item "Around line 28:"
-=back without =over
+.IP "Around line 26:" 4
+.IX Item "Around line 26:"
+\&'=item' outside of any '=over'

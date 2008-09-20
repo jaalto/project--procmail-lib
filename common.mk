@@ -18,36 +18,39 @@ ifneq (,)
 This makefile requires GNU Make.
 endif
 
-PROJECT		= procmail-lib
+PACKAGE		= procmail-lib
 DESTDIR		=
 
 prefix		= /usr/local
 exec_prefix	= $(prefix)
-doc_prefix	= $(prefix)/share/doc
-data_prefix	= $(prefix)/share
-
-man_prefix	= $(prefix)/man
+bindir		= $(exec_prefix)/bin
+sharedir	= $(prefix)/share
+man_prefix	= $(prefix)
+mandir		= $(prefix)/man
 
 ifeq ($(prefix),/usr)
-  man_prefix	= $(prefix)/share/man
+  man_prefix	= $(prefix)/share
+  mandir	= $(man_prefix)/man
 endif
 
-INSTALL		= install
-INSTALL_BIN	= $(INSTALL) -m 755
-INSTALL_DATA	= $(INSTALL) -m 644
-
-BINDIR		= $(DESTDIR)$(exec_prefix)/bin
-DATADIR		= $(DESTDIR)$(data_prefix)/$(PROJECT)
-DOCDIR		= $(DESTDIR)$(doc_prefix)/$(PROJECT)
-MANDIR		= $(DESTDIR)$(man_prefix)
+BINDIR		= $(DESTDIR)$(bindir)
+DOCDIR		= $(DESTDIR)$(sharedir)/doc
+SHAREDIR	= $(DESTDIR)$(prefix)/share/$(PACKAGE)
+LIBDIR		= $(DESTDIR)$(prefix)/lib/$(PACKAGE)
+SBINDIR		= $(DESTDIR)$(exec_prefix)/sbin
+ETCDIR		= $(DESTDIR)/etc/$(PACKAGE)
 
 MAN1DIR		= $(MANDIR)/man1
 MAN5DIR		= $(MANDIR)/man5
 MAN8DIR		= $(MANDIR)/man8
 
-clean:
-	-rm -f *[~#] .[~#]* *.tmp
+INSTALL		= install
+INSTALL_BIN	= $(INSTALL) -m 755
+INSTALL_DATA	= $(INSTALL) -m 644
 
 distclean: clean
+
+clean:
+	-rm -f *[~#] .[~#]* *.tmp
 
 # End of file

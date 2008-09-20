@@ -42,18 +42,23 @@ man:
 	$(MAKE) -f pod2man.mk BIN=$(BIN) makeman
 
 install-doc:
+	# Rule install-doc - install documentation
 	$(INSTALL_BIN) -d $(EXDIR)
-	$(INSTALL_DATA) $(INSTALL_DOC_OBJS) $(EXDIR)/
+	$(INSTALL_DATA) $(INSTALL_DOC_OBJS) $(EXDIR)
 
 install-examples:
-	$(INSTALL_BIN) -D $(INSTALL_EXAMPLE_OBJS) $(EXDIR)/
+	# Rule install-examples - install examples
+	$(INSTALL_BIN) -d $(EXDIR)
+	$(INSTALL_BIN) -D $(INSTALL_EXAMPLE_OBJS) $(EXDIR)
 
 install-procmail:
-	$(INSTALL_BIN)	-d  $(DATADIR)
-	$(INSTALL_DATA)	    $(INSTALL_PM_OBJS) $(DATADIR)/
+	# Rule install-procmail - install procmail files
+	$(INSTALL_BIN)	-d  $(SHAREDIR)
+	$(INSTALL_DATA)	$(INSTALL_PM_OBJS) $(SHAREDIR)
 
 install-man:
-	$(INSTALL_BIN) -D *.1 $(MAN1DIR)/
+	# Rule install-man - install manual page
+	$(INSTALL_BIN) -D $(BIN).1 $(MAN1DIR)/$(BIN).1
 
 install-bin:
 	$(INSTALL_BIN) -D $(BIN) $(BINDIR)/$(BIN)

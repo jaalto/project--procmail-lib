@@ -18,8 +18,6 @@ ifneq (,)
 This makefile requires GNU Make.
 endif
 
-include common.mk
-
 all:
 	@echo "There is nothing to build. See file INSTALL."
 
@@ -35,12 +33,12 @@ install:
 	$(MAKE) -C doc		install
 
 install-test:
-	# for Maintainer only
+	# Rule install-test - for Maintainer only
 	rm -rf tmp
-	make DESTDIR=`pwd`/tmp prefix=/. man_prefix=/. data_prefix=/. install
+	make DESTDIR=`pwd`/tmp prefix=/. install
 
 www:
-	# for Maintainer only
+	# Rule www - for Maintainer only
 	$(MAKE) -C doc www
 
 .PHONY: all clean distclean realclean install www

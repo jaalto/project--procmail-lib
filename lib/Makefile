@@ -23,16 +23,17 @@ ifneq (,)
 This makefile requires GNU Make.
 endif
 
-INSTALL_OBJS = *.rc
-
 include ../common.mk
+
+INSTALL_OBJS = *.rc
 
 all:
 	@echo "There is nothing to make. See INSTALL"
 
 install-procmail:
-	$(INSTALL_BIN) -d $(DATADIR)
-	$(INSTALL_DATA) $(INSTALL_OBJS) $(DATADIR)
+	# Rule install-procmail - install procmail files
+	$(INSTALL_BIN) -d $(SHAREDIR)
+	$(INSTALL_DATA) $(INSTALL_OBJS) $(SHAREDIR)
 
 install: install-procmail
 
