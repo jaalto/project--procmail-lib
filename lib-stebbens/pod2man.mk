@@ -11,29 +11,26 @@
 #	WITHOUT ANY WARRANTY; without even the implied warranty of
 #	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
 #	General Public License for more details.
-#
 #	Visit <http://www.gnu.org/copyleft/gpl.html>
 
-PROJECT		= procmail-lib
-DESTDIR		=
+BIN		= package
+PODCENTER	= $$(date "+%Y-%m-%d")
+MANSECT		= 1
+MANDEST		= $(MANSRC)
 
-prefix		= /usr/local
-exec_prefix	= $(prefix)
-doc_prefix	= $(prefix)/share/doc
-man_prefix	= $(prefix)/man
-data_prefix	= $(prefix)/share
+MANPOD		= $(MANSRC)$(BIN).$(MANSECT).pod
+MANPAGE		= $(MANDEST)$(BIN).$(MANSECT)
 
-INSTALL		= install
-INSTALL_BIN	= $(INSTALL) -m 755
-INSTALL_DATA	= $(INSTALL) -m 644
+makeman: $(MANPAGE)
 
-BINDIR		= $(DESTDIR)$(exec_prefix)/bin
-DATADIR		= $(DESTDIR)$(data_prefix)/$(PROJECT)
-DOCDIR		= $(DESTDIR)$(doc_prefix)/$(PROJECT)
-MANDIR		= $(DESTDIR)$(man_prefix)/man/man1
+$(MANPAGE): $(MANPOD)
+	which pod2man && \
+	pod2man --center="$(PODCENTER)" \
+		--name="$(BIN)" \
+		--section="$(MANSECT)" \
+		$(MANPOD) \
+	| sed 's,[Pp]erl v[0-9.]\+,$(BIN),' \
+	> $(MANPAGE) && \
+	rm -f pod*.tmp
 
-MAN1DIR		= $(MANDIR)/man1
-MAN5DIR		= $(MANDIR)/man5
-MAN8DIR		= $(MANDIR)/man8
-
-# End of file
+# End of of Makefile part

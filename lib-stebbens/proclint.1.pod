@@ -1,0 +1,88 @@
+#  This is manual page in Perl POD format. Read more at
+#  http://perldoc.perl.org/perlpod.html or run command:
+#
+#     perldoc perlpod | less
+#
+#  To check the syntax:
+#
+#     podchecker *.pod
+#
+#  Create manual page with command:
+#
+#    pod2man PAGE.N.pod > PAGE.N
+
+=pod
+
+=head1 NAME
+
+proclint - Check procmail rc files for proper syntax
+
+=head1 SYNOPSIS
+
+  proclint [options] *.rc
+
+=head1 OPTIONS
+
+=item B<-h|--help>
+
+Display short help.
+
+=item B<--includerc>
+
+Scan and possibly list files included in code with INCLUDERC
+statements.
+
+=item B<--list>
+
+List lines in the procmail recipe files.
+
+=item B<--noinclude>
+
+Do not scan INCLUDERC references (default).
+
+=item B<--nolist>
+
+Do not list lines, except for errors (default).
+
+=item B<--procmailrc>
+
+Check $HOME/.procmailrca
+
+=back
+
+=head1 DESCRIPTION
+
+Check procmail rc files for proper syntax, recipe nesting, etc. The
+output consists of: 'LINE-NUMBER:FLAG:DEPTH: text'. FLAG is one of:
+
+    'R'         recipe
+    'C'         condition
+    'A'         action (redirect, '!', or pipe, '|')
+    'F'         folder
+    '='         assignment
+    '+'         continuation
+    'E'         *line may be erroneous*
+
+DEPTH indicates the depth of the recipe nesting and is shown only
+when greater than zero.
+
+=head1 ENVIRONMENT
+
+None.
+
+=head1 FILES
+
+None.
+
+=head1 SEE ALSO
+
+procmail(1)
+
+=head1 AUTHORS
+
+Alan K. Stebbens <aks@sgi.com>
+
+This manual page was written by Jari Aalto <jari.aalto@cante.net>.
+Released under license GPL v2 or any later version.
+
+=cut

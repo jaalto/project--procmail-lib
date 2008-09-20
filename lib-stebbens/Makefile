@@ -35,13 +35,15 @@ INSTALL_PM_OBJS	     = `ls *.rc | grep -v example`
 INSTALL_EXAMPLE_OBJS = prefile-example.rc procmailrc-example
 INSTALL_DOC_OBJS     = 0*README* Copyright \
 		       GNU-LICENSE *.html *tutorial* *.info
-all:
-	@echo "There is nothing to make. See INSTALL."
+all: man
 
 clean:
 	-rm -f *[~#] .[~#]*
 
 distclean: clean
+
+man:
+	$(MAKE) -f pod2man.mk BIN=proclint makeman
 
 install-doc:
 	$(INSTALL_BIN) -d $(BASEDIR)
