@@ -1,0 +1,57 @@
+Document id
+
+        #T2HTML-TITLE Procmail Module library documentation
+        #T2HTML-METAKEYWORDS Procmail, library, Spam, UBE
+        #T2HTML-OPTION --name-uniq
+        #T2HTML-OPTION --html-frame
+        #T2HTML-OPTION --css-code-bg
+        #T2HTML-OPTION --css-code-note
+        #T2HTML-OPTION Note:
+        #T2HTML-OPTION --simple
+
+        Copyright (C) 1997-2009 Jari Aalto
+
+        License: This material may be distributed only subject to
+        the terms and conditions set forth in GNU General Public
+        License v2 or later; or, at your option, distributed under the
+        terms of GNU Free Documentation License version 1.2 or later
+        (GNU FDL).
+
+        This page documents of part of the files included in Procmail
+        Module Library project. Each modules is can be used as a plug-in.
+        Some can be used as subroutines to your own programs and some are
+        self containing recipes. There is no user or site specific settings
+        in these modules.
+
+        An attempt to minimize the use of external processes was the design
+        goal. The modules try to use pure procmail way as much as possible
+        e.g. to get date and directly from message without calling
+        expensive shell `date'. It is important to remember that procmail
+        is run on every incoming message and every CPU tick spent counts.
+
+         Document control
+
+        This document has been automatically generated from the procmail files
+        with 2 small perl programs in the following manner:
+
+            % perl -S ripdoc.pl `ls pm-ja*.rc|sort`   > pm-lib.raw
+
+            % perl -S t2html.pl                                           \
+              --html-frame                                                \
+              --base http://freshmeat.net/projects/procmail-lib           \
+              --button-previous http://freshmeat.net/projects/procmail-lib \
+              --title  "Procmail module documentation"                    \
+              --author "Jari Aalto"                                       \
+              --meta-keywords "procmail, sendmail, programming, library"  \
+              --meta-description "Procmail plug-in module documentation"  \
+              --name-uniq                                                 \
+              --Out                                                       \
+              pm-lib.txt
+
+        The perl program assume that the documentation sections have been
+        written in Technical Text Format. The perl program `ripdoc.pl' can
+        be found at CPAN entry
+        http://www.cpan.org/modules/by-authors/id/J/JA/JARIAALTO/ and
+        `t2html.pl' is available at project
+	#URL<http://freshmeat.net/projects/perl-text2html><perl-text2html>.
+

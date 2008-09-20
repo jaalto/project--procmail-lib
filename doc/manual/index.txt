@@ -59,163 +59,170 @@ Pm-jaaddr.rc -- extract 'foo@some.com' email address from variable INPUT
 
     File id
 
-        .Copyright (C)   1997-2009 Jari Aalto
-        .$Keywords:      procmail, extract, email address, subroutine $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
-        This includerc extracts the various components of email address
-        from variable `INPUT'. You can do quite a lot interesting things with
-        your email address. One of the tricks that you could use if you
-        don't have sendmail plus addressing capabilities, is that you put
-        the additional infomation to the RFC comment. Eg. If you read and
-        followup to posts in usenet games groups, you could use:
+ 	This includerc extracts the various components of email address
+ 	from variable `INPUT'. You can do quite a lot interesting things with
+ 	your email address. One of the tricks that you could use if you
+ 	don't have sendmail plus addressing capabilities, is that you put
+ 	the additional infomation to the RFC comment. Eg. If you read and
+ 	followup to posts in usenet games groups, you could use:
 
-            From: <login@site.com> (John Doe+usenet.games)
+ 	    From: <login@site.com> (John Doe+usenet.games)
 
-        Or if your email address's localpart (that's characters before @)
-        already signify your First and surname, you don't need to repeat it
-        in comment. However, place special marker "+" to mark
+ 	Or if your email address's localpart (that's characters before @)
+ 	already signify your First and surname, you don't need to repeat it
+ 	in comment. However, place special marker "+" to mark
         additional information part for your procmail recipes:
 
-            From: <first.surname@site.com> (+usenet.games)
+ 	    From: <first.surname@site.com> (+usenet.games)
 
-        The use of RFC comment should work everywhere because RFC requires
-        that comments are preserved along with the address information.
-        If you would have sendmail plus addressing capabilities you would
-        have used:
+ 	The use of RFC comment should work everywhere because RFC requires
+ 	that comments are preserved along with the address information.
+ 	If you would have sendmail plus addressing capabilities you would
+ 	have used:
 
-            From: <login+usenet.games@site.com> (John Doe)
+ 	    From: <login+usenet.games@site.com> (John Doe)
 
-        The idea is that the list infomation is readily available from
-        the email. The following recipe will derive the plus information
-        and use it directly as a mailbox where to drop the message. If
-        The Editor: Emacs, means anything to you, you can program it
-        to generate the appropriate From headers automatically when you
-        send mail from Gnus Mail/Newsreader MUA. Drop me a message if
-        you need an example how a piece of Emacs lisp code makes those
-        magic RFC plus addresses in the background while you compose the
-        body of the message.
+ 	The idea is that the list infomation is readily available from
+ 	the email. The following recipe will derive the plus information
+ 	and use it directly as a mailbox where to drop the message. If
+ 	The Editor: Emacs, means anything to you, you can program it
+ 	to generate the appropriate From headers automatically when you
+ 	send mail from Gnus Mail/Newsreader MUA. Drop me a message if
+ 	you need an example how a piece of Emacs lisp code makes those
+ 	magic RFC plus addresses in the background while you compose the
+ 	body of the message.
 
-            RC_EMAIL = $PMSRC/pm-jaaddr.rc
-            TOME     = "(login1|login2)"
+ 	    RC_EMAIL = $PMSRC/pm-jaaddr.rc
+ 	    TOME     = "(login1|login2)"
 
-            :0
-            *$ ^TO\/.*$TOME.*
-            {
-                INPUT       = $MATCH
-                INCLUDERC   = $RC_EMAIL
-                PLUS        = $COMMENT_PLUS
+ 	    :0
+ 	    *$ ^TO\/.*$TOME.*
+ 	    {
+ 		INPUT	    = $MATCH
+ 		INCLUDERC   = $RC_EMAIL
+ 		PLUS	    = $COMMENT_PLUS
 
-                #  If COMMENT_PLUS was defined, we found "+"
-                #  address which contain "usenet.games". Save it to
-                #  folder.
+ 		#  If COMMENT_PLUS was defined, we found "+"
+ 		#  address which contain "usenet.games". Save it to
+ 		#  folder.
 
-                :0 :
-                * PLUS ?? [a-z]
-                $PLUS
-            }
+ 		:0 :
+ 		* PLUS ?? [a-z]
+ 		$PLUS
+ 	    }
 
     Notes
 
-        1998-05 David Hunt <dh@west.net> also mentioned that "you need to
-        remember that some MTAs, (qmail for one, and soon vmail) use a dash
-        ( - ) as the subaddress delimiter. So you'll want to allow for that
-        in your code". For this reason the email part accepts both
-        "-" and  "+". The RFC comment however accepts only "+" and "--".
+ 	1998-05 David Hunt <dh@west.net> also mentioned that "you need to
+ 	remember that some MTAs, (qmail for one, and soon vmail) use a dash
+ 	( - ) as the subaddress delimiter. So you'll want to allow for that
+ 	in your code". For this reason the email part accepts both
+ 	"-" and  "+". The RFC comment however accepts only "+" and "--".
 
     Example input
 
-            "From: foo+procmail@this.site.com (Mr. foo)"        traditional
-            "From: foo-procmail@this.site.com (Mr. foo)"        new styled
+            "From: foo+procmail@this.site.com (Mr. foo)"	traditional
+            "From: foo-procmail@this.site.com (Mr. foo)"	new styled
 
-        NOTE: M$SOFT mailers tend to send idiotic smart quotes "'Mr. foo'"
-        and this recipe ignores these two quotes ["'] as if message had
-        only the standard ["]
+ 	NOTE: M$SOFT mailers tend to send idiotic smart quotes "'Mr. foo'"
+ 	and this recipe ignores these two quotes ["'] as if message had
+ 	only the standard ["]
 
     Returned values
 
             ADDRESS     "foo+procmail@this.site.com"
-                        containing the email address without <>
+ 			containing the email address without <>
 
             ACCOUNT     "foo+procmail"
-                        all characters before @
+ 			all characters before @
 
-            ACCOUNT1    "foo"
-                        characters before plus: account1+account2@site
-                        Note, if there is no "+", this is same as ACCOUNT.
+            ACCOUNT1	"foo"
+ 			characters before plus: account1+account2@site
+ 			Note, if there is no "+", this is same as ACCOUNT.
 
-            ACCOUNT2    "procmail"
-                        _only_ set if plus found: account1+account2@site
+            ACCOUNT2	"procmail"
+ 			_only_ set if plus found: account1+account2@site
 
             SITE        "this.site.com"
-                        all characters after @
+ 			all characters after @
 
             DOMAIN      "site.com"
-                        the main domain, preceding words in site are
+ 			the main domain, preceding words in site are
                         considered subdomain (local) addresses.
 
                             sub.sub.domain.net
 
-            SUB         "this.site"
-                        all the sub-domain names without the NET part.
+ 	    SUB		"this.site"
+ 			all the sub-domain names without the NET part.
 
-            SUB1        "site"
-                        The first subdomain counted from the _RIGHT_ after NET
+ 	    SUB1	"site"
+ 			The first subdomain counted from the _RIGHT_ after NET
 
-            SUB2        "this"
-                        Second subdomain.
+ 	    SUB2	"this"
+ 			Second subdomain.
 
-            SUB3        ""
-                        Third subdomain.
+ 	    SUB3	""
+ 			Third subdomain.
 
-            SUB4        ""
-                        Fourth subdomain.
+ 	    SUB4	""
+ 			Fourth subdomain.
 
             NET         "com"
-                        last characters after last period ( net,com,edu ...)
+ 			last characters after last period ( net,com,edu ...)
 
-            COMMENT     Anything unside parenthesis (Mr. Foo) or if no
-                        parentheses found, then anything between quotes
-                        "Mr. Foo"
+            COMMENT	Anything unside parenthesis (Mr. Foo) or if no
+ 			parentheses found, then anything between quotes
+ 			"Mr. Foo"
 
-            COMMENT_PLUS Anything after the "+" in the comment, like
-                         "Mr Foo+mail.usenet" --> "mail.usenet"
+ 	    COMMENT_PLUS Anything after the "+" in the comment, like
+ 			 "Mr Foo+mail.usenet" --> "mail.usenet"
 
-                         Note: some MTA's don't allow + character, so use
-                         alternatively '--':
-                         "Mr Foo--mail.usenet"  --> "mail.usenet"
+ 			 Note: some MTA's don't allow + character, so use
+ 			 alternatively '--':
+ 			 "Mr Foo--mail.usenet"  --> "mail.usenet"
 
-        Additionally there is variables DOT1 DOT2, which behave like
-        ACCOUNT1 and ACCOUNT2, but in respect to dotted firstname.surname
-        type address:
+ 	Additionally there is variables DOT1 DOT2, which behave like
+ 	ACCOUNT1 and ACCOUNT2, but in respect to dotted firstname.surname
+ 	type address:
 
-                john.doe@site.com
+ 		john.doe@site.com
 
-                ACCOUNT1    = john.doe
-                ACCOUNT2    = <empty>
-                DOT1        = john
-                DOT2        = doe
+ 		ACCOUNT1    = john.doe
+ 		ACCOUNT2    = <empty>
+ 		DOT1	    = john
+ 		DOT2	    = doe
 
-        If there is plus, the ACCOUNT2 is defined
+ 	If there is plus, the ACCOUNT2 is defined
 
-                john.doe+foo@site.com
+ 		john.doe+foo@site.com
 
-                ACCOUNT1    = john.doe
-                ACCOUNT2    = foo
-                DOT1        = john          (in respect to ACCOUNT1)
-                DOT2        = doe           (in respect to ACCOUNT1)
+ 		ACCOUNT1    = john.doe
+ 		ACCOUNT2    = foo
+ 		DOT1	    = john	    (in respect to ACCOUNT1)
+ 		DOT2	    = doe	    (in respect to ACCOUNT1)
 
 
-        Variable ERROR is set to "yes" if INPUT wasn't recognized or parsing
-        the address failed.
+ 	Variable ERROR is set to "yes" if INPUT wasn't recognized or parsing
+ 	the address failed.
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
+ 	PMSRC must point to source directory of procmail code. This subroutine
         will include pm-javar.rc from there.
 
     Call arguments (variables to set before calling)
@@ -224,11 +231,11 @@ Pm-jaaddr.rc -- extract 'foo@some.com' email address from variable INPUT
 
     Usage example
 
-        Read From field and address from it. This is lot faster than using
-        external `formail' call.
+ 	Read From field and address from it. This is lot faster than using
+ 	external `formail' call.
 
-            PMSRC   = $HOME/pm
-            RC_ADDR = $PMSRC/pm-jaaddr.rc
+ 	    PMSRC   = $HOME/pm
+ 	    RC_ADDR = $PMSRC/pm-jaaddr.rc
 
             :0
             *  ^From:\/.*@.*
@@ -241,29 +248,37 @@ Pm-jaaddr.rc -- extract 'foo@some.com' email address from variable INPUT
                 :0
                 * ERROR ?? yes
                 {
-                   # Hmm, no std email address found. Any other ideas?
-                }
+ 		   # Hmm, no std email address found. Any other ideas?
+ 		}
             }
 
 Pm-jabup.rc --  Keeep N arriving message backup in separate directory
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$Keywords:     procmail backup recipe $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
-        Preserve last N arriving messages in a separate sub-directory.
-        This should be your safety-belt recipe that you put to the beginning
-        of your .procmailrc.
+ 	Preserve last N arriving messages in a separate sub-directory.
+ 	This should be your safety-belt recipe that you put to the beginning
+ 	of your .procmailrc.
 
-        Procmail saves the backup files with names like: msg.rcG  msg.scG
-        msg.3YS1, msg.4YS1, msg.VYS1, msg.fYS1 to the backup directory.
+ 	Procmail saves the backup files with names like: msg.rcG  msg.scG
+ 	msg.3YS1, msg.4YS1, msg.VYS1, msg.fYS1 to the backup directory.
 
-        Note: this recipe will alawys call shell commands for each message
+ 	Note: this recipe will alawys call shell commands for each message
         you recive. That is needed because cleaning of the backup directory.
         If you receive only small number of messages per day, the performance
         drop of your .procmailrc is not crucial. But if you store many messages
@@ -312,11 +327,18 @@ Pm-jacookie1.rc -- Generate unique id from INPUT variable.
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$Keywords:     procmail cookieMake subroutine $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -350,11 +372,24 @@ Pm-jacookie.rc -- Handle cookie (unique id) confirmations
 
     File id
 
-        .Copyright (C)  1997-20091 Jari Aalto
-        .$Keywords:     procmail, cookie, confirm, subroutine
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details.
+
+        You should have received a copy of the GNU General Public License
+        along with program. If not, write to the
+        Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+        Boston, MA 02110-1301, USA.
+
+        Visit <http://www.gnu.org/copyleft/gpl.html>
 
     Overview of features
 
@@ -367,7 +402,7 @@ Pm-jacookie.rc -- Handle cookie (unique id) confirmations
 
     Description
 
-        This recipe handles generating the cookie to new users, comparing
+ 	This recipe handles generating the cookie to new users, comparing
         the returned cookie against the original one and passing known
         users through if they already had returned their cookie.
 
@@ -492,9 +527,9 @@ Pm-jacookie.rc -- Handle cookie (unique id) confirmations
         It takes a bit extra, but they can easily return the message.
         Fill in the missing variables, this won't work out of the box for you.
 
-            WORK        = "(domain1|domain2|domain3)"
-            LISTS       = "(procmail|list-2|list-3|list-4)"
-            VALID       = "(postmaster|abuse|$LISTS|$WORK)"
+            WORK 	= "(domain1|domain2|domain3)"
+            LISTS 	= "(procmail|list-2|list-3|list-4)"
+            VALID 	= "(postmaster|abuse|$LISTS|$WORK)"
             RC_COOKIE   = $PMSRC/pm-jacookie.rc
             UBE_SPOOL   = $HOME/Mail/junk.ube.spool   # Save spam here
 
@@ -553,11 +588,18 @@ Pm-jacron.rc -- Procmail: Run cron once a day
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$Keywords:     procmail, cron, framework, subroutine $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>
 
     Description
 
@@ -567,7 +609,7 @@ Pm-jacron.rc -- Procmail: Run cron once a day
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This recipe
+ 	PMSRC must point to source directory of procmail code. This recipe
         will include
 
         o   pm-javar.rc
@@ -644,11 +686,18 @@ Pm-jadaemon.rc -- Handle DAEMON messages by changing subject
 
     File id
 
-        .Copyright (C)  Jari Aalto
-        .$Keywords:     procmail, daemon, subroutine $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+ 	<http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -694,7 +743,10 @@ Pm-jadaemon.rc -- Handle DAEMON messages by changing subject
 
     Call arguments (variables to set before calling)
 
-        o   JA_DAEMON_REGEXP,   which messages to trigger
+        o   `JA_DAEMON_SAVE'. This is by default `yes' which causes the
+            original subject to be saved under header field `X-Old-Daemon-Subject'.
+            If you don't want that extra header generated, set this variable to `no'
+        o   `JA_DAEMON_REGEXP', which messages to trigger
 
     Return values
 
@@ -729,15 +781,22 @@ Pm-jadate1.rc -- 'Tue, 31 Dec 1997' date parser from variable INPUT
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$Keywords:     procmail, subroutine, date parsing $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
-        This includerc parses date from variable `INPUT' which has string
+ 	This includerc parses date from variable `INPUT' which has string
 
             "Week, Daynbr Month Year"
 
@@ -748,23 +807,23 @@ Pm-jadate1.rc -- 'Tue, 31 Dec 1997' date parser from variable INPUT
 
         Returned values
 
-            YYYY    = 4 digits
+ 	    YYYY    = 4 digits
             YY      = 2 digits
             MON     = 3 characters
             MM      = 2 digits
             DAY     = 3 characters
             DD      = 2 digits
             hh      = 2 digits      If available
-            mm      = 2 digits      If available
+            mm	    = 2 digits	    If available
             ss      = 2 digits      If available
             TZ      = 5 characters  If available
 
-        Variable ERROR is set to `yes' if it couldn't recognize the INPUT
-        and couldn't parse the basic YYYY, YY, MM, DD variables.
+ 	Variable ERROR is set to `yes' if it couldn't recognize the INPUT
+ 	and couldn't parse the basic YYYY, YY, MM, DD variables.
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
+ 	PMSRC must point to source directory of procmail code. This subroutine
         will include pm-javar.rc from there.
 
     Call arguments (variables to set before calling)
@@ -777,12 +836,12 @@ Pm-jadate1.rc -- 'Tue, 31 Dec 1997' date parser from variable INPUT
 
     Usage example
 
-        The first *Received* header will tell when the message was received
-        by your mailserver. We parse the date and avoid calling expensive
+ 	The first *Received* header will tell when the message was received
+ 	by your mailserver. We parse the date and avoid calling expensive
         `date' command.
 
-            PMSRC           = $HOME/pm
-            RC_DATE_WDMY    = $PMSRC/pm-jadate1.rc #Week-Day-Month-Year parser
+ 	    PMSRC	    = $HOME/pm
+ 	    RC_DATE_WDMY    = $PMSRC/pm-jadate1.rc #Week-Day-Month-Year parser
 
             # Get time from first header, it ends like this:
             #
@@ -800,40 +859,47 @@ Pm-jadate1.rc -- 'Tue, 31 Dec 1997' date parser from variable INPUT
                 :0
                 * ERROR ?? yes
                 {
-                   # Use some other way to get the time or shout loudly
-                }
+ 		   # Use some other way to get the time or shout loudly
+ 		}
             }
 
 Pm-jadate2.rc -- 'YYYY-MM-DD' ISO date parser from variable INPUT
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$Keywords:     procmail, subroutine, date parsing $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
-        This includerc parses date in format "YYYY-MM-DD hh:mm:ss"
-        like `1997-12-01' and sets following variables whenever called
+ 	This includerc parses date in format "YYYY-MM-DD hh:mm:ss"
+ 	like `1997-12-01' and sets following variables whenever called
 
-                YYYY    = 4 digits
-                YY      = 2 digits
-                MON     = 3 characters
-                MM      = 2 digits
-                DD      = 2 digits
-                hh      = 2 digits  If avaliable
-                mm      = 2 digits  If avaliable
-                ss      = 2 digits  If avaliable
+ 		YYYY	= 4 digits
+ 		YY	= 2 digits
+ 		MON	= 3 characters
+ 		MM	= 2 digits
+ 		DD	= 2 digits
+ 		hh      = 2 digits  If avaliable
+ 		mm      = 2 digits  If avaliable
+ 		ss      = 2 digits  If avaliable
 
-        Variable ERROR is set to `yes' if it couldn't recognize the INPUT
-        and couldn't parse the basic YYYY, YY, MM, DD variables.
+ 	Variable ERROR is set to `yes' if it couldn't recognize the INPUT
+ 	and couldn't parse the basic YYYY, YY, MM, DD variables.
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
+ 	PMSRC must point to source directory of procmail code. This subroutine
         will include pm-javar.rc from there.
 
     Call arguments (variables to set before calling)
@@ -845,8 +911,8 @@ Pm-jadate2.rc -- 'YYYY-MM-DD' ISO date parser from variable INPUT
 
     Usage example
 
-            PMSRC          = $HOME/pm
-            RC_DATE_ISO    = $PMSRC/pm-jadate2.rc # ISO date parser
+ 	    PMSRC	   = $HOME/pm
+ 	    RC_DATE_ISO    = $PMSRC/pm-jadate2.rc # ISO date parser
 
             INPUT = "This is 1800-10-11, a very old date"
 
@@ -858,39 +924,46 @@ Pm-jadate3.rc -- 'Tue Nov 25 19:32:57' date parser from variable INPUT
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$Keywords:     procmail, subroutine, date parsing $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
-        This includerc parses date from variable INPUT which has string
+ 	This includerc parses date from variable INPUT which has string
 
-            "Week, Month dayNbr hh:mm:ss yyyy",
+ 	    "Week, Month dayNbr hh:mm:ss yyyy",
 
-        Example
+ 	Example
 
-            Tue Nov 25 19:32:57 1997
+ 	    Tue Nov 25 19:32:57 1997
 
-        Returned values
+ 	Returned values
 
-                YYYY    = 4 digits
-                YY      = 2 digits
-                MON     = 3 characters
-                MM      = 2 digits
-                DAY     = 3 characters
-                DD      = 2 digits
-                hh      = 2 digits
-                mm      = 2 digits
-                ss      = 2 sigits
+ 		YYYY	= 4 digits
+ 		YY	= 2 digits
+ 		MON	= 3 characters
+ 		MM	= 2 digits
+ 		DAY	= 3 characters
+ 		DD	= 2 digits
+ 		hh	= 2 digits
+ 		mm	= 2 digits
+ 		ss	= 2 sigits
 
-        Variable ERROR is set to "yes" if it couldn't recognize the INPUT.
+ 	Variable ERROR is set to "yes" if it couldn't recognize the INPUT.
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
+ 	PMSRC must point to source directory of procmail code. This subroutine
         will include pm-javar.rc from there.
 
     Call arguments (variables to set before calling)
@@ -899,16 +972,16 @@ Pm-jadate3.rc -- 'Tue Nov 25 19:32:57' date parser from variable INPUT
 
     Usage example
 
-        The first *Received* header will tell when the message was received
-        by the mailserver. Parse the date and avoid calling expensive `date'
-        command.
+ 	The first *Received* header will tell when the message was received
+ 	by the mailserver. Parse the date and avoid calling expensive `date'
+ 	command.
 
-            PMSRC           = $HOME/pm
-            RC_DATE_WMDT    = $PMSRC/pm-jadate4.rc #Week-Month-Day-Time parser
+ 	    PMSRC	    = $HOME/pm
+ 	    RC_DATE_WMDT    = $PMSRC/pm-jadate4.rc #Week-Month-Day-Time parser
 
             # Get time from X-From-Line: Which was added by my MDA
-            #   X-From-Line: procmail-request@informatik.rwth-aachen.de \
-            #    Tue Nov 25 19:32:57 1997
+ 	    #	X-From-Line: procmail-request@informatik.rwth-aachen.de \
+ 	    #	 Tue Nov 25 19:32:57 1997
 
             :0 c
             *$ ^X-From-Line:\/.*
@@ -922,55 +995,62 @@ Pm-jadate3.rc -- 'Tue Nov 25 19:32:57' date parser from variable INPUT
                 :0
                 * ERROR ?? yes
                 {
-                   # Use some other way to get the time or shout loudly
-                }
+ 		   # Use some other way to get the time or shout loudly
+ 		}
             }
 
 Pm-jadate4.rc -- make RFC 'Mon, 1 Dec 1997 17:41:09' and parse values
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$keywords:     procmail, subroutine, date, shell $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
-        This subroutine calls shell command date once and prses the values.
-        This should be your last resort if you haven't got the date values
-        by any other means. This subroutine assumes that the DATE command
-        knows the following % specifier formats (HP-UX)
+ 	This subroutine calls shell command date once and prses the values.
+ 	This should be your last resort if you haven't got the date values
+ 	by any other means. This subroutine assumes that the DATE command
+ 	knows the following % specifier formats (HP-UX)
 
-            Y   NNNN    year
-            h   MON     month
-            d   NN      day
-            a   WEEK    Like "Mon"
-            H   NN      hour
-            M   NN      min
-            S   NN      sec
+ 	    Y   NNNN    year
+ 	    h   MON     month
+ 	    d   NN      day
+ 	    a   WEEK    Like "Mon"
+ 	    H   NN      hour
+ 	    M   NN      min
+ 	    S   NN      sec
 
-        Returned values
+ 	Returned values
 
             DATE    = RFC date in format "Mon, 1 Dec 1997 17:41:09"
-                      This is same as what you would see in From_
+ 		      This is same as what you would see in From_
 
-            YYYY    = 4 digits
-            YY      = 2 digits
-            MON     = 3 characters
-            MM      = 2 digits
-            DAY     = 3 characters
-            DD      = 2 digits
-            hh      = 2 digits
-            mm      = 2 digits
-            ss      = 2 sigits
+ 	    YYYY    = 4 digits
+ 	    YY	    = 2 digits
+ 	    MON	    = 3 characters
+ 	    MM	    = 2 digits
+ 	    DAY	    = 3 characters
+ 	    DD	    = 2 digits
+ 	    hh	    = 2 digits
+ 	    mm	    = 2 digits
+ 	    ss	    = 2 sigits
 
-        Variable ERROR is set to "yes" if values couldn't be set
+ 	Variable ERROR is set to "yes" if values couldn't be set
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
+ 	PMSRC must point to source directory of procmail code. This subroutine
         will include
 
         o   pm-javar.rc
@@ -982,10 +1062,10 @@ Pm-jadate4.rc -- make RFC 'Mon, 1 Dec 1997 17:41:09' and parse values
 
     Usage example
 
-        The First Received line will tell when the message was received by
-        the MDA. If thata fails, then get date from the system. If you send
-        test messages to # yourself, you don't usually put From_ header in
-        it and thus there is # no date information in 'dry run' tests.
+ 	The First Received line will tell when the message was received by
+ 	the MDA. If thata fails, then get date from the system. If you send
+ 	test messages to # yourself, you don't usually put From_ header in
+ 	it and thus there is # no date information in 'dry run' tests.
 
             # Get time from first eader, which is always same in my system
             # Received: ... ; Thu, 13 Nov 1997 11:43:50 +0200
@@ -1018,15 +1098,22 @@ Pm-jadate5.rc -- 'Fri Jun 19 18:51:56 1998' date parser from var INPUT
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$Keywords:     procmail, subroutine, date parsing $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
-        This includerc parses date from variable INPUT which has string
+ 	This includerc parses date from variable INPUT which has string
 
             "WeekDay Month dayNbr Year"
 
@@ -1037,23 +1124,23 @@ Pm-jadate5.rc -- 'Fri Jun 19 18:51:56 1998' date parser from var INPUT
 
         Returned values
 
-            YYYY    = 4 digits
+ 	    YYYY    = 4 digits
             YY      = 2 digits
             MON     = 3 characters
             MM      = 2 digits
             DAY     = 3 characters
             DD      = 2 digits
             hh      = 2 digits      If available
-            mm      = 2 digits      If available
+            mm	    = 2 digits	    If available
             ss      = 2 digits      If available
             TZ      = 5 characters  If available
 
-        Variable ERROR is set to "yes" if it couldn't recognize the INPUT
-        and couldn't parse the basic YYYY,YY,MM,DD variables.
+ 	Variable ERROR is set to "yes" if it couldn't recognize the INPUT
+ 	and couldn't parse the basic YYYY,YY,MM,DD variables.
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
+ 	PMSRC must point to source directory of procmail code. This subroutine
         will include pm-javar.rc from there.
 
     Call arguments (variables to set before calling)
@@ -1066,12 +1153,12 @@ Pm-jadate5.rc -- 'Fri Jun 19 18:51:56 1998' date parser from var INPUT
 
     Usage example
 
-        The first *Received* header will tell when the message was received
-        by your mailserver. We parse the date and avoid calling expensive
+ 	The first *Received* header will tell when the message was received
+ 	by your mailserver. We parse the date and avoid calling expensive
         `date' command.
 
-            PMSRC           = $HOME/pm
-            RC_DATE_WDMY    = $PMSRC/pm-jadate5.rc #Week-Day-Month-Year parser
+ 	    PMSRC	    = $HOME/pm
+ 	    RC_DATE_WDMY    = $PMSRC/pm-jadate5.rc #Week-Day-Month-Year parser
 
             # Get time from first header, it ends like this:
 
@@ -1086,43 +1173,50 @@ Pm-jadate5.rc -- 'Fri Jun 19 18:51:56 1998' date parser from var INPUT
                 :0
                 * ERROR ?? yes
                 {
-                   # Use some other way to get the time or shout loudly
-                }
+ 		   # Use some other way to get the time or shout loudly
+ 		}
             }
 
 Pm-jadate.rc -- Read date from the message hdrs: From_, Receved:
 
     File id
 
-        .Copyright (C) 1997-2009 Jari Aalto
-        .$keywords:    procmail, date, subroutine $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
-        This recipe will scan several headers to find the date string.
+ 	This recipe will scan several headers to find the date string.
         When suitable header is found and the parsing has succeeded, the
         return variables are set. The Date values reflects the arrive time
         of the message; not the sending time. If nothing works, a shell call
         `date' is used as a last resort.
 
-        Returned values
+ 	Returned values
 
-            YYYY    = 4 digits
-            YY      = 2 digits
-            MON     = 3 characters
-            MM      = 2 digits
-            DAY     = 3 characters
-            DD      = 2 digits
-            hh      = 2 digits      if available
-            mm      = 2 digits      if available
-            ss      = 2 digits      if available
+ 	    YYYY    = 4 digits
+ 	    YY	    = 2 digits
+ 	    MON	    = 3 characters
+ 	    MM	    = 2 digits
+ 	    DAY	    = 3 characters
+ 	    DD	    = 2 digits
+ 	    hh	    = 2 digits      if available
+ 	    mm	    = 2 digits      if available
+ 	    ss	    = 2 digits      if available
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
+ 	PMSRC must point to source directory of procmail code. This subroutine
         will include
 
         o   pm-javar.rc
@@ -1145,11 +1239,18 @@ Pm-jadup.rc -- Procmail: Handle duplicates; store to separate folder
 
     File id
 
-        .Copyright (C)   1997-2009 Jari Aalto
-        .$Keywords:      procmail, subroutine, filter duplicates $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -1157,7 +1258,7 @@ Pm-jadup.rc -- Procmail: Handle duplicates; store to separate folder
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
+ 	PMSRC must point to source directory of procmail code. This subroutine
         will include
 
         o   pm-javar.rc
@@ -1225,11 +1326,18 @@ Pm-jaempty.rc -- check if message body is empty
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$keywords:     procmail, subroutine, check empty message $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -1261,15 +1369,22 @@ Pm-jafrom.rc -- get message's best FROM field without calling `formail'
 
     File id
 
-        Copyright (C)   1997-2009 Jari Aalto
-        $keywords:      procmail,  subroutine, extract FROM $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
-        This includerc extracts the most likely FROM address from the
+ 	This includerc extracts the most likely FROM address from the
         message. The order of the search is Reply-to, From_, Sender, From
         and if none found, then as a last resort, call `formail'. You would
         usually use the returned value for logging purposes.
@@ -1287,7 +1402,7 @@ Pm-jafrom.rc -- get message's best FROM field without calling `formail'
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
+ 	PMSRC must point to source directory of procmail code. This subroutine
         will include pm-javar.rc from there. You nee procmail 3.11pre7 in
         order to use this subroutine. (due to formail -z switch)
 
@@ -1297,18 +1412,25 @@ Pm-jafrom.rc -- get message's best FROM field without calling `formail'
 
     Usage example
 
-        INCLUDERC = $PMSRC/pm-jafrom.rc
-        FROM      = $OUTPUT   # now we have the 'best' FROM field
+ 	INCLUDERC = $PMSRC/pm-jafrom.rc
+ 	FROM      = $OUTPUT   # now we have the 'best' FROM field
 
 Pm-jafwd.rc -- Controlling forwarding remotedly
 
     File id
 
-        .Copyright (C)   1997-2009 Jari Aalto
-        .$keywords:      procmail, subroutine,  forward mail $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Overview of features
 
@@ -1448,18 +1570,199 @@ Pm-jafwd.rc -- Controlling forwarding remotedly
 
     File layout
 
-        tinybm.el/&tags and tinytab.el for the 4 tab text placement. See
-        also unix what(1) and GNUS RCS ident(1).
+        tinybm.el/&tags and tinytab.el for the 4 tab text placement.
 
-Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
+
+  .................................................... &initialising ...
+
+
+id    = "pm-jafwd.rc"
+dummy = "
+========================================================================
+$id: init:
+"
+
+:0
+* !  WSPC ?? ( )
+{
+}
+
+  ....................................................... &variables ...
+
+    If you're testing, set this to "tee FILE", and the sent confirmation
+    Messages are stored to your disk and not actually mailed.
+
+JA_FWD_SENDMAIL         = ${JA_FWD_SENDMAIL:-"sendmail -oi -t"}
+
+    File to hold the forward address. When forward is off, this file does
+    Not exist.
+
+JA_FWD_FILE             = ${JA_FWD_FILE:-"$HOME/.forward-address"}
+
+    The password needed after the control command.
+
+JA_FWD_PASSWORD         = ${JA_FWD_PASSWORD:-"password"}
+
+    If you want case sensitive control messages and passwords,
+    Set this variable to procmail flag "D". Then commands like below
+    Are different. You should use flag `D' for your own security.
+
+        forward-on password
+        Forward-on password
+
+JA_FWD_PASSWORD_CASE    = ${JA_FWD_PASSWORD_CASE:-""}
+
+    Set this to account names and addresses that you use if you want some
+    Protection. The control messages can be sent only from the matched
+    Addresses only. The default "." accepts control message from anywhere
+    And to be forwarded anywhere.
+
+JA_FWD_FROM_MUST_MATCH  = ${JA_FWD_FROM_MUST_MATCH:-"."}
+JA_FWD_TO_MUST_MATCH    = ${JA_FWD_TO_MUST_MATCH:-"."}
+
+    Should the messages stored locally to this account too while forwarding
+    Messages? a good idea is to keep this "yes", because you never know if
+    The forward address was faulty.
+
+JA_FWD_COPY             = ${JA_FWD_COPY:-"yes"}
+
+    The accepted control messages in Subject field
+
+JA_FWD_ON               = ${JA_FWD_ON:-"forward-on"}
+JA_FWD_OFF              = ${JA_FWD_OFF:-"forward-off"}
+
+    Initialize these variables unless they're already set.  please set
+    Before this module, so that you save extra formail call, if you have
+    Already read the value.
+
+        JA_FWD_FROM     = $FROM
+
+JA_FWD_FROM             = ${JA_FWD_FROM:-`$FORMAIL -zxFrom:`}
+
+    From which header to find the password information.
+
+    O   "header"    Look Subject field.
+    O   "body"      Look first words in the body of message
+
+
+JA_FWD_CONTROL_FIELD    = ${JA_FWD_CONTROL_FIELD:-"subject"}
+
+    This has only meanng if `JA_FWD_CONTROL_FIELD' is set to "body"
+
+        "^^"    "forward-on password" must be at the very beginning
+                of the body
+        ".*"    "forward-on password" can be anywhere in the body
+
+JA_FWD_CONTROL_REGEXP = ".*"
+
+    If the address where we're forwarding bounces, make sure
+    We don't get into loop.
+
+JA_FWD_XLOOP            = ${JA_FWD_XLOOP:-"$LOGNAME@$HOST"}
+
+
+dummy = "Check forward-off control message"
+
+  ..................................................... &state-check ...
+
+forward = ""
+address = ""
+
+dummy   = "$id: Check if control message is in the Subject"
+
+:0
+*   JA_FWD_CONTROL_FIELD ?? subject
+*$  ^From:$JA_FWD_FROM_MUST_MATCH
+{
+
+
+}
+
+dummy = "$id: Check if control message is in the body"
+
+:0 E
+*    JA_FWD_CONTROL_FIELD ?? body
+*$  ^From:$JA_FWD_FROM_MUST_MATCH
+{
+
+}
+
+  ............................................................. &off ...
+
+dummy = "$id: check forward OFF"
+
+:0
+*   forward ?? off
+{
+
+
+
+
+}
+
+
+  .............................................................. &on ...
+    It's important that we don't forward mailer daemon messages
+    Of self bounces. The X-Loop was attached by us and while
+    The FROM_DAEMON would already trigger bounce message, we double
+    Check with X-Loop
+
+
+dummy = "$id: check forward ON $address"
+
+:0 E
+*     forward ?? on
+*$ ! ^X-Loop: $JA_FWD_XLOOP
+*$ !  $JA_FROM_DAEMON
+{
+
+
+
+
+
+
+}
+
+  .................................................... do-forwarding ...
+    Now do the forwarding
+    File tests:
+
+    S => file exists and has a size greater than zero
+    R => file must be readable by us
+
+dummy = "$NL$NL$id: Check if forward is activated $NL"
+
+:0
+*  forward ?? ^^^^
+*$ ? $IS_NOT_EMPTY $JA_FWD_FILE
+*$ ? $IS_READABLE  $JA_FWD_FILE
+{
+
+}
+
+dummy = "$id: end:"
+
+
+
+  pm-jafwd.rc ends here
+  pm-jalist.rc -- Subroutine to detect mailing LIST from message.
+
+Pm-jafwd.rc -- Controlling forwarding remotedly
 
     File id
 
-        .Copyright (C)  1998-2009 Jari aalto
-        .$Keywords:     procmail, subroutine, mailing list detect $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -1468,50 +1771,47 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
         listserv, majordomo etc. normally use. After this subroutine has
         been applied to message the variable `LIST' contains the mailing
         list name. Subroutine adaptively finds new new mailing lists
-        from the messages. The alternative to subscribing to many
-        mailing lists is to read them from web archives. Even better
-        way is to use NNTP server at http://www.gmane.org which
-        allows you to post as you would to a regular newsgroup. Consider
-        using the NNTP interface and you may save you from receiving
-        lot of messages that can already be found from Gmane's server.
+        from the messages.
+
+        The alternative to subscribing to many mailing lists is to read
+        them from web archives. Even better way is to use NNTP server at
+        http://www.gmane.org which allows you to post as you would to a
+        regular newsgroup. Consider using the NNTP interface and you may
+        save you from receiving lot of messages that can already be found
+        from Gmane's server.
 
     Quick start
 
         If you just want to jump in and use this module and you
-        see that some list isn't trapped, please set
+        noteice that some list isn't trapped, please set
 
         o   JA_LIST_HEADER_REGEXP to match the From: field
 
         If you want to make some list more unique, like if name "Alert"
-        was detected as list name, please set
+        was detected as a list name, please set
 
         o   JA_LIST_MAKE_UNIQUE to match the list name, like "Alert".
             After that the list name will be converted to HOST-LIST format.
 
-    Sendmail plus method for list subscription
+    Sendmail plus type method for list subscription
 
-        If you can use sendmail PLUS addressing capabilities, you may not
-        be interested in this module, because you have an alternative way
-        to handle mailing list messages. Let's suppose you want to
-        subscribe to procmail mailing list and want to save all messages
-        to folder list.procmail, then you'd subscribe with address:
+        If you can use sendmail type PLUS addressing capabilities, you may
+        not be interested in this module, because you have an alternative
+        way to handle mailing list messages. The extra information after
+        "+" is available to procmail scripts via `$ARG' pseudo variable
+        when procmail is the LDA. Let's suppose you want to subscribe to
+        procmail mailing list and want to save all messages to folder
+        list.procmail, then you'd subscribe with address:
 
             login+list.procmail@site.com
 
-        The extra information after "+" is available to your procmail
-        scripts via $ARG pseudo variable when procmail is the LDA. If you
-        fortunate to have new sendmail, you usually subscribe to mailing
-        lists with regular email address:
-
-            login@site.com
-
-        How do you detect the arriving mailing list messages?
-        Traditionally, you would add a piece of recipe to `~/.procmailrc' to
-        catch each list, but that's manual work every time. When you use
-        this subroutine, you no longer need to write separate mailing list
-        recipes to your `~/.procmailrc' every time you subscribe to a new
-        mailing list. The detection of a new list happens in this
-        subroutine for you.
+        If your email host doe snot provide the plus addressing then it the
+        traditiona approach have been to add a piece of recipe to
+        `~/.procmailrc' to catch each list. But that's manual work for
+        every list. When you use this subroutine, you no longer need to
+        write separate mailing list recipes to your `~/.procmailrc' every
+        time you subscribe to a new mailing list. The detection of a new
+        list will happen automatically.
 
     What you need to know before using this module
 
@@ -1521,8 +1821,8 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
             If 'To:' domain is same as `From/Sender:/Reply-to:' domain
             then it is considered a mailing list message.
 
-        This causes certain messages to be treated to category LIST.
-        This module can't possibly know that the following is not from
+        This causes certain messages to be treated as mailing list messages.
+        The module can't possibly know that the following is not from
         mailing list, because it doesn't know "what is mailing list", only
         "how it probably looks like it". This is definitedly categorized as
         mailing list message, because `From' and even `Reply-to' has the same
@@ -1543,7 +1843,8 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
             :0
             *$ ! $noList
             {
-                INCLLUDERC = $RC_LIST
+                INCLUDERC = $RC_LIST
+                # ... save messsag by examining variable LIST (which see)
             }
 
     Ask for help
@@ -1561,6 +1862,9 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
         to this subroutine to detect that mailing list. If the message
         you received _was_ from a mailing list, please send all the headers
         to the maintainer so that support can be added.
+
+    Further reading
+
         You can search for mailing list that interests you at:
 
             http://www.lsoft.com/lists/listref.html
@@ -1617,9 +1921,9 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
 
         If grabbed `LIST' match this regexp at the end of list name, then
         the postfix match will be removed. It is traditional that many
-        lists names are like list1-info, list2-beta, list3-l and you
-        would prefer more names (for mbox) list1, list2 and list3. The
-        default value will ditch "-(info|beta|l)".
+        list names are like list1-info, list2-beta, list3-L and ut would
+        be preferable to see names like list1, list2 and list3. The
+        default value will ditch "-(info|beta|L)".
 
     Variable JA_LIST_KILL_PREFIX
 
@@ -1628,7 +1932,7 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
 
     Variable JA_LIST_DISREGARD_EMAIL
 
-        I some cases this list detection recipe "thinks" that the address
+        In some cases this list detection recipe "thinks" that the address
         picked is the list sender. You may have a dedicated address where
         all you mailing list mails arrive and you have named it like
         mailing-list@me.here.at, which will effectively trigger: Ah,
@@ -1712,12 +2016,12 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
 
             jde, java, FLAMENCO, tango, tm-en, w3
 
-        Ok, now we apply the conversion table by defining it as follows,
-        where the grabbed LIST is first, then comes space(s), new name
+        Ok, now we apply the conversion table by defining it as follows.
+        The grabbed LIST name is first, then comes space(s), new name
         _and_ terminating colon. Repeat this for each list you want to
         convert.
 
-            LIST CONVERSION,LIST CONVERSION,
+            LIST CONVERSION[,LIST CONVERSION ...]
 
         This gives us table below: notice that entries tango-l, w3-beta
         were not included, because the `JA_LIST_KILL_POSTFIX' already got
@@ -1747,8 +2051,8 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
 
         If you have many mailing lists that use uppercase names, it may be
         tedious to add each mailing list name to `JA_LIST_CONVERSION'.
-        Possible alternative is to us  very efficient `tr' program
-        to convert  characters to lowercase. Again; think twice,
+        Possible alternative is to use very efficient `tr' program
+        to convert characters to lowercase. Again; think twice,
         because any extra process could be avoided if `JA_LIST_CONVERSION'
         was used.
 
@@ -1768,9 +2072,8 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
     List name is not always the same
 
         One important thing to keep in mind is that when mailing list
-        manager sends out list messages, the headers may some times change.
-        This means that the list name grabbed by previous calls changes,
-        although the list in practice has not changed at all.
+        manager sends out list messages, the headers may change.
+        This means that the list name grabbed previously changes too.
         This is unfortunate, but it sometimes happens. Let's see an example.
         I was previously receiving messages from Cygwin mailing list named
         `gnu-win32'
@@ -1781,10 +2084,9 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
         to new header
 
             Mailing-List: contact cygwin-help@sourceware.cygnus.com; run by ezmlm
-
-        Now I had two list names that both should be going to the same mailbox.
-        No worries, just add new entry to the translate table to convert
-        the new list name to mailbox name:
+       Now I had two list names that both should be going to the same
+        mailbox.  No worries, just add new entry to the translate
+        table to convert the new list name to mailbox name:
 
             JA_LIST_CONVERSION = "\
             gnu-win32           cygwin32,\
@@ -1803,28 +2105,47 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
             ...
 
             #   Handle all mailing lists with one subroutine and recipe
-            #   following it
+            #   following it. Set also JA_LIST_CONVERSION before
+            #   calling this subroutine to cnvert the found list names.
 
             INCLUDERC = $RC_LIST
+            imap      =                 # Kill var. Set to "/" to enable
 
             :0                          # if list name was grabbed
             * LIST ?? [a-z]
             {
                 dummy = "Saving mailing list: $LIST"
 
-                :0 :
-                list.$LIST
+                :0 w:
+                ${imap+".INBOX."}list.$LIST$imap
             }
+
+        What's that IMAP thing there, you may wonder. Normally
+        procmail delivers to standard mailbox, so the name is
+        something like '$MAILDIR/list.abc'. For IMAP, the delivery
+        must happen using principle "one file, one message", so
+        procmail must deliver to a directory. That's what the added
+        `$imap' is there for. It is also customary that IMAP folders
+        are prefixed with ".INBOX", so the actual name becomes
+        `$MAILDIR/.INBOX.list.abc'. For IMAP there should also
+        be proper `MAILDIR=$HOME/Maildir' setting.
 
 Pm-jamime-decode.rc -- decode MIME body contents; quoted-printable, base64
 
     File id
 
-        .Copyright (C)  1998-2009 Jari Aalto
-        .$Keywords:     procmail, subroutine, mime $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Documentation
 
@@ -1832,16 +2153,16 @@ Pm-jamime-decode.rc -- decode MIME body contents; quoted-printable, base64
         presented by Peter Galbraith <galbraith@mixing.qc.dfo.ca> in
         procmail mailing list somewhere at the end of 1997.
 
-        This includerc supposes that the header has MIME header
-        Content-Type: text/plain and performs qp or base64 decoding
-        on the whole message. Note, that if you receive messages that
-        have many mime attachments, then this recipe is not suitable
-        for it.
+        This subroutine supposes that the header has MIME header
+        Content-Type: text/plain and performs quoted-printable or
+        base64 decoding on the whole message. Note, that if you
+        receive messages that have many mime attachments, then this
+        recipe is not suitable for it.
 
         Procmail is *not* designed to handle mime attachments and this
         recipe only applies to whole _body_.
 
-        The pm-jamime-kill.rc is really stretching the limits and any
+        The `pm-jamime-*.rc' is really stretching the limits and any
         serious works hould be delegated to appropriate Perl MIME modules.
         There is a Perl MIME module which will allow you to manipulate MIME
         body parts rather elegantly. See
@@ -1852,26 +2173,56 @@ Pm-jamime-decode.rc -- decode MIME body contents; quoted-printable, base64
 
     Notes
 
-        Perl and it's modules are not used, because Perl is so CPU intensive.
-        If we can do it with Procmail, let's do it. When we can't, we must give
-        the task to outside processes and pay the penalty. Consider this
-        seriously if you get hundreds of mails per day from mailing
-        lists.
+        Perl or python is not used, because both are CPU intensive. It
+        would be too expansive for accounts or environments receiving
+        hundreds of mails
+ 	per day (like from several mailing lists).
+
+        RFC 2047 gives possiblity to use MIME iso-8859-1 extensions
+        for mail headers.
+
+            Subject: Re: [PIC]: RSA =?iso-8859-1?Q?encryption=B7=B7?=
+            Subject: =?iso-8859-1?Q?=5BEE=5D:TV_&_video_IC=B4s_!!?=
+
+        There is also base64 possibility (although rare):
+
+            Subject: =?iso-8859-1?B?zvLi5fI6ICAgICAgTVBMQUIzLjQw?=
+
+        In worst possible case there is even multiple ISO encoded
+        strings in subject. Yes, this is valid, the continued line
+        includes spaces at front to keep it with original just like
+        in `Received:' headers. This subroutine will not touch headers
+        that have multiple ISO tags - procmail is too limited for that.
+
+            Subject: AW: Re: AW: neue =3D?ISO-8859-1?Q?M=3DF6glichkeiten_=3D28was_=3D=C4hn?=3D
+               =3D?ISO-8859-1?Q?lichkeiten_von_=3DDCbungen=3D29?=3D
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
-        will include
+        Variable `PMSRC' must point to source directory of procmail code.
+        This subroutine will include
 
-        o   pm-javar.rc
+        o   pm-javar.rc, pm-jamime.rc
+        o   Programs `$MIME_BIN', `$MIME_BIN_QP' and `$MIME_BIN_64'
+            must have been installed (see pm-javar.rc).
 
     Call arguments (variables to set before calling)
 
-        (none)
+        o   `JA_MIME_DECODE_TREAT_SUBJECT', default "yes". Decode
+            Subject header by removing mime.
+        o   `JA_MIME_DECODE_TREAT_FROM', default "no". Decode
+            From header by removing mime.
+        o   `JA_MIME_DECODE_TREAT_BODY', default "no". Decode
+            body of message by removing quoted-printable from a
+            message that contains only one part. Messages with multiple
+            parts are not handled.
 
     Return values
 
-        (none)
+        o    `PM_JAMIME_COMPLEX_SUBJECT' is set to "yes"
+             if Subject header contains ISO encoding several times, it
+             cannot be handled by this module. This flag is set to
+             indicate that some other program shoudl handle the message.
 
     Examples
 
@@ -1894,11 +2245,18 @@ Pm-jamime-kill.rc -- General MIME attachment killer (vcards, html)
 
     File id
 
-        .Copyright (C)   1997-2009 Jari Aalto
-        .$Keywords:      procmail, subroutine, MIME killer $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -1906,15 +2264,16 @@ Pm-jamime-kill.rc -- General MIME attachment killer (vcards, html)
             MIME messages are very complex in structure and all this module
             can do is to detect *simple* attachements. It cannot be used
             as - all purpose - all detecting - MIME attachement killer.
-            But the part it can do is done efficiently, because most of the
+            But the part it can do, is done efficiently, because most of the
             things are accomplished using procmail and resource friendly
             `awk'.
 
-        Microsoft Explorer has a bad habit of including 7k
-        application/ms-tnef attachment to the end of message. The sample
-        message is described in next section. If you don't want to see that
-        additional ms-tnef attachment, then plug in this module and you no
-        longer see MS Explorer cruft.
+        There are meny programs that add additional information to the
+        messages. Microsoft's mail program is one which may include
+        a 7k application/ms-tnef attachment to the end of
+        message. Many other programs may do the same. This was the idea
+        in 1997 when this module was written; to get rid of the extra
+        cruft which should not land in the mailbox.
 
         This recipe works like this: If email's structure is
 
@@ -1925,14 +2284,14 @@ Pm-jamime-kill.rc -- General MIME attachment killer (vcards, html)
             --boundary
 
         then the attachment is killed from the body. The message-text part
-        is also decoded if it was quoted printable. This leaves clean text;
-        with no MIME anywhere. MIME headers have been modified as needed
-        (due to conversion from multi part and possibly quoted printable to
-        plain text):
+        is also decoded if it was quoted printable. This leaves clean text
+        with no MIME anywhere. MIME headers have will be modified as needed
+        due to conversion from multi part and possibly quoted printable to
+        plain text and the final  message looks like:
 
             message
 
-        But if email's structure was anything else, like if there were 3
+        But if email's structure is anything else, like if there were 3
         mime sections:
 
             --boundary
@@ -1943,22 +2302,24 @@ Pm-jamime-kill.rc -- General MIME attachment killer (vcards, html)
             some-unwanted-mime-attachment
             --boundary
 
-        then the "unwanted" part is emptyed by replacing area with one
-        empty line. The message structure stays the same, but the killed
-        "unwanted" part is labelled as text/plain so that your MUA will
-        decode the MIME message correctly.
+        then the "unwanted" part is emptyed by replacing with one empty
+        line. The message structure stays the same, but the killed
+        "some-unwanted-mime-attachment" part is labelled as text/plain
+        so that the MUA (Mail User Agent; the email reader program)
+        can decode the MIME message correctly.
 
     Applications for other mime attachments
 
-        All these are covered in this module:
+        The following cases are ncluded on in this module. You need to
+        separately the behavior before this module will start working.
 
-        o   Lotus Notes sends similar extra attachment and you can use this
-            same recipe to kill it. See example section.
-        o   Microsoft Express sends a copy of message in HTML format in the
-            attachment, you can kill that too, see example section.
-        o   Netscape's Mozilla sends a copy of message in HTML. See example.
-            Also it sends `vcards'
-        o   Openmail sends 10-20 base64 attachments WINMAIL.DAT.
+        o   Lotus Notes attachment.
+        o   Microsoft Express attachement. It sends a copy of message in HTML
+            format.
+        o   Mozilla's Netscape attachement. It sends a copy of message in HTML.
+        o   `Vcard' attachments.
+        o   Openmail attachment. It sends 10-20 line base64 attachments
+            WINMAIL.DAT.
 
     Example of lotus notes attachment
 
@@ -2079,8 +2440,12 @@ Pm-jamime-kill.rc -- General MIME attachment killer (vcards, html)
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
-        will include
+        To handle base64 encoded messages, package called `metamail' must
+        have been installed to system. It provides program `mimencode'
+        which is used through variable $MIME_BIN (see pm-javar.rc).
+
+        Variable $PMSRC must point to source directory of procmail code.
+        This subroutine will include
 
         o   pm-javar.rc
         o   pm-jamime.rc
@@ -2088,13 +2453,12 @@ Pm-jamime-kill.rc -- General MIME attachment killer (vcards, html)
     Call arguments (variables to set before calling)
 
         First of all, this is primarily a framework recipe to kill any kind
-        of attachment. If you do not set JA_MIME_TYPE before calling
+        of attachment. If you do not set `JA_MIME_TYPE' before calling
         this recipe, recipe will try to determine the right value by itself.
-        See if the automatic detection works for you or preset the
-        JA_MIME_TYPE beforehand if it fails (I'd like to hear about the
-        failure and add the conditions as default)
+        If the automatic detection fails you _need_ to preset the value
+        of `JA_MIME_TYPE' beforehand.
 
-        o   `JA_MIME_TYPE' is an case sensitive AWK *REGEXP*. Always use
+        o   `JA_MIME_TYPE' is a case sensitive AWK *REGEXP*. Always use
             *lowercase* letters in this regexp because the line is lowercased
             before match is made. This regexp determines if the kill
             recipe is applied to the message or not. Value is set for
@@ -2103,22 +2467,26 @@ Pm-jamime-kill.rc -- General MIME attachment killer (vcards, html)
         o   `JA_MIME_KILL_RE', additional *REGEXP* to kill lines from the
             message. Value is case sensitive awk regexp and by default matches
             Lotus notes tag: name="XXX.PCX".
+        o   `JA_MIME_EXTRA_HEADER', name of header added to the message
+            if the MIME portion was killed. Default value is
+            "X-Mime-Type-Killed".
 
-        It may be possible that some messages are malformed and that they
-        do not contain proper "boundary" definition string in the header. I
-        have seen messages that have text/html attachments, but no proper
-        Mime headers. For those cases there is additional variable that
-        will kill all text up till matching line regardless of message
-        content.
+        It may be possible that some messages are malformed and that
+        they do not contain proper "boundary" definition string in the
+        header. There have been messages that have text/html
+        attachments, but no proper Mime headers. For those cases there
+        is additional variable that will kill all text up till
+        matching line regardless of message content.
 
         o   `JA_MIME_KILL2_RE' is set to "text/html|application/ms-tnef".
             Update this to match attchements you receive. Set variable to
             "" if you don't want to change the body of non-compliant MIME
             message.
 
-        That is your last resort if the standard MIME detection failed.
-        (there must have been some problem in the sender's MUA that composed
-        message)
+        That variable is the last resort if the standard MIME detection
+        failed. There must have been some problem in the sender's MUA that
+        composed message. It's dangerous, so make sure you don't set it
+        lightly.
 
     Possible conflict with your awk
 
@@ -2130,16 +2498,16 @@ Pm-jamime-kill.rc -- General MIME attachment killer (vcards, html)
             procmail: Rescue of unfiltered data succeeded
 
         it means that the system's standard `awk' doesn't support the
-        variable passing syntax: do following test
+        variable passing syntax. Do the following test:
 
             % awk '{print VAR; exit}' VAR="value" /etc/passwd
 
-        And it should print "value". If not, then see if you have `nawk' or
-        `gawk' is your system, which should understand the variable passing
-        syntax. The only change you need is to define variable AWK
-        somewhere at the top of your `.procmailrc'.
+        It should print "value". If not, then see if you have `nawk' or
+        `gawk' in the system. They should understand the variable passing
+        syntax. The only change needed is to define variable AWK
+        somewhere at the top of `~/.procmailrc'.
 
-            AWK = "nawk"        # if that works better than standard "awk"
+            AWK = "gawk"        # Better than standard "awk"
 
     Warnings
 
@@ -2174,16 +2542,11 @@ Pm-jamime-kill.rc -- General MIME attachment killer (vcards, html)
 
             INCLUDERC = $PMSRC/pm-jamime-kill.rc
 
-
     Usage example
 
-        For default mime types mentioned earlier, you just plug-in this module:
-
-            INCLUDERC = $PMSRC/pm-jamime-kill.rc
-
-        If you want to do all by yourself, add this to your
-        `~/.procmailrc'. This demonstrates how the correct MIME types are
-        detected:
+        To kill text/html or pdf, postscript and others add something
+        like this to `~/.procmailrc'. It demonstrates how the correct
+        MIME types are detected:
 
             # .....................................................
             # 1) Uncomment following line if your standard "awk" is broken
@@ -2191,27 +2554,25 @@ Pm-jamime-kill.rc -- General MIME attachment killer (vcards, html)
             # AWK = "gawk"
 
             # .....................................................
-            #  2) Next set correct value for attachment killing
-
-            #  Kill Lotus notes .pcx attachments [already included]
+            #  2) Set correct value for attachment killing
 
             :0
             * ^X-Lotus-FromDomain:
             {
+                #  Kill Lotus notes .pcx attachments
                 JA_MIME_TYPE = "application/octet-stream"
             }
 
-            #   Kill all html attachments
-
             :0
+            * H ?? ^From:.*foo@example.com
             * B ?? ^Content-Type:.*text/html
             {
+                #   Kill html attachments
                 JA_MIME_TYPE = "text/html"
             }
 
             # .....................................................
-            #  3) And now handle the message
-            #    by default kill MS Explorer's ms-tnef attachment.
+            #  3) Call module
 
             INCLUDERC = $PMSRC/pm-jamime-kill.rc
 
@@ -2219,24 +2580,31 @@ Pm-jamime.rc -- subroutine to read mime boundary etc. variables
 
     File id
 
-        .Copyright (C)   1997-2009 Jari Aalto
-        .$Keywords:      procmail, subroutine, mime $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Documentation
 
         This includerc reads MIME boundary string from the message
-        if it exists. The boundary string is typically found from
-        Content-Type header.
+ 	if it exists. The boundary string is typically found from
+ 	Content-Type header.
 
-            Mime-Version: 1.0
-            Content-Type: multipart/mixed; boundary=9i9nmIyA2yEADZbW
+ 	    Mime-Version: 1.0
+ 	    Content-Type: multipart/mixed; boundary=9i9nmIyA2yEADZbW
 
-        In addition it will define few other mime variables. See the
-        returned values. You use these variables later in your MIME
-        message processing.
+ 	In addition it will define few other mime variables. See the
+ 	returned values. You use these variables later in your MIME
+ 	message processing.
 
     Mime Notes
 
@@ -2270,66 +2638,148 @@ Pm-jamime.rc -- subroutine to read mime boundary etc. variables
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
+ 	PMSRC must point to source directory of procmail code. This subroutine
         will include
 
         o   pm-javar.rc
 
     Call arguments (variables to set before calling)
 
-        (none)
+ 	(none)
 
     Return values
 
-        o   Variable MIME is set to "yes" or "no" if messages has mime version
-            string
-        o   MIME_VER contains the mime version string from the header.
-        o   MIME_TYPE contains the Content-Type from the header.
-        o   MIME_CTE contains Content-Transfer-Encoding from the header.
+ 	o   Variable MIME is set to "yes" or "no" if messages has mime version
+ 	    string
+ 	o   MIME_VER contains the mime version string from the header.
+ 	o   MIME_TYPE contains the Content-Type from the header.
+ 	o   MIME_CTE contains Content-Transfer-Encoding from the header.
         o   MIME_H_QP is "yes" if Content-Transfer-Encoding: quoted-printable
-            is in the header.
-        o   MIME_B_QP is "yes" if Content-Transfer-Encoding: quoted-printable
-            is found from the body.
+ 	    is in the header.
+ 	o   MIME_B_QP is "yes" if Content-Transfer-Encoding: quoted-printable
+ 	    is found from the body.
         o   MIME_BOUNDARY contains the boundary string, which is used to
-            differentiate mime sections in the body.
-        o   MIME_BOUNDARY_COUNT is the number of boundary strings found
-            from the body. The value is 3 if there is two mime sections,
-            and 4 if 3 etc. MIME_BOUNDARY_COUNT -1 = count of sections.
-        o   MIME_H_ATTACHMENT, contains the filename if there was attachement
-            filename in the header. Content-Disposition: attachment;
-            filename="..."
-        o   MIME_B_ATTACHMENT. `body' file attachment. Note however that
-            this is the match of first string in the body. There may be
-            several attachments. MIME_B_ATTACHMENT_FILE_COUNT tells you
-            how many filenames are in the body.
+ 	    differentiate mime sections in the body.
+ 	o   MIME_BOUNDARY_COUNT is the number of boundary strings found
+ 	    from the body. The value is 3 if there is two mime sections,
+ 	    and 4 if 3 etc. MIME_BOUNDARY_COUNT -1 = count of sections.
+ 	o   MIME_H_ATTACHMENT, contains the filename if there was attachement
+ 	    filename in the header. Content-Disposition: attachment;
+ 	    filename="..."
+ 	o   MIME_B_ATTACHMENT. `body' file attachment. Note however that
+ 	    this is the match of first string in the body. There may be
+ 	    several attachments. MIME_B_ATTACHMENT_FILE_COUNT tells you
+ 	    how many filenames are in the body.
 
     Usage example
 
-        INCLUDERC = $PMSRC/pm-jamime.rc
+ 	INCLUDERC = $PMSRC/pm-jamime.rc
+
+Pm-jamime-recode.rc -- re-encode MIME Header: Subject, From as quoted-printable
+
+    File id
+
+        Copyright (C) 1997-2009 Jari Aalto
+
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
+
+    Documentation
+
+        This subroutine supposes that message has been handled by
+        'pm-jamime-decode.rc'. The purpose is to restore *Subject* and
+        *From* headers back to quoted printable format so that
+        messages can be savely saved through IMAP system which may not
+        handle 8-bit messages. If message is stored directly to
+        mailbox and the used Mail user Agent has no problems with
+        dealing 8-bit characters, this module is not needed.
+
+ 	An example where this subroutine could be applied:
+
+ 	o   Feed message to `pm-jamime-decode.rc'
+ 	o   Feed message `pm-jasubject.rc' (to clean multiple Re: Re: Fwd ..)
+ 	o   Restore From/Subject encodings with `pm-jamime-recode.rc'
+ 	o   Save message to mailbox
+
+    Notes
+
+        Perl or python is not used, because both are CPU intensive.
+        It would be too expansive for accounts or environments
+        receiving hundreds of mails per day (like from several mailing
+        lists).
+
+    Required settings
+
+        Variable `PMSRC' must point to source directory of procmail code.
+        This subroutine will include
+
+        o   pm-javar.rc
+        o   pm-jamime.rc
+        o   Program `$MIME_BIN_QP_E'
+            must have been installed (see pm-javar.rc).
+ 	o   pm-jamine-decode.rc must have been called and message must
+ 	    contain headers `X-Mime-Header-Decoded-*'
+
+    Call arguments (variables to set before calling)
+
+        o   `JA_MIME_RECODE_TREAT_SUBJECT', default "yes". Decode
+            Subject header by removing mime.
+        o   `JA_MIME_RECODE_TREAT_FROM', default "no". Decode
+            From header by removing mime.
+
+    Return values
+
+        (none)
+
+    Examples
+
+        To fix Subject header and then make it 7bit clean again. Note,
+        this may not be exactly what you want. The pm-jamime-decode.rc
+        file does a little more than  From/Header handling (also modifies
+        message body). Read documentation of each file before using
+        following example
+
+            INCLUDERC = $PMSRC/pm-jasubject.rc
+            INCLUDERC = $PMSRC/pm-jamime-decode.rc
+            INCLUDERC = $PMSRC/pm-jamime-recode.rc
 
 Pm-jamime-save.rc -- save message's MIME attachement (one file) to a file
 
     File id
 
-        .Copyright (C)   1998-2009 Jari Aalto
-        .$Keywords:      procmail, subroutine, mime $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Documentation
 
         This module saves _one_ simple file attachment (MIME) from he
         message. The message must define following MIME headers. If
-        "filename=" does not exists, then the message will not be
-        handled.
+        "filename=" does not exists, then the message is ignored.
 
             Mime-Version: <version>
             Content-Type: <type>
             Content-Disposition: attachment; filename="file.txt"
 
         The last line can also be in separate line, provided that it
-        is intended according to standard rules:
+        is indented according to standard rules:
 
             Mime-Version: <version>
             Content-Type: <type>
@@ -2342,15 +2792,15 @@ Pm-jamime-save.rc -- save message's MIME attachement (one file) to a file
         does nothing, because that's out of our league and you need some
         more heavy weight mime tools. E.g. Perl CPAN has MIME libraries.
 
-        _Note_: When the attachment is in the body, it is simply written
+        _Note_: when the attachment is in the body, it is simply written
         to a disk and the location in message is replaced with test:
 
-            Extracted to file:/users/foo/junk/file.txt.1998-03-30
+            Extracted to file:/users/foo/junk/<YYYY-MM-DD-hhmm>.file.txt.
 
-        The existing mime headers that surrounded the attachment are
-        untouched, so don't try to press your Mail Agents MIME buttons
-        at that point any more. There is no such file in that spot
-        if you set `JA_MIME_SAVE_DEL' to `yes').
+        The existing mime headers that surround the attachment are
+        lect untouched, so don't try to press your Mail Agent's MIME buttons
+        at that point. There is no such file in that spot
+        if you set `JA_MIME_SAVE_DEL' to `yes'.
 
     Required settings
 
@@ -2415,13 +2865,22 @@ Pm-janetmind.rc -- handle http://minder.netmind.com/ messages
 
     File id
 
-        .Copyright (C)    1998-2009 Jari Aalto
-        .$Keywords:       procmail netmind recipe $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
+
+ 	** THIS MODULE IS OBSOLETE. THE NETMIND SERVICE NO LONGER EXISTS **
 
         http://minder.netmind.com/
 
@@ -2481,11 +2940,18 @@ Pm-janslookup.rc -- run nslookup on variable INPUT
 
     File id
 
-        .Copyright (C)   1997-2009 Jari Aalto
-        .Keywords:       procmail, nslookup, subroutine
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -2602,11 +3068,18 @@ Pm-jaorig.rc -- Extract embedded original message (simple recipe)
 
     File id
 
-        .Copyright (C)   1998-2009 Jari Aalto
-        .$Keywords:      procmail recipe extract original message $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Documentation
 
@@ -2752,11 +3225,18 @@ Pm-japing.rc -- reply shortly to message "Subject: ping"; account ok
 
     File id
 
-        .Copyright (C)   1997-2009 Jari Aalto
-        .$Keywords:      procmail, subroutine, ping auto-ack $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -2800,11 +3280,18 @@ Pm-japop3.rc -- Remotedly download messages by mail command request
 
     File id
 
-        .Copyright (C)   1998-2009 Jari Aalto
-        .$Keywords:      procmail pop3 emulation recipe $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -2849,13 +3336,13 @@ Pm-japop3.rc -- Remotedly download messages by mail command request
         o   `JA_POP3_TMP' is the file where mailbox is moved before starting
             to forward the messages. Do not put to point to your $HOME,
             becaus that may exceed the quota.
-        o   `JA_POP3_TO_MUST_MATCH' must contain regexp that match the email
-            addresses where the pop3 messages are allowed to send. BE SURE
-            TO DEFINE this. If you have account X,Y,Z where you want to receive
-            pop3 messages, set this regexp to match those site's email addresses.
-        o   `JA_POP3_LOGFILE' is the log where you can see how the forked
-            procmail processes send each pop3 mail. You may want to set this
-            to different location than your default `$LOGFILE'.
+ 	o   `JA_POP3_TO_MUST_MATCH' must contain regexp that match the email
+ 	    addresses where the pop3 messages are allowed to send. BE SURE
+ 	    TO DEFINE this. If you have account X,Y,Z where you want to receive
+ 	    pop3 messages, set this regexp to match those site's email addresses.
+ 	o   `JA_POP3_LOGFILE' is the log where you can see how the forked
+ 	    procmail processes send each pop3 mail. You may want to set this
+ 	    to different location than your default `$LOGFILE'.
 
     Return value
 
@@ -2872,8 +3359,8 @@ Pm-japop3.rc -- Remotedly download messages by mail command request
 
             .. somewhere in your .procmailrc ..
 
-            JA_POP3_SUBJECT_CMD = myPoPcmd
-            INCLUDERC           = $RC_POP3
+ 	    JA_POP3_SUBJECT_CMD = myPoPcmd
+ 	    INCLUDERC           = $RC_POP3
 
             #   Save all pop3 requests to folder
 
@@ -2885,22 +3372,29 @@ Pm-japop3.rc -- Remotedly download messages by mail command request
     In account Y, from where you send the pop3 requests. Following code stores
     The received messages to separate folder
 
-            #   The MATCH will contain the host name from where the messages
-            #   were moved
+ 	    #   The MATCH will contain the host name from where the messages
+ 	    #   were moved
 
-            :0 :
-            *$ X-Loop-Fwd:.*\.rc +\/$NSPC+
+ 	    :0 :
+ 	    *$ X-Loop-Fwd:.*\.rc +\/$NSPC+
             mail.fwd.$MATCH.mbox
 
 Pm-jarandf.rc -- pick (rand)om line from (f)ile
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$keywords:     procmail. subroutine, random file line $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -2914,7 +3408,7 @@ Pm-jarandf.rc -- pick (rand)om line from (f)ile
         the code block: that is, in the input line. I know no awk that
         would not have this feature, but at least you know now what it takes.
 
-            % awk '{print VAR; exit;}' VAR=1 /etc/passwd
+ 	    % awk '{print VAR; exit;}' VAR=1 /etc/passwd
 
         Try using GNU awk, if your standard awk didn't print 1 in above
         test. (Put this line to the top of your .procmailrc)
@@ -2923,14 +3417,14 @@ Pm-jarandf.rc -- pick (rand)om line from (f)ile
 
     Call arguments (variables to set before calling)
 
-        If intend to call this subroutine many times, then please calculate
-        the number of lines beforehand and pass it to this subroutine. If
-        the MAX is not set, then `wc' is called every time to find your the
-        line count.
+ 	If intend to call this subroutine many times, then please calculate
+ 	the number of lines beforehand and pass it to this subroutine. If
+ 	the MAX is not set, then `wc' is called every time to find your the
+ 	line count.
 
         o   FILE, from what file to select. Make sure this exists; existence
             is not checked here.
-        o   [MAX] optional, number of lines in the FILE.
+ 	o   [MAX] optional, number of lines in the FILE.
 
     Returned value
 
@@ -2943,8 +3437,8 @@ Pm-jarandf.rc -- pick (rand)om line from (f)ile
             $RC_RANDF = $PMSRC/pm-jarand.rc
             $COOKIE   = $HOME/txt/cookie.lst
 
-            ...somewhere..
-            MAX=20 FILE=$COOKIE    INCLUDERC=$RC_RANDF
+ 	    ...somewhere..
+ 	    MAX=20 FILE=$COOKIE    INCLUDERC=$RC_RANDF
 
             #  LINE contains randomly read line
 
@@ -2952,11 +3446,18 @@ Pm-jasrv-check.rc -- check FILE validity, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1998-2009 Jari Aalto
-        .$Keywords:      procmail, file server $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -2978,11 +3479,18 @@ Pm-jasrv-daemon.rc -- server request check, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1998-2009 Jari Aalto
-        .$Keywords:      procmail, file server $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -3005,11 +3513,18 @@ Pm-jasrv-err.rc -- send message, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1998 Jari Aalto $
-        .$Keywords:      procmail FileServer subroutine $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -3022,17 +3537,24 @@ Pm-jasrv-err.rc -- send message, subroutine for File Server
 
     Output
 
-        o   fld, additional field to be added to the saved mbox log message
+ 	o   fld, additional field to be added to the saved mbox log message
 
 Pm-jasrv-from.rc -- compose reply, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1997-2009 Jari Aalto
-        .$Keywords:      procmail, file server $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -3041,13 +3563,13 @@ Pm-jasrv-from.rc -- compose reply, subroutine for File Server
 
         Here is dry run example to test this module
 
-            % procmail DEFAULT=/dev/null VERBOSE=on LOGABSTRACT=all         \
-                FORMAIL=/opt/local/bin/formail                              \
-                JA_SRV_FORMAIL_FROM=me@here                                 \
-                JA_SRV_CONTENT_TYPE=content-type                            \
-                JA_SRV_XLOOP=xloop                                          \
-                $HOME/pm/pm-jasrv-from.rc                                   \
-                < $HOME/any-sample.email
+ 	    % procmail DEFAULT=/dev/null VERBOSE=on LOGABSTRACT=all         \
+ 		FORMAIL=/opt/local/bin/formail                              \
+ 		JA_SRV_FORMAIL_FROM=me@here                                 \
+ 		JA_SRV_CONTENT_TYPE=content-type                            \
+ 		JA_SRV_XLOOP=xloop                                          \
+ 		$HOME/pm/pm-jasrv-from.rc				    \
+ 	        < $HOME/any-sample.email
 
     Input
 
@@ -3062,11 +3584,18 @@ Pm-jasrv-msg.rc -- send message, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1998-2009 Jari Aalto
-        .$Keywords:      procmail, file server $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -3083,48 +3612,49 @@ Pm-jasrv-multi.rc -- send multipart MIME message, subroutine for FileSrv
 
     File id
 
-        .Copyright (C)   1998-2009 Jari Aalto
-        .$Keywords:      procmail FileServer subroutine $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
         This subroutine is part of MPFS file server. Send out FILE as
-        multipart MIME message. The message will always be base64
-        encoded before sending.
+ 	multipart MIME message. The message will always be base64
+ 	encoded before sending.
 
     Input
 
-        o   JA_SRV_MIME_MULTI_SEND, command to feed the composed and message
-            which will handle sending it as multipart MIME.
-        o   JA_SRV_MULTIPART_THRESHOLD is the hunk size for slitting mail.
-        o   FILE, only filename part. Included in MIME headers.
+ 	o   JA_SRV_MIME_MULTI_SEND, command to feed the composed and message
+ 	    which will handle sending it as multipart MIME.
+ 	o   JA_SRV_MULTIPART_THRESHOLD is the hunk size for slitting mail.
+ 	o   FILE, only filename part. Included in MIME headers.
         o   file, absolute path to send
 
 Pm-jasrv.rc -- MIME capable Procmail File server
 
     File id
 
-        .Copyright (C)   1997-2009 Jari Aalto
-        .$Keywords:      procmail, File Server $
+        Copyright (C) 1997-2009 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
-        published by the Free Software Foundation; either version 2 of
-        the License, or (at your option) any later version.
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
 
         This program is distributed in the hope that it will be useful, but
         WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-        General Public License for more details.
-
-        You should have received a copy of the GNU General Public License along
-        with this program; if not, write to the Free Software Foundation,
-        Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -3488,11 +4018,18 @@ Pm-jasrv-req.rc -- server request check, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1998-2009 Jari Aalto
-        .$Keywords:      procmail FileServer subroutine $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -3500,12 +4037,12 @@ Pm-jasrv-req.rc -- server request check, subroutine for File Server
         Check if file server request is on the JA_SRV_SUBJECT and
         do case or incasensitive check.
 
-        To Dry run this module use following skeleton. Substitute keywods
-        as needed to reflect your system setup:
+ 	To Dry run this module use following skeleton. Substitute keywods
+ 	as needed to reflect your system setup:
 
             % procmail DEFAULT=/dev/null VERBOSE=on LOGABSTRACT=all     \
               PMSRC=$HOME/txt JA_SRV_CMD_STRING=send                    \
-              JA_SRV_SUBJECT="send newbie_article.rtf noconv"           \
+              JA_SRV_SUBJECT="send newbie_article.rtf noconv"		\
               txt/pm-jasrv-req.rc < ~/test.mail
 
     Input
@@ -3522,11 +4059,18 @@ Pm-jasrv-send.rc -- server request check, subroutine for File Server
 
     File id
 
-        .Copyright (C)   1998-2009 Jari Aalto
-        .$Keywords:      procmail, file server $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -3535,33 +4079,33 @@ Pm-jasrv-send.rc -- server request check, subroutine for File Server
         following command: a) make sure that $HOME/test conatins any simple
         email message b) define FORMAIL if it isnot found from path.
 
-            % procmail DEFAULT=/dev/null VERBOSE=on LOGABSTRACT=all     \
-              PMSRC=$HOME/txt JA_SRV_LOG=/dev/null                      \
-              FORMAIL=/opt/local/bin/formail                            \
-              file=$HOME/test FILE=test WORD=WORD JA_SRV_FROM=foo@bar   \
-              SENDMAIL="tee -a $HOME/test.send" txt/pm-jasrv-send.rc < ~/test
+ 	    % procmail DEFAULT=/dev/null VERBOSE=on LOGABSTRACT=all	\
+ 	      PMSRC=$HOME/txt JA_SRV_LOG=/dev/null			\
+ 	      FORMAIL=/opt/local/bin/formail				\
+ 	      file=$HOME/test FILE=test WORD=WORD JA_SRV_FROM=foo@bar   \
+ 	      SENDMAIL="tee -a $HOME/test.send" txt/pm-jasrv-send.rc < ~/test
 
     Note:
 
-        The MIME headers here selected previously were:
+ 	The MIME headers here selected previously were:
 
-            Content-type: application/octet-stream
-            Content-transfer-encoding: x-gzip64
+ 	    Content-type: application/octet-stream
+ 	    Content-transfer-encoding: x-gzip64
 
-        But Defining own CTE such as x-gzip64 is strongly discouraged by
-        the MIME RFC's. Most e-mail clients would be at a loss on how to
-        handle these. Many would just bomb out and not even give you the
-        opportunity to save it to a file. A more correct MIME type is this,
-        which is now used:
+ 	But Defining own CTE such as x-gzip64 is strongly discouraged by
+ 	the MIME RFC's. Most e-mail clients would be at a loss on how to
+ 	handle these. Many would just bomb out and not even give you the
+ 	opportunity to save it to a file. A more correct MIME type is this,
+ 	which is now used:
 
-            Content-type: application/x-gzip
-            Content-transfer-encoding: base64
+ 	    Content-type: application/x-gzip
+ 	    Content-transfer-encoding: base64
 
     Input
 
        o    `FILE' is the filename(chdir to directory is already done)
-            `file' is _absolute_ filename
-            `WORD' is next word from subject line after FILE word.
+ 	    `file' is _absolute_ filename
+ 	    `WORD' is next word from subject line after FILE word.
        o    JA_SRV_CMD_STRING is flag
        o    JA_SRV_F_SUBJ_NOTIFY is flag
 
@@ -3573,47 +4117,54 @@ Pm-jastore.rc -- Store messagee to inbox or gzip inbox
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$Keywords:     procmail, subroutine, storing, saving message $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
-        This subroutine stores the message to file pointed by `MBOX'. This
-        subroutine is meant to be used with the the other general purpose
-        includerc files. This makes it possible to have a centralized file
-        storage handling for all your rc files.
+ 	This subroutine stores the message to file pointed by `MBOX'. This
+ 	subroutine is meant to be used with the the other general purpose
+ 	includerc files. This makes it possible to have a centralized file
+ 	storage handling for all your rc files.
 
-        Regular user doesn't get much out of this rc unless he mixes both
-        .gz and regular files in his .procmailrc
+ 	Regular user doesn't get much out of this rc unless he mixes both
+ 	.gz and regular files in his .procmailrc
 
-        R e p e a t: This module is basis for general purpose procmail
-        rc plug-ins to strre message to mailbox pointed by some rc
-        configuration variable. Normal user can simply say in his .procmailrc:
+ 	R e p e a t: This module is basis for general purpose procmail
+ 	rc plug-ins to strre message to mailbox pointed by some rc
+ 	configuration variable. Normal user can simply say in his .procmailrc:
 
-            :0:
-            mail.private
+ 	    :0:
+ 	    mail.private
 
     Required settings
 
-        (none)
+ 	(none)
 
     Call arguments (variables to set before calling)
 
-        `MBOX'          must have been set to point to message storage.
-        `MBOX_SUFFIX'   is extension added to MBOX. Default is none.
-        `MBOX_MH'       if "yes" then deliver to MH mailbox with
-                        `MBOX_MH_CMD' which is "rcvstore" by default.
+ 	`MBOX'		must have been set to point to message storage.
+ 	`MBOX_SUFFIX'	is extension added to MBOX. Default is none.
+ 	`MBOX_MH'	if "yes" then deliver to MH mailbox with
+ 			`MBOX_MH_CMD' which is "rcvstore" by default.
 
-        o   message is delivered to MH mailbox using `MBOX_MH_CMD'
+ 	o   message is delivered to MH mailbox using `MBOX_MH_CMD'
 
         otherwise
 
-        o   If MBOX is `some.mbox'     the message is stored as is.
-        o   If MBOX is `some.mbox.gz'  the message is gzipped to folder.
-        o   If MBOX is `some-dir/.'    then deliver as individual files
+ 	o   If MBOX is `some.mbox'     the message is stored as is.
+ 	o   If MBOX is `some.mbox.gz'  the message is gzipped to folder.
+ 	o   If MBOX is `some-dir/.'    then deliver as individual files
 
     Example usage
 
@@ -3629,13 +4180,25 @@ Pm-jasubject.rc -- Subject field cleaner and canonicalizer (Re:)
 
     File id
 
-        .Copyright (C)  1998-2009 Jari Aalto
-        .$Keywords:     procmail, subroutine, subject clean $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
+
+ 	_NOTE:_ If you receive RFC 2047 encoded Subject headers like
+ 	"Subject: =?ISO-8859-1?Q?=C4hnlichkeiten_von_=DCbungen?=", you
+ 	must first decode it before using this subroutine. Feed the
+ 	message to `pm-jamime-decode.rc' first.
 
         There are many different Email programs out there that add their
         own `reply' characters to the subject field. The most sad programs
@@ -3679,54 +4242,56 @@ Pm-jasubject.rc -- Subject field cleaner and canonicalizer (Re:)
 
     About In-Reply-To header
 
-        If there is `In-Reply-to' header in the message, but there is not *Re:*
-        in the subject line, one is added automatically. Some broken Mailers
-        forget to add the *Re:* to the Subject line.
+        If there is `In-Reply-to' header in the message, but there is
+        not *Re:* in the subject line, one is added automatically.
+        Some broken Mailers forget to add the *Re:* to the Subject
+        line.
 
     Variable JA_SUBJECT_SAVE
 
-        This is by default `yes' which makes the original subject saved under
-        header field `X-Old-Subject'. If you don't want that extra header
-        generated, set this variable to `no'
+        This is by default `yes' which causes the original subject to
+        be saved under header field `X-Old-Subject'. If you don't want
+        that extra header generated, set this variable to `no'
 
     Variable JA_SUBJECT_FWD_KILL
 
-        This is by default `yes', which will kill extra forwarding indication
-        words like (fwd) [fwd] <fwd> <f>. If you set this to `no', then all the
-        forwarding words are preserved. The de facto forward format is:
+        This is by default `yes', which will kill extra forwarding
+        indication words like (fwd) [fwd] <fwd> <f>. If you set this
+        to `no', then all the forwarding words are preserved. The de
+        facto forward format is:
 
             Subject: This subject (fwd)
 
     Code note
 
-        This subroutine's intention is to make Subject more expressive by
-        deleting redundant information. A simplistic approach has been
-        taken where Subject consists of list of *words* whose each attribute
-        can be either `ok' or `delete'. No attempt has been made to
-        determine the structure of the Subject. You can see the algorithm better
+        This subroutine's intention is to make Subject more expressive
+        by deleting redundant information. A simplistic approach has
+        been taken where Subject consists of list of *words* whose
+        each attribute can be either `ok' or `delete'. No attempt has
+        been made to determine the structure of the Subject. You can
+        see the algorithm better
         from an example:
 
             Re: New subject (was Re: Old subject)
 
-        That should be treated syntactically like "New subject" and forgetting
-        anything between parenthesis. This is however not respected and
-        not even tried. The rule applied here is "One Re: is tolerated",
-        so the subject won't change. It doesn't matter where "Re:" is.
+        That should be treated syntactically like "New subject" and
+        forgetting anything between parenthesis. This is however not
+        respected and not even tried. The rule applied here is "One
+        Re: is tolerated", so the subject won't change. It doesn't
+        matter where "Re:" is.
 
-        But here the subject is changed. The rule applied is "Delete
-        all unwanted words and then add one Re: to the beginning if OLD
-        content had any Reply indications"
+        But here the subject is changed. The rule applied is: Delete
+        all unwanted _words_ and then add one Re: to the beginning if OLD
+        content had any Reply indications
 
                 Re: New subject (was Re: Old subject)
             --> Re: New subject (was Old subject)
 
-        Now you understand how the Subject changing works.
-
     IMPORTANT notice
 
-        Please check that your `SHELL' variable setting in `~/procmailrc' is `sh'
-        derivate, /bin/sh or /bin/bash. This module won't work with other
-        shells.
+        Please check that your `SHELL' variable setting in `~/procmailrc'
+        is `sh' derivate, /bin/sh or /bin/bash. This module won't work with
+        other shells.
 
     Awk usage note
 
@@ -3737,14 +4302,9 @@ Pm-jasubject.rc -- Subject field cleaner and canonicalizer (Re:)
 
             AWK = "gawk"        # you may need this, try also gawk
 
-    Example usage
+    Customizations
 
-        You need nothing special, just include this recipe
-        before you save message to folder.
-
-            INCLUDERC = $PMSRC/pm-jasubject.rc
-
-        Customizations: Let's say Polish M$Outlook uses `ODP:' instead of
+        Let's say Polish M$Outlook uses `ODP:' instead of
         standard `re:' and you want to handle that too: Then set:
 
             JA_SUBJECT_KILL = "odp:"            # NOTE: all lowercase
@@ -3764,6 +4324,13 @@ Pm-jasubject.rc -- Subject field cleaner and canonicalizer (Re:)
         Important: The regexp must be _all_ lowercase, because when match
         happens, the words have been converted to lowercase.
 
+    Example usage
+
+        You need nothing special, just include this recipe
+        before you save message to folder.
+
+            INCLUDERC = $PMSRC/pm-jasubject.rc
+
     Debugging
 
         You can dry-run test this module with following command and watching
@@ -3772,7 +4339,10 @@ Pm-jasubject.rc -- Subject field cleaner and canonicalizer (Re:)
         correction is found.
 
             % procmail SHELL=/bin/sh AWK=gawk VERBOSE=on LOGABSTRACT=all \
-              PMSRC=txt JA_SUBJECT_KILL="(ace-users)" txt/pm-jasubject.rc  \
+              DEFAULT=/dev/null LOGFILE=$(tty) \
+              JA_SUBJECT_KILL="(ace-users)" \
+              PMSRC=/path/to/install/dir \
+              /path/to/pm-jasubject.rc  \
               < ~/test.mail
 
     Thank you
@@ -3785,28 +4355,22 @@ Pm-jatime.rc -- "hh:mm:ss" time parser from variable INPUT
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$Keywords:     procmail, subroutine, time parsing $
+        Copyright (C) 1997-2009 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
-        published by the Free Software Foundation; either version 2 of
-        the License, or (at your option) any later version.
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
 
         This program is distributed in the hope that it will be useful, but
         WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-        General Public License for more details.
-
-        You should have received a copy of the GNU General Public License along
-        with this program; if not, write to the Free Software Foundation,
-        Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
-        This includerc parses date from variable INPUT which has string
+ 	This includerc parses date from variable INPUT which has string
 
             "hh:mm:ss"
 
@@ -3817,15 +4381,15 @@ Pm-jatime.rc -- "hh:mm:ss" time parser from variable INPUT
         Returned values
 
             hh      = 2 digits
-            mm      = 2 digits
+            mm	    = 2 digits
             ss      = 2 digits
 
-        Variable ERROR is set to "yes" if it couldn't recognize the INPUT
-        and couldn't parse all hh, mm, ss variables.
+ 	Variable ERROR is set to "yes" if it couldn't recognize the INPUT
+ 	and couldn't parse all hh, mm, ss variables.
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
+ 	PMSRC must point to source directory of procmail code. This subroutine
         will include pm-javar.rc from there.
 
     Call arguments (variables to set before calling)
@@ -3836,11 +4400,11 @@ Pm-jatime.rc -- "hh:mm:ss" time parser from variable INPUT
 
     Usage example
 
-        Get the time of received message. The From_ header will always
-        have the standard time stamp.
+ 	Get the time of received message. The From_ header will always
+ 	have the standard time stamp.
 
-            PMSRC           = $HOME/pm
-            RC_DATE_TIME    = $PMSRC/pm-jatime.rc
+ 	    PMSRC	    = $HOME/pm
+ 	    RC_DATE_TIME    = $PMSRC/pm-jatime.rc
 
             :0 c
             *  ^From +\/.*
@@ -3853,23 +4417,30 @@ Pm-jatime.rc -- "hh:mm:ss" time parser from variable INPUT
                 :0
                 * ERROR ?? yes
                 {
-                   # Should not ever happen, you have broken From_
-                }
+ 		   # Should not ever happen, you have broken From_
+ 		}
             }
 
 Pm-jaube1.rc -- Jari's UBE filter. Subroutine 1
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .$Keywords:     procmail, UBE, UCE, spam filter $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Documentation
 
-        This file is part of the "pm-jaube.rc". This subroutine is called
+ 	This file is part of the "pm-jaube.rc". This subroutine is called
         when likely UBE message has been triggered.
 
     Required settings
@@ -3879,15 +4450,22 @@ Pm-jaube1.rc -- Jari's UBE filter. Subroutine 1
 
         o   pm-jastore.rc
 
-Pm-jaube-keywords.rc -- Jari's bare bones word list based UBE filter
+Pm-jaube-keywords.rc -- Bare bones word list based UBE filter
 
     File id
 
-        .Copyright (C)  2004 Jari Aalto
-        .$Keywords:     procmail, subroutine, UBE, spam, UCE filter $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Warning
 
@@ -4011,15 +4589,16 @@ Pm-jaube-keywords.rc -- Jari's bare bones word list based UBE filter
 
     Return values
 
-        o   `ERROR_STATUS' is set to word "Good" or "Bad".
+        o   `ERROR_STATUS' is set to word "Bad" otherwise empty.
         o   `ERROR' is set to short descriptive word that indicate which
-            rule was matched. Values: *Header-From-Keywords*,
-            *Header-Subject-keywords* and *Body-keywords*
+            rule was matched. Values: *Header-FromKeywords*,
+            *Header-SubjectKeywords* and *Body-Keywords*
         o   `ERROR_MATCH' is set to some words that happened to trigger
             UBE catch rule.
 
     Usage example
 
+            PMSRC     = "/path/to/procmail/lib"
             #   Exclude these addresses from tests
             VALID_FROM = "(my@address.example.com|word@here.example.com)"
 
@@ -4027,9 +4606,9 @@ Pm-jaube-keywords.rc -- Jari's bare bones word list based UBE filter
             *$ ! ^From:.*$VALID_FROM
             *  !  FROM_DAEMON
             {
-                INCLUDERC             = $PMSRC/pm-jaube-keywords.rc
+                INCLUDERC = $PMSRC/pm-jaube-keywords.rc
 
-                #  Variable "ERROR" was set if message was UBE
+                #  Variable "ERROR" is set if message was UBE
 
                 :0 :
                 * ! ERROR ?? ^^^^
@@ -4040,17 +4619,24 @@ Pm-jaube-keywords.rc -- Jari's bare bones word list based UBE filter
 
         The layout of this file is managed by Emacs packages tinyprocmal.el
         and tinytab.el for the 4 tab text placement.
-        See projecthttp://freshmeat.net/projects/tiny-tools
+        See project http://freshmeat.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-spamprobe.rc -- Interface to Annoyance Filter program
 
     File id
 
-        .Copyright (C)  Jari Aalto
-        .$Keywords:     procmail, subroutine, UBE, spam, filter $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Warning
 
@@ -4129,10 +4715,11 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Annoyance Filter program
     Call arguments (variables to set before calling)
 
         o   `JA_UBE_ANNOYANCE_PRG', path to the program [required].
-        o   `JA_UBE_ANNOYANCE_SPAM_DB', path to the *dictionary database
-            [required]. E.g. `$HOME/.annoyance/fdict.db'.
+        o   `JA_UBE_ANNOYANCE_SPAM_DB', path to the dictionary database
+            [required]. E.g. `$HOME/.annoyance/dict.db'.
         o   `JA_UBE_ANNOYANCE_SPAM_DB_OPT', type of dictionary to read.
-            Default is "--fread".
+            Default is "--read", but this could be fast dictionary option
+            "--fread".
         o   `JA_UBE_ANNOYANCE_HEADER', the header name where the results
             are put. If not defined, no header is added.
             Defaults to *X-Spam-Annoyance-Status*
@@ -4152,7 +4739,7 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Annoyance Filter program
             <other checks, mailing lists, work mail etc.>
 
             JA_UBE_ANNOYANCE_PRG     = "/usr/bin/nice -n 5 /usr/bin/annoyance-filter"
-            JA_UBE_ANNOYANCE_SPAM_DB = $HOME/.annoyance/fdict.db
+            JA_UBE_ANNOYANCE_SPAM_DB = $HOME/.annoyance/dict.db
             INCLUDERC                = $PMSRC/pm-jaube-prg-spamprobe.rc
 
             #   The ERROR will contains word "yes" if message was spam
@@ -4165,32 +4752,39 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Annoyance Filter program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See projecthttp://freshmeat.net/projects/tiny-tools
+        See http://freshmeat.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
 
     File id
 
-        .Copyright (C)  2004 Jari Aalto
-        .$Keywords:     procmail, subroutine, UBE, spam, filter $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Warning
 
         Put all your Unsolicited Bulk Emacil (aka spam) filters towards the
-        end of your `~/.procmailrc'. The idea is that valid messages are filed
-        first (mailing lists, your work and private mail, bounces) and only
-        the uncategorized messages are checked last.
+        end of your `~/.procmailrc'. The idea is that valid messages
+        are filed first (mailing lists, your work and private mail,
+        bounces) and only the uncategorized messages are checked last.
 
         YOU CANNOT USE THIS PROCMAIL SUBROUTINE UNLESS YOU HAVE TRAINED THE
         BAYESIAN PROGRAM FIRST!
 
         To train:
 
-            $ ls spam/*.mail | xargs -n 1 bmf -s    # feed individual messages
-            $ ls good/*.mail | xargs -n 1 bmf -n    # feed individual messages
+            $ ls spam/*.mail | xargs -n 1 bmf -s # feed individual messages
+            $ ls good/*.mail | xargs -n 1 bmf -n # feed individual messages
 
         To test
 
@@ -4199,10 +4793,10 @@ Pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
     Overview of features
 
         o   Implements interface to http://www.sf.net/projects/bmf
-            "Bayesian Mail Filter" project. The called binary is "bmf" hence
-            the name of this subroutine. Bmf program uses well know statistical
-            analysis which is much more reliable than any hand made procmail
-            scripts could ever achieve.
+            "Bayesian Mail Filter" project. The called binary is "bmf"
+            hence the name of this subroutine. Bmf program uses well
+            know statistical analysis which is much more reliable than
+            any hand made procmail scripts could ever achieve.
         o   Variable `ERROR' is set if the message was UBE.
         o   Results are available in headers `X-Spam-bmf-Status' and
             `X-Spam-bmf-Flag' for further analysis.
@@ -4214,12 +4808,13 @@ Pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
         good or bad, or if you like, ham and spam. All the Bayesian programs
         are not the same, so if you want to achive magic 99.99% probability
         the only methodology to do that is to chain several programs in
-        serially. There is no single program that can solve the UBE detection.
+        serially. There is no single program that can solve the
+        UBE detection.
 
-        For serious discussion of strenghts of the different programs, refer to
-        a very good article "Spam Filters" by Sam Holden at
-        2004-08-16 <http://freshmeat.net/articles/view/964>. The article
-        evaluated throughly following programs:
+        For serious discussion of strenghts of the different programs,
+        refer to a very good article "Spam Filters" by Sam Holden at
+        2004-08-16 <http://freshmeat.net/articles/view/964>. The
+        article evaluated throughly following programs:
 
         o   Bayesian Mail Filter        (bayesian)
         o   Bogofilter                  (bayesian)
@@ -4239,12 +4834,12 @@ Pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
 
     About bouncing message back
 
-        The general consensus is, that you should not send bounces. The UBE
-        sender is not there, because the address forged. Do not increase
-        the network traffic; you will not do any good to anybody by
-        bouncing messgas -- you just increase mail traffic even more.
-        Instead save the messages to folders and periodically periodically
-        check their contents.
+        The general consensus is, that you should not send bounces.
+        The UBE sender is not there, because the address forged. Do
+        not increase the network traffic; you will not do any good to
+        anybody by bouncing messgas -- you just increase mail traffic
+        even more. Instead save the messages to folders and
+        periodically periodically check their contents.
 
     Required settings
 
@@ -4252,7 +4847,7 @@ Pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
         `~/.procmailrc'. Use absolute path to make the external shell
         quick; it'll save server load considerably.
 
-            JA_UBE_BMF_PRG = /usr/bin/bmf
+            JA_UBE_BMF_PRG = "/usr/bin/bmf"
 
         If you _do_ _not_ have program installed, do not leave the
         variable lying aroung, because it will keep this subroutine active.
@@ -4307,17 +4902,140 @@ Pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See projecthttp://freshmeat.net/projects/tiny-tools
+        See project http://freshmeat.net/projects/emacs-tiny-tools/
+
+Pm-jaube-prg-bogofilter -- Interface to bogofilter program
+
+    File id
+
+        Copyright (C) 1997-2009 Jari Aalto
+
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
+
+    Warning
+
+        Put all your Unsolicited Bulk Emacil (aka spam) filters towards the
+        end of your `~/.procmailrc'. The idea is that valid messages are filed
+        first (mailing lists, your work and private mail, bounces) and only
+        the uncategorized messages are checked last.
+
+        YOU CANNOT USE THIS PROCMAIL SUBROUTINE UNLESS YOU HAVE TRAINED THE
+        BAYESIAN PROGRAM FIRST!
+
+        To train:
+
+            $  rm -f ~/.bogofilter/*.db         # delete database
+            $  bogofilter -B -n good.msg ...
+            $  bogofilter -B -s spam.msg ...
+
+    Overview of features
+
+        o   Implements interface to http://www.sf.net/projects/bogofilter
+            project.
+        o   variable `ERROR' is set if message was likely spam.
+        o   Results are available by default in header
+            `X-Spam-Bogofilter-Status'.
+
+    Description
+
+        There are several Bayesian based statistical analysis programs that
+        study the message's tokens and then classify it into two categories:
+        good or bad, or if you like, ham and spam. All the Bayesian programs
+        are not the same, so if you want to achive magic 99.99% probability
+        the only methodology to do that is to chain several programs in
+        serially. There is no single program that can solve the UBE detection.
+        This procmail subroutine implements call interface to program
+        `bogofilter', which must already have been installed.
+
+    About bouncing message back
+
+        The general consensus is, that you should not send bounces. The UBE
+        sender is not there, because the address forged. Do not increase
+        the network traffic; you will not do any good to anybody by
+        bouncing messgas -- you just increase mail traffic even more.
+        Instead save the messages to folders and periodically periodically
+        check their contents.
+
+    Required settings
+
+        If `bogofilter' program is available, define this variable in your
+        `~/.procmailrc'. Use absolute path to make the external shell
+        quick; it'll save server load considerably.
+
+            JA_UBE_BOGOFILTER_PRG = /usr/bin/bogofilter
+
+        If you _do_ _not_ have program installed, do not leave the
+        variable lying aroung, because it will keep this subroutine active.
+        Calling a non existing program is not a good idea, so it better to
+        empty the variable if the program is not available.
+
+    Required settings
+
+        None. No dependencies to other procmail modules.
+
+    Call arguments (variables to set before calling)
+
+        o   JA_UBE_BOGOFILTER_PRG, path to the program
+        o   JA_UBE_BOGOFILTER_HEADER_NEW, the header name where the results
+            are put. If not defined, no header is added.
+            Defaults to `X-Spam-Bogofilter-Status'
+        o   JA_UBE_BOGOFILTER_FORCE, if set to _yes_ then call program no matter
+            what. Normally if there already is `X-Spam-*' header,
+            it is assumed that the message has already been checked
+            and no new checking is needed.
+
+    Return values
+
+        o   ERROR, is set to the return value of program if message was spam.
+        o   ERROR_INFO, is set if case is "unsure".
+
+    Usage example
+
+            PMSRC                  = $HOME/procmail # procmail recipe dir
+
+            <other checks, mailing lists, work mail etc.>
+
+            JA_UBE_BOGOFILTER_PRG  = "/usr/bin/nice -n 5 /usr/bin/bogogilter"
+            INCLUDERC              = $PMSRC/pm-jaube-prg-bogofilter.rc
+
+            #   The ERROR will contains reason if program classified
+            #   the message into "bad" category.
+
+            :0 :
+            * ! ERROR ?? ^^^^
+            junk.mbox
+
+    File layout
+
+        The layout of this file is managed by Emacs packages tinyprocmail.el
+        and tinytab.el for the 4 tab text placement.
+        See project http://freshmeat.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-bsfilter.rc -- Interface to Bsfilter program
 
     File id
 
-        .Copyright (C)  Jari Aalto
-        .$Keywords:     procmail, subroutine, UBE, spam, filter $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Warning
 
@@ -4413,17 +5131,24 @@ Pm-jaube-prg-bsfilter.rc -- Interface to Bsfilter program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See projecthttp://freshmeat.net/projects/tiny-tools
+        See project http://freshmeat.net/projects/emacs-tiny-tools/
 
-Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
+Pm-jaube-prg-ifile -- Interface to ifile program
 
     File id
 
-        .Copyright (C)  Jari Aalto
-        .$Keywords:     procmail, subroutine, UBE, spam, filter $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Warning
 
@@ -4494,9 +5219,9 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
         o   JA_UBE_IFILE_PRG, path to the program
         o   JA_UBE_IFILE_HEADER, the header name where the results
             are put. If not defined, no header is added.
-            Defaults to `X-Spamifile'
+            Defaults to `X-Spam-Ifile-Status'
         o   JA_UBE_IFILE_FORCE, if set to _yes_ then call program no matter
-            what. Normally if there already is `X-Spamifile' header,
+            what. Normally if there already is header,
             it is assumed that the message has already been checked
             and no new checking is needed.
 
@@ -4509,8 +5234,8 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
         folders used for messages were *spam* and *good*, then the headers
         read:
 
-            X-Spam-ifile: spam
-            X-Spam-ifile: good
+            X-Spam-Ifile-Status: spam
+            X-Spam-Ifile-Status: good
 
     Usage example
 
@@ -4521,35 +5246,42 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
             JA_UBE_IFILE_PRG       = "/usr/bin/nice -n 5 /usr/bin/ifile"
             INCLUDERC              = $PMSRC/pm-jaube-prg-ifile.rc
 
-            #   The ERROR will contains word "yes" spamprobe classified
+            #   The ERROR will contains reason if program classified
             #   the message into "bad" category.
 
             :0 :
-            * ERROR ?? spam
+            * ! ERROR ?? ^^^^
             junk.mbox
 
     File layout
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See projecthttp://freshmeat.net/projects/tiny-tools
+        See project http://freshmeat.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-runall.rc -- Interface to all Bayesian filter programs
 
     File id
 
-        .Copyright (C)  Jari Aalto
-        .$Keywords:     procmail, subroutine, UBE, spam, filter $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Overview of features
 
         o   To detect spam reliably, run all Bayesian programs one by one
             to see if any of them classifies the message as spam.
         o   Programs supported: bogofilter, spamprobe, Bayesian Mail
-            Filter, Annoyance Filterm Bsfilter, Spamoracle and Spamassassin.
+            Filter, Annoyance Filter, Bsfilter, Spamoracle and Spamassassin.
 
     Description
 
@@ -4621,17 +5353,17 @@ Pm-jaube-prg-runall.rc -- Interface to all Bayesian filter programs
 
     Usage example
 
-            PMSRC            = $HOME/procmail # procmail recipe dir
+            PMSRC                 = $HOME/procmail # procmail recipe dir
 
             # ... other checks, mailing lists, work mail etc.
 
-            #   bogofilter and spamprobe are available and trained. Use them.
+            #   bogofilter and Bayesian Mail Filter available and trained. Use them.
 
-            JA_UBE_BOGOFILTER_PRG = "/usr/bin/nice -n 5 /usr/bin/bogofilter"
-            JA_UBE_BMF_PRG        = "/usr/bin/nice -n 5 /usr/bin/bmf"
+            JA_UBE_BOGOFILTER_PRG = "/bin/nice -n 5 /bin/bogofilter"
+            JA_UBE_BMF_PRG        = "/bin/nice -n 5 /bin/bmf"
 
-            #   Now call the "umbrella" module, which will take care of
-            #   the details.
+            #   Call the "umbrella" module, which will take care of
+            #   all the details.
 
             INCLUDERC             = $PMSRC/pm-jaube-prg-runall.rc
 
@@ -4645,17 +5377,141 @@ Pm-jaube-prg-runall.rc -- Interface to all Bayesian filter programs
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See projecthttp://freshmeat.net/projects/tiny-tools
+        See project http://freshmeat.net/projects/emacs-tiny-tools/
+
+Pm-jaube-prg-spamassassin -- Interface to spamassassin program
+
+    File id
+
+        Copyright (C) 1997-2009 Jari Aalto
+
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
+
+    Warning
+
+        Put all your Unsolicited Bulk Emacil (aka spam) filters towards the
+        end of your `~/.procmailrc'. The idea is that valid messages are filed
+        first (mailing lists, your work and private mail, bounces) and only
+        the uncategorized messages are checked last.
+
+        YOU CANNOT USE THIS PROCMAIL SUBROUTINE UNLESS YOU HAVE TRAINED THE
+        BAYESIAN PROGRAM FIRST!
+
+        To train:
+
+            $ rm -f ~/.spamassassin/bayes*
+            $ sa-learn $opt --local --no-rebuild --ham  good.msg ...
+            $ sa-learn $opt --local --no-rebuild --spam spam.msg ...
+            $ sa-learn --rebuild
+
+    Overview of features
+
+        o   Implements interface to http://www.spamassassin.org/
+            project.
+        o   variable `ERROR' is set if message was spam.
+        o   Results are available in default headers (X-Spam-*)
+
+    Description
+
+        There are several Bayesian based statistical analysis programs that
+        study the message's tokens and then classify it into two categories:
+        good or bad, or if you like, ham and spam. All the Bayesian programs
+        are not the same, so if you want to achive magic 99.99% probability
+        the only methodology to do that is to chain several programs in
+        serially. There is no single program that can solve the UBE detection.
+        This procmail subroutine implements call interface to program
+        `spamassassin', which must already have been installed.
+
+    About bouncing message back
+
+        The general consensus is, that you should not send bounces. The UBE
+        sender is not there, because the address forged. Do not increase
+        the network traffic; you will not do any good to anybody by
+        bouncing messgas -- you just increase mail traffic even more.
+        Instead save the messages to folders and periodically periodically
+        check their contents.
+
+    Required settings
+
+        If `spamassassin' program is available, define this variable in your
+        `~/.procmailrc'. Use absolute path to make the external shell
+        quick; it'll save server load considerably.
+
+            JA_UBE_SPAMASSASSIN_PRG = /usr/bin/spamassassin
+
+        If you _do_ _not_ have program installed, do not leave the
+        variable lying aroung, because it will keep this subroutine active.
+        Calling a non existing program is not a good idea, so it better to
+        empty the variable if the program is not available.
+
+    Required settings
+
+        None. No dependencies to other procmail modules.
+
+    Call arguments (variables to set before calling)
+
+        o   JA_UBE_SPAMASSASSIN_PRG, path to the program
+        o   JA_UBE_SPAMASSASSIN_MIN_SIZE, minumum message size. Default is
+            100 bytes.
+        o   JA_UBE_SPAMASSASSIN_MAX_SIZE, maximum message size. Default is
+            256 000 bytes (about 256k).
+        o   JA_UBE_SPAMASSASSIN_FORCE, if set to _yes_ then call program no
+            matter what. Normally if there already is `X-Spam-*' header,
+            it is assumed that the message has already been checked
+            and no new checking is needed.
+
+    Return values
+
+        o   ERROR, is set to the return value of program if message was spam.
+        o   ERROR_INFO, is set if case is "unsure".
+
+    Usage example
+
+            PMSRC                   = $HOME/procmail # procmail recipe dir
+
+            <other checks, mailing lists, work mail etc.>
+
+            JA_UBE_SPAMASSASSIN_PRG = "/usr/bin/nice -n 5 /usr/bin/bogofilter"
+            INCLUDERC               = $PMSRC/pm-jaube-prg-spamassassin.rc
+
+            #   The ERROR will contains reason if program classified
+            #   the message into "bad" category.
+
+            :0 :
+            * ! ERROR ?? ^^^^
+            junk.mbox
+
+    File layout
+
+        The layout of this file is managed by Emacs packages tinyprocmail.el
+        and tinytab.el for the 4 tab text placement.
+        See project http://freshmeat.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-spamoracle.rc -- Interface to Spamoracle program
 
     File id
 
-        .Copyright (C)  Jari Aalto
-        .$Keywords:     procmail, subroutine, UBE, spam, filter $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Warning
 
@@ -4781,17 +5637,24 @@ Pm-jaube-prg-spamoracle.rc -- Interface to Spamoracle program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See projecthttp://freshmeat.net/projects/tiny-tools
+        See project http://freshmeat.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
 
     File id
 
-        .Copyright (C)  Jari Aalto
-        .$Keywords:     procmail, subroutine, UBE, spam, filter $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Warning
 
@@ -4808,10 +5671,10 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
             $ spamprobe -8 good good.msg ...
             $ spamprobe -8 spam spam.msg ...
 
-        Make sure there are no stale lock files, or the spamprobe and this
-        subroutine will hang infinitely:
+ 	Make sure there are no stale lock files, or the spamprobe and this
+ 	subroutine will hang infinitely:
 
-            $ rm -f ~/.spamprobe/lock
+ 	    $ rm -f ~/.spamprobe/lock
 
     Overview of features
 
@@ -4864,10 +5727,11 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
         o   `JA_UBE_SPAMPROBE_HEADER', the header name where the results
             are put. If not defined, no header is added.
             Defaults to *X-Spam-Spamprobe-Status*
-        o   `JA_UBE_SPAMPROBE_FORCE', if set to _yes_ then call program no matter
-            what. Normally if there already is *X-Spam-Spamprobe-Status* header,
-            it is assumed that the message has already been checked
-            and no new checking is needed.
+        o   `JA_UBE_SPAMPROBE_FORCE', if set to _yes_ then call program
+            no matter what. Normally if there already is
+            *X-Spam-Spamprobe-Status* header, it is assumed that the
+            message has already been checked and no new checking is
+            needed.
 
     Return values
 
@@ -4892,17 +5756,24 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See projecthttp://freshmeat.net/projects/tiny-tools
+        See project http://freshmeat.net/projects/emacs-tiny-tools/
 
 Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
 
     File id
 
-        .Copyright (C)  Jari Aalto
-        .$Keywords:     procmail, subroutine, UBE, spam, UCE filter $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Warning
 
@@ -4913,16 +5784,17 @@ Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
 
     Are you sure you want to use procmail for UBE?
 
-        If you think you can put this recipe as a first line of defence
-        to your mail, you will disappoint. Checking UBE with procmail's
-        rule based means does not work that way. The good messages must
-        be sorted first (like your mailing lists and your important
-        work or friend message) and only then what's left to process
-        can be scanned by static rule based tools, like this procmail module.
-        There are much more better tools that are based on statistical analysis of
-        messages. You really should consider using one or combination
-        of Bayesian tools: *Spamassassin*, *bogofilter*, *spamprobe*,
-        *Bayesian* *Mail* *Filter*, *ifile* etc.
+        If you think you can put this recipe as a first line of defence to
+        your mail, you will disappoint. Checking UBE with procmail's
+        rule based means does not work that way. The good messages
+        must be sorted first (like your mailing lists and your
+        important work or friend message) and only then what's left to
+        process can be scanned by static rule based tools, like this
+        procmail module. There are much more better tools that are
+        based on statistical analysis of messages. You really should
+        consider using one or combination of Bayesian tools:
+        *Spamassassin*, *bogofilter*, *spamprobe*, *Bayesian* *Mail*
+        *Filter*, *ifile* etc.
 
         _Repeat:_ procmail rules are not the tool to UBE control. The
         pattern matching rules can never keep up with the spammers. That
@@ -4934,10 +5806,11 @@ Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
         o   Have an account that does not get large number of UBE messages.
         o   Or if procmail is all you have in the system.
 
-        only then consider this module or any other procmail based spam filters
-        in that respect. So, please don't set your expectations high. Spend
-        good time with the configuration variables and check there returned
-        result in variable `ERROR' carefully. Good luck.
+        only then consider this module or any other procmail based
+        spam filters in that respect. So, please don't set your
+        expectations high. Spend good time with the configuration
+        variables and check there returned result in variable `ERROR'
+        carefully. Good luck.
 
     Overview of features
 
@@ -4946,10 +5819,11 @@ Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
             heuristics nail most of the UBE messages. Just plug in this
             module and you have UBE shield active.
         o   Header based filtering: Minimum headers, Pegasus bulk mail,
-            X-uidl validity check
+            X-uidl validity check, bogus From-To combination,
         o   Address based filtering: Numeric address, Invalid address (eg.
             me@myMarketing.global), UBE-like(friend,remove request.)
-        o   Text filtering: no html accepted, common advertising slogans.
+        o   Text filtering: no html accepted, common advertising slogans,
+            unnecessary many capitalized words, HTML message body detection,
         o   And many more check that just not were listed here.
 
         Remember: this is not 100% and there will always be some mishits, so
@@ -4964,9 +5838,10 @@ Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
         messages and made the package look a bit more general so that it
         could be included via `INCLUDERC' in the standard way.
 
-        Thanks to Daniel and others, the UBE bomb days can be reduced, when this
-        filter is active. Some UBE messages may still lurk into the
-        mailbox, but that's the problem with all static rule based tools.
+        Thanks to Daniel and others, the UBE bomb days can be reduced,
+        when this filter is active. Some UBE messages may still lurk
+        into the mailbox, but that's the problem with all static rule
+        based tools.
 
     Logging the events
 
@@ -4997,14 +5872,14 @@ Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
         `SUBJECT' are fields read the message's headers.
 
             BIFF      = $HOME/Mail/mail.log
-            INCLUDERC = $PMSRC/pm-jadate.rc
-            ...
+ 	    INCLUDERC = $PMSRC/pm-jadate.rc
+ 	    ...
 
             :0 hwic:
             *$ ! $LISTS
             |echo "$TODAY $FROM $FSUBJECT" >> $BIFF
 
-        Here is small perl script to parint summary of trapped UBE
+        Here is small perl script to print summary of trapped UBE
         messages from a log like above. It gives nice overview which recipes
         catch most of the UBE messages.
 
@@ -5051,8 +5926,8 @@ Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This recipe file
-        will include
+        PMSRC must point to source directory of procmail code. This
+        recipe file will include
 
         o   pm-javar.rc
         o   pm-janslookup.rc
@@ -5146,7 +6021,7 @@ Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
             Marketing-SubjectGreeting
             MegaSpammer
             MessageId-Invalid
-            MessageIdEmpty
+            MessageId-Empty
             NoDirectAddress-ToCc
             NotEnoughHeaders
             Received-IPError
@@ -5210,17 +6085,25 @@ Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
     File layout
 
         The layout of this file is managed by Emacs packages tinyprocmal.el
-        See projecthttp://freshmeat.net/projects/tiny-tools
+        and tinytab.el for the 4 tab text placement.
+        See project http://freshmeat.net/projects/emacs-tiny-tools/
 
 Pm-javac.rc -- Procmail: Vacation framework recipe (id-cache)
 
     File id
 
-        .Copyright (C)   1997-2009 Jari Aalto
-        .$Keywords:      procmail, vacation framework $
+        Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        <http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
@@ -5231,7 +6114,7 @@ Pm-javac.rc -- Procmail: Vacation framework recipe (id-cache)
 
     Required settings
 
-        PMSRC must point to source directory of procmail code. This subroutine
+ 	PMSRC must point to source directory of procmail code. This subroutine
         will include
 
         o   pm-javar.rc
@@ -5245,11 +6128,11 @@ Pm-javac.rc -- Procmail: Vacation framework recipe (id-cache)
 
     Usage example
 
-        To turn on the vacation feature, create ~/.vac file and recipe below
-        activates vacation. If the vacation is not active, then cache file
-        is removed. (automatic cleanup). The VERBOSE is also turned off
-        when you're on vacation; so that your procmail log will not get
-        filled.
+ 	To turn on the vacation feature, create ~/.vac file and recipe below
+ 	activates vacation. If the vacation is not active, then cache file
+ 	is removed. (automatic cleanup). The VERBOSE is also turned off
+ 	when you're on vacation; so that your procmail log will not get
+ 	filled.
 
         So when you go to vacation, you 'touch ~/.vac' and update
         ~/vacation.msg. When you come back, you 'rm ~/.vac'. That's it.
@@ -5266,8 +6149,8 @@ Pm-javac.rc -- Procmail: Vacation framework recipe (id-cache)
             {
                 VERBOSE     = off
                 JA_VAC      = "yes"
-                JA_VAC_RC   = $PMSRC/pm-myvac.rc        # my vacation recipe
-                INCLUDERC   = $PMSRC/pm-javac.rc        # framework
+                JA_VAC_RC   = $PMSRC/pm-myvac.rc	# my vacation recipe
+                INCLUDERC   = $PMSRC/pm-javac.rc	# framework
             }
             :0 E                                        # else
             * ? $IS_EXIST $JA_VAC_ID_CACHE
@@ -5293,114 +6176,119 @@ Pm-javar.rc -- Global variable definitions
 
     File id
 
-        .Copyright (C)  1997-2009 Jari Aalto
-        .Keywords:      procmail, variable definitions
+ 	Copyright (C) 1997-2009 Jari Aalto
 
-        This code is free software in terms of GNU Gen. pub. Lic. v2 or later
-        Refer to http://www.gnu.org/copyleft/gpl.html
+ 	This program is free software; you can redistribute it and/or
+ 	modify it under the terms of the GNU General Public License as
+ 	published by the Free Software Foundation; either version 2 of the
+ 	License, or (at your option) any later version
+
+ 	This program is distributed in the hope that it will be useful, but
+ 	WITHOUT ANY WARRANTY; without even the implied warranty of
+ 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ 	General Public License for more details at
+ 	<http://www.gnu.org/copyleft/gpl.html>.
 
     Description
 
-        This file defines common variables that you can use in the recipe's
-        condition line. Procmail does not know about escape sequences
-        like `\t' or `\n' and it is therefore much more readable to use
-        variables as substitute for common regular expression
-        atoms. Pay attention that the line starts with "*$ ", where
-        "$" expands the variables: In this file, the variable names
-        represent the well known Perl regular expression names, so
-        that $s is alost like Perl expression \s (whitespace) and $S
-        is almost equivalent to `\S' (non-whitespace). Similarly, $d is
-        `\d' (digit) and $D resembled `\D' (non-digit).
+ 	This file defines common variables that you can use in the recipe's
+ 	condition line. Procmail does not know about escape sequences
+ 	like `\t' or `\n' and it is therefore much more readable to use
+ 	variables as substitute for common regular expression
+ 	atoms. Pay attention that the line starts with "*$ ", where
+ 	"$" expands the variables: In this file, the variable names
+ 	represent the well known Perl regular expression names, so
+ 	that $s is alost like Perl expression \s (whitespace) and $S
+ 	is almost equivalent to `\S' (non-whitespace). Similarly, $d is
+ 	`\d' (digit) and $D resembled `\D' (non-digit).
 
-            :0
-            *$ $s+something+$s+$d+$a+
+ 	    :0
+ 	    *$ $s+something+$s+$d+$a+
 
-        The equivalent without variables (you don't see the tabs and
-        spaces here):
+ 	The equivalent without variables (you don't see the tabs and
+ 	spaces here):
 
-            :0
-            #  Space + tab
-            * [         ]something[     ][0-9]+[a-z]+
+ 	    :0
+ 	    #  Space + tab
+ 	    * [		]something[	][0-9]+[a-z]+
 
 
-        In addition all system dependent variables are defined in this module.
-        For example if you have Gnu awk, it is strongly suggest that you set:
+ 	In addition all system dependent variables are defined in this module.
+ 	For example if you have Gnu awk, it is strongly suggest that you set:
 
-            AWK = "/path/to/gawk"  # in Linux, this would be /usr/bin/awk
+ 	    AWK = "/path/to/gawk"  # in Linux, this would be /usr/bin/awk
 
-        Also if plain `perl' binary still runs the perl 4, then please set
-
-            PERL = "path/to/perl5"
-
-        You can define these variables before or after the module, just make
-        sure the binaries reflect your operating system's paths. In general,
-        if you "port" your setup to several system, dont' include absolute
-        paths. In the other hand, if your setup is in the same place using
-        absolute paths speed up executions by a factor of 3 or more.
-        (depending on how long your PATH is)
+ 	You can define these variables before or after the module, just make
+ 	sure the binaries reflect your operating system's paths. In general,
+ 	if you "port" your setup to several system, dont' include absolute
+ 	paths. In the other hand, if your setup is in the same place using
+ 	absolute paths will speed up executions by a factor of 3 or more.
+ 	(depending on how long your PATH is)
 
     Standard variables defined
 
-        See pm-tips.txt file for full explanation or look at the source code.
+ 	See pm-tips.txt file for full explanation or look at the source code.
 
-            SPC WSPC NSPC SPCL       # Whitespace, Non Whitespace, W+linefeed
-            \s \d \D \w \W and \a \A # perl equivalents
+ 	    SPC WSPC NSPC SPCL	     # Whitespace, Non Whitespace, W+linefeed
+ 	    \s \d \D \w \W and \a \A # perl equivalents
 
     Special variable JA_FROM_DAEMON
 
-        In order to boost procmail and to save extra CPU cycles, this module
-        defines variable `JA_FROM_DAEMON' that caches the information of
-        ^FROM_DAEMON.  You can refer to `JA_FROM_DAEMON' as you would to
-        big brother FROM_DAEMON. This has the advantage that procmail
-        has already computed the result and the variable `JA_FROM_DAEMON'
-        is used as a cache, thus avoiding repeated FROM_DAEMON regexp
-        tests, which are expensive.  Variable `JA_FROM_DAEMON_match'
-        contains "" or the result of matched daemon text.
+ 	In order to boost procmail and to save extra CPU cycles, this module
+ 	defines variable `JA_FROM_DAEMON' that caches the information of
+ 	^FROM_DAEMON. You can refer to `JA_FROM_DAEMON' as you would to
+ 	big brother FROM_DAEMON. This has the advantage that procmail
+ 	has already computed the result and the variable `JA_FROM_DAEMON'
+ 	is used as a cache, thus avoiding repeated FROM_DAEMON regexp
+ 	tests, which are expensive. Variable `JA_FROM_DAEMON_match'
+ 	contains "" or the result of matched daemon text.
 
-            *$ $JA_FROM_DAEMON
+ 	    *$ $JA_FROM_DAEMON
 
-        or the familiar
+ 	or the familiar
 
-            *$ ! $JA_FROM_DAEMON
+ 	    *$ ! $JA_FROM_DAEMON
 
-        Instead of using the regexp parsing with
+ 	Instead of using the regexp parsing with
 
-            * ^FROM_DAEMON
+ 	    * ^FROM_DAEMON
 
-        and
+ 	and
 
-            * ! ^FROM_DAEMON
+ 	    * ! ^FROM_DAEMON
 
     Special variable JA_FROM_MAILER
 
-        Works like `JA_FROM_DAEMON' variable but in respect to FROM_MAILER.
-        The matches text is in `JA_FROM_MAILER_MATCH'
+ 	Works like `JA_FROM_DAEMON' variable but in respect to FROM_MAILER.
+ 	The matches text is in `JA_FROM_MAILER_MATCH'
 
     Usage example
 
-        For your .procmailrc, you can simply put this, because you
-        want to load the variables at startup
+ 	For your .procmailrc, you can simply put this, because you
+ 	want to load the variables at startup
 
-            INCLUDERC = $PMSRC/pm-javar.rc
+ 	    PMSRC     = "/path/to/install/location/of/this/library"
+ 	    INCLUDERC = $PMSRC/pm-javar.rc
 
-        If you're developing your own modules that use these variables put these lines
-        at the beginning. `~/.procmailrc'. It checks if WSPC variable does
-        not include a space --> load the variable definitions. If the
-        variable is already defined, the file is not loaded. The test
-        line is something alike #ifdef -- #endif in C/C++ language or
-        a conditional "import" command in other languages.
+ 	If you're developing your own modules that use these variables
+ 	put these lines at the beginning. `~/.procmailrc'. It checks
+ 	if WSPC variable does not include a space --> load the
+ 	variable definitions. If the variable is already defined, the
+ 	file is not loaded. The test line is something alike #ifdef --
+ 	#endif in C/C++ language or a conditional "import" command in
+ 	other languages.
 
-            :0
-            * ! WSPC ?? [ ]
-            {
-                INCLUDERC = $PMSRC/pm-javar.rc
-            }
+ 	    :0
+ 	    * ! WSPC ?? [ ]
+ 	    {
+ 		INCLUDERC = $PMSRC/pm-javar.rc
+ 	    }
 
     Defined modules
 
-        After this file loads, you can refer to any module with $RC_JA_MODULE.
-        E.g. to call email spit module in your code you would use following.
-        See at the end of this file for all defined module names.
+ 	After this file loads, you can refer to any module with $RC_JA_MODULE.
+ 	E.g. to call email spit module in your code you would use following.
+ 	See at the end of this file for all defined module names.
 
-            INCLUDERC = $RC_JA_UBE
+ 	    INCLUDERC = $RC_JA_UBE
 
