@@ -22,12 +22,12 @@ Procmail Module library documentation
 	content="">
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Expires" content="Wed, 19 Nov 2008 11:42:54 GMT">
+  <meta http-equiv="Expires" content="Wed, 19 Nov 2008 11:57:35 GMT">
 
 
 
   <meta name="Generator"
-	content="2008-09-20 14:42 Perl program t2html v2008.0919.2313 http://freshmeat.net/projects/perl-text2html">
+	content="2008-09-20 14:57 Perl program t2html v2008.0919.2313 http://freshmeat.net/projects/perl-text2html">
 
 
 
@@ -4108,559 +4108,16 @@ Procmail Module library documentation
 <p class="column8">
         tinybm.el/&amp;tags and tinytab.el for the 4 tab text placement.
 
-
-  .................................................... &amp;initialising ...
-
-
-id    = &quot;pm-jafwd.rc&quot;
-dummy = &quot;
-=<span class="word-small">=====================================================================</span>
-$id: init:
-&quot;
-
-:0
-* !  WSPC ?? ( )
-{
-}
-
-  ....................................................... &amp;variables ...
-
-
-
-  <a name="116" id="116"></a>
-  <h2>
-      If you're testing, set this to &quot;tee FILE&quot;, and the sent confirmation
-
-  </h2>
-
-
-
-
-
- <p> <a name="117" id="117"></a>
-  <h2>
-      Messages are stored to your disk and not actually mailed.
-
-  </h2>
-
-
-
-<p>
 <hr>
-	<a name="118"  id="118"></a>
+	<a name="116"  id="116"></a>
 	<h1>
-	JA_FWD_SENDMAIL         = ${JA_FWD_SEND<a href="MAIL:-&quot;sendmail" >MAIL:-&quot;sendmail</A> -oi -t&quot;}
+	Pm-jalist.rc &ndash; Subroutine to detect mailing LIST from message.
 
 	</h1>
 
 
 
-  <a name="119" id="119"></a>
-  <h2>
-      File to hold the forward address. When forward is off, this file does
-
-  </h2>
-
-
-
-
-
- <p> <a name="120" id="120"></a>
-  <h2>
-      Not exist.
-
-  </h2>
-
-
-
-<p>
-<hr>
-	<a name="121"  id="121"></a>
-	<h1>
-	JA_FWD_FILE             = ${JA_FWD_<a href="FILE:-&quot;$HOME/.forward-address&quot;}" >FILE:-&quot;$HOME/.forward-address&quot;}</A>
-
-	</h1>
-
-
-
-  <a name="122" id="122"></a>
-  <h2>
-      The password needed after the control command.
-
-  </h2>
-
-
-
-<p>
-<hr>
-	<a name="123"  id="123"></a>
-	<h1>
-	JA_FWD_PASSWORD         = ${JA_FWD_PASSWORD:-&quot;password&quot;}
-
-	</h1>
-
-
-
-  <a name="124" id="124"></a>
-  <h2>
-      If you want case sensitive control messages and passwords,
-
-  </h2>
-
-
-
-
-
- <p> <a name="125" id="125"></a>
-  <h2>
-      Set this variable to procmail flag &quot;D&quot;. Then commands like below
-
-  </h2>
-
-
-
-
-
- <p> <a name="126" id="126"></a>
-  <h2>
-      Are different. You should use flag `D' for your own security.
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        forward-on password
-        Forward-on password
-
-<hr>
-	<a name="127"  id="127"></a>
-	<h1>
-	JA_FWD_PASSWORD_CASE    = ${JA_FWD_PASSWORD_CASE:-&quot;&quot;}
-
-	</h1>
-
-
-
-  <a name="128" id="128"></a>
-  <h2>
-      Set this to account names and addresses that you use if you want some
-
-  </h2>
-
-
-
-
-
- <p> <a name="129" id="129"></a>
-  <h2>
-      Protection. The control messages can be sent only from the matched
-
-  </h2>
-
-
-
-
-
- <p> <a name="130" id="130"></a>
-  <h2>
-      Addresses only. The default &quot;.&quot; accepts control message from anywhere
-
-  </h2>
-
-
-
-
-
- <p> <a name="131" id="131"></a>
-  <h2>
-      And to be forwarded anywhere.
-
-  </h2>
-
-
-
-<p>
-<hr>
-	<a name="132"  id="132"></a>
-	<h1>
-	JA_FWD_FROM_MUST_MATCH  = ${JA_FWD_FROM_MUST_MATCH:-&quot;.&quot;}
-
-	</h1>
-<hr>
-	<a name="133"  id="133"></a>
-	<h1>
-	JA_FWD_TO_MUST_MATCH    = ${JA_FWD_TO_MUST_MATCH:-&quot;.&quot;}
-
-	</h1>
-
-
-
-  <a name="134" id="134"></a>
-  <h2>
-      Should the messages stored locally to this account too while forwarding
-
-  </h2>
-
-
-
-
-
- <p> <a name="135" id="135"></a>
-  <h2>
-      Messages? a good idea is to keep this &quot;yes&quot;, because you never know if
-
-  </h2>
-
-
-
-
-
- <p> <a name="136" id="136"></a>
-  <h2>
-      The forward address was faulty.
-
-  </h2>
-
-
-
-<p>
-<hr>
-	<a name="137"  id="137"></a>
-	<h1>
-	JA_FWD_COPY             = ${JA_FWD_COPY:-&quot;yes&quot;}
-
-	</h1>
-
-
-
-  <a name="138" id="138"></a>
-  <h2>
-      The accepted control messages in Subject field
-
-  </h2>
-
-
-
-<p>
-<hr>
-	<a name="139"  id="139"></a>
-	<h1>
-	JA_FWD_ON               = ${JA_FWD_ON:-&quot;forward-on&quot;}
-
-	</h1>
-<hr>
-	<a name="140"  id="140"></a>
-	<h1>
-	JA_FWD_OFF              = ${JA_FWD_OFF:-&quot;forward-off&quot;}
-
-	</h1>
-
-
-
-  <a name="141" id="141"></a>
-  <h2>
-      Initialize these variables unless they're already set.  please set
-
-  </h2>
-
-
-
-
-
- <p> <a name="142" id="142"></a>
-  <h2>
-      Before this module, so that you save extra formail call, if you have
-
-  </h2>
-
-
-
-
-
- <p> <a name="143" id="143"></a>
-  <h2>
-      Already read the value.
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        JA_FWD_FROM     = $FROM
-
-<hr>
-	<a name="144"  id="144"></a>
-	<h1>
-	JA_FWD_FROM             = ${JA_FWD_FROM:-`$FORMAIL -zxFrom:`}
-
-	</h1>
-
-
-
-  <a name="145" id="145"></a>
-  <h2>
-      From which header to find the password information.
-
-  </h2>
-
-
-
-
-
-
- <p> <a name="146" id="146"></a>
-  <h2>
-      O   &quot;header&quot;    Look Subject field.
-
-  </h2>
-
-
-
-
-
- <p> <a name="147" id="147"></a>
-  <h2>
-      O   &quot;body&quot;      Look first words in the body of message
-
-  </h2>
-
-
-
-
-<p>
-<hr>
-	<a name="148"  id="148"></a>
-	<h1>
-	JA_FWD_CONTROL_FIELD    = ${JA_FWD_CONTROL_FIELD:-&quot;subject&quot;}
-
-	</h1>
-
-
-
-  <a name="149" id="149"></a>
-  <h2>
-      This has only meanng if `JA_FWD_CONTROL_FIELD' is set to &quot;body&quot;
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        &quot;^^&quot;    &quot;forward-on password&quot; must be at the very beginning
-          of the body
-        &quot;.*&quot;    &quot;forward-on password&quot; can be anywhere in the body
-
-<hr>
-	<a name="150"  id="150"></a>
-	<h1>
-	JA_FWD_CONTROL_REGEXP = &quot;.*&quot;
-
-	</h1>
-
-
-
-  <a name="151" id="151"></a>
-  <h2>
-      If the address where we're forwarding bounces, make sure
-
-  </h2>
-
-
-
-
-
- <p> <a name="152" id="152"></a>
-  <h2>
-      We don't get into loop.
-
-  </h2>
-
-
-
-<p>
-<hr>
-	<a name="153"  id="153"></a>
-	<h1>
-	JA_FWD_XLOOP            = ${JA_FWD_XLOOP:-&quot;$LOGNAME@$HOST&quot;}
-
-	</h1>
-
-
-dummy = &quot;Check forward-off control message&quot;
-
-  ..................................................... &amp;state-check ...
-
-forward = &quot;&quot;
-address = &quot;&quot;
-
-dummy   = &quot;$id: Check if control message is in the Subject&quot;
-
-:0
-*   JA_FWD_CONTROL_FIELD ?? subject
-*$  ^From:$JA_FWD_FROM_MUST_MATCH
-{
-
-
-}
-
-dummy = &quot;$id: Check if control message is in the body&quot;
-
-:0 E
-*    JA_FWD_CONTROL_FIELD ?? body
-*$  ^From:$JA_FWD_FROM_MUST_MATCH
-{
-
-}
-
-  ............................................................. &amp;off ...
-
-dummy = &quot;$id: check forward OFF&quot;
-
-:0
-*   forward ?? off
-{
-
-
-
-
-}
-
-
-  .............................................................. &amp;on ...
-
-
-  <a name="154" id="154"></a>
-  <h2>
-      It's important that we don't forward mailer daemon messages
-
-  </h2>
-
-
-
-
-
- <p> <a name="155" id="155"></a>
-  <h2>
-      Of self bounces. The X-Loop was attached by us and while
-
-  </h2>
-
-
-
-
-
- <p> <a name="156" id="156"></a>
-  <h2>
-      The FROM_DAEMON would already trigger bounce message, we double
-
-  </h2>
-
-
-
-
-
- <p> <a name="157" id="157"></a>
-  <h2>
-      Check with X-Loop
-
-  </h2>
-
-
-
-
-
-<p>dummy = &quot;$id: check forward ON $address&quot;
-
-:0 E
-*     forward ?? on
-*$ ! ^X-Loop: $JA_FWD_XLOOP
-*$ !  $JA_FROM_DAEMON
-{
-
-
-
-
-
-
-}
-
-  .................................................... do-forwarding ...
-
-
-  <a name="158" id="158"></a>
-  <h2>
-      Now do the forwarding
-
-  </h2>
-
-
-
-
-
- <p> <a name="159" id="159"></a>
-  <h2>
-      File tests:
-
-  </h2>
-
-
-
-
-
-
- <p> <a name="160" id="160"></a>
-  <h2>
-      S =&gt; file exists and has a size greater than zero
-
-  </h2>
-
-
-
-
-
- <p> <a name="161" id="161"></a>
-  <h2>
-      R =&gt; file must be readable by us
-
-  </h2>
-
-
-
-
-<p>dummy = &quot;$NL$NL$id: Check if forward is activated $NL&quot;
-
-:0
-*  forward ?? ^^^^
-*$ ? $IS_NOT_EMPTY $JA_FWD_FILE
-*$ ? $IS_READABLE  $JA_FWD_FILE
-{
-
-}
-
-dummy = &quot;$id: end:&quot;
-
-
-
-  pm-jafwd.rc ends here
-  pm-jalist.rc &ndash; Subroutine to detect mailing LIST from message.
-
-<hr>
-	<a name="162"  id="162"></a>
-	<h1>
-	Pm-jafwd.rc &ndash; Controlling forwarding remotedly
-
-	</h1>
-
-
-
-  <a name="163" id="163"></a>
+  <a name="117" id="117"></a>
   <h2>
       File id
 
@@ -4690,7 +4147,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="164" id="164"></a>
+  <a name="118" id="118"></a>
   <h2>
       Description
 
@@ -4719,7 +4176,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="165" id="165"></a>
+  <a name="119" id="119"></a>
   <h2>
       Quick start
 
@@ -4755,7 +4212,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="166" id="166"></a>
+  <a name="120" id="120"></a>
   <h2>
       Sendmail plus type method for list subscription
 
@@ -4795,7 +4252,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="167" id="167"></a>
+  <a name="121" id="121"></a>
   <h2>
       What you need to know before using this module
 
@@ -4865,7 +4322,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="168" id="168"></a>
+  <a name="122" id="122"></a>
   <h2>
       Ask for help
 
@@ -4901,7 +4358,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="169" id="169"></a>
+  <a name="123" id="123"></a>
   <h2>
       Further reading
 
@@ -4938,7 +4395,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="170" id="170"></a>
+  <a name="124" id="124"></a>
   <h2>
       Code note: Errors-To
 
@@ -4976,7 +4433,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="171" id="171"></a>
+  <a name="125" id="125"></a>
   <h2>
       Required settings
 
@@ -5000,7 +4457,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="172" id="172"></a>
+  <a name="126" id="126"></a>
   <h2>
       Variable JA_LIST_FROM_TO_IGNORE
 
@@ -5027,7 +4484,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="173" id="173"></a>
+  <a name="127" id="127"></a>
   <h2>
       Variable JA_LIST_SAVE
 
@@ -5055,7 +4512,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="174" id="174"></a>
+  <a name="128" id="128"></a>
   <h2>
       Variable JA_LIST_KILL_POSTFIX
 
@@ -5074,7 +4531,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="175" id="175"></a>
+  <a name="129" id="129"></a>
   <h2>
       Variable JA_LIST_KILL_PREFIX
 
@@ -5090,7 +4547,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="176" id="176"></a>
+  <a name="130" id="130"></a>
   <h2>
       Variable JA_LIST_DISREGARD_EMAIL
 
@@ -5128,7 +4585,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="177" id="177"></a>
+  <a name="131" id="131"></a>
   <h2>
       Variable JA_LIST_HEADER_REGEXP
 
@@ -5194,7 +4651,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="178" id="178"></a>
+  <a name="132" id="132"></a>
   <h2>
       Variable JA_LIST_MAKE_UNIQUE
 
@@ -5228,7 +4685,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="179" id="179"></a>
+  <a name="133" id="133"></a>
   <h2>
       Variable JA_LIST_CONVERSION
 
@@ -5375,7 +4832,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="180" id="180"></a>
+  <a name="134" id="134"></a>
   <h2>
       List name is not always the same
 
@@ -5433,7 +4890,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="181" id="181"></a>
+  <a name="135" id="135"></a>
   <h2>
       Example: basic installation
 
@@ -5489,7 +4946,7 @@ dummy = &quot;$id: end:&quot;
         be proper <samp class="word">MAILDIR=$HOME/Maildir</samp> setting.
 
 <hr>
-	<a name="182"  id="182"></a>
+	<a name="136"  id="136"></a>
 	<h1>
 	Pm-jamime-decode.rc &ndash; decode MIME body contents; quoted-printable, base64
 
@@ -5497,7 +4954,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="183" id="183"></a>
+  <a name="137" id="137"></a>
   <h2>
       File id
 
@@ -5527,7 +4984,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="184" id="184"></a>
+  <a name="138" id="138"></a>
   <h2>
       Documentation
 
@@ -5570,7 +5027,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="185" id="185"></a>
+  <a name="139" id="139"></a>
   <h2>
       Notes
 
@@ -5634,7 +5091,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="186" id="186"></a>
+  <a name="140" id="140"></a>
   <h2>
       Required settings
 
@@ -5658,7 +5115,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="187" id="187"></a>
+  <a name="141" id="141"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -5683,7 +5140,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="188" id="188"></a>
+  <a name="142" id="142"></a>
   <h2>
       Return values
 
@@ -5703,7 +5160,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="189" id="189"></a>
+  <a name="143" id="143"></a>
   <h2>
       Examples
 
@@ -5736,7 +5193,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="190"  id="190"></a>
+	<a name="144"  id="144"></a>
 	<h1>
 	Pm-jamime-kill.rc &ndash; General MIME attachment killer (vcards, html)
 
@@ -5744,7 +5201,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="191" id="191"></a>
+  <a name="145" id="145"></a>
   <h2>
       File id
 
@@ -5774,7 +5231,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="192" id="192"></a>
+  <a name="146" id="146"></a>
   <h2>
       Description
 
@@ -5872,7 +5329,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="193" id="193"></a>
+  <a name="147" id="147"></a>
   <h2>
       Applications for other mime attachments
 
@@ -5903,7 +5360,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="194" id="194"></a>
+  <a name="148" id="148"></a>
   <h2>
       Example of lotus notes attachment
 
@@ -5941,7 +5398,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="195" id="195"></a>
+  <a name="149" id="149"></a>
   <h2>
       Example of MS Explorer's ms-tnef message
 
@@ -5983,7 +5440,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="196" id="196"></a>
+  <a name="150" id="150"></a>
   <h2>
       Example of MS Express's HTML message
 
@@ -6024,7 +5481,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="197" id="197"></a>
+  <a name="151" id="151"></a>
   <h2>
       Example of Netscape's HTML attachment
 
@@ -6061,7 +5518,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="198" id="198"></a>
+  <a name="152" id="152"></a>
   <h2>
       Example of Netscape's vcard attachment.
 
@@ -6100,7 +5557,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="199" id="199"></a>
+  <a name="153" id="153"></a>
   <h2>
       Required settings
 
@@ -6129,7 +5586,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="200" id="200"></a>
+  <a name="154" id="154"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -6191,7 +5648,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="201" id="201"></a>
+  <a name="155" id="155"></a>
   <h2>
       Possible conflict with your awk
 
@@ -6248,7 +5705,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="202" id="202"></a>
+  <a name="156" id="156"></a>
   <h2>
       Warnings
 
@@ -6291,7 +5748,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="203" id="203"></a>
+  <a name="157" id="157"></a>
   <h2>
       Usage example: Customizing the attachment killing
 
@@ -6326,7 +5783,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="204" id="204"></a>
+  <a name="158" id="158"></a>
   <h2>
       Usage example
 
@@ -6377,7 +5834,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="205"  id="205"></a>
+	<a name="159"  id="159"></a>
 	<h1>
 	Pm-jamime.rc &ndash; subroutine to read mime boundary etc. variables
 
@@ -6385,7 +5842,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="206" id="206"></a>
+  <a name="160" id="160"></a>
   <h2>
       File id
 
@@ -6415,7 +5872,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="207" id="207"></a>
+  <a name="161" id="161"></a>
   <h2>
       Documentation
 
@@ -6448,7 +5905,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="208" id="208"></a>
+  <a name="162" id="162"></a>
   <h2>
       Mime Notes
 
@@ -6502,7 +5959,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="209" id="209"></a>
+  <a name="163" id="163"></a>
   <h2>
       Required settings
 
@@ -6526,7 +5983,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="210" id="210"></a>
+  <a name="164" id="164"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -6541,7 +5998,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="211" id="211"></a>
+  <a name="165" id="165"></a>
   <h2>
       Return values
 
@@ -6586,7 +6043,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="212" id="212"></a>
+  <a name="166" id="166"></a>
   <h2>
       Usage example
 
@@ -6600,7 +6057,7 @@ dummy = &quot;$id: end:&quot;
         INCLUDERC = $PMSRC/pm-jamime.rc
 
 <hr>
-	<a name="213"  id="213"></a>
+	<a name="167"  id="167"></a>
 	<h1>
 	Pm-jamime-recode.rc &ndash; re-encode MIME Header: Subject, From as quoted-printable
 
@@ -6608,7 +6065,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="214" id="214"></a>
+  <a name="168" id="168"></a>
   <h2>
       File id
 
@@ -6638,7 +6095,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="215" id="215"></a>
+  <a name="169" id="169"></a>
   <h2>
       Documentation
 
@@ -6673,7 +6130,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="216" id="216"></a>
+  <a name="170" id="170"></a>
   <h2>
       Notes
 
@@ -6691,7 +6148,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="217" id="217"></a>
+  <a name="171" id="171"></a>
   <h2>
       Required settings
 
@@ -6720,7 +6177,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="218" id="218"></a>
+  <a name="172" id="172"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -6740,7 +6197,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="219" id="219"></a>
+  <a name="173" id="173"></a>
   <h2>
       Return values
 
@@ -6755,7 +6212,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="220" id="220"></a>
+  <a name="174" id="174"></a>
   <h2>
       Examples
 
@@ -6784,7 +6241,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="221"  id="221"></a>
+	<a name="175"  id="175"></a>
 	<h1>
 	Pm-jamime-save.rc &ndash; save message's MIME attachement (one file) to a file
 
@@ -6792,7 +6249,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="222" id="222"></a>
+  <a name="176" id="176"></a>
   <h2>
       File id
 
@@ -6822,7 +6279,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="223" id="223"></a>
+  <a name="177" id="177"></a>
   <h2>
       Documentation
 
@@ -6896,7 +6353,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="224" id="224"></a>
+  <a name="178" id="178"></a>
   <h2>
       Required settings
 
@@ -6922,7 +6379,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="225" id="225"></a>
+  <a name="179" id="179"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -6953,7 +6410,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="226" id="226"></a>
+  <a name="180" id="180"></a>
   <h2>
       Core dump note
 
@@ -6972,7 +6429,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="227" id="227"></a>
+  <a name="181" id="181"></a>
   <h2>
       Possible conflict with your awk
 
@@ -7031,7 +6488,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="228" id="228"></a>
+  <a name="182" id="182"></a>
   <h2>
       Return values (none)
 
@@ -7041,7 +6498,7 @@ dummy = &quot;$id: end:&quot;
 
 <p>
 <hr>
-	<a name="229"  id="229"></a>
+	<a name="183"  id="183"></a>
 	<h1>
 	Pm-janetmind.rc &ndash; handle <a href="http://minder.netmind.com/" >http://minder.netmind.com/</A> messages
 
@@ -7049,7 +6506,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="230" id="230"></a>
+  <a name="184" id="184"></a>
   <h2>
       File id
 
@@ -7079,7 +6536,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="231" id="231"></a>
+  <a name="185" id="185"></a>
   <h2>
       Description
 
@@ -7152,7 +6609,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="232" id="232"></a>
+  <a name="186" id="186"></a>
   <h2>
       Required settings
 
@@ -7176,7 +6633,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="233" id="233"></a>
+  <a name="187" id="187"></a>
   <h2>
       Usage example
 
@@ -7199,7 +6656,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="234"  id="234"></a>
+	<a name="188"  id="188"></a>
 	<h1>
 	Pm-janslookup.rc &ndash; run nslookup on variable INPUT
 
@@ -7207,7 +6664,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="235" id="235"></a>
+  <a name="189" id="189"></a>
   <h2>
       File id
 
@@ -7237,7 +6694,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="236" id="236"></a>
+  <a name="190" id="190"></a>
   <h2>
       Description
 
@@ -7292,7 +6749,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="237" id="237"></a>
+  <a name="191" id="191"></a>
   <h2>
       Required settings
 
@@ -7315,7 +6772,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="238" id="238"></a>
+  <a name="192" id="192"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -7361,7 +6818,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="239" id="239"></a>
+  <a name="193" id="193"></a>
   <h2>
       Return values
 
@@ -7394,7 +6851,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="240" id="240"></a>
+  <a name="194" id="194"></a>
   <h2>
       Usage example
 
@@ -7469,7 +6926,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="241"  id="241"></a>
+	<a name="195"  id="195"></a>
 	<h1>
 	Pm-jaorig.rc &ndash; Extract embedded original message (simple recipe)
 
@@ -7477,7 +6934,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="242" id="242"></a>
+  <a name="196" id="196"></a>
   <h2>
       File id
 
@@ -7507,7 +6964,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="243" id="243"></a>
+  <a name="197" id="197"></a>
   <h2>
       Documentation
 
@@ -7542,7 +6999,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="244" id="244"></a>
+  <a name="198" id="198"></a>
   <h2>
       Where you would use this module
 
@@ -7589,7 +7046,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="245" id="245"></a>
+  <a name="199" id="199"></a>
   <h2>
       How the message is extracted
 
@@ -7638,7 +7095,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="246" id="246"></a>
+  <a name="200" id="200"></a>
   <h2>
       Code note: procmail or awk core dump
 
@@ -7691,7 +7148,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="247" id="247"></a>
+  <a name="201" id="201"></a>
   <h2>
       Required settings
 
@@ -7715,7 +7172,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="248" id="248"></a>
+  <a name="202" id="202"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -7730,7 +7187,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="249" id="249"></a>
+  <a name="203" id="203"></a>
   <h2>
       Usage Example
 
@@ -7788,7 +7245,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="250"  id="250"></a>
+	<a name="204"  id="204"></a>
 	<h1>
 	Pm-japing.rc &ndash; reply shortly to message &quot;Subject: ping&quot;; account ok
 
@@ -7796,7 +7253,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="251" id="251"></a>
+  <a name="205" id="205"></a>
   <h2>
       File id
 
@@ -7826,7 +7283,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="252" id="252"></a>
+  <a name="206" id="206"></a>
   <h2>
       Description
 
@@ -7871,7 +7328,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="253" id="253"></a>
+  <a name="207" id="207"></a>
   <h2>
       Required settings
 
@@ -7894,7 +7351,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="254" id="254"></a>
+  <a name="208" id="208"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -7909,7 +7366,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="255" id="255"></a>
+  <a name="209" id="209"></a>
   <h2>
       Usage example
 
@@ -7929,7 +7386,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="256"  id="256"></a>
+	<a name="210"  id="210"></a>
 	<h1>
 	Pm-japop3.rc &ndash; Remotedly download messages by mail command request
 
@@ -7937,7 +7394,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="257" id="257"></a>
+  <a name="211" id="211"></a>
   <h2>
       File id
 
@@ -7967,7 +7424,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="258" id="258"></a>
+  <a name="212" id="212"></a>
   <h2>
       Description
 
@@ -8022,7 +7479,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="259" id="259"></a>
+  <a name="213" id="213"></a>
   <h2>
       Required settings
 
@@ -8045,7 +7502,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="260" id="260"></a>
+  <a name="214" id="214"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -8076,7 +7533,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="261" id="261"></a>
+  <a name="215" id="215"></a>
   <h2>
       Return value
 
@@ -8093,7 +7550,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="262" id="262"></a>
+  <a name="216" id="216"></a>
   <h2>
       Example usage
 
@@ -8129,7 +7586,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="263" id="263"></a>
+  <a name="217" id="217"></a>
   <h2>
       In account Y, from where you send the pop3 requests. Following code stores
 
@@ -8139,7 +7596,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
- <p> <a name="264" id="264"></a>
+ <p> <a name="218" id="218"></a>
   <h2>
       The received messages to separate folder
 
@@ -8163,7 +7620,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="265"  id="265"></a>
+	<a name="219"  id="219"></a>
 	<h1>
 	Pm-jarandf.rc &ndash; pick (rand)om line from (f)ile
 
@@ -8171,7 +7628,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="266" id="266"></a>
+  <a name="220" id="220"></a>
   <h2>
       File id
 
@@ -8201,7 +7658,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="267" id="267"></a>
+  <a name="221" id="221"></a>
   <h2>
       Description
 
@@ -8218,7 +7675,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="268" id="268"></a>
+  <a name="222" id="222"></a>
   <h2>
       Required settings
 
@@ -8258,7 +7715,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="269" id="269"></a>
+  <a name="223" id="223"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -8284,7 +7741,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="270" id="270"></a>
+  <a name="224" id="224"></a>
   <h2>
       Returned value
 
@@ -8299,7 +7756,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="271" id="271"></a>
+  <a name="225" id="225"></a>
   <h2>
       Example usage
 
@@ -8326,7 +7783,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="272"  id="272"></a>
+	<a name="226"  id="226"></a>
 	<h1>
 	Pm-jasrv-check.rc &ndash; check FILE validity, subroutine for File Server
 
@@ -8334,7 +7791,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="273" id="273"></a>
+  <a name="227" id="227"></a>
   <h2>
       File id
 
@@ -8364,7 +7821,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="274" id="274"></a>
+  <a name="228" id="228"></a>
   <h2>
       Description
 
@@ -8380,7 +7837,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="275" id="275"></a>
+  <a name="229" id="229"></a>
   <h2>
       Input
 
@@ -8398,7 +7855,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="276" id="276"></a>
+  <a name="230" id="230"></a>
   <h2>
       Output
 
@@ -8416,7 +7873,7 @@ dummy = &quot;$id: end:&quot;
 
 
 <hr>
-	<a name="277"  id="277"></a>
+	<a name="231"  id="231"></a>
 	<h1>
 	Pm-jasrv-daemon.rc &ndash; server request check, subroutine for File Server
 
@@ -8424,7 +7881,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="278" id="278"></a>
+  <a name="232" id="232"></a>
   <h2>
       File id
 
@@ -8454,7 +7911,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="279" id="279"></a>
+  <a name="233" id="233"></a>
   <h2>
       Description
 
@@ -8480,7 +7937,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="280" id="280"></a>
+  <a name="234" id="234"></a>
   <h2>
       Input
 
@@ -8496,7 +7953,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="281" id="281"></a>
+  <a name="235" id="235"></a>
   <h2>
       Output
 
@@ -8514,7 +7971,7 @@ dummy = &quot;$id: end:&quot;
 
 
 <hr>
-	<a name="282"  id="282"></a>
+	<a name="236"  id="236"></a>
 	<h1>
 	Pm-jasrv-err.rc &ndash; send message, subroutine for File Server
 
@@ -8522,7 +7979,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="283" id="283"></a>
+  <a name="237" id="237"></a>
   <h2>
       File id
 
@@ -8552,7 +8009,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="284" id="284"></a>
+  <a name="238" id="238"></a>
   <h2>
       Description
 
@@ -8568,7 +8025,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="285" id="285"></a>
+  <a name="239" id="239"></a>
   <h2>
       Input
 
@@ -8587,7 +8044,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="286" id="286"></a>
+  <a name="240" id="240"></a>
   <h2>
       Output
 
@@ -8605,7 +8062,7 @@ dummy = &quot;$id: end:&quot;
 
 
 <hr>
-	<a name="287"  id="287"></a>
+	<a name="241"  id="241"></a>
 	<h1>
 	Pm-jasrv-from.rc &ndash; compose reply, subroutine for File Server
 
@@ -8613,7 +8070,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="288" id="288"></a>
+  <a name="242" id="242"></a>
   <h2>
       File id
 
@@ -8643,7 +8100,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="289" id="289"></a>
+  <a name="243" id="243"></a>
   <h2>
       Description
 
@@ -8678,7 +8135,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="290" id="290"></a>
+  <a name="244" id="244"></a>
   <h2>
       Input
 
@@ -8696,7 +8153,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="291" id="291"></a>
+  <a name="245" id="245"></a>
   <h2>
       Output
 
@@ -8710,7 +8167,7 @@ dummy = &quot;$id: end:&quot;
         (none)
 
 <hr>
-	<a name="292"  id="292"></a>
+	<a name="246"  id="246"></a>
 	<h1>
 	Pm-jasrv-msg.rc &ndash; send message, subroutine for File Server
 
@@ -8718,7 +8175,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="293" id="293"></a>
+  <a name="247" id="247"></a>
   <h2>
       File id
 
@@ -8748,7 +8205,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="294" id="294"></a>
+  <a name="248" id="248"></a>
   <h2>
       Description
 
@@ -8765,7 +8222,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="295" id="295"></a>
+  <a name="249" id="249"></a>
   <h2>
       Input
 
@@ -8782,7 +8239,7 @@ dummy = &quot;$id: end:&quot;
 
 
 <hr>
-	<a name="296"  id="296"></a>
+	<a name="250"  id="250"></a>
 	<h1>
 	Pm-jasrv-multi.rc &ndash; send multipart MIME message, subroutine for FileSrv
 
@@ -8790,7 +8247,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="297" id="297"></a>
+  <a name="251" id="251"></a>
   <h2>
       File id
 
@@ -8820,7 +8277,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="298" id="298"></a>
+  <a name="252" id="252"></a>
   <h2>
       Description
 
@@ -8837,7 +8294,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="299" id="299"></a>
+  <a name="253" id="253"></a>
   <h2>
       Input
 
@@ -8858,7 +8315,7 @@ dummy = &quot;$id: end:&quot;
 
 
 <hr>
-	<a name="300"  id="300"></a>
+	<a name="254"  id="254"></a>
 	<h1>
 	Pm-jasrv.rc &ndash; MIME capable Procmail File server
 
@@ -8866,7 +8323,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="301" id="301"></a>
+  <a name="255" id="255"></a>
   <h2>
       File id
 
@@ -8896,7 +8353,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="302" id="302"></a>
+  <a name="256" id="256"></a>
   <h2>
       Description
 
@@ -8936,7 +8393,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="303" id="303"></a>
+  <a name="257" id="257"></a>
   <h2>
       Overview of features
 
@@ -8959,7 +8416,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="304" id="304"></a>
+  <a name="258" id="258"></a>
   <h2>
       Install: server file directory
 
@@ -9033,7 +8490,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="305" id="305"></a>
+  <a name="259" id="259"></a>
   <h2>
       Install: special files
 
@@ -9092,7 +8549,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="306" id="306"></a>
+  <a name="260" id="260"></a>
   <h2>
       Install: file `help'
 
@@ -9122,7 +8579,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="307" id="307"></a>
+  <a name="261" id="261"></a>
   <h2>
       Basic usage in details
 
@@ -9182,7 +8639,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="308" id="308"></a>
+  <a name="262" id="262"></a>
   <h2>
       Advanced usage
 
@@ -9320,7 +8777,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="309" id="309"></a>
+  <a name="263" id="263"></a>
   <h2>
       Multi part mime messages
 
@@ -9375,7 +8832,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="310" id="310"></a>
+  <a name="264" id="264"></a>
   <h2>
       Stopping server
 
@@ -9417,7 +8874,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="311" id="311"></a>
+  <a name="265" id="265"></a>
   <h2>
       Using password to validate file requests
 
@@ -9495,7 +8952,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="312" id="312"></a>
+  <a name="266" id="266"></a>
   <h2>
       Changing server's command string (multiple servers)
 
@@ -9535,7 +8992,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="313" id="313"></a>
+  <a name="267" id="267"></a>
   <h2>
       Notes from the author
 
@@ -9629,7 +9086,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="314" id="314"></a>
+  <a name="268" id="268"></a>
   <h2>
       Required settings
 
@@ -9691,7 +9148,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="315" id="315"></a>
+  <a name="269" id="269"></a>
   <h2>
       Usage example
 
@@ -9733,7 +9190,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="316"  id="316"></a>
+	<a name="270"  id="270"></a>
 	<h1>
 	Pm-jasrv-req.rc &ndash; server request check, subroutine for File Server
 
@@ -9741,7 +9198,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="317" id="317"></a>
+  <a name="271" id="271"></a>
   <h2>
       File id
 
@@ -9771,7 +9228,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="318" id="318"></a>
+  <a name="272" id="272"></a>
   <h2>
       Description
 
@@ -9805,7 +9262,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="319" id="319"></a>
+  <a name="273" id="273"></a>
   <h2>
       Input
 
@@ -9824,7 +9281,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="320" id="320"></a>
+  <a name="274" id="274"></a>
   <h2>
       Output
 
@@ -9842,7 +9299,7 @@ dummy = &quot;$id: end:&quot;
 
 
 <hr>
-	<a name="321"  id="321"></a>
+	<a name="275"  id="275"></a>
 	<h1>
 	Pm-jasrv-send.rc &ndash; server request check, subroutine for File Server
 
@@ -9850,7 +9307,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="322" id="322"></a>
+  <a name="276" id="276"></a>
   <h2>
       File id
 
@@ -9880,7 +9337,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="323" id="323"></a>
+  <a name="277" id="277"></a>
   <h2>
       Description
 
@@ -9911,7 +9368,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="324" id="324"></a>
+  <a name="278" id="278"></a>
   <h2>
       Note:
 
@@ -9954,7 +9411,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="325" id="325"></a>
+  <a name="279" id="279"></a>
   <h2>
       Input
 
@@ -9974,7 +9431,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="326" id="326"></a>
+  <a name="280" id="280"></a>
   <h2>
       Output
 
@@ -9992,7 +9449,7 @@ dummy = &quot;$id: end:&quot;
 
 
 <hr>
-	<a name="327"  id="327"></a>
+	<a name="281"  id="281"></a>
 	<h1>
 	Pm-jastore.rc &ndash; Store messagee to inbox or gzip inbox
 
@@ -10000,7 +9457,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="328" id="328"></a>
+  <a name="282" id="282"></a>
   <h2>
       File id
 
@@ -10030,7 +9487,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="329" id="329"></a>
+  <a name="283" id="283"></a>
   <h2>
       Description
 
@@ -10069,7 +9526,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="330" id="330"></a>
+  <a name="284" id="284"></a>
   <h2>
       Required settings
 
@@ -10084,7 +9541,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="331" id="331"></a>
+  <a name="285" id="285"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -10122,7 +9579,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="332" id="332"></a>
+  <a name="286" id="286"></a>
   <h2>
       Example usage
 
@@ -10147,7 +9604,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="333"  id="333"></a>
+	<a name="287"  id="287"></a>
 	<h1>
 	Pm-jasubject.rc &ndash; Subject field cleaner and canonicalizer (Re:)
 
@@ -10155,7 +9612,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="334" id="334"></a>
+  <a name="288" id="288"></a>
   <h2>
       File id
 
@@ -10185,7 +9642,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="335" id="335"></a>
+  <a name="289" id="289"></a>
   <h2>
       Description
 
@@ -10275,7 +9732,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="336" id="336"></a>
+  <a name="290" id="290"></a>
   <h2>
       About In-Reply-To header
 
@@ -10293,7 +9750,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="337" id="337"></a>
+  <a name="291" id="291"></a>
   <h2>
       Variable JA_SUBJECT_SAVE
 
@@ -10310,7 +9767,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="338" id="338"></a>
+  <a name="292" id="292"></a>
   <h2>
       Variable JA_SUBJECT_FWD_KILL
 
@@ -10337,7 +9794,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="339" id="339"></a>
+  <a name="293" id="293"></a>
   <h2>
       Code note
 
@@ -10391,7 +9848,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="340" id="340"></a>
+  <a name="294" id="294"></a>
   <h2>
       IMPORTANT notice
 
@@ -10408,7 +9865,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="341" id="341"></a>
+  <a name="295" id="295"></a>
   <h2>
       Awk usage note
 
@@ -10435,7 +9892,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="342" id="342"></a>
+  <a name="296" id="296"></a>
   <h2>
       Customizations
 
@@ -10495,7 +9952,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="343" id="343"></a>
+  <a name="297" id="297"></a>
   <h2>
       Example usage
 
@@ -10520,7 +9977,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="344" id="344"></a>
+  <a name="298" id="298"></a>
   <h2>
       Debugging
 
@@ -10552,7 +10009,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="345" id="345"></a>
+  <a name="299" id="299"></a>
   <h2>
       Thank you
 
@@ -10568,7 +10025,7 @@ dummy = &quot;$id: end:&quot;
         recipe didn't catch at first.
 
 <hr>
-	<a name="346"  id="346"></a>
+	<a name="300"  id="300"></a>
 	<h1>
 	Pm-jatime.rc &ndash; &quot;hh:mm:ss&quot; time parser from variable INPUT
 
@@ -10576,7 +10033,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="347" id="347"></a>
+  <a name="301" id="301"></a>
   <h2>
       File id
 
@@ -10606,7 +10063,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="348" id="348"></a>
+  <a name="302" id="302"></a>
   <h2>
       Description
 
@@ -10663,7 +10120,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="349" id="349"></a>
+  <a name="303" id="303"></a>
   <h2>
       Required settings
 
@@ -10679,7 +10136,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="350" id="350"></a>
+  <a name="304" id="304"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -10703,7 +10160,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="351" id="351"></a>
+  <a name="305" id="305"></a>
   <h2>
       Usage example
 
@@ -10743,7 +10200,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="352"  id="352"></a>
+	<a name="306"  id="306"></a>
 	<h1>
 	Pm-jaube1.rc &ndash; Jari's UBE filter. Subroutine 1
 
@@ -10751,7 +10208,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="353" id="353"></a>
+  <a name="307" id="307"></a>
   <h2>
       File id
 
@@ -10781,7 +10238,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="354" id="354"></a>
+  <a name="308" id="308"></a>
   <h2>
       Documentation
 
@@ -10797,7 +10254,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="355" id="355"></a>
+  <a name="309" id="309"></a>
   <h2>
       Required settings
 
@@ -10820,7 +10277,7 @@ dummy = &quot;$id: end:&quot;
 
 
 <hr>
-	<a name="356"  id="356"></a>
+	<a name="310"  id="310"></a>
 	<h1>
 	Pm-jaube-keywords.rc &ndash; Bare bones word list based UBE filter
 
@@ -10828,7 +10285,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="357" id="357"></a>
+  <a name="311" id="311"></a>
   <h2>
       File id
 
@@ -10858,7 +10315,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="358" id="358"></a>
+  <a name="312" id="312"></a>
   <h2>
       Warning
 
@@ -10882,7 +10339,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="359" id="359"></a>
+  <a name="313" id="313"></a>
   <h2>
       Overview of features
 
@@ -10904,7 +10361,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="360" id="360"></a>
+  <a name="314" id="314"></a>
   <h2>
       Description
 
@@ -10987,7 +10444,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="361" id="361"></a>
+  <a name="315" id="315"></a>
   <h2>
       About bouncing message back
 
@@ -11006,7 +10463,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="362" id="362"></a>
+  <a name="316" id="316"></a>
   <h2>
       Code Note
 
@@ -11060,7 +10517,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="363" id="363"></a>
+  <a name="317" id="317"></a>
   <h2>
       Required settings
 
@@ -11075,7 +10532,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="364" id="364"></a>
+  <a name="318" id="318"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -11095,7 +10552,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="365" id="365"></a>
+  <a name="319" id="319"></a>
   <h2>
       Return values
 
@@ -11118,7 +10575,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="366" id="366"></a>
+  <a name="320" id="320"></a>
   <h2>
       Usage example
 
@@ -11153,7 +10610,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="367" id="367"></a>
+  <a name="321" id="321"></a>
   <h2>
       File layout
 
@@ -11169,7 +10626,7 @@ dummy = &quot;$id: end:&quot;
         See project <a href="http://freshmeat.net/projects/emacs-tiny-tools/" >http://freshmeat.net/projects/emacs-tiny-tools/</A>
 
 <hr>
-	<a name="368"  id="368"></a>
+	<a name="322"  id="322"></a>
 	<h1>
 	Pm-jaube-prg-spamprobe.rc &ndash; Interface to Annoyance Filter program
 
@@ -11177,7 +10634,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="369" id="369"></a>
+  <a name="323" id="323"></a>
   <h2>
       File id
 
@@ -11207,7 +10664,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="370" id="370"></a>
+  <a name="324" id="324"></a>
   <h2>
       Warning
 
@@ -11264,7 +10721,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="371" id="371"></a>
+  <a name="325" id="325"></a>
   <h2>
       Overview of features
 
@@ -11289,7 +10746,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="372" id="372"></a>
+  <a name="326" id="326"></a>
   <h2>
       Description
 
@@ -11311,7 +10768,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="373" id="373"></a>
+  <a name="327" id="327"></a>
   <h2>
       About bouncing message back
 
@@ -11331,7 +10788,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="374" id="374"></a>
+  <a name="328" id="328"></a>
   <h2>
       Required settings
 
@@ -11364,7 +10821,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="375" id="375"></a>
+  <a name="329" id="329"></a>
   <h2>
       Required settings
 
@@ -11379,7 +10836,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="376" id="376"></a>
+  <a name="330" id="330"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -11411,7 +10868,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="377" id="377"></a>
+  <a name="331" id="331"></a>
   <h2>
       Return values
 
@@ -11430,7 +10887,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="378" id="378"></a>
+  <a name="332" id="332"></a>
   <h2>
       Usage example
 
@@ -11462,7 +10919,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="379" id="379"></a>
+  <a name="333" id="333"></a>
   <h2>
       File layout
 
@@ -11478,7 +10935,7 @@ dummy = &quot;$id: end:&quot;
         See <a href="http://freshmeat.net/projects/emacs-tiny-tools/" >http://freshmeat.net/projects/emacs-tiny-tools/</A>
 
 <hr>
-	<a name="380"  id="380"></a>
+	<a name="334"  id="334"></a>
 	<h1>
 	Pm-jaube-prg-bmf.rc &ndash; Interface to Bayesian Mail Filter program
 
@@ -11486,7 +10943,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="381" id="381"></a>
+  <a name="335" id="335"></a>
   <h2>
       File id
 
@@ -11516,7 +10973,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="382" id="382"></a>
+  <a name="336" id="336"></a>
   <h2>
       Warning
 
@@ -11566,7 +11023,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="383" id="383"></a>
+  <a name="337" id="337"></a>
   <h2>
       Overview of features
 
@@ -11591,7 +11048,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="384" id="384"></a>
+  <a name="338" id="338"></a>
   <h2>
       Description
 
@@ -11645,7 +11102,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="385" id="385"></a>
+  <a name="339" id="339"></a>
   <h2>
       About bouncing message back
 
@@ -11665,7 +11122,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="386" id="386"></a>
+  <a name="340" id="340"></a>
   <h2>
       Required settings
 
@@ -11698,7 +11155,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="387" id="387"></a>
+  <a name="341" id="341"></a>
   <h2>
       Required settings
 
@@ -11713,7 +11170,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="388" id="388"></a>
+  <a name="342" id="342"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -11738,7 +11195,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="389" id="389"></a>
+  <a name="343" id="343"></a>
   <h2>
       Return values
 
@@ -11773,7 +11230,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="390" id="390"></a>
+  <a name="344" id="344"></a>
   <h2>
       Usage example
 
@@ -11805,6 +11262,1128 @@ dummy = &quot;$id: end:&quot;
 
 
 
+  <a name="345" id="345"></a>
+  <h2>
+      File layout
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        The layout of this file is managed by Emacs packages tinyprocmail.el
+        and tinytab.el for the 4 tab text placement.
+        See project <a href="http://freshmeat.net/projects/emacs-tiny-tools/" >http://freshmeat.net/projects/emacs-tiny-tools/</A>
+
+<hr>
+	<a name="346"  id="346"></a>
+	<h1>
+	Pm-jaube-prg-bogofilter &ndash; Interface to bogofilter program
+
+	</h1>
+
+
+
+  <a name="347" id="347"></a>
+  <h2>
+      File id
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        Copyright &copy; 1997-2009 Jari Aalto
+
+
+<p class="column8">
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+
+<p class="column8">
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        &lt;<a href="http://www.gnu.org/copyleft/gpl.html" >http://www.gnu.org/copyleft/gpl.html</A>&gt;.
+
+
+
+  <a name="348" id="348"></a>
+  <h2>
+      Warning
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        Put all your Unsolicited Bulk Emacil (aka spam) filters towards the
+        end of your <samp class="word">~/.procmailrc</samp>. The idea is that valid messages are filed
+        first (mailing lists, your work and private mail, bounces) and only
+        the uncategorized messages are checked last.
+
+
+<p class="column8">
+        YOU CANNOT USE THIS PROCMAIL SUBROUTINE UNLESS YOU HAVE TRAINED THE
+        BAYESIAN PROGRAM FIRST!
+
+
+<p class="column8">
+        To train:
+
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      $  rm -f ~/.bogofilter/*.db         # delete database
+      $  bogofilter -B -n good.msg ...
+      $  bogofilter -B -s spam.msg ...    </pre></td>
+    </tr>
+</table>
+
+
+
+  <a name="349" id="349"></a>
+  <h2>
+      Overview of features
+
+  </h2>
+
+
+
+<p>
+<ul>
+	<li>Implements interface to <a href="http://www.sf.net/projects/bogofilter" >http://www.sf.net/projects/bogofilter</A>
+            project.
+<li>variable <samp class="word">ERROR</samp> is set if message was likely spam.
+	</li>
+<li>Results are available by default in header
+	            <samp class="word">X-Spam-Bogofilter-Status</samp>.</li>
+</ul>
+
+
+
+
+
+  <a name="350" id="350"></a>
+  <h2>
+      Description
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        There are several Bayesian based statistical analysis programs that
+        study the message's tokens and then classify it into two categories:
+        good or bad, or if you like, ham and spam. All the Bayesian programs
+        are not the same, so if you want to achive magic 99.99% probability
+        the only methodology to do that is to chain several programs in
+        serially. There is no single program that can solve the UBE detection.
+        This procmail subroutine implements call interface to program
+        <samp class="word">bogofilter</samp>, which must already have been installed.
+
+
+
+  <a name="351" id="351"></a>
+  <h2>
+      About bouncing message back
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        The general consensus is, that you should not send bounces. The UBE
+        sender is not there, because the address forged. Do not increase
+        the network traffic; you will not do any good to anybody by
+        bouncing messgas &ndash; you just increase mail traffic even more.
+        Instead save the messages to folders and periodically periodically
+        check their contents.
+
+
+
+  <a name="352" id="352"></a>
+  <h2>
+      Required settings
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        If <samp class="word">bogofilter</samp> program is available, define this variable in your
+        <samp class="word">~/.procmailrc</samp>. Use absolute path to make the external shell
+        quick; it'll save server load considerably.
+
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      JA_UBE_BOGOFILTER_PRG = /usr/bin/bogofilter    </pre></td>
+    </tr>
+</table>
+
+
+<p class="column8">
+        If you <strong class="word">do</strong> <strong class="word">not</strong> have program installed, do not leave the
+        variable lying aroung, because it will keep this subroutine active.
+        Calling a non existing program is not a good idea, so it better to
+        empty the variable if the program is not available.
+
+
+
+  <a name="353" id="353"></a>
+  <h2>
+      Required settings
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        None. No dependencies to other procmail modules.
+
+
+
+  <a name="354" id="354"></a>
+  <h2>
+      Call arguments (variables to set before calling)
+
+  </h2>
+
+
+
+<p>
+<ul>
+	<li>JA_UBE_BOGOFILTER_PRG, path to the program
+<li>JA_UBE_BOGOFILTER_HEADER_NEW, the header name where the results
+            are put. If not defined, no header is added.
+            Defaults to <samp class="word">X-Spam-Bogofilter-Status</samp>
+	</li>
+<li>JA_UBE_BOGOFILTER_FORCE, if set to <strong class="word">yes</strong> then call program no matter
+            what. Normally if there already is <samp class="word">X-Spam-*</samp> header,
+            it is assumed that the message has already been checked
+	            and no new checking is needed.</li>
+</ul>
+
+
+
+
+
+  <a name="355" id="355"></a>
+  <h2>
+      Return values
+
+  </h2>
+
+
+
+<p>
+<ul>
+	<li>ERROR, is set to the return value of program if message was spam.
+	<li>ERROR_INFO, is set if case is &quot;unsure&quot;.</li>
+</ul>
+
+
+
+
+
+  <a name="356" id="356"></a>
+  <h2>
+      Usage example
+
+  </h2>
+
+
+
+<p>
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      PMSRC                  = $HOME/procmail # procmail recipe dir
+
+      &lt;other checks, mailing lists, work mail etc.&gt;
+
+      JA_UBE_BOGOFILTER_PRG  = &quot;/usr/bin/nice -n 5 /usr/bin/bogogilter&quot;
+      INCLUDERC              = $PMSRC/pm-jaube-prg-bogofilter.rc
+
+      #   The ERROR will contains reason if program classified
+      #   the message into &quot;bad&quot; category.
+
+      :0 :
+      * ! ERROR ?? ^^^^
+      junk.mbox    </pre></td>
+    </tr>
+</table>
+
+
+
+  <a name="357" id="357"></a>
+  <h2>
+      File layout
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        The layout of this file is managed by Emacs packages tinyprocmail.el
+        and tinytab.el for the 4 tab text placement.
+        See project <a href="http://freshmeat.net/projects/emacs-tiny-tools/" >http://freshmeat.net/projects/emacs-tiny-tools/</A>
+
+<hr>
+	<a name="358"  id="358"></a>
+	<h1>
+	Pm-jaube-prg-bsfilter.rc &ndash; Interface to Bsfilter program
+
+	</h1>
+
+
+
+  <a name="359" id="359"></a>
+  <h2>
+      File id
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        Copyright &copy; 1997-2009 Jari Aalto
+
+
+<p class="column8">
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+
+<p class="column8">
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        &lt;<a href="http://www.gnu.org/copyleft/gpl.html" >http://www.gnu.org/copyleft/gpl.html</A>&gt;.
+
+
+
+  <a name="360" id="360"></a>
+  <h2>
+      Warning
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        Put all your Unsolicited Bulk Emacil (aka spam) filters towards the
+        end of your <samp class="word">~/.procmailrc</samp>. The idea is that valid messages are filed
+        first (mailing lists, your work and private mail, bounces) and only
+        the uncategorized messages are checked last.
+
+
+<p class="column8">
+        YOU CANNOT USE THIS PROCMAIL SUBROUTINE UNLESS YOU HAVE TRAINED THE
+        BAYESIAN PROGRAM FIRST!
+
+
+<p class="column8">
+        To train:
+
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      $ bsfilter --add-clean good.msg ...
+      $ bsfilter --add-spam  spam.msg ...    </pre></td>
+    </tr>
+</table>
+
+
+
+  <a name="361" id="361"></a>
+  <h2>
+      Overview of features
+
+  </h2>
+
+
+
+<p>
+<ul>
+	<li>Implements interface to project
+            <a href="http://packages.debian.org/testing/mail/bsfilter" >http://packages.debian.org/testing/mail/bsfilter</A>
+<li>variable <samp class="word">ERROR</samp> is set if the message was UBE.
+	</li>
+<li>Results are available by default in header
+	            <samp class="word">X-Spam-Bsfilter-Status</samp>.</li>
+</ul>
+
+
+
+
+
+  <a name="362" id="362"></a>
+  <h2>
+      Description
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        There are several Bayesian based statistical analysis programs that
+        study the message's tokens and then classify it into two categories:
+        good or bad, or if you like, ham and spam. All the Bayesian programs
+        are not the same, so if you want to achive magic 99.99% probability
+        the only methodology to do that is to chain several programs in
+        serially. There is no single program that can solve the UBE detection.
+        This procmail subroutine implements call interface to program
+        <samp class="word">bsfilter</samp>, which must already have been installed.
+
+
+
+  <a name="363" id="363"></a>
+  <h2>
+      About bouncing message back
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        The general consensus is, that you should not send bounces. The UBE
+        sender is not there, because the address forged. Do not increase
+        the network traffic; you will not do any good to anybody by
+        bouncing messgas &ndash; you just increase mail traffic even more.
+        Instead save the messages to folders and periodically periodically
+        check their contents.
+
+
+
+  <a name="364" id="364"></a>
+  <h2>
+      Required settings
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        If <samp class="word">bsfilter</samp> program is available, define this variable in your
+        <samp class="word">~/.procmailrc</samp>. Use absolute path to make the external shell
+        quick; it'll save server load considerably.
+
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      JA_UBE_BSFILTER_PRG = /usr/bin/bsfilter    </pre></td>
+    </tr>
+</table>
+
+
+<p class="column8">
+        If you <strong class="word">do</strong> <strong class="word">not</strong> have program installed, do not leave the
+        variable lying aroung, because it will keep this subroutine active.
+        Calling a non existing program is not a good idea, so it better to
+        empty the variable if the program is not available.
+
+
+
+  <a name="365" id="365"></a>
+  <h2>
+      Required settings
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        None. No dependencies to other procmail modules.
+
+
+
+  <a name="366" id="366"></a>
+  <h2>
+      Call arguments (variables to set before calling)
+
+  </h2>
+
+
+
+<p>
+<ul>
+	<li><samp class="word">JA_UBE_BSFILTER_PRG</samp>, path to the program.
+<li><samp class="word">JA_UBE_BSFILTER_HEADER</samp>, the header prefix name where the results
+            are put. If not defined, no header is added.
+            Defaults to <em class="word">X-Spam-Bsfilter-</em>
+	</li>
+<li><samp class="word">JA_UBE_BSFILTER_FORCE</samp>, if set to <strong class="word">yes</strong> then call program no matter
+            what. Normally if there already is <em class="word">X-Spam-Bsfilter-</em> header,
+            it is assumed that the message has already been checked
+	            and no new checking is needed.</li>
+</ul>
+
+
+
+
+
+  <a name="367" id="367"></a>
+  <h2>
+      Return values
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+	<ul>
+	<li><samp class="word">ERROR</samp>, is set to the return value of <samp class="word">bsfilter</samp> program.</li>
+</ul>
+
+
+
+
+
+  <a name="368" id="368"></a>
+  <h2>
+      Usage example
+
+  </h2>
+
+
+
+<p>
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      PMSRC                  = $HOME/procmail # procmail recipe dir
+
+      &lt;other checks, mailing lists, work mail etc.&gt;
+
+      JA_UBE_BSFILTER_PRG    = &quot;/usr/bin/nice -n 5 /usr/bin/bsfilter&quot;
+      INCLUDERC              = $PMSRC/pm-jaube-prg-bsfilter.rc
+
+      #   The ERROR will contains word &quot;yes&quot; if message was spam
+
+      :0 :
+      * ERROR ?? yes
+      junk.mbox    </pre></td>
+    </tr>
+</table>
+
+
+
+  <a name="369" id="369"></a>
+  <h2>
+      File layout
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        The layout of this file is managed by Emacs packages tinyprocmail.el
+        and tinytab.el for the 4 tab text placement.
+        See project <a href="http://freshmeat.net/projects/emacs-tiny-tools/" >http://freshmeat.net/projects/emacs-tiny-tools/</A>
+
+<hr>
+	<a name="370"  id="370"></a>
+	<h1>
+	Pm-jaube-prg-ifile &ndash; Interface to ifile program
+
+	</h1>
+
+
+
+  <a name="371" id="371"></a>
+  <h2>
+      File id
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        Copyright &copy; 1997-2009 Jari Aalto
+
+
+<p class="column8">
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+
+<p class="column8">
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        &lt;<a href="http://www.gnu.org/copyleft/gpl.html" >http://www.gnu.org/copyleft/gpl.html</A>&gt;.
+
+
+
+  <a name="372" id="372"></a>
+  <h2>
+      Warning
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        Put all your Unsolicited Bulk Emacil (aka spam) filters towards the
+        end of your <samp class="word">~/.procmailrc</samp>. The idea is that valid messages are filed
+        first (mailing lists, your work and private mail, bounces) and only
+        the uncategorized messages are checked last.
+
+
+<p class="column8">
+        YOU CANNOT USE THIS PROCMAIL SUBROUTINE UNLESS YOU HAVE TRAINED THE
+        BAYESIAN PROGRAM FIRST!
+
+
+<p class="column8">
+        To train:
+
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      $ rm ~/.idata                       # delete database
+      $ echo herbalife | ifile -i spam    # initialize database
+      $ ifile -h -i good good.msg ...
+      $ ifile -h -i spam spam.msg ...    </pre></td>
+    </tr>
+</table>
+
+
+
+  <a name="373" id="373"></a>
+  <h2>
+      Overview of features
+
+  </h2>
+
+
+
+<p>
+<ul>
+	<li>Implements interface to <a href="http://freshmeat.net/projects/ifile" >http://freshmeat.net/projects/ifile</A>
+            project.
+<li>variable <samp class="word">ERROR</samp> is set to the result of ifile check. This
+            usually holds the &quot;folder&quot; name the ifile was trained at the
+            time. E.g. if the folder used for training Unsolicited Bulk
+            Email was &quot;ifile -i spam&quot;, then the return value is &quot;spam&quot;.
+	<li>Results are available by default in header <samp class="word">X-Spamifile</samp>.</li>
+</ul>
+
+
+
+
+
+  <a name="374" id="374"></a>
+  <h2>
+      Description
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        There are several Bayesian based statistical analysis programs that
+        study the message's tokens and then classify it into two categories:
+        good or bad, or if you like, ham and spam. All the Bayesian programs
+        are not the same, so if you want to achive magic 99.99% probability
+        the only methodology to do that is to chain several programs in
+        serially. There is no single program that can solve the UBE detection.
+        This procmail subroutine implements call interface to program
+        <samp class="word">ifile</samp>, which must already have been installed.
+
+
+
+  <a name="375" id="375"></a>
+  <h2>
+      About bouncing message back
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        The general consensus is, that you should not send bounces. The UBE
+        sender is not there, because the address forged. Do not increase
+        the network traffic; you will not do any good to anybody by
+        bouncing messgas &ndash; you just increase mail traffic even more.
+        Instead save the messages to folders and periodically periodically
+        check their contents.
+
+
+
+  <a name="376" id="376"></a>
+  <h2>
+      Required settings
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        If <samp class="word">ifile</samp> program is available, define this variable in your
+        <samp class="word">~/.procmailrc</samp>. Use absolute path to make the external shell
+        quick; it'll save server load considerably.
+
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      JA_UBE_IFILE_PRG = /usr/bin/ifile    </pre></td>
+    </tr>
+</table>
+
+
+<p class="column8">
+        If you <strong class="word">do</strong> <strong class="word">not</strong> have program installed, do not leave the
+        variable lying aroung, because it will keep this subroutine active.
+        Calling a non existing program is not a good idea, so it better to
+        empty the variable if the program is not available.
+
+
+
+  <a name="377" id="377"></a>
+  <h2>
+      Required settings
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        None. No dependencies to other procmail modules.
+
+
+
+  <a name="378" id="378"></a>
+  <h2>
+      Call arguments (variables to set before calling)
+
+  </h2>
+
+
+
+<p>
+<ul>
+	<li>JA_UBE_IFILE_PRG, path to the program
+<li>JA_UBE_IFILE_HEADER, the header name where the results
+            are put. If not defined, no header is added.
+            Defaults to <samp class="word">X-Spam-Ifile-Status</samp>
+	</li>
+<li>JA_UBE_IFILE_FORCE, if set to <strong class="word">yes</strong> then call program no matter
+            what. Normally if there already is header,
+            it is assumed that the message has already been checked
+	            and no new checking is needed.</li>
+</ul>
+
+
+
+
+
+  <a name="379" id="379"></a>
+  <h2>
+      Return values
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+	<ul>
+	<li>ERROR, is set to the return value of <samp class="word">ifile</samp> program.</li>
+</ul>
+
+
+
+
+<p class="column8">
+        If header output is enabled, it will contain the folder name
+        <samp class="word">ifile</samp> thinks the message belongs to. Assuming that trained
+        folders used for messages were <em class="word">spam</em> and <em class="word">good</em>, then the headers
+        read:
+
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      X-Spam-Ifile-Status: spam
+      X-Spam-Ifile-Status: good    </pre></td>
+    </tr>
+</table>
+
+
+
+  <a name="380" id="380"></a>
+  <h2>
+      Usage example
+
+  </h2>
+
+
+
+<p>
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      PMSRC                  = $HOME/procmail # procmail recipe dir
+
+      &lt;other checks, mailing lists, work mail etc.&gt;
+
+      JA_UBE_IFILE_PRG       = &quot;/usr/bin/nice -n 5 /usr/bin/ifile&quot;
+      INCLUDERC              = $PMSRC/pm-jaube-prg-ifile.rc
+
+      #   The ERROR will contains reason if program classified
+      #   the message into &quot;bad&quot; category.
+
+      :0 :
+      * ! ERROR ?? ^^^^
+      junk.mbox    </pre></td>
+    </tr>
+</table>
+
+
+
+  <a name="381" id="381"></a>
+  <h2>
+      File layout
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        The layout of this file is managed by Emacs packages tinyprocmail.el
+        and tinytab.el for the 4 tab text placement.
+        See project <a href="http://freshmeat.net/projects/emacs-tiny-tools/" >http://freshmeat.net/projects/emacs-tiny-tools/</A>
+
+<hr>
+	<a name="382"  id="382"></a>
+	<h1>
+	Pm-jaube-prg-runall.rc &ndash; Interface to all Bayesian filter programs
+
+	</h1>
+
+
+
+  <a name="383" id="383"></a>
+  <h2>
+      File id
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        Copyright &copy; 1997-2009 Jari Aalto
+
+
+<p class="column8">
+        This program is free software; you can redistribute it and/or
+        modify it under the terms of the GNU General Public License as
+        published by the Free Software Foundation; either version 2 of the
+        License, or (at your option) any later version
+
+
+<p class="column8">
+        This program is distributed in the hope that it will be useful, but
+        WITHOUT ANY WARRANTY; without even the implied warranty of
+        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+        General Public License for more details at
+        &lt;<a href="http://www.gnu.org/copyleft/gpl.html" >http://www.gnu.org/copyleft/gpl.html</A>&gt;.
+
+
+
+  <a name="384" id="384"></a>
+  <h2>
+      Overview of features
+
+  </h2>
+
+
+
+<p>
+<ul>
+	<li>To detect spam reliably, run all Bayesian programs one by one
+            to see if any of them classifies the message as spam.
+<li>Programs supported: bogofilter, spamprobe, Bayesian Mail
+	            Filter, Annoyance Filter, Bsfilter, Spamoracle and Spamassassin.</li>
+</ul>
+
+
+
+
+
+  <a name="385" id="385"></a>
+  <h2>
+      Description
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        There are several bayesian based statistical analysis programs that
+        study the message's tokens and then classify it into two categories:
+        good or bad, or if you like, ham and spam. This module is a
+        <strong class="word">meta</strong> <strong class="word">package</strong> which will call all other individual modules
+        that interface to these Bayesian programs. The use is simple: define
+        programs that are available in your system and which you have
+        trained (Bayesian programs need to be trained before use), and this
+        this module will query how those programs would classify the message.
+
+
+
+  <a name="386" id="386"></a>
+  <h2>
+      Required settings
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        PMSRC must point to source directory of procmail code. This subroutine
+        will include
+
+<ul>
+	<li>pm-javar.rc
+<li>pm-jaube-prg-spamprobe.rc
+	</li>
+<li>pm-jaube-prg-spamoracle.rc
+	</li>
+<li>pm-jaube-prg-annoyance-filter.rc
+	</li>
+<li>pm-jaube-prg-bsfilter.rc
+	<li>pm-jaube-prg-bmf.rc</li>
+</ul>
+
+
+
+
+
+  <a name="387" id="387"></a>
+  <h2>
+      Call arguments (variables to set before calling)
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        To activate Bayesian program(s), define path to them. Default
+        value for all these variables is &quot;&quot; i.e. is is supposed that
+        no programs have been installed or trained.
+
+<ul>
+	<li><samp class="word">JA_UBE_BOGOFILTER_PRG</samp>, path to <em class="word">bogofilter</em> program.
+<li><samp class="word">JA_UBE_SPAMPROBE_PRG</samp>, Path to <em class="word">spamprobe</em> program
+	</li>
+<li><samp class="word">JA_UBE_BMF_PRG</samp>, Path to Bayesian Mail Filter <em class="word">bmf</em> program.
+	</li>
+<li><samp class="word">JA_UBE_SPAMASSASSIN_PRG</samp>, path to <em class="word">spamassassin</em> program.
+            If daemon version is available, set this to <em class="word">spamc</em> program.
+	</li>
+<li><samp class="word">JA_UBE_SPAMORACLE_PRG</samp>, path to <em class="word">spamoracle</em> program.
+	</li>
+<li><samp class="word">JA_UBE_ANNOYANCE_PRG</samp>, path to <em class="word">annoyance-filter</em> program.
+            You must also set <samp class="word">JA_UBE_ANNOYANCE_SPAM_DB</samp> to fast
+            dictionary database location.
+	<li><samp class="word">JA_UBE_BSFILTER_PRG</samp>, path to <em class="word">bsfilter</em> program.</li>
+</ul>
+
+
+
+
+<p class="column8">
+        Optional variables to set:
+
+<ul>
+	<li> <samp class="word">JA_UBE_BOGOFILTER_OPT</samp>. Default is &quot;-p&quot; passthrough.
+             Option &quot;-e&quot; will report exit code to procmail.
+<li> <samp class="word">JA_UBE_SPAMASSASSIN_OPT</samp>. Default is &quot;&quot;.
+	</li>
+<li> <samp class="word">JA_UBE_SPAMASSASSIN_MAX_SIZE</samp>. Default is 256000 (256k).
+             Spamassassin is a Perl program, which is slow at startup,
+             so checking e.g. long attachements consumes lot of resources.
+	             Keep this value relatively small.</li>
+</ul>
+
+
+
+
+
+  <a name="388" id="388"></a>
+  <h2>
+      Important notes
+
+  </h2>
+
+
+
+
+<p>
+<p class="column8">
+        All headers are canonicalized to <em class="word">X-Spam-&lt;PROGRAM&gt;-</em> so e.g.
+        in bogofilter's case, the default <em class="word">X-Bogocity</em> header is
+        changed to value <em class="word">X-Spam-Bogofilter-Status</em> and so on.
+        Summaries like below can then be generated:
+
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      $ egrep -i '(Subject|From|^X-Spam.*Status)' *.mbox    </pre></td>
+    </tr>
+</table>
+
+
+
+  <a name="389" id="389"></a>
+  <h2>
+      Return values
+
+  </h2>
+
+
+
+<p>
+<ul>
+	<li><samp class="word">ERROR</samp> variable's first word is set to program that classified
+            the spam: <em class="word">bogofilter</em>, <em class="word">bmf</em> (Bayesian Mail Filter),
+            <em class="word">spamassassin</em> etc. It is followed by semicolon &quot;;&quot; and
+            detailed return status from the program.
+<li><samp class="word">ERROR_INFO</samp> is set only in bogofilter's case if it thinks
+	            the message is neither spam nor ham (&quot;Unsure&quot;).</li>
+</ul>
+
+
+
+
+
+  <a name="390" id="390"></a>
+  <h2>
+      Usage example
+
+  </h2>
+
+
+
+<p>
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      PMSRC                 = $HOME/procmail # procmail recipe dir
+
+      # ... other checks, mailing lists, work mail etc.
+
+      #   bogofilter and Bayesian Mail Filter available and trained. Use them.
+
+      JA_UBE_BOGOFILTER_PRG = &quot;/bin/nice -n 5 /bin/bogofilter&quot;
+      JA_UBE_BMF_PRG        = &quot;/bin/nice -n 5 /bin/bmf&quot;
+
+      #   Call the &quot;umbrella&quot; module, which will take care of
+      #   all the details.
+
+      INCLUDERC             = $PMSRC/pm-jaube-prg-runall.rc
+
+      #   ERROR is set if message was spam. The &quot;()\/&quot; logs reason.
+
+      :0 :
+      * ERROR ?? ^()\/.+
+      junk.mbox    </pre></td>
+    </tr>
+</table>
+
+
+
   <a name="391" id="391"></a>
   <h2>
       File layout
@@ -11823,7 +12402,7 @@ dummy = &quot;$id: end:&quot;
 <hr>
 	<a name="392"  id="392"></a>
 	<h1>
-	Pm-jaube-prg-bogofilter &ndash; Interface to bogofilter program
+	Pm-jaube-prg-spamassassin &ndash; Interface to spamassassin program
 
 	</h1>
 
@@ -11889,9 +12468,10 @@ dummy = &quot;$id: end:&quot;
     <tr>
     <td class="shade-normal-attrib" valign="top">
     <pre>
-      $  rm -f ~/.bogofilter/*.db         # delete database
-      $  bogofilter -B -n good.msg ...
-      $  bogofilter -B -s spam.msg ...    </pre></td>
+      $ rm -f ~/.spamassassin/bayes*
+      $ sa-learn $opt --local --no-rebuild --ham  good.msg ...
+      $ sa-learn $opt --local --no-rebuild --spam spam.msg ...
+      $ sa-learn --rebuild    </pre></td>
     </tr>
 </table>
 
@@ -11907,12 +12487,10 @@ dummy = &quot;$id: end:&quot;
 
 <p>
 <ul>
-	<li>Implements interface to <a href="http://www.sf.net/projects/bogofilter" >http://www.sf.net/projects/bogofilter</A>
+	<li>Implements interface to <a href="http://www.spamassassin.org/" >http://www.spamassassin.org/</A>
             project.
-<li>variable <samp class="word">ERROR</samp> is set if message was likely spam.
-	</li>
-<li>Results are available by default in header
-	            <samp class="word">X-Spam-Bogofilter-Status</samp>.</li>
+<li>variable <samp class="word">ERROR</samp> is set if message was spam.
+	<li>Results are available in default headers (X-Spam-*)</li>
 </ul>
 
 
@@ -11937,7 +12515,7 @@ dummy = &quot;$id: end:&quot;
         the only methodology to do that is to chain several programs in
         serially. There is no single program that can solve the UBE detection.
         This procmail subroutine implements call interface to program
-        <samp class="word">bogofilter</samp>, which must already have been installed.
+        <samp class="word">spamassassin</samp>, which must already have been installed.
 
 
 
@@ -11972,7 +12550,7 @@ dummy = &quot;$id: end:&quot;
 
 <p>
 <p class="column8">
-        If <samp class="word">bogofilter</samp> program is available, define this variable in your
+        If <samp class="word">spamassassin</samp> program is available, define this variable in your
         <samp class="word">~/.procmailrc</samp>. Use absolute path to make the external shell
         quick; it'll save server load considerably.
 
@@ -11981,7 +12559,7 @@ dummy = &quot;$id: end:&quot;
     <tr>
     <td class="shade-normal-attrib" valign="top">
     <pre>
-      JA_UBE_BOGOFILTER_PRG = /usr/bin/bogofilter    </pre></td>
+      JA_UBE_SPAMASSASSIN_PRG = /usr/bin/spamassassin    </pre></td>
     </tr>
 </table>
 
@@ -12019,13 +12597,15 @@ dummy = &quot;$id: end:&quot;
 
 <p>
 <ul>
-	<li>JA_UBE_BOGOFILTER_PRG, path to the program
-<li>JA_UBE_BOGOFILTER_HEADER_NEW, the header name where the results
-            are put. If not defined, no header is added.
-            Defaults to <samp class="word">X-Spam-Bogofilter-Status</samp>
+	<li>JA_UBE_SPAMASSASSIN_PRG, path to the program
+<li>JA_UBE_SPAMASSASSIN_MIN_SIZE, minumum message size. Default is
+            100 bytes.
 	</li>
-<li>JA_UBE_BOGOFILTER_FORCE, if set to <strong class="word">yes</strong> then call program no matter
-            what. Normally if there already is <samp class="word">X-Spam-*</samp> header,
+<li>JA_UBE_SPAMASSASSIN_MAX_SIZE, maximum message size. Default is
+            256 000 bytes (about 256k).
+	</li>
+<li>JA_UBE_SPAMASSASSIN_FORCE, if set to <strong class="word">yes</strong> then call program no
+            matter what. Normally if there already is <samp class="word">X-Spam-*</samp> header,
             it is assumed that the message has already been checked
 	            and no new checking is needed.</li>
 </ul>
@@ -12066,12 +12646,12 @@ dummy = &quot;$id: end:&quot;
     <tr>
     <td class="shade-normal-attrib" valign="top">
     <pre>
-      PMSRC                  = $HOME/procmail # procmail recipe dir
+      PMSRC                   = $HOME/procmail # procmail recipe dir
 
       &lt;other checks, mailing lists, work mail etc.&gt;
 
-      JA_UBE_BOGOFILTER_PRG  = &quot;/usr/bin/nice -n 5 /usr/bin/bogogilter&quot;
-      INCLUDERC              = $PMSRC/pm-jaube-prg-bogofilter.rc
+      JA_UBE_SPAMASSASSIN_PRG = &quot;/usr/bin/nice -n 5 /usr/bin/bogofilter&quot;
+      INCLUDERC               = $PMSRC/pm-jaube-prg-spamassassin.rc
 
       #   The ERROR will contains reason if program classified
       #   the message into &quot;bad&quot; category.
@@ -12102,7 +12682,7 @@ dummy = &quot;$id: end:&quot;
 <hr>
 	<a name="404"  id="404"></a>
 	<h1>
-	Pm-jaube-prg-bsfilter.rc &ndash; Interface to Bsfilter program
+	Pm-jaube-prg-spamoracle.rc &ndash; Interface to Spamoracle program
 
 	</h1>
 
@@ -12168,8 +12748,21 @@ dummy = &quot;$id: end:&quot;
     <tr>
     <td class="shade-normal-attrib" valign="top">
     <pre>
-      $ bsfilter --add-clean good.msg ...
-      $ bsfilter --add-spam  spam.msg ...    </pre></td>
+      $ spamoracle add -v -spam good.msg ...  # feed individual messages
+      $ spamoracle add -v -good good.msg ...  # feed individual messages    </pre></td>
+    </tr>
+</table>
+
+
+<p class="column8">
+        To test
+
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      $  spamoracle test mail.msg | less    </pre></td>
     </tr>
 </table>
 
@@ -12185,12 +12778,13 @@ dummy = &quot;$id: end:&quot;
 
 <p>
 <ul>
-	<li>Implements interface to project
-            <a href="http://packages.debian.org/testing/mail/bsfilter" >http://packages.debian.org/testing/mail/bsfilter</A>
-<li>variable <samp class="word">ERROR</samp> is set if the message was UBE.
+	<li>Implements interface to <a href="http://freshmeat.net/projects/spamoracle" >http://freshmeat.net/projects/spamoracle</A>
+            OCaml language based Bayesian Mail program.
+<li>Variable <samp class="word">ERROR</samp> is set to &quot;yes&quot; if the message was UBE.
 	</li>
-<li>Results are available by default in header
-	            <samp class="word">X-Spam-Bsfilter-Status</samp>.</li>
+<li>Results are available in headers <samp class="word">X-Spam-Spamoracle-Status</samp>,
+            <samp class="word">X-Spam-Spamoracle-Score</samp>, <samp class="word">X-Spam-Spamoracle-Details</samp> and
+	            <samp class="word">X-Spam-Spamoracle-Attachment</samp>  for further analysis.</li>
 </ul>
 
 
@@ -12208,14 +12802,22 @@ dummy = &quot;$id: end:&quot;
 
 <p>
 <p class="column8">
-        There are several Bayesian based statistical analysis programs that
+        There are several bayesian based statistical analysis programs that
         study the message's tokens and then classify it into two categories:
         good or bad, or if you like, ham and spam. All the Bayesian programs
         are not the same, so if you want to achive magic 99.99% probability
         the only methodology to do that is to chain several programs in
         serially. There is no single program that can solve the UBE detection.
-        This procmail subroutine implements call interface to program
-        <samp class="word">bsfilter</samp>, which must already have been installed.
+
+
+<p class="column8">
+        Using Spamoracle as sole spam protection is inefficient, because
+        version version 1.4 (2004-09-29) does not accept messages from
+        stdin. Becaus of this message has to be written to a temporary file
+        before calling Spamoracle. Later the temporary file must be removed
+        with <samp class="word">rm</samp>. All these three shell calls are needed for each message.
+        If you have other detection programs, call them first to identify
+        unsolicited Bulk Email.
 
 
 
@@ -12250,7 +12852,7 @@ dummy = &quot;$id: end:&quot;
 
 <p>
 <p class="column8">
-        If <samp class="word">bsfilter</samp> program is available, define this variable in your
+        If <samp class="word">spamoracle</samp> program is available, define this variable in your
         <samp class="word">~/.procmailrc</samp>. Use absolute path to make the external shell
         quick; it'll save server load considerably.
 
@@ -12259,7 +12861,7 @@ dummy = &quot;$id: end:&quot;
     <tr>
     <td class="shade-normal-attrib" valign="top">
     <pre>
-      JA_UBE_BSFILTER_PRG = /usr/bin/bsfilter    </pre></td>
+      JA_UBE_SPAMORACLE_PRG = /usr/bin/spamoracle    </pre></td>
     </tr>
 </table>
 
@@ -12297,15 +12899,19 @@ dummy = &quot;$id: end:&quot;
 
 <p>
 <ul>
-	<li><samp class="word">JA_UBE_BSFILTER_PRG</samp>, path to the program.
-<li><samp class="word">JA_UBE_BSFILTER_HEADER</samp>, the header prefix name where the results
-            are put. If not defined, no header is added.
-            Defaults to <em class="word">X-Spam-Bsfilter-</em>
+	<li><samp class="word">JA_UBE_SPAMORACLE_PRG</samp>, path to program
+<li><samp class="word">JA_UBE_SPAMORACLE_HEADER_PREFIX</samp>, the header name where the results
+            are put. If not defined, no headers are added. Default
+            value is  <em class="word">X-Spam-Spamoracle'</em>.
 	</li>
-<li><samp class="word">JA_UBE_BSFILTER_FORCE</samp>, if set to <strong class="word">yes</strong> then call program no matter
-            what. Normally if there already is <em class="word">X-Spam-Bsfilter-</em> header,
+<li><samp class="word">JA_UBE_SPAMORACLE_FORCE</samp>, if set to <strong class="word">yes</strong> then call program no matter
+            what. Normally if there already are <em class="word">X-Spam-Spamoracle-</em> headers,
             it is assumed that the message has already been checked
-	            and no new checking is needed.</li>
+            and no new checking is needed.
+	</li>
+<li><samp class="word">JA_UBE_SPAMORACLE_REGEXP</samp>, regexp to match for spam probability.
+            Defaul value will match probabbility of 0.8 with 5 interesting words.
+	            The match is tried agains <em class="word">X-Spam-Spamoracle-Score</em> header.</li>
 </ul>
 
 
@@ -12320,14 +12926,36 @@ dummy = &quot;$id: end:&quot;
 
 
 
-
 <p>
-<p class="column8">
-	<ul>
-	<li><samp class="word">ERROR</samp>, is set to the return value of <samp class="word">bsfilter</samp> program.</li>
+<ul>
+	<li><samp class="word">ERROR</samp>, value  &quot;yes&quot; if <samp class="word">JA_UBE_SPAMORACLE_REGEXP</samp> matched.
+<li><samp class="word">ERROR_MATCH</samp> contains detailed content of
+	            <samp class="word">X-Spam-Spamoracle-Score</samp> header.</li>
 </ul>
 
 
+
+
+<p class="column8">
+        If headers were enabled, they will contain these values. The
+        score's values are spam probability 0.0 - 1.0 and the degree of
+        similarity 0-15 of the message with the spam messages in the
+        corpus.
+
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      X-Spam-Spamoracle-Status: yes
+      X-Spam-Spamoracle-Score: 1.00 -- 15
+      X-Spam-Spamoracle-Details: refid:98 $$$$:98 surfing:98 asp:95 click:93
+        cable:92 instantly:90 https:88 internet:87 www:86 U4:85 isn't:14 month:81
+        com:75 surf:75
+      X-Spam-Spamoracle-Attachments: cset=&quot;GB2312&quot; type=&quot;application/octet-stream&quot;
+        name=&quot;Guangwen4.zip&quot;    </pre></td>
+    </tr>
+</table>
 
 
 
@@ -12345,14 +12973,15 @@ dummy = &quot;$id: end:&quot;
     <tr>
     <td class="shade-normal-attrib" valign="top">
     <pre>
-      PMSRC                  = $HOME/procmail # procmail recipe dir
+      PMSRC            = $HOME/procmail # procmail recipe dir
 
       &lt;other checks, mailing lists, work mail etc.&gt;
 
-      JA_UBE_BSFILTER_PRG    = &quot;/usr/bin/nice -n 5 /usr/bin/bsfilter&quot;
-      INCLUDERC              = $PMSRC/pm-jaube-prg-bsfilter.rc
+      JA_UBE_SPAMORACLE_PRG   = &quot;/usr/bin/nice -n 5 /usr/bin/bmf&quot;
+      INCLUDERC               = $PMSRC/pm-jaube-prg-spamoracle.rc
 
-      #   The ERROR will contains word &quot;yes&quot; if message was spam
+      #   The ERROR will contains word &quot;yes&quot; if it program classified
+      #   the message into &quot;bad&quot; category.
 
       :0 :
       * ERROR ?? yes
@@ -12380,7 +13009,7 @@ dummy = &quot;$id: end:&quot;
 <hr>
 	<a name="416"  id="416"></a>
 	<h1>
-	Pm-jaube-prg-ifile &ndash; Interface to ifile program
+	Pm-jaube-prg-spamprobe.rc &ndash; Interface to Spamprobe program
 
 	</h1>
 
@@ -12446,10 +13075,22 @@ dummy = &quot;$id: end:&quot;
     <tr>
     <td class="shade-normal-attrib" valign="top">
     <pre>
-      $ rm ~/.idata                       # delete database
-      $ echo herbalife | ifile -i spam    # initialize database
-      $ ifile -h -i good good.msg ...
-      $ ifile -h -i spam spam.msg ...    </pre></td>
+      $ spamprobe -8 good good.msg ...
+      $ spamprobe -8 spam spam.msg ...    </pre></td>
+    </tr>
+</table>
+
+
+<p class="column8">
+        Make sure there are no stale lock files, or the spamprobe and this
+        subroutine will hang infinitely:
+
+<p>
+<table class="shade-normal">
+    <tr>
+    <td class="shade-normal-attrib" valign="top">
+    <pre>
+      $ rm -f ~/.spamprobe/lock    </pre></td>
     </tr>
 </table>
 
@@ -12465,13 +13106,12 @@ dummy = &quot;$id: end:&quot;
 
 <p>
 <ul>
-	<li>Implements interface to <a href="http://freshmeat.net/projects/ifile" >http://freshmeat.net/projects/ifile</A>
+	<li>Implements interface to <a href="http://freshmeat.net/projects/spamprobe/" >http://freshmeat.net/projects/spamprobe/</A>
             project.
-<li>variable <samp class="word">ERROR</samp> is set to the result of ifile check. This
-            usually holds the &quot;folder&quot; name the ifile was trained at the
-            time. E.g. if the folder used for training Unsolicited Bulk
-            Email was &quot;ifile -i spam&quot;, then the return value is &quot;spam&quot;.
-	<li>Results are available by default in header <samp class="word">X-Spamifile</samp>.</li>
+<li>variable <samp class="word">ERROR</samp> is set if the message was UBE.
+	</li>
+<li>Results are available by default in header
+	            <samp class="word">X-Spam-Spamprobe-Status</samp>.</li>
 </ul>
 
 
@@ -12496,7 +13136,7 @@ dummy = &quot;$id: end:&quot;
         the only methodology to do that is to chain several programs in
         serially. There is no single program that can solve the UBE detection.
         This procmail subroutine implements call interface to program
-        <samp class="word">ifile</samp>, which must already have been installed.
+        <samp class="word">spamprobe</samp>, which must already have been installed.
 
 
 
@@ -12531,7 +13171,7 @@ dummy = &quot;$id: end:&quot;
 
 <p>
 <p class="column8">
-        If <samp class="word">ifile</samp> program is available, define this variable in your
+        If <samp class="word">spamprobe</samp> program is available, define this variable in your
         <samp class="word">~/.procmailrc</samp>. Use absolute path to make the external shell
         quick; it'll save server load considerably.
 
@@ -12540,7 +13180,7 @@ dummy = &quot;$id: end:&quot;
     <tr>
     <td class="shade-normal-attrib" valign="top">
     <pre>
-      JA_UBE_IFILE_PRG = /usr/bin/ifile    </pre></td>
+      JA_UBE_SPAMPROBE_PRG = /usr/bin/spamprobe    </pre></td>
     </tr>
 </table>
 
@@ -12578,15 +13218,16 @@ dummy = &quot;$id: end:&quot;
 
 <p>
 <ul>
-	<li>JA_UBE_IFILE_PRG, path to the program
-<li>JA_UBE_IFILE_HEADER, the header name where the results
+	<li><samp class="word">JA_UBE_SPAMPROBE_PRG</samp>, path to the program.
+<li><samp class="word">JA_UBE_SPAMPROBE_HEADER</samp>, the header name where the results
             are put. If not defined, no header is added.
-            Defaults to <samp class="word">X-Spam-Ifile-Status</samp>
+            Defaults to <em class="word">X-Spam-Spamprobe-Status</em>
 	</li>
-<li>JA_UBE_IFILE_FORCE, if set to <strong class="word">yes</strong> then call program no matter
-            what. Normally if there already is header,
-            it is assumed that the message has already been checked
-	            and no new checking is needed.</li>
+<li><samp class="word">JA_UBE_SPAMPROBE_FORCE</samp>, if set to <strong class="word">yes</strong> then call program
+            no matter what. Normally if there already is
+            <em class="word">X-Spam-Spamprobe-Status</em> header, it is assumed that the
+            message has already been checked and no new checking is
+	            needed.</li>
 </ul>
 
 
@@ -12605,27 +13246,10 @@ dummy = &quot;$id: end:&quot;
 <p>
 <p class="column8">
 	<ul>
-	<li>ERROR, is set to the return value of <samp class="word">ifile</samp> program.</li>
+	<li><samp class="word">ERROR</samp>, is set to the return value of <samp class="word">spamprobe</samp> program.</li>
 </ul>
 
 
-
-
-<p class="column8">
-        If header output is enabled, it will contain the folder name
-        <samp class="word">ifile</samp> thinks the message belongs to. Assuming that trained
-        folders used for messages were <em class="word">spam</em> and <em class="word">good</em>, then the headers
-        read:
-
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      X-Spam-Ifile-Status: spam
-      X-Spam-Ifile-Status: good    </pre></td>
-    </tr>
-</table>
 
 
 
@@ -12647,14 +13271,13 @@ dummy = &quot;$id: end:&quot;
 
       &lt;other checks, mailing lists, work mail etc.&gt;
 
-      JA_UBE_IFILE_PRG       = &quot;/usr/bin/nice -n 5 /usr/bin/ifile&quot;
-      INCLUDERC              = $PMSRC/pm-jaube-prg-ifile.rc
+      JA_UBE_SPAMPROBE_PRG   = &quot;/usr/bin/nice -n 5 /usr/bin/spamprobe&quot;
+      INCLUDERC              = $PMSRC/pm-jaube-prg-spamprobe.rc
 
-      #   The ERROR will contains reason if program classified
-      #   the message into &quot;bad&quot; category.
+      #   The ERROR will contains word &quot;yes&quot; if message was spam
 
       :0 :
-      * ! ERROR ?? ^^^^
+      * ERROR ?? yes
       junk.mbox    </pre></td>
     </tr>
 </table>
@@ -12679,7 +13302,7 @@ dummy = &quot;$id: end:&quot;
 <hr>
 	<a name="428"  id="428"></a>
 	<h1>
-	Pm-jaube-prg-runall.rc &ndash; Interface to all Bayesian filter programs
+	Pm-jaube.rc &ndash; Unsolicited Bulk Email (UBE) filter.
 
 	</h1>
 
@@ -12717,1172 +13340,6 @@ dummy = &quot;$id: end:&quot;
 
   <a name="430" id="430"></a>
   <h2>
-      Overview of features
-
-  </h2>
-
-
-
-<p>
-<ul>
-	<li>To detect spam reliably, run all Bayesian programs one by one
-            to see if any of them classifies the message as spam.
-<li>Programs supported: bogofilter, spamprobe, Bayesian Mail
-	            Filter, Annoyance Filter, Bsfilter, Spamoracle and Spamassassin.</li>
-</ul>
-
-
-
-
-
-  <a name="431" id="431"></a>
-  <h2>
-      Description
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        There are several bayesian based statistical analysis programs that
-        study the message's tokens and then classify it into two categories:
-        good or bad, or if you like, ham and spam. This module is a
-        <strong class="word">meta</strong> <strong class="word">package</strong> which will call all other individual modules
-        that interface to these Bayesian programs. The use is simple: define
-        programs that are available in your system and which you have
-        trained (Bayesian programs need to be trained before use), and this
-        this module will query how those programs would classify the message.
-
-
-
-  <a name="432" id="432"></a>
-  <h2>
-      Required settings
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        PMSRC must point to source directory of procmail code. This subroutine
-        will include
-
-<ul>
-	<li>pm-javar.rc
-<li>pm-jaube-prg-spamprobe.rc
-	</li>
-<li>pm-jaube-prg-spamoracle.rc
-	</li>
-<li>pm-jaube-prg-annoyance-filter.rc
-	</li>
-<li>pm-jaube-prg-bsfilter.rc
-	<li>pm-jaube-prg-bmf.rc</li>
-</ul>
-
-
-
-
-
-  <a name="433" id="433"></a>
-  <h2>
-      Call arguments (variables to set before calling)
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        To activate Bayesian program(s), define path to them. Default
-        value for all these variables is &quot;&quot; i.e. is is supposed that
-        no programs have been installed or trained.
-
-<ul>
-	<li><samp class="word">JA_UBE_BOGOFILTER_PRG</samp>, path to <em class="word">bogofilter</em> program.
-<li><samp class="word">JA_UBE_SPAMPROBE_PRG</samp>, Path to <em class="word">spamprobe</em> program
-	</li>
-<li><samp class="word">JA_UBE_BMF_PRG</samp>, Path to Bayesian Mail Filter <em class="word">bmf</em> program.
-	</li>
-<li><samp class="word">JA_UBE_SPAMASSASSIN_PRG</samp>, path to <em class="word">spamassassin</em> program.
-            If daemon version is available, set this to <em class="word">spamc</em> program.
-	</li>
-<li><samp class="word">JA_UBE_SPAMORACLE_PRG</samp>, path to <em class="word">spamoracle</em> program.
-	</li>
-<li><samp class="word">JA_UBE_ANNOYANCE_PRG</samp>, path to <em class="word">annoyance-filter</em> program.
-            You must also set <samp class="word">JA_UBE_ANNOYANCE_SPAM_DB</samp> to fast
-            dictionary database location.
-	<li><samp class="word">JA_UBE_BSFILTER_PRG</samp>, path to <em class="word">bsfilter</em> program.</li>
-</ul>
-
-
-
-
-<p class="column8">
-        Optional variables to set:
-
-<ul>
-	<li> <samp class="word">JA_UBE_BOGOFILTER_OPT</samp>. Default is &quot;-p&quot; passthrough.
-             Option &quot;-e&quot; will report exit code to procmail.
-<li> <samp class="word">JA_UBE_SPAMASSASSIN_OPT</samp>. Default is &quot;&quot;.
-	</li>
-<li> <samp class="word">JA_UBE_SPAMASSASSIN_MAX_SIZE</samp>. Default is 256000 (256k).
-             Spamassassin is a Perl program, which is slow at startup,
-             so checking e.g. long attachements consumes lot of resources.
-	             Keep this value relatively small.</li>
-</ul>
-
-
-
-
-
-  <a name="434" id="434"></a>
-  <h2>
-      Important notes
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        All headers are canonicalized to <em class="word">X-Spam-&lt;PROGRAM&gt;-</em> so e.g.
-        in bogofilter's case, the default <em class="word">X-Bogocity</em> header is
-        changed to value <em class="word">X-Spam-Bogofilter-Status</em> and so on.
-        Summaries like below can then be generated:
-
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      $ egrep -i '(Subject|From|^X-Spam.*Status)' *.mbox    </pre></td>
-    </tr>
-</table>
-
-
-
-  <a name="435" id="435"></a>
-  <h2>
-      Return values
-
-  </h2>
-
-
-
-<p>
-<ul>
-	<li><samp class="word">ERROR</samp> variable's first word is set to program that classified
-            the spam: <em class="word">bogofilter</em>, <em class="word">bmf</em> (Bayesian Mail Filter),
-            <em class="word">spamassassin</em> etc. It is followed by semicolon &quot;;&quot; and
-            detailed return status from the program.
-<li><samp class="word">ERROR_INFO</samp> is set only in bogofilter's case if it thinks
-	            the message is neither spam nor ham (&quot;Unsure&quot;).</li>
-</ul>
-
-
-
-
-
-  <a name="436" id="436"></a>
-  <h2>
-      Usage example
-
-  </h2>
-
-
-
-<p>
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      PMSRC                 = $HOME/procmail # procmail recipe dir
-
-      # ... other checks, mailing lists, work mail etc.
-
-      #   bogofilter and Bayesian Mail Filter available and trained. Use them.
-
-      JA_UBE_BOGOFILTER_PRG = &quot;/bin/nice -n 5 /bin/bogofilter&quot;
-      JA_UBE_BMF_PRG        = &quot;/bin/nice -n 5 /bin/bmf&quot;
-
-      #   Call the &quot;umbrella&quot; module, which will take care of
-      #   all the details.
-
-      INCLUDERC             = $PMSRC/pm-jaube-prg-runall.rc
-
-      #   ERROR is set if message was spam. The &quot;()\/&quot; logs reason.
-
-      :0 :
-      * ERROR ?? ^()\/.+
-      junk.mbox    </pre></td>
-    </tr>
-</table>
-
-
-
-  <a name="437" id="437"></a>
-  <h2>
-      File layout
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        The layout of this file is managed by Emacs packages tinyprocmail.el
-        and tinytab.el for the 4 tab text placement.
-        See project <a href="http://freshmeat.net/projects/emacs-tiny-tools/" >http://freshmeat.net/projects/emacs-tiny-tools/</A>
-
-<hr>
-	<a name="438"  id="438"></a>
-	<h1>
-	Pm-jaube-prg-spamassassin &ndash; Interface to spamassassin program
-
-	</h1>
-
-
-
-  <a name="439" id="439"></a>
-  <h2>
-      File id
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        Copyright &copy; 1997-2009 Jari Aalto
-
-
-<p class="column8">
-        This program is free software; you can redistribute it and/or
-        modify it under the terms of the GNU General Public License as
-        published by the Free Software Foundation; either version 2 of the
-        License, or (at your option) any later version
-
-
-<p class="column8">
-        This program is distributed in the hope that it will be useful, but
-        WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-        General Public License for more details at
-        &lt;<a href="http://www.gnu.org/copyleft/gpl.html" >http://www.gnu.org/copyleft/gpl.html</A>&gt;.
-
-
-
-  <a name="440" id="440"></a>
-  <h2>
-      Warning
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        Put all your Unsolicited Bulk Emacil (aka spam) filters towards the
-        end of your <samp class="word">~/.procmailrc</samp>. The idea is that valid messages are filed
-        first (mailing lists, your work and private mail, bounces) and only
-        the uncategorized messages are checked last.
-
-
-<p class="column8">
-        YOU CANNOT USE THIS PROCMAIL SUBROUTINE UNLESS YOU HAVE TRAINED THE
-        BAYESIAN PROGRAM FIRST!
-
-
-<p class="column8">
-        To train:
-
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      $ rm -f ~/.spamassassin/bayes*
-      $ sa-learn $opt --local --no-rebuild --ham  good.msg ...
-      $ sa-learn $opt --local --no-rebuild --spam spam.msg ...
-      $ sa-learn --rebuild    </pre></td>
-    </tr>
-</table>
-
-
-
-  <a name="441" id="441"></a>
-  <h2>
-      Overview of features
-
-  </h2>
-
-
-
-<p>
-<ul>
-	<li>Implements interface to <a href="http://www.spamassassin.org/" >http://www.spamassassin.org/</A>
-            project.
-<li>variable <samp class="word">ERROR</samp> is set if message was spam.
-	<li>Results are available in default headers (X-Spam-*)</li>
-</ul>
-
-
-
-
-
-  <a name="442" id="442"></a>
-  <h2>
-      Description
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        There are several Bayesian based statistical analysis programs that
-        study the message's tokens and then classify it into two categories:
-        good or bad, or if you like, ham and spam. All the Bayesian programs
-        are not the same, so if you want to achive magic 99.99% probability
-        the only methodology to do that is to chain several programs in
-        serially. There is no single program that can solve the UBE detection.
-        This procmail subroutine implements call interface to program
-        <samp class="word">spamassassin</samp>, which must already have been installed.
-
-
-
-  <a name="443" id="443"></a>
-  <h2>
-      About bouncing message back
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        The general consensus is, that you should not send bounces. The UBE
-        sender is not there, because the address forged. Do not increase
-        the network traffic; you will not do any good to anybody by
-        bouncing messgas &ndash; you just increase mail traffic even more.
-        Instead save the messages to folders and periodically periodically
-        check their contents.
-
-
-
-  <a name="444" id="444"></a>
-  <h2>
-      Required settings
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        If <samp class="word">spamassassin</samp> program is available, define this variable in your
-        <samp class="word">~/.procmailrc</samp>. Use absolute path to make the external shell
-        quick; it'll save server load considerably.
-
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      JA_UBE_SPAMASSASSIN_PRG = /usr/bin/spamassassin    </pre></td>
-    </tr>
-</table>
-
-
-<p class="column8">
-        If you <strong class="word">do</strong> <strong class="word">not</strong> have program installed, do not leave the
-        variable lying aroung, because it will keep this subroutine active.
-        Calling a non existing program is not a good idea, so it better to
-        empty the variable if the program is not available.
-
-
-
-  <a name="445" id="445"></a>
-  <h2>
-      Required settings
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        None. No dependencies to other procmail modules.
-
-
-
-  <a name="446" id="446"></a>
-  <h2>
-      Call arguments (variables to set before calling)
-
-  </h2>
-
-
-
-<p>
-<ul>
-	<li>JA_UBE_SPAMASSASSIN_PRG, path to the program
-<li>JA_UBE_SPAMASSASSIN_MIN_SIZE, minumum message size. Default is
-            100 bytes.
-	</li>
-<li>JA_UBE_SPAMASSASSIN_MAX_SIZE, maximum message size. Default is
-            256 000 bytes (about 256k).
-	</li>
-<li>JA_UBE_SPAMASSASSIN_FORCE, if set to <strong class="word">yes</strong> then call program no
-            matter what. Normally if there already is <samp class="word">X-Spam-*</samp> header,
-            it is assumed that the message has already been checked
-	            and no new checking is needed.</li>
-</ul>
-
-
-
-
-
-  <a name="447" id="447"></a>
-  <h2>
-      Return values
-
-  </h2>
-
-
-
-<p>
-<ul>
-	<li>ERROR, is set to the return value of program if message was spam.
-	<li>ERROR_INFO, is set if case is &quot;unsure&quot;.</li>
-</ul>
-
-
-
-
-
-  <a name="448" id="448"></a>
-  <h2>
-      Usage example
-
-  </h2>
-
-
-
-<p>
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      PMSRC                   = $HOME/procmail # procmail recipe dir
-
-      &lt;other checks, mailing lists, work mail etc.&gt;
-
-      JA_UBE_SPAMASSASSIN_PRG = &quot;/usr/bin/nice -n 5 /usr/bin/bogofilter&quot;
-      INCLUDERC               = $PMSRC/pm-jaube-prg-spamassassin.rc
-
-      #   The ERROR will contains reason if program classified
-      #   the message into &quot;bad&quot; category.
-
-      :0 :
-      * ! ERROR ?? ^^^^
-      junk.mbox    </pre></td>
-    </tr>
-</table>
-
-
-
-  <a name="449" id="449"></a>
-  <h2>
-      File layout
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        The layout of this file is managed by Emacs packages tinyprocmail.el
-        and tinytab.el for the 4 tab text placement.
-        See project <a href="http://freshmeat.net/projects/emacs-tiny-tools/" >http://freshmeat.net/projects/emacs-tiny-tools/</A>
-
-<hr>
-	<a name="450"  id="450"></a>
-	<h1>
-	Pm-jaube-prg-spamoracle.rc &ndash; Interface to Spamoracle program
-
-	</h1>
-
-
-
-  <a name="451" id="451"></a>
-  <h2>
-      File id
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        Copyright &copy; 1997-2009 Jari Aalto
-
-
-<p class="column8">
-        This program is free software; you can redistribute it and/or
-        modify it under the terms of the GNU General Public License as
-        published by the Free Software Foundation; either version 2 of the
-        License, or (at your option) any later version
-
-
-<p class="column8">
-        This program is distributed in the hope that it will be useful, but
-        WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-        General Public License for more details at
-        &lt;<a href="http://www.gnu.org/copyleft/gpl.html" >http://www.gnu.org/copyleft/gpl.html</A>&gt;.
-
-
-
-  <a name="452" id="452"></a>
-  <h2>
-      Warning
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        Put all your Unsolicited Bulk Emacil (aka spam) filters towards the
-        end of your <samp class="word">~/.procmailrc</samp>. The idea is that valid messages are filed
-        first (mailing lists, your work and private mail, bounces) and only
-        the uncategorized messages are checked last.
-
-
-<p class="column8">
-        YOU CANNOT USE THIS PROCMAIL SUBROUTINE UNLESS YOU HAVE TRAINED THE
-        BAYESIAN PROGRAM FIRST!
-
-
-<p class="column8">
-        To train:
-
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      $ spamoracle add -v -spam good.msg ...  # feed individual messages
-      $ spamoracle add -v -good good.msg ...  # feed individual messages    </pre></td>
-    </tr>
-</table>
-
-
-<p class="column8">
-        To test
-
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      $  spamoracle test mail.msg | less    </pre></td>
-    </tr>
-</table>
-
-
-
-  <a name="453" id="453"></a>
-  <h2>
-      Overview of features
-
-  </h2>
-
-
-
-<p>
-<ul>
-	<li>Implements interface to <a href="http://freshmeat.net/projects/spamoracle" >http://freshmeat.net/projects/spamoracle</A>
-            OCaml language based Bayesian Mail program.
-<li>Variable <samp class="word">ERROR</samp> is set to &quot;yes&quot; if the message was UBE.
-	</li>
-<li>Results are available in headers <samp class="word">X-Spam-Spamoracle-Status</samp>,
-            <samp class="word">X-Spam-Spamoracle-Score</samp>, <samp class="word">X-Spam-Spamoracle-Details</samp> and
-	            <samp class="word">X-Spam-Spamoracle-Attachment</samp>  for further analysis.</li>
-</ul>
-
-
-
-
-
-  <a name="454" id="454"></a>
-  <h2>
-      Description
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        There are several bayesian based statistical analysis programs that
-        study the message's tokens and then classify it into two categories:
-        good or bad, or if you like, ham and spam. All the Bayesian programs
-        are not the same, so if you want to achive magic 99.99% probability
-        the only methodology to do that is to chain several programs in
-        serially. There is no single program that can solve the UBE detection.
-
-
-<p class="column8">
-        Using Spamoracle as sole spam protection is inefficient, because
-        version version 1.4 (2004-09-29) does not accept messages from
-        stdin. Becaus of this message has to be written to a temporary file
-        before calling Spamoracle. Later the temporary file must be removed
-        with <samp class="word">rm</samp>. All these three shell calls are needed for each message.
-        If you have other detection programs, call them first to identify
-        unsolicited Bulk Email.
-
-
-
-  <a name="455" id="455"></a>
-  <h2>
-      About bouncing message back
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        The general consensus is, that you should not send bounces. The UBE
-        sender is not there, because the address forged. Do not increase
-        the network traffic; you will not do any good to anybody by
-        bouncing messgas &ndash; you just increase mail traffic even more.
-        Instead save the messages to folders and periodically periodically
-        check their contents.
-
-
-
-  <a name="456" id="456"></a>
-  <h2>
-      Required settings
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        If <samp class="word">spamoracle</samp> program is available, define this variable in your
-        <samp class="word">~/.procmailrc</samp>. Use absolute path to make the external shell
-        quick; it'll save server load considerably.
-
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      JA_UBE_SPAMORACLE_PRG = /usr/bin/spamoracle    </pre></td>
-    </tr>
-</table>
-
-
-<p class="column8">
-        If you <strong class="word">do</strong> <strong class="word">not</strong> have program installed, do not leave the
-        variable lying aroung, because it will keep this subroutine active.
-        Calling a non existing program is not a good idea, so it better to
-        empty the variable if the program is not available.
-
-
-
-  <a name="457" id="457"></a>
-  <h2>
-      Required settings
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        None. No dependencies to other procmail modules.
-
-
-
-  <a name="458" id="458"></a>
-  <h2>
-      Call arguments (variables to set before calling)
-
-  </h2>
-
-
-
-<p>
-<ul>
-	<li><samp class="word">JA_UBE_SPAMORACLE_PRG</samp>, path to program
-<li><samp class="word">JA_UBE_SPAMORACLE_HEADER_PREFIX</samp>, the header name where the results
-            are put. If not defined, no headers are added. Default
-            value is  <em class="word">X-Spam-Spamoracle'</em>.
-	</li>
-<li><samp class="word">JA_UBE_SPAMORACLE_FORCE</samp>, if set to <strong class="word">yes</strong> then call program no matter
-            what. Normally if there already are <em class="word">X-Spam-Spamoracle-</em> headers,
-            it is assumed that the message has already been checked
-            and no new checking is needed.
-	</li>
-<li><samp class="word">JA_UBE_SPAMORACLE_REGEXP</samp>, regexp to match for spam probability.
-            Defaul value will match probabbility of 0.8 with 5 interesting words.
-	            The match is tried agains <em class="word">X-Spam-Spamoracle-Score</em> header.</li>
-</ul>
-
-
-
-
-
-  <a name="459" id="459"></a>
-  <h2>
-      Return values
-
-  </h2>
-
-
-
-<p>
-<ul>
-	<li><samp class="word">ERROR</samp>, value  &quot;yes&quot; if <samp class="word">JA_UBE_SPAMORACLE_REGEXP</samp> matched.
-<li><samp class="word">ERROR_MATCH</samp> contains detailed content of
-	            <samp class="word">X-Spam-Spamoracle-Score</samp> header.</li>
-</ul>
-
-
-
-
-<p class="column8">
-        If headers were enabled, they will contain these values. The
-        score's values are spam probability 0.0 - 1.0 and the degree of
-        similarity 0-15 of the message with the spam messages in the
-        corpus.
-
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      X-Spam-Spamoracle-Status: yes
-      X-Spam-Spamoracle-Score: 1.00 -- 15
-      X-Spam-Spamoracle-Details: refid:98 $$$$:98 surfing:98 asp:95 click:93
-        cable:92 instantly:90 https:88 internet:87 www:86 U4:85 isn't:14 month:81
-        com:75 surf:75
-      X-Spam-Spamoracle-Attachments: cset=&quot;GB2312&quot; type=&quot;application/octet-stream&quot;
-        name=&quot;Guangwen4.zip&quot;    </pre></td>
-    </tr>
-</table>
-
-
-
-  <a name="460" id="460"></a>
-  <h2>
-      Usage example
-
-  </h2>
-
-
-
-<p>
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      PMSRC            = $HOME/procmail # procmail recipe dir
-
-      &lt;other checks, mailing lists, work mail etc.&gt;
-
-      JA_UBE_SPAMORACLE_PRG   = &quot;/usr/bin/nice -n 5 /usr/bin/bmf&quot;
-      INCLUDERC               = $PMSRC/pm-jaube-prg-spamoracle.rc
-
-      #   The ERROR will contains word &quot;yes&quot; if it program classified
-      #   the message into &quot;bad&quot; category.
-
-      :0 :
-      * ERROR ?? yes
-      junk.mbox    </pre></td>
-    </tr>
-</table>
-
-
-
-  <a name="461" id="461"></a>
-  <h2>
-      File layout
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        The layout of this file is managed by Emacs packages tinyprocmail.el
-        and tinytab.el for the 4 tab text placement.
-        See project <a href="http://freshmeat.net/projects/emacs-tiny-tools/" >http://freshmeat.net/projects/emacs-tiny-tools/</A>
-
-<hr>
-	<a name="462"  id="462"></a>
-	<h1>
-	Pm-jaube-prg-spamprobe.rc &ndash; Interface to Spamprobe program
-
-	</h1>
-
-
-
-  <a name="463" id="463"></a>
-  <h2>
-      File id
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        Copyright &copy; 1997-2009 Jari Aalto
-
-
-<p class="column8">
-        This program is free software; you can redistribute it and/or
-        modify it under the terms of the GNU General Public License as
-        published by the Free Software Foundation; either version 2 of the
-        License, or (at your option) any later version
-
-
-<p class="column8">
-        This program is distributed in the hope that it will be useful, but
-        WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-        General Public License for more details at
-        &lt;<a href="http://www.gnu.org/copyleft/gpl.html" >http://www.gnu.org/copyleft/gpl.html</A>&gt;.
-
-
-
-  <a name="464" id="464"></a>
-  <h2>
-      Warning
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        Put all your Unsolicited Bulk Emacil (aka spam) filters towards the
-        end of your <samp class="word">~/.procmailrc</samp>. The idea is that valid messages are filed
-        first (mailing lists, your work and private mail, bounces) and only
-        the uncategorized messages are checked last.
-
-
-<p class="column8">
-        YOU CANNOT USE THIS PROCMAIL SUBROUTINE UNLESS YOU HAVE TRAINED THE
-        BAYESIAN PROGRAM FIRST!
-
-
-<p class="column8">
-        To train:
-
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      $ spamprobe -8 good good.msg ...
-      $ spamprobe -8 spam spam.msg ...    </pre></td>
-    </tr>
-</table>
-
-
-<p class="column8">
-        Make sure there are no stale lock files, or the spamprobe and this
-        subroutine will hang infinitely:
-
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      $ rm -f ~/.spamprobe/lock    </pre></td>
-    </tr>
-</table>
-
-
-
-  <a name="465" id="465"></a>
-  <h2>
-      Overview of features
-
-  </h2>
-
-
-
-<p>
-<ul>
-	<li>Implements interface to <a href="http://freshmeat.net/projects/spamprobe/" >http://freshmeat.net/projects/spamprobe/</A>
-            project.
-<li>variable <samp class="word">ERROR</samp> is set if the message was UBE.
-	</li>
-<li>Results are available by default in header
-	            <samp class="word">X-Spam-Spamprobe-Status</samp>.</li>
-</ul>
-
-
-
-
-
-  <a name="466" id="466"></a>
-  <h2>
-      Description
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        There are several Bayesian based statistical analysis programs that
-        study the message's tokens and then classify it into two categories:
-        good or bad, or if you like, ham and spam. All the Bayesian programs
-        are not the same, so if you want to achive magic 99.99% probability
-        the only methodology to do that is to chain several programs in
-        serially. There is no single program that can solve the UBE detection.
-        This procmail subroutine implements call interface to program
-        <samp class="word">spamprobe</samp>, which must already have been installed.
-
-
-
-  <a name="467" id="467"></a>
-  <h2>
-      About bouncing message back
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        The general consensus is, that you should not send bounces. The UBE
-        sender is not there, because the address forged. Do not increase
-        the network traffic; you will not do any good to anybody by
-        bouncing messgas &ndash; you just increase mail traffic even more.
-        Instead save the messages to folders and periodically periodically
-        check their contents.
-
-
-
-  <a name="468" id="468"></a>
-  <h2>
-      Required settings
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        If <samp class="word">spamprobe</samp> program is available, define this variable in your
-        <samp class="word">~/.procmailrc</samp>. Use absolute path to make the external shell
-        quick; it'll save server load considerably.
-
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      JA_UBE_SPAMPROBE_PRG = /usr/bin/spamprobe    </pre></td>
-    </tr>
-</table>
-
-
-<p class="column8">
-        If you <strong class="word">do</strong> <strong class="word">not</strong> have program installed, do not leave the
-        variable lying aroung, because it will keep this subroutine active.
-        Calling a non existing program is not a good idea, so it better to
-        empty the variable if the program is not available.
-
-
-
-  <a name="469" id="469"></a>
-  <h2>
-      Required settings
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        None. No dependencies to other procmail modules.
-
-
-
-  <a name="470" id="470"></a>
-  <h2>
-      Call arguments (variables to set before calling)
-
-  </h2>
-
-
-
-<p>
-<ul>
-	<li><samp class="word">JA_UBE_SPAMPROBE_PRG</samp>, path to the program.
-<li><samp class="word">JA_UBE_SPAMPROBE_HEADER</samp>, the header name where the results
-            are put. If not defined, no header is added.
-            Defaults to <em class="word">X-Spam-Spamprobe-Status</em>
-	</li>
-<li><samp class="word">JA_UBE_SPAMPROBE_FORCE</samp>, if set to <strong class="word">yes</strong> then call program
-            no matter what. Normally if there already is
-            <em class="word">X-Spam-Spamprobe-Status</em> header, it is assumed that the
-            message has already been checked and no new checking is
-	            needed.</li>
-</ul>
-
-
-
-
-
-  <a name="471" id="471"></a>
-  <h2>
-      Return values
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-	<ul>
-	<li><samp class="word">ERROR</samp>, is set to the return value of <samp class="word">spamprobe</samp> program.</li>
-</ul>
-
-
-
-
-
-  <a name="472" id="472"></a>
-  <h2>
-      Usage example
-
-  </h2>
-
-
-
-<p>
-<p>
-<table class="shade-normal">
-    <tr>
-    <td class="shade-normal-attrib" valign="top">
-    <pre>
-      PMSRC                  = $HOME/procmail # procmail recipe dir
-
-      &lt;other checks, mailing lists, work mail etc.&gt;
-
-      JA_UBE_SPAMPROBE_PRG   = &quot;/usr/bin/nice -n 5 /usr/bin/spamprobe&quot;
-      INCLUDERC              = $PMSRC/pm-jaube-prg-spamprobe.rc
-
-      #   The ERROR will contains word &quot;yes&quot; if message was spam
-
-      :0 :
-      * ERROR ?? yes
-      junk.mbox    </pre></td>
-    </tr>
-</table>
-
-
-
-  <a name="473" id="473"></a>
-  <h2>
-      File layout
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        The layout of this file is managed by Emacs packages tinyprocmail.el
-        and tinytab.el for the 4 tab text placement.
-        See project <a href="http://freshmeat.net/projects/emacs-tiny-tools/" >http://freshmeat.net/projects/emacs-tiny-tools/</A>
-
-<hr>
-	<a name="474"  id="474"></a>
-	<h1>
-	Pm-jaube.rc &ndash; Unsolicited Bulk Email (UBE) filter.
-
-	</h1>
-
-
-
-  <a name="475" id="475"></a>
-  <h2>
-      File id
-
-  </h2>
-
-
-
-
-<p>
-<p class="column8">
-        Copyright &copy; 1997-2009 Jari Aalto
-
-
-<p class="column8">
-        This program is free software; you can redistribute it and/or
-        modify it under the terms of the GNU General Public License as
-        published by the Free Software Foundation; either version 2 of the
-        License, or (at your option) any later version
-
-
-<p class="column8">
-        This program is distributed in the hope that it will be useful, but
-        WITHOUT ANY WARRANTY; without even the implied warranty of
-        MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-        General Public License for more details at
-        &lt;<a href="http://www.gnu.org/copyleft/gpl.html" >http://www.gnu.org/copyleft/gpl.html</A>&gt;.
-
-
-
-  <a name="476" id="476"></a>
-  <h2>
       Warning
 
   </h2>
@@ -13899,7 +13356,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="477" id="477"></a>
+  <a name="431" id="431"></a>
   <h2>
       Are you sure you want to use procmail for UBE?
 
@@ -13949,7 +13406,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="478" id="478"></a>
+  <a name="432" id="432"></a>
   <h2>
       Overview of features
 
@@ -13984,7 +13441,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="479" id="479"></a>
+  <a name="433" id="433"></a>
   <h2>
       Description
 
@@ -14011,7 +13468,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="480" id="480"></a>
+  <a name="434" id="434"></a>
   <h2>
       Logging the events
 
@@ -14129,7 +13586,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="481" id="481"></a>
+  <a name="435" id="435"></a>
   <h2>
       About bouncing message back
 
@@ -14150,7 +13607,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="482" id="482"></a>
+  <a name="436" id="436"></a>
   <h2>
       Required settings
 
@@ -14174,7 +13631,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="483" id="483"></a>
+  <a name="437" id="437"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -14236,7 +13693,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="484" id="484"></a>
+  <a name="438" id="438"></a>
   <h2>
       Return values
 
@@ -14314,7 +13771,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="485" id="485"></a>
+  <a name="439" id="439"></a>
   <h2>
       Usage example
 
@@ -14393,7 +13850,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="486" id="486"></a>
+  <a name="440" id="440"></a>
   <h2>
       File layout
 
@@ -14409,7 +13866,7 @@ dummy = &quot;$id: end:&quot;
         See project <a href="http://freshmeat.net/projects/emacs-tiny-tools/" >http://freshmeat.net/projects/emacs-tiny-tools/</A>
 
 <hr>
-	<a name="487"  id="487"></a>
+	<a name="441"  id="441"></a>
 	<h1>
 	Pm-javac.rc &ndash; Procmail: Vacation framework recipe (id-cache)
 
@@ -14417,7 +13874,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="488" id="488"></a>
+  <a name="442" id="442"></a>
   <h2>
       File id
 
@@ -14447,7 +13904,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="489" id="489"></a>
+  <a name="443" id="443"></a>
   <h2>
       Description
 
@@ -14465,7 +13922,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="490" id="490"></a>
+  <a name="444" id="444"></a>
   <h2>
       Required settings
 
@@ -14489,7 +13946,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="491" id="491"></a>
+  <a name="445" id="445"></a>
   <h2>
       Call arguments (variables to set before calling)
 
@@ -14510,7 +13967,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="492" id="492"></a>
+  <a name="446" id="446"></a>
   <h2>
       Usage example
 
@@ -14586,7 +14043,7 @@ dummy = &quot;$id: end:&quot;
 </table>
 
 <hr>
-	<a name="493"  id="493"></a>
+	<a name="447"  id="447"></a>
 	<h1>
 	Pm-javar.rc &ndash; Global variable definitions
 
@@ -14594,7 +14051,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="494" id="494"></a>
+  <a name="448" id="448"></a>
   <h2>
       File id
 
@@ -14624,7 +14081,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="495" id="495"></a>
+  <a name="449" id="449"></a>
   <h2>
       Description
 
@@ -14697,7 +14154,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="496" id="496"></a>
+  <a name="450" id="450"></a>
   <h2>
       Standard variables defined
 
@@ -14722,7 +14179,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="497" id="497"></a>
+  <a name="451" id="451"></a>
   <h2>
       Special variable JA_FROM_DAEMON
 
@@ -14792,7 +14249,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="498" id="498"></a>
+  <a name="452" id="452"></a>
   <h2>
       Special variable JA_FROM_MAILER
 
@@ -14808,7 +14265,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="499" id="499"></a>
+  <a name="453" id="453"></a>
   <h2>
       Usage example
 
@@ -14857,7 +14314,7 @@ dummy = &quot;$id: end:&quot;
 
 
 
-  <a name="500" id="500"></a>
+  <a name="454" id="454"></a>
   <h2>
       Defined modules
 
@@ -14894,7 +14351,7 @@ dummy = &quot;$id: end:&quot;
 -->
 <hr>
 
-<em    class="footer">Html date: 2008-09-20 14:42<br>
+<em    class="footer">Html date: 2008-09-20 14:57<br>
 
 </em>
 
