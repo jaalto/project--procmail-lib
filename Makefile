@@ -36,6 +36,7 @@ install:
 
 install-test:
 	# for Maintainer only
+	rm -rf tmp
 	make DESTDIR=`pwd`/tmp prefix=/. man_prefix=/. data_prefix=/. install
 
 www:
