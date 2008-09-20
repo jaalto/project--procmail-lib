@@ -44,10 +44,6 @@
 #
 #	    AWK = "/path/to/gawk"  # in Linux, this would be /usr/bin/awk
 #
-#	Also if `perl' binary happens to be v. 4 (unlikely), then please set:
-#
-#	    PERL = "path/to/perl5"
-#
 #	You can define these variables before or after the module, just make
 #	sure the binaries reflect your operating system's paths. In general,
 #	if you "port" your setup to several system, dont' include absolute
