@@ -40,9 +40,12 @@ LIBDIR		= $(DESTDIR)$(prefix)/lib/$(PACKAGE)
 SBINDIR		= $(DESTDIR)$(exec_prefix)/sbin
 ETCDIR		= $(DESTDIR)/etc/$(PACKAGE)
 
-MAN1DIR		= $(MANDIR)/man1
-MAN5DIR		= $(MANDIR)/man5
-MAN8DIR		= $(MANDIR)/man8
+# 1 = regular, 5 = conf, 6 = games, 8 = daemons
+MANDIR		= $(DESTDIR)$(mandir)
+MANDIR1		= $(MANDIR)/man1
+MANDIR5		= $(MANDIR)/man5
+MANDIR6		= $(MANDIR)/man6
+MANDIR8		= $(MANDIR)/man8
 
 INSTALL		= install
 INSTALL_BIN	= $(INSTALL) -m 755

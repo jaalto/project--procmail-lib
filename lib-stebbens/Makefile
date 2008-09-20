@@ -58,7 +58,7 @@ install-procmail:
 
 install-man:
 	# Rule install-man - install manual page
-	$(INSTALL_BIN) -D $(BIN).1 $(MAN1DIR)/$(BIN).1
+	$(INSTALL_BIN) -D $(BIN).1 $(MANDIR1)/$(BIN).1
 
 install-bin:
 	$(INSTALL_BIN) -D $(BIN) $(BINDIR)/$(BIN)
