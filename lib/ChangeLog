@@ -1,3 +1,7 @@
+2008-09-20  Jari Aalto  <jari.aalto@cante.net>
+
+	* pm-jafwd.rc: (top level) Add missing 'Change Log' header.
+
 2007-09-20  Jari Aalto  <jari.aalto@cante.net>
 
 	RELEASE 20070930.1156
