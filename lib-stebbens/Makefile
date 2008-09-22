@@ -27,7 +27,7 @@ include ../common.mk
 
 NAME		     = lib-stebbens
 
-BASEDIR		     = $(DOCDIR)/$(NAME)
+BASEDIR		     = $(SHAREDIR)/$(NAME)
 EXDIR		     = $(BASEDIR)/examples
 
 BIN		     = proclint
@@ -43,8 +43,8 @@ man:
 
 install-doc:
 	# Rule install-doc - install documentation
-	$(INSTALL_BIN) -d $(EXDIR)
-	$(INSTALL_DATA) $(INSTALL_DOC_OBJS) $(EXDIR)
+	$(INSTALL_BIN) -d $(BASEDIR)
+	$(INSTALL_DATA) $(INSTALL_DOC_OBJS) $(BASEDIR)
 
 install-examples:
 	# Rule install-examples - install examples
