@@ -1,3 +1,9 @@
+2008-09-22  Jari Aalto  <jari.aalto@cante.net>
+
+	* pm-jamime-kill.rc: (MIME_BOUNDARY_COUNT 3): Rewrite AWK
+	so that is correctly kills the set JA_MIME_TYPE, like "text/html"
+	portion.
+
 2008-09-20  Jari Aalto  <jari.aalto@cante.net>
 
 	* pm-jafwd.rc: (top level) Add missing 'Change Log' header.

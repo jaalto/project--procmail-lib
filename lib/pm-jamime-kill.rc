@@ -246,7 +246,7 @@
 #       composed message. It's dangerous, so make sure you don't set it
 #       lightly.
 #
-#   Possible conflict with your awk
+#   Possible conflict with the awk
 #
 #       If you see an error message in the log file saying that awk failed:
 #
@@ -458,6 +458,9 @@ jaMimeKillModified   = "no"             # Flag
 jaMimeKillMsg                           # Kill variable
 SHELLMETAS                              # kill variable
 
+dummy = "JA_MIME_TYPE [$JA_MIME_TYPE]"
+dummy = "MIME_BOUNDARY [$MIME_BOUNDARY]"
+
 :0
 * !     JA_MIME_TYPE    ?? ^^^^
 * !     MIME_BOUNDARY   ?? ^^^^
@@ -480,34 +483,64 @@ SHELLMETAS                              # kill variable
     :0
     * MIME_BOUNDARY_COUNT   ?? ^^3^^
     {
-        dummy = "$NL$NL$id: exactly 3 boundary strings $NL"
+        dummy = "$NL$NL$id: exactly 3 boundary strings"
 
         #   - AWK will kill the mime boundary strings, so we must remember
         #     if the message had quoted printable. The variable MIME_B_QP
         #     contain the qp information.
         #
-        #   - Kill up till MIME type (eg. ms-tnef)
-        #   - skip lines that match boundary string
-        #   - Kill user defined lines
-        #   - Kill MIME Content-XXXX headers from the body
+	#   Program logic (effectively a state machine)
+        #   - First blank line is header end. Print header verbatim.
+        #   - Keep track of seen boundaries: 1, 2, 3
+        #   - When EAT (text/html) portion is found, kill text up
+	#     till next boundary marker
         #
         #   We need the "i" flag because awk quits before it has read
         #   all the input
 
-        dummy   = "$id: Killing all MIME"
-
         :0 fbw i
-        | $AWK                                                              \
-          ' {                                                               \
-                line = tolower($0);                                         \
-                if ( match(line, EXIT)      > 0 ) {exit}                    \
-                if ( match($0, RE)          > 0 ) {next}                    \
-                if ( match($0, KILL)        > 0 ) {next}                    \
-                if ( match($0, "^Content-") > 0 ) {next}                    \
-                print;                                                      \
-            }                                                               \
-          ' RE="$MIME_BOUNDARY"                                             \
-            EXIT="$JA_MIME_TYPE"                                            \
+        | $AWK							\
+          '							\
+           /^[ \t]*$/ {						\
+	       print;						\
+	       header = 0;					\
+	   }							\
+								\
+	   header {						\
+	       print;						\
+	       next;						\
+	   }							\
+								\
+	   $0 ~ RE {						\
+	       boundary++;					\
+	   }							\
+								\
+	   {							\
+		if ( killUntil )				\
+		{						\
+		    if ( boundary < killUntil )			\
+		    {						\
+			next;					\
+		    }						\
+		    killUntil = 0;				\
+		}						\
+								\
+		line = tolower($0);				\
+								\
+		if ( ! found  &&  match($0, EAT) > 0 )		\
+		{						\
+		    found++;					\
+		    killUntil = boundary + 1;			\
+		}						\
+								\
+		if ( match($0, RE)          > 0 ) {next}	\
+		if ( match($0, KILL)        > 0 ) {next}	\
+		if ( match($0, "^Content-") > 0 ) {next}	\
+								\
+		print;						\
+	    }							\
+	  ' RE="$MIME_BOUNDARY"					\
+            EAT="^Content-Type:.*$JA_MIME_TYPE"			\
             KILL="$JA_MIME_KILL_RE"
 
         #   -- If AWK succeeded --
@@ -583,9 +616,8 @@ SHELLMETAS                              # kill variable
 #
 #       MIME-Version: 1.0
 #       Content-Type:  multipart/alternative; boundary="...."
-#
 
-dummy = "$NL$NL$id: last resort, kill up till regexp $NL"
+dummy = "$NL$NL$id: last resort, kill up till regexp"
 
 #   Non-mime compliant messages
 #
@@ -593,12 +625,13 @@ dummy = "$NL$NL$id: last resort, kill up till regexp $NL"
 #   If we do not have the boundary string (i.e. this not mime),
 #   then apply this recipe.
 
+dummy = "$id: MIME_BOUNDARY $MIME_BOUNDARY"
+
 :0
 *        MIME_BOUNDARY    ?? ^^^^
 *        JA_MIME_KILL2_RE ?? [a-z]
 *$ B ?? $JA_MIME_KILL2_RE
 {
-
     LINEBUF = $JA_MIME_KILL_LINEBUF
 
     #   Well we could use SED here, but then there is a problem with
