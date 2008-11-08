@@ -42,7 +42,7 @@ $DIR		=~ s,/$,, || chomp($DIR = qx(pwd));
 my $FH_TEMPLATE = 'fh00';
 $|		= 1;
 
-sub usage (;$) {
+sub Usage (;$) {
     my $code = shift || 0;
 
     print <<"EOF"; exit $code;
@@ -73,8 +73,34 @@ when greater than zero.
 EOF
 }
 
-sub Scan {
-    my($file) = shift;
+sub Untab ($) {
+    local $_ = shift;
+
+    while (($x = index($_,"\t")) >= $[) {
+        substr($_,$x,1) = " " x (((($x / 8) + 1) * 8) - $x)
+    }
+
+    $_;
+}
+
+sub Eval {
+    my $val = shift;
+
+    while( ( $val =~ /\$(\w+)/ ) ) {
+        if( defined( $Assigns{$1} ) ) {
+            $val = $` . $Assigns{$1} . $';
+        } elsif( defined( $ENV{$1} ) ) {
+            $val = $` . $ENV{$1} . $';
+        } else {
+            $val = $` . $';     # omit the variable -- it's empty
+        }
+    }
+
+    $val;
+}
+
+sub Scan ($) {
+    my $file = shift;
 
     return if $Scanned{$file};
 
@@ -109,7 +135,7 @@ sub Scan {
 
     while( <$FH> ) {
         chomp;
-        $_ = &untab($_) if /\t/;
+        $_ = Untab $_ if /\t/;
 
         if( $continuation ) {
             $line .= "\n".$_;
@@ -161,7 +187,7 @@ sub Scan {
                 if( $includerc ) {
                     $Assigns{$var} = $val;
                     if( $var eq 'INCLUDERC' ) {
-                        $newfile = &Eval($val);
+                        $newfile = Eval $val;
                         if( $newfile && -f $newfile ) {
                             $includefile = $newfile;
                         } elsif ( $newfile ) {
@@ -242,41 +268,17 @@ sub Scan {
     close $FH;
 }
 
-sub Eval {
-    my($val) = shift;
-
-    while( ( $val =~ /\$(\w+)/ ) ) {
-        if( defined( $Assigns{$1} ) ) {
-            $val = $` . $Assigns{$1} . $';
-        } elsif( defined( $ENV{$1} ) ) {
-            $val = $` . $ENV{$1} . $';
-        } else {
-            $val = $` . $';     # omit the variable -- it's empty
-        }
-    }
-
-    $val;
-}
-
-sub untab {
-    local($_) = shift;
-
-    while (($x = index($_,"\t")) >= $[) {
-        substr($_,$x,1) = " " x (((($x / 8) + 1) * 8) - $x)
-    }
-
-    $_;
-}
-
 sub Main () {
     unless ($#ARGV >= $[) {
-	usage 1;
+	Usage 1;
     }
 
     while( $_ = shift @ARGV ) {
+
 	warn "$_ => @ARGV";
+
 	if ( /^(-h|--help)/ ) {
-	    usage;
+	    Usage;
 	} elsif (  / ^(-l|--list)/ ) {
 	    $listlines++;
 	} elsif ( /^(-L|--nolist)/ ) {
@@ -292,7 +294,7 @@ sub Main () {
 	    print "Unknown option: '$_'\n";
 	    next;
 	} else {
-	    Scan($_);
+	    Scan $_;
 	}
     }
 }
