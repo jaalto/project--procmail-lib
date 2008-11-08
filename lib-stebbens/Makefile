@@ -43,7 +43,7 @@ install-doc:
 install-examples:
 	# Rule install-examples - install examples
 	$(INSTALL_BIN) -d $(EXDIR)
-	$(INSTALL_BIN) -D $(INSTALL_EXAMPLE_OBJS) $(EXDIR)
+	$(INSTALL_DATA) -D $(INSTALL_EXAMPLE_OBJS) $(EXDIR)
 
 install-procmail:
 	# Rule install-procmail - install procmail files
@@ -52,7 +52,7 @@ install-procmail:
 
 install-man:
 	# Rule install-man - install manual page
-	$(INSTALL_BIN) -D $(BIN).1 $(MANDIR1)/$(BIN).1
+	$(INSTALL_DATA) -D $(BIN).1 $(MANDIR1)/$(BIN).1
 
 install-bin:
 	$(INSTALL_BIN) -D $(BIN) $(BINDIR)/$(BIN)
