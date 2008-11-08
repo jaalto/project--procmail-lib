@@ -1,97 +1,123 @@
 #!/usr/bin/perl
 #
-# $Id: proclint,v 1.2 2004/09/21 14:01:47 jaalto Exp $
-#
 # proclint [-[no]list] [-[no]includerc] [-procmailrc] rcfiles ...
 #
-# Author: Alan K. Stebbens <aks@sgi.com>
+# Copyright
 #
-# By default, -noincluderc and -nolist are set.
+#	Copyright (C) 2006-2008 Jari Aalto <jari.aalto@cante.net>
+#	Copyright (C) 1995-1997 Alan Stebbens <aks@sgi.com>
 #
-# Because debugging procmailrc scripts is difficult
-# I try to encode checks into this script.
+# License
 #
-# If -list given, list all lines of the recipe, numbered, and
-# with levels and a type flag character.
+#	This program is free software; you can redistribute it and/or
+#	modify it under the terms of the GNU General Public License as
+#	published by the Free Software Foundation; either version 2 of the
+#	License, or (at your option) any later version
 #
-# Current errors caught:
+#	This program is distributed in the hope that it will be useful, but
+#	WITHOUT ANY WARRANTY; without even the implied warranty of
+#	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+#	General Public License for more details at
+#	Visit <http://www.gnu.org/copyleft/gpl.html>.
 #
-#  '{' and '}' nesting errors.
-#  Missing '*' on conditions
-#  Lines which aren't recipes or assignments
-#  Unterminated recipes
+# Description by Alan Stebbens
 #
+#	By default, -noincluderc and -nolist are set.
+#
+#	Because debugging procmailrc scripts is difficult
+#	I try to encode checks into this script.
+#
+#	If -list given, list all lines of the recipe, numbered, and
+#	with levels and a type flag character.
+#
+#	Current errors caught:
+#
+#	'{' and '}' nesting errors.
+#	Missing '*' on conditions
+#	Lines which aren't recipes or assignments
+#	Unterminated recipes
 
-($DIR,$PROG) = $0 =~ m=^(.*/)?([^/]+)$=;
-$DIR =~ s=/$== || chop($DIR = `pwd`);
+my($DIR,$PROG)	= $0 =~ m,^(.*/)?([^/]+)$,;
+$DIR		=~ s,/$,, || chomp($DIR = qx(pwd));
+my $FH_TEMPLATE = 'fh00';
+$|		= 1;
 
-$| = 1;
+sub usage (;$) {
+    my $code = shift || 0;
 
-unless ($#ARGV >= $[) {
-    usage(1);
+    print <<"EOF"; exit $code;
+usage: $PROG [options] <rcfiles ...>
+Check procmail rc files for proper syntax, recipe nesting, etc.
+Options (default are marked with '*'):
+
+    -h, --help         This message
+    -i, --includerc    Scan and possibly list files included with INCLUDERC
+    -I, --noinclude*   Do not scan INCLUDERC references
+    -l, --list         List lines in the procmail recipe files.
+    -L, --nolist*      Do not list lines, except for errors.
+    -p, --procmailrc   Check \$HOME/.procmailrc
+
+The output consists of: 'LINE-NUMBER:FLAG:DEPTH: text'.
+FLAG is one of:
+
+    'R'         recipe
+    'C'         condition
+    'A'         action (redirect, '!', or pipe, '|')
+    'F'         folder
+    '='         assignment
+    '+'         continuation
+    'E'         *line may be erroneous*
+
+DEPTH indicates the depth of the recipe nesting and is shown only
+when greater than zero.
+EOF
 }
-
-while( $_ = shift @ARGV ) {
-    warn "$_ => @ARGV";
-    if ( /^(-h|--help)/ ) {
-        usage();
-    } elsif (  / ^(-l|--list)/ ) {
-        $listlines++;
-    } elsif ( /^(-L|--nolist)/ ) {
-        $listlines = '';
-    } elsif ( /^(-i|--includerc)/ ) {
-        $includerc++;
-    } elsif ( /^(-I|--noincluderc)/ ) {
-        $includerc = '';
-    } elsif ( /^(-p|--procmailrc)/ ) {
-        $HOME = $ENV{'HOME'} || (getpwuid($>))[7];
-        push(@ARGV,"$HOME/.procmailrc");
-    } elsif ( /^-/ ) {
-        print "Unknown option: '$_'\n";
-        next;
-    } else {
-        Scan($_);
-    }
-}
-
-$FH_TEMPLATE = 'fh00';
 
 sub Scan {
-    local($file) = shift;
+    my($file) = shift;
+
     return if $Scanned{$file};
+
     $Scanned{$file}++;
-    local($fileLevel) = shift || 0;
-    local($mainLevel) = shift || 0;
-    local( $recipe, $errs, $continuation, $line );
-    local( $type, $count, $conditions, $var, $val, $errs );
-    local( $includefile, $depth );
-    local( $level ) = $mainLevel;
-    local( $_ );
+
+    my($fileLevel) = shift || 0;
+    my($mainLevel) = shift || 0;
+    my($recipe, $errs, $continuation, $line);
+    my($type, $count, $conditions, $var, $val);
+    my($includefile, $depth);
+    my($level) = $mainLevel;
+    local($_);
 
     unless ($quiet) {
         print "\n" if $listlines;
         print (" " x $fileLevel);
         print "Scanning file $file:";
     }
+
     local($FH) = $FH_TEMPLATE++;
+
     open( $FH , $file ) || do {
         print "Can't open $file: $!\n";
         return;
     };
+
     print "\n" unless $quiet;
     $recipe = '';
     $errs = '';
     $continuation = '';
     $line = '';
+
     while( <$FH> ) {
-        chop;
+        chomp;
         $_ = &untab($_) if /\t/;
+
         if( $continuation ) {
             $line .= "\n".$_;
             $_ = $line;
             $line = '';
             $continuation = '';
         }
+
         if( /\\$/ ) {           # continuation?
             $continuation = 1;
             chop;               # remove the trailing slash
@@ -100,6 +126,7 @@ sub Scan {
         }
 
         $type = ' ';
+
         if( /^\s*\#/ || /^\s*$/ ) {     # ignore comments or blank lines
             $type = ' ';
             $_ = ' ' unless length;
@@ -187,10 +214,12 @@ sub Scan {
                 $type = '+';
             }
         }
+
         if( $errs ) {
             print $errs;
             $errs = '';
         }
+
         if ($includefile) {
             &Scan( $includefile, $fileLevel + 1, $level );
             unless ($quiet) {
@@ -201,17 +230,20 @@ sub Scan {
             $includefile = '';
         }
     }
+
     if ($recipe) {
         print "$file: EOF: recipe at line $recipe never terminated.\n";
     }
+
     if ($level > $mainLevel) {
         print "$file: EOF: Unterminated nested recipies.\n";
     }
+
     close $FH;
 }
 
 sub Eval {
-    local($val) = shift;
+    my($val) = shift;
 
     while( ( $val =~ /\$(\w+)/ ) ) {
         if( defined( $Assigns{$1} ) ) {
@@ -222,46 +254,49 @@ sub Eval {
             $val = $` . $';     # omit the variable -- it's empty
         }
     }
+
     $val;
 }
 
 sub untab {
     local($_) = shift;
+
     while (($x = index($_,"\t")) >= $[) {
         substr($_,$x,1) = " " x (((($x / 8) + 1) * 8) - $x)
     }
+
     $_;
 }
 
-sub usage ($) {
-    my $code = shift || 0;
+sub Main () {
+    unless ($#ARGV >= $[) {
+	usage 1;
+    }
 
-    print <<"EOF"; exit $code;
-usage: $PROG [options] <rcfiles ...>
-Check procmail rc files for proper syntax, recipe nesting, etc.
-Options (default are marked with '*'):
-
-    -h|--help         This message
-    -i|--includerc    Scan and possibly list files included with INCLUDERC
-    -I|--noinclude*   Do not scan INCLUDERC references
-    -l|--list         List lines in the procmail recipe files.
-    -L|--nolist*      Do not list lines, except for errors.
-    -p|--procmailrc   Check \$HOME/.procmailrc
-
-The output consists of: 'LINE-NUMBER:FLAG:DEPTH: text'.
-FLAG is one of:
-
-    'R'         recipe
-    'C'         condition
-    'A'         action (redirect, '!', or pipe, '|')
-    'F'         folder
-    '='         assignment
-    '+'         continuation
-    'E'         *line may be erroneous*
-
-DEPTH indicates the depth of the recipe nesting and is shown only
-when greater than zero.
-EOF
+    while( $_ = shift @ARGV ) {
+	warn "$_ => @ARGV";
+	if ( /^(-h|--help)/ ) {
+	    usage;
+	} elsif (  / ^(-l|--list)/ ) {
+	    $listlines++;
+	} elsif ( /^(-L|--nolist)/ ) {
+	    $listlines = '';
+	} elsif ( /^(-i|--includerc)/ ) {
+	    $includerc++;
+	} elsif ( /^(-I|--noincluderc)/ ) {
+	    $includerc = '';
+	} elsif ( /^(-p|--procmailrc)/ ) {
+	    $HOME = $ENV{'HOME'} || (getpwuid($>))[7];
+	    push(@ARGV,"$HOME/.procmailrc");
+	} elsif ( /^-/ ) {
+	    print "Unknown option: '$_'\n";
+	    next;
+	} else {
+	    Scan($_);
+	}
+    }
 }
+
+Main();
 
 # End of file
