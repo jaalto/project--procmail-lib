@@ -23,6 +23,8 @@ proclint - Check procmail rc files for proper syntax
 
 =head1 OPTIONS
 
+=over 4
+
 =item B<-h, --help>
 
 Display short help.
