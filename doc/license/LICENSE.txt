@@ -1,6 +1,9 @@
 Copyright information
 
-        Copyright 1997-2007 Jari Aalto
+        This program runs solely with Free Software. It does not rely
+        on any component of non-Free Software.
+
+        Copyright (C) 1997-2008 Jari Aalto
 
         This program (referring to all files, including documentation,
         distributed in project "Procmail Module Library") is free
@@ -19,10 +22,7 @@ Copyright information
         the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
         Boston, MA 02110-1301, USA.
 
-        Visit <http://www.gnu.org/copyleft/gpl.html> for more information
-
-        This program runs solely with Free Software. It does not rely
-        on any component of non-Free Software.
+        Visit <http://www.gnu.org/copyleft/gpl.html> for more information.
 
         - -
 
@@ -34,23 +34,19 @@ Copyright information
 
         The end user can continue to distribute the documentation in
         this dual licence form *or* select the other license (GNU GPL,
-        GNU FDL) and remove the unwanted one. In case of removal, a
-        notice "License <license name> removed <date ISO 8601> by
-        <Firstname Lastname>" must be mentioned somewhere in the
-        distributed files; that notice is allowed to be outside of the
-        original files.
+        GNU FDL) and remove the unwanted one.
 
-            Copyright (C) 1997-2008 Jari Aalto
+	Copyright (C) 1997-2008 Jari Aalto
 
-            Permission is granted to copy, distribute and/or modify
-            this document under the terms of the GNU Free
-            Documentation License, Version 1.2 or any later version
-            published by the Free Software Foundation; with no
-            Invariant Sections, no Front-Cover Texts, and no
-            Back-Cover Texts. A copy of the license is included in the
-            section entitled "GNU Free Documentation License";
-            see the file COPYING.GNU-GFDL.
+	Permission is granted to copy, distribute and/or modify
+	this document under the terms of the GNU Free
+	Documentation License, Version 1.2 or any later version
+	published by the Free Software Foundation; with no
+	Invariant Sections, no Front-Cover Texts, and no
+	Back-Cover Texts. A copy of the license is included in the
+	section entitled "GNU Free Documentation License";
+	see the file COPYING.GNU-GFDL.
 
-            Visit <http://www.gnu.org/licenses/fdl.html> for more information.
+	Visit <http://www.gnu.org/licenses/fdl.html> for more information.
 
 End
