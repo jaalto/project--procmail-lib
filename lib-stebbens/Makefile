@@ -27,7 +27,7 @@ include ../common.mk
 
 NAME		     = lib-stebbens
 
-BASEDIR		     = $(SHAREDIR)/$(NAME)
+BASEDIR		     = $(DOCDIR)/$(NAME)
 EXDIR		     = $(BASEDIR)/examples
 
 BIN		     = proclint
@@ -53,7 +53,7 @@ install-examples:
 
 install-procmail:
 	# Rule install-procmail - install procmail files
-	$(INSTALL_BIN)	-d  $(SHAREDIR)
+	$(INSTALL_BIN) -d $(SHAREDIR)
 	$(INSTALL_DATA)	$(INSTALL_PM_OBJS) $(SHAREDIR)
 
 install-man:
