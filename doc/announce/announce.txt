@@ -1,5 +1,6 @@
 Newsgroups: comp.mail.misc
 CC: Procmail mailing list <procmail@lists.RWTH-Aachen.DE>
+Newsgroups: gmane.mail.procmail, comp.mail.misc
 Subject: Procmail Module Library released
 --text follows this line--
 
