@@ -23,28 +23,28 @@ proclint - Check procmail rc files for proper syntax
 
 =head1 OPTIONS
 
-=item B<-h|--help>
+=item B<-h, --help>
 
 Display short help.
 
-=item B<-i|--includerc>
+=item B<-i, --includerc>
 
 Scan and possibly list files included in code with INCLUDERC
 statements.
 
-=item B<-I|--noinclude>
+=item B<-I, --noinclude>
 
 Do not scan INCLUDERC references (default).
 
-=item B<-l|--list>
+=item B<-l, --list>
 
 List lines in the procmail recipe files.
 
-=item B<-L|--nolist>
+=item B<-L, --nolist>
 
 Do not list lines, except for errors (default).
 
-=item B<-p|--procmailrc>
+=item B<-p, --procmailrc>
 
 Check $HOME/.procmailrca
 
@@ -66,6 +66,10 @@ output consists of: 'LINE-NUMBER:FLAG:DEPTH: text'. FLAG is one of:
 DEPTH indicates the depth of the recipe nesting and is shown only
 when greater than zero.
 
+=head1 BUGS
+
+There are many bugs. Please regard the output as advisory only.
+
 =head1 ENVIRONMENT
 
 None.
@@ -80,9 +84,11 @@ procmail(1)
 
 =head1 AUTHORS
 
-Alan K. Stebbens <aks@sgi.com>
+Program was written by Alan K. Stebbens <aks@sgi.com>.
 
 This manual page was written by Jari Aalto <jari.aalto@cante.net>.
-Released under license GPL v2 or any later version.
+Released under license GNU GPL v2 or (at your option) any later
+version. For more information about license, visit
+<http://www.gnu.org/copyleft/gpl.html>.
 
 =cut
