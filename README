@@ -6,12 +6,16 @@ This is collection of plug-in modules include: parse dates, time,
 email addresses, mail forward, pop3, Spam detection, Cron, MIME file
 servers, daemon messages and more.
 
+This package contains 2 separate libraries. The original 1995-1997
+Alan Stebbens' libraries and ones from Jari Aalto in their separate
+directories.
+
     doc/            		Documentation
     doc/examples/   		Procmail startup file examples
     doc/source/license/         Licensing information
     lib/            		The "code". Plug-in modules
 
-    lib-stebbens/   		Alan Stebben's orignal modules.
+    lib-stebbens/   		Alan Stebben's original modules.
 				Historical; Bug reports are ignored
 				for these.
 
