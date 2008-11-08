@@ -17,7 +17,9 @@ How to install
         Installation requires GNU make. The default location is
         /usr/local/share/procmail-lib for modules and
         /usr/local/share/doc/procmail-lib for documentation. Supply
-        `prefix' and/or `exec_prefix' to make(1) call as needed:
+        `prefix' and/or `exec_prefix' to make(1) call as needed. Note
+        that the DESTDIR *must* be absolute path, because makefiles
+	are run in their own directories.
 
             make prefix=/usr install
 
