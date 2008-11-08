@@ -24,12 +24,13 @@ prefix		?= /usr/local
 exec_prefix	?= $(prefix)
 bindir		?= $(exec_prefix)/bin
 sharedir	?= $(prefix)/share
-man_prefix	?= $(prefix)
-mandir		?= $(prefix)/man
 
 ifeq ($(prefix),/usr)
-    man_prefix	?= $(prefix)/share
+    man_prefix	= $(prefix)/share
     mandir	?= $(man_prefix)/man
+else
+    man_prefix	?= $(prefix)
+    mandir      ?= $(prefix)/man
 endif
 
 BINDIR		?= $(DESTDIR)$(bindir)
