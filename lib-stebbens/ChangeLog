@@ -1,3 +1,8 @@
+2008-11-08  Jari Aalto  <jari.aalto@cante.net>
+
+	* proclint.1.pod: (BUGS): Add. (AUTHORS): Update Copyright.
+	(OPTIONS): Change -o|--option format to "-o, --option".
+
 2004-12-16 Thu  Jari Aalto  <jari dot aalto A T cante dot net>
 
         * Makefile: 1.4 CODEDIR changed to DATADIR.

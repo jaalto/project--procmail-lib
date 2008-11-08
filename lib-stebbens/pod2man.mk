@@ -10,21 +10,22 @@
 #	This program is distributed in the hope that it will be useful, but
 #	WITHOUT ANY WARRANTY; without even the implied warranty of
 #	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
-#	General Public License for more details.
-#	Visit <http://www.gnu.org/copyleft/gpl.html>
+#	General Public License for more details at
+#	Visit <http://www.gnu.org/copyleft/gpl.html>.
 
-BIN		= package
-PODCENTER	= $$(date "+%Y-%m-%d")
-MANSECT		= 1
-MANDEST		= $(MANSRC)
+BIN		?= package
+PODCENTER	?= $$(date "+%Y-%m-%d")
+MANSECT		?= 1
+MANDEST		?= $(MANSRC)
 
-MANPOD		= $(MANSRC)$(BIN).$(MANSECT).pod
-MANPAGE		= $(MANDEST)$(BIN).$(MANSECT)
+MANPOD		?= $(MANSRC)$(BIN).$(MANSECT).pod
+MANPAGE		?= $(MANDEST)$(BIN).$(MANSECT)
 
 makeman: $(MANPAGE)
 
 $(MANPAGE): $(MANPOD)
 	which pod2man && \
+	podchecker $(MANPOD) && \
 	pod2man --center="$(PODCENTER)" \
 		--name="$(BIN)" \
 		--section="$(MANSECT)" \
