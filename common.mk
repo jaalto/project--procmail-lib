@@ -34,7 +34,7 @@ else
 endif
 
 BINDIR		?= $(DESTDIR)$(bindir)
-DOCDIR		?= $(DESTDIR)$(sharedir)/doc
+DOCDIR		?= $(DESTDIR)$(sharedir)/doc/$(PACKAGE)
 SHAREDIR	?= $(DESTDIR)$(prefix)/share/$(PACKAGE)
 LIBDIR		?= $(DESTDIR)$(prefix)/lib/$(PACKAGE)
 SBINDIR		?= $(DESTDIR)$(exec_prefix)/sbin
