@@ -36,7 +36,7 @@ install-test:
 	# Rule install-test - for Maintainer only
 	rm -rf tmp
 	make DESTDIR=`pwd`/tmp prefix=/. install
-	@echo find -type f tmp
+	@echo "find tmp -type f | less"
 
 www:
 	# Rule www - for Maintainer only
