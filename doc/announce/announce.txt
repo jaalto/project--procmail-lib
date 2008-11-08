@@ -1,9 +1,9 @@
 Newsgroups: comp.mail.misc
 CC: Procmail mailing list <procmail@lists.RWTH-Aachen.DE>
-Subject: Procmail Module Library 2004.1216 released
+Subject: Procmail Module Library released
 --text follows this line--
 
-Main page   : http://freshemat.net/projects/procmail-lib
+Project page: http://freshemat.net/projects/procmail-lib
 Procmail    : http://www.procmail.org/ and
               http://mailman.rwth-aachen.de/mailman/listinfo/procmail
 
