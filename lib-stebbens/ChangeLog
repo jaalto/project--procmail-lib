@@ -1,4 +1,13 @@
+2008-12-09  Jari Aalto  <jari.aalto@cante.net>
+
+	* proclint (Main): Remove 'warn' debugging code.
+
 2008-11-08  Jari Aalto  <jari.aalto@cante.net>
+
+	* proclint: Add proper Copyright, License. Modernize Perl code
+	by changing local to my. Move code and functions to the beginning
+	so that functions are defined before used. Add Main(). Add function
+	protype definitions.
 
 	* proclint.1.pod: (BUGS): Add. (AUTHORS): Update Copyright.
 	(OPTIONS): Change -o|--option format to "-o, --option".
