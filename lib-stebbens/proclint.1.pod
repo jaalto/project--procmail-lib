@@ -70,7 +70,14 @@ when greater than zero.
 
 =head1 BUGS
 
-There are many bugs. Please regard the output as advisory only.
+There are many bugs. E.g. multiline handling is not done (continued
+strings).
+
+Please regard the output as advisory only.x
+
+=head1 STATUS CODES
+
+Program returns non-zero in case problem is found.
 
 =head1 ENVIRONMENT
 

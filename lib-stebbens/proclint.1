@@ -124,17 +124,17 @@
 .\" ========================================================================
 .\"
 .IX Title "proclint 1"
-.TH proclint 1 "2008-11-08" "proclint" "2008-11-08"
+.TH proclint 1 "2008-12-09" "proclint" "2008-12-09"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
 .nh
 .SH "NAME"
-proclint \- Check procmail rc files for proper syntax
+proclint \- Lint procmail rc files for proper syntax
 .SH "SYNOPSIS"
 .IX Header "SYNOPSIS"
 .Vb 1
-\&  proclint [options] *.rc
+\&  proclint [options] <procmail *.rc files>
 .Ve
 .SH "OPTIONS"
 .IX Header "OPTIONS"
@@ -160,23 +160,29 @@ Check \f(CW$HOME\fR/.procmailrca
 .SH "DESCRIPTION"
 .IX Header "DESCRIPTION"
 Check procmail rc files for proper syntax, recipe nesting, etc. The
-output consists of: '\s-1LINE\-NUMBER:FLAG:DEPTH:\s0 text'. \s-1FLAG\s0 is one of:
+output consists of: \f(CW\*(C`LINE\-NUMBER:FLAG:DEPTH: text\*(C'\fR. \s-1FLAG\s0 is one of:
 .PP
 .Vb 7
-\&    \*(AqR\*(Aq         recipe
-\&    \*(AqC\*(Aq         condition
-\&    \*(AqA\*(Aq         action (redirect, \*(Aq!\*(Aq, or pipe, \*(Aq|\*(Aq)
-\&    \*(AqF\*(Aq         folder
-\&    \*(Aq=\*(Aq         assignment
-\&    \*(Aq+\*(Aq         continuation
-\&    \*(AqE\*(Aq         *line may be erroneous*
+\&    R  recipe
+\&    C  condition
+\&    A  action (redirect, \*(Aq!\*(Aq, or pipe, \*(Aq|\*(Aq)
+\&    F  folder
+\&    =  assignment
+\&    +  continuation
+\&    E  *line may be erroneous*
 .Ve
 .PP
 \&\s-1DEPTH\s0 indicates the depth of the recipe nesting and is shown only
 when greater than zero.
 .SH "BUGS"
 .IX Header "BUGS"
-There are many bugs. Please regard the output as advisory only.
+There are many bugs. E.g. multiline handling is not done (continued
+strings).
+.PP
+Please regard the output as advisory only.x
+.SH "STATUS CODES"
+.IX Header "STATUS CODES"
+Program returns non-zero in case problem is found.
 .SH "ENVIRONMENT"
 .IX Header "ENVIRONMENT"
 None.
