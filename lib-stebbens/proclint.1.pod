@@ -15,11 +15,11 @@
 
 =head1 NAME
 
-proclint - Check procmail rc files for proper syntax
+proclint - Lint procmail rc files for proper syntax
 
 =head1 SYNOPSIS
 
-  proclint [options] *.rc
+  proclint [options] <procmail *.rc files>
 
 =head1 OPTIONS
 
@@ -55,15 +55,15 @@ Check $HOME/.procmailrca
 =head1 DESCRIPTION
 
 Check procmail rc files for proper syntax, recipe nesting, etc. The
-output consists of: 'LINE-NUMBER:FLAG:DEPTH: text'. FLAG is one of:
+output consists of: C<LINE-NUMBER:FLAG:DEPTH: text>. FLAG is one of:
 
-    'R'         recipe
-    'C'         condition
-    'A'         action (redirect, '!', or pipe, '|')
-    'F'         folder
-    '='         assignment
-    '+'         continuation
-    'E'         *line may be erroneous*
+    R  recipe
+    C  condition
+    A  action (redirect, '!', or pipe, '|')
+    F  folder
+    =  assignment
+    +  continuation
+    E  *line may be erroneous*
 
 DEPTH indicates the depth of the recipe nesting and is shown only
 when greater than zero.

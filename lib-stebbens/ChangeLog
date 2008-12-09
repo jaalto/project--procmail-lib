@@ -1,5 +1,7 @@
 2008-12-09  Jari Aalto  <jari.aalto@cante.net>
 
+	* proclint.1.pod: Improve manual page.
+
 	* proclint (Main): Remove 'warn' debugging code.
 
 2008-11-08  Jari Aalto  <jari.aalto@cante.net>
