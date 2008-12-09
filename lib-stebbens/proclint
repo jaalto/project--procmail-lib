@@ -274,9 +274,6 @@ sub Main () {
     }
 
     while( $_ = shift @ARGV ) {
-
-	warn "$_ => @ARGV";
-
 	if ( /^(-h|--help)/ ) {
 	    Usage;
 	} elsif (  / ^(-l|--list)/ ) {
