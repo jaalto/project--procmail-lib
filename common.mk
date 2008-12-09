@@ -30,7 +30,7 @@ ifeq ($(prefix),/usr)
     mandir	?= $(man_prefix)/man
 else
     man_prefix	?= $(prefix)
-    mandir      ?= $(prefix)/man
+    mandir	?= $(prefix)/man
 endif
 
 BINDIR		?= $(DESTDIR)$(bindir)
