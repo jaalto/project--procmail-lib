@@ -31,20 +31,18 @@
 #       recipe only applies to whole _body_.
 #
 #       The `pm-jamime-*.rc' is really stretching the limits and any
-#       serious works hould be delegated to appropriate Perl MIME modules.
-#       There is a Perl MIME module which will allow you to manipulate MIME
-#       body parts rather elegantly. See
-#       http://www.perl.com/CPAN-local/authors/Eryq/ for MIME-tools.
+#       serious work should be delegated to other tools. Alternatives:
 #
-#       Se also mimedecode at ftp://ftp.dde.dk/pub/mimedecode.c which
-#       in included in Debian Linux.
+#       o   A Perl MIME module which will allow you to manipulate MIME
+#           body parts rather elegantly. See
+#           http://www.perl.com/CPAN-local/authors/Eryq/ for MIME-tools.
+#       o   mimedecode at ftp://ftp.dde.dk/pub/mimedecode.c
 #
 #   Notes
 #
-#       Perl or python is not used, because both are CPU intensive. It
+#       Perl or Python is not used, because both are CPU intensive. It
 #       would be too expansive for accounts or environments receiving
-#       hundreds of mails
-#	per day (like from several mailing lists).
+#       hundreds of mails per day (like from several mailing lists).
 #
 #       RFC 2047 gives possiblity to use MIME iso-8859-1 extensions
 #       for mail headers.
@@ -87,10 +85,10 @@
 #
 #   Return values
 #
-#       o    `PM_JAMIME_COMPLEX_SUBJECT' is set to "yes"
-#            if Subject header contains ISO encoding several times, it
-#            cannot be handled by this module. This flag is set to
-#            indicate that some other program shoudl handle the message.
+#       o    `PM_JAMIME_COMPLEX_SUBJECT' is set to "yes".
+#            This flag is set to indicate that some other program
+#            should handle the message. If Subject header contains ISO
+#            encoding several times, it cannot be handled by this module.
 #
 #   Examples
 #
@@ -151,6 +149,8 @@ dummy = "pm-jamime-decode.rc: handle quoted printable"
 PM_JAMIME_COMPLEX_SUBJECT       # Return value if too complex subject
 
 jamimeHandledSubject = "no"
+
+#  Kill variables
 jamimeSubject
 jamimeSubjectRest
 
@@ -218,7 +218,7 @@ jamimeSubjectRest
 #  Too bad Procmail does not have subroutines. This recipe is
 #  identical to "Subject" check above.
 #
-#  Note, that From header is different form the Subject header
+#  Note, that 'From' header is different from the 'Subject' header
 #  in respect to the ISO encoding. Look closely where '?=' ends:
 #
 #    Subject: =?ISO-8859-1?Q?=C4hnlichkeiten_von_=DCbungen?=
@@ -268,7 +268,6 @@ jamimeHandledFrom = "no"
 
 :0
 *    JA_MIME_DECODE_TREAT_BODY  ?? yes
-*  ! JA_MIME_TYPE               ?? ^^^^
 *$   $JA_MIME_DECODE_REGEXP
 {
     :0 fbw

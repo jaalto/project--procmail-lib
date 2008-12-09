@@ -1,3 +1,9 @@
+2008-12-09  Jari Aalto  <jari.aalto@cante.net>
+
+	* pm-jamime-decode.rc (jamimeHandledFrom): Remove unused
+	JA_MIME_TYPE which prevented calling the recipe. Closes Debian bug
+	#388526.
+
 2008-09-22  Jari Aalto  <jari.aalto@cante.net>
 
 	* pm-jamime-kill.rc: (MIME_BOUNDARY_COUNT 3): Rewrite AWK
