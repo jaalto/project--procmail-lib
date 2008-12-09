@@ -2,7 +2,8 @@
 
 	* proclint.1.pod: Improve manual page.
 
-	* proclint (Main): Remove 'warn' debugging code.
+	* proclint (Main): Remove 'warn' debugging code. Add Scan() prototype.
+	Add $ERROR to return status code.
 
 2008-11-08  Jari Aalto  <jari.aalto@cante.net>
 

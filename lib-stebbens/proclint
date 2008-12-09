@@ -40,6 +40,7 @@
 my($DIR,$PROG)	= $0 =~ m,^(.*/)?([^/]+)$,;
 $DIR		=~ s,/$,, || chomp($DIR = qx(pwd));
 my $FH_TEMPLATE = 'fh00';
+my $ERROR       = 0;
 $|		= 1;
 
 sub Usage (;$) {
@@ -99,20 +100,21 @@ sub Eval {
     $val;
 }
 
-sub Scan ($) {
-    my $file = shift;
+sub Scan ($; $$);
+
+sub Scan ($; $$) {
+    my $file      = shift;
+    my $fileLevel = shift || 0;
+    my $mainLevel = shift || 0;
 
     return if $Scanned{$file};
 
     $Scanned{$file}++;
 
-    my($fileLevel) = shift || 0;
-    my($mainLevel) = shift || 0;
-    my($recipe, $errs, $continuation, $line);
     my($type, $count, $conditions, $var, $val);
     my($includefile, $depth);
     my($level) = $mainLevel;
-    local($_);
+    local $_;
 
     unless ($quiet) {
         print "\n" if $listlines;
@@ -122,16 +124,17 @@ sub Scan ($) {
 
     local($FH) = $FH_TEMPLATE++;
 
-    open( $FH , $file ) || do {
+    open( $FH , $file )  or  do {
         print "Can't open $file: $!\n";
+	$ERROR = 1;
         return;
     };
 
     print "\n" unless $quiet;
-    $recipe = '';
-    $errs = '';
-    $continuation = '';
-    $line = '';
+    my $recipe		= '';
+    my $errs		= '';
+    my $continuation	= '';
+    my $line		= '';
 
     while( <$FH> ) {
         chomp;
@@ -139,8 +142,8 @@ sub Scan ($) {
 
         if( $continuation ) {
             $line .= "\n".$_;
-            $_ = $line;
-            $line = '';
+            $_     = $line;
+            $line  = '';
             $continuation = '';
         }
 
@@ -153,11 +156,11 @@ sub Scan ($) {
 
         $type = ' ';
 
-        if( /^\s*\#/ || /^\s*$/ ) {     # ignore comments or blank lines
+        if( /^\s*\#/  or  /^\s*$/ ) {     # ignore comments or blank lines
             $type = ' ';
             $_ = ' ' unless length;
         }
-        elsif( ! $recipe || /^\s*:/) {  # are we looking for a recipe?
+        elsif( ! $recipe  or  /^\s*:/) {  # are we looking for a recipe?
             # This is a state driven scanner
             # State     Parse   Next    What
             #   0        :       1      Start recipe parse
@@ -225,14 +228,16 @@ sub Scan ($) {
                 if ( /^\s*[\#*(){}|!?]|^\s*\w+ \w+/ ) { # make reasonable mistake guess
                     $errs .= "Possibly bad folder name?\n";
                 }
+
                 $recipe = '';
             }
         }
 
       Print:
-        if ($listlines || $errs) {
-            @lines = split(/\n/,$_);
+        if ( $listlines  or  $errs ) {
+            @lines = split /\n/;
             $depth = $level > 0 ? sprintf("<%d>",$level) : "   ";
+
             while ($_ = shift(@lines)) {
                 print (" " x $fileLevel);
                 $_ .= "\\" if @lines;
@@ -243,11 +248,12 @@ sub Scan ($) {
 
         if( $errs ) {
             print $errs;
+            $ERROR = 1;
             $errs = '';
         }
 
         if ($includefile) {
-            &Scan( $includefile, $fileLevel + 1, $level );
+            Scan( $includefile, $fileLevel + 1, $level );
             unless ($quiet) {
                 print "\n" if $listlines;
                 print (" " x $fileLevel);
@@ -259,10 +265,12 @@ sub Scan ($) {
 
     if ($recipe) {
         print "$file: EOF: recipe at line $recipe never terminated.\n";
+        $ERROR = 1;
     }
 
     if ($level > $mainLevel) {
         print "$file: EOF: Unterminated nested recipies.\n";
+        $ERROR = 1;
     }
 
     close $FH;
@@ -294,6 +302,8 @@ sub Main () {
 	    Scan $_;
 	}
     }
+
+    return $ERROR;
 }
 
 Main();
