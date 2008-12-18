@@ -219,9 +219,10 @@
 #       o   `JA_MIME_TYPE' is a case sensitive AWK *REGEXP*. Always use
 #           *lowercase* letters in this regexp because the line is lowercased
 #           before match is made. This regexp determines if the kill
-#           recipe is applied to the message or not. Value is set for
-#           MS explorer, MS express, Netscape and Lotus Notes etc.
-#           messages by default.
+#           recipe is applied to the message or not. Suggested default
+#           value: "text/html". If empty (not set), the heuristics
+#           tries to set it for MS explorer, MS express, Netscape,
+#           Lotus Notes etc.
 #       o   `JA_MIME_KILL_RE', additional *REGEXP* to kill lines from the
 #           message. Value is case sensitive awk regexp and by default matches
 #           Lotus notes tag: name="XXX.PCX".
@@ -381,7 +382,7 @@ JA_MIME_EXTRA_HEADER = ${JA_MIME_EXTRA_HEADER:-"X-Mime-Type-Killed"}
 {
     dummy = "$id: automatic JA_MIME_TYPE detection"
 
-    #   Suppose this and change type below if we get a hit
+    #   The (safe) default value. Will be changed below
 
     JA_MIME_TYPE = "application/ms-tnef"
 
@@ -460,6 +461,7 @@ SHELLMETAS                              # kill variable
 
 dummy = "JA_MIME_TYPE [$JA_MIME_TYPE]"
 dummy = "MIME_BOUNDARY [$MIME_BOUNDARY]"
+dummy = "Check if running the kill recipe"
 
 :0
 * !     JA_MIME_TYPE    ?? ^^^^
@@ -470,9 +472,9 @@ dummy = "MIME_BOUNDARY [$MIME_BOUNDARY]"
     #   If there were only 3 mime tags, then then message is in format
     #
     #       boundary-tag
-    #        message
+    #         message
     #       boundary-tag
-    #        unwanted-mime-part
+    #         unwanted-mime-part
     #       boundary-tag
     #
     #   a) make sure count is 3
@@ -489,58 +491,58 @@ dummy = "MIME_BOUNDARY [$MIME_BOUNDARY]"
         #     if the message had quoted printable. The variable MIME_B_QP
         #     contain the qp information.
         #
-	#   Program logic (effectively a state machine)
+        #   Program logic (effectively a state machine)
         #   - First blank line is header end. Print header verbatim.
         #   - Keep track of seen boundaries: 1, 2, 3
         #   - When EAT (text/html) portion is found, kill text up
-	#     till next boundary marker
+        #     till next boundary marker
         #
         #   We need the "i" flag because awk quits before it has read
         #   all the input
 
         :0 fbw i
-        | $AWK							\
-          '							\
-           /^[ \t]*$/ {						\
-	       print;						\
-	       header = 0;					\
-	   }							\
-								\
-	   header {						\
-	       print;						\
-	       next;						\
-	   }							\
-								\
-	   $0 ~ RE {						\
-	       boundary++;					\
-	   }							\
-								\
-	   {							\
-		if ( killUntil )				\
-		{						\
-		    if ( boundary < killUntil )			\
-		    {						\
-			next;					\
-		    }						\
-		    killUntil = 0;				\
-		}						\
-								\
-		line = tolower($0);				\
-								\
-		if ( ! found  &&  match($0, EAT) > 0 )		\
-		{						\
-		    found++;					\
-		    killUntil = boundary + 1;			\
-		}						\
-								\
-		if ( match($0, RE)          > 0 ) {next}	\
-		if ( match($0, KILL)        > 0 ) {next}	\
-		if ( match($0, "^Content-") > 0 ) {next}	\
-								\
-		print;						\
-	    }							\
-	  ' RE="$MIME_BOUNDARY"					\
-            EAT="^Content-Type:.*$JA_MIME_TYPE"			\
+        | $AWK                                                  \
+          '                                                     \
+           /^[ \t]*$/ {                                         \
+               print;                                           \
+               header = 0;                                      \
+           }                                                    \
+                                                                \
+           header {                                             \
+               print;                                           \
+               next;                                            \
+           }                                                    \
+                                                                \
+           $0 ~ RE {                                            \
+               boundary++;                                      \
+           }                                                    \
+                                                                \
+           {                                                    \
+                if ( killUntil )                                \
+                {                                               \
+                    if ( boundary < killUntil )                 \
+                    {                                           \
+                        next;                                   \
+                    }                                           \
+                    killUntil = 0;                              \
+                }                                               \
+                                                                \
+                line = tolower($0);                             \
+                                                                \
+                if ( ! found  &&  match($0, EAT) > 0 )          \
+                {                                               \
+                    found++;                                    \
+                    killUntil = boundary + 1;                   \
+                }                                               \
+                                                                \
+                if ( match($0, RE)          > 0 ) {next}        \
+                if ( match($0, KILL)        > 0 ) {next}        \
+                if ( match($0, "^Content-") > 0 ) {next}        \
+                                                                \
+                print;                                          \
+            }                                                   \
+          ' RE="$MIME_BOUNDARY"                                 \
+            EAT="^Content-Type:.*$JA_MIME_TYPE"                 \
             KILL="$JA_MIME_KILL_RE"
 
         #   -- If AWK succeeded --
@@ -597,17 +599,26 @@ dummy = "MIME_BOUNDARY [$MIME_BOUNDARY]"
     | $AWK                                                                  \
       ' {                                                                   \
             line = tolower($0);                                             \
+                                                                            \
             if ( match(line, HDR) > 0 )                                     \
             {                                                               \
-                 flag = 1; print "Content-Type: text/plain;"                \
+                 flag = 1;                                                  \
+                 print "Content-Type: text/plain;";                         \
             }                                                               \
-            if ( match($0, RE) ) { flag = 0 }                               \
-            if ( flag == 0 )     { print    }                               \
+                                                                            \
+            if ( match($0, RE) )                                            \
+            {                                                               \
+                flag = 0;                                                   \
+            }                                                               \
+                                                                            \
+            if ( flag == 0 )                                                \
+            {                                                               \
+                print;                                                      \
+            }                                                               \
         }                                                                   \
       ' RE="$MIME_BOUNDARY" HDR="$JA_MIME_TYPE"
 
     LINEBUF = $jaMimeKillLINEBUF
-
 }
 
 # ..................................................... &invalid-mime ...

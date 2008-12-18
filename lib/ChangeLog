@@ -1,3 +1,8 @@
+2008-12-18  Jari Aalto  <jari.aalto@cante.net>
+
+	* pm-jamime-kill.rc: Cosmetics. Adjust comments, code layout and
+	improve documentation of variable JA_MIME_TYPE.
+
 2008-12-09  Jari Aalto  <jari.aalto@cante.net>
 
 	* pm-jamime-decode.rc (jamimeHandledFrom): Remove unused
