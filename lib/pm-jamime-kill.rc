@@ -261,12 +261,21 @@
 #
 #           % awk '{print VAR; exit}' VAR="value" /etc/passwd
 #
-#       It should print "value". If not, then see if you have `nawk' or
-#       `gawk' in the system. They should understand the variable passing
+#       It should print "value". If not, then see if you have `gawk' or
+#       `mawk' in the system. Try whcih awk understands the variable passing
 #       syntax. The only change needed is to define variable AWK
 #       somewhere at the top of `~/.procmailrc'.
 #
 #           AWK = "gawk"        # Better than standard "awk"
+#
+#        WARNING: In some systems the `gawk' is not real GNU awk, but a
+#        symlink to somewhere alse. E.g. in SunOs/Solaris you may find this
+#        setup, which is unsufficient. For Solaris, the GNU awk is available
+#        at http://www.blastwave.org
+#
+#	    $ which gawk
+#	    $ ls -l /usr/local/bin/gawk
+#	    /usr/local/bin/gawk -> /usr/bin/nawk
 #
 #   Warnings
 #
@@ -461,7 +470,7 @@ SHELLMETAS                              # kill variable
 
 dummy = "JA_MIME_TYPE [$JA_MIME_TYPE]"
 dummy = "MIME_BOUNDARY [$MIME_BOUNDARY]"
-dummy = "Check if running the kill recipe"
+dummy = "Check if running the kill recipe, SHELL= $SHELL"
 
 :0
 * !     JA_MIME_TYPE    ?? ^^^^
