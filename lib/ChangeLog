@@ -1,3 +1,8 @@
+2008-12-20  Jari Aalto  <jari.aalto@cante.net>
+
+	* pm-jamime-kill.rc: (Possible conflict with the awk): Warn
+	about gawk being a symlink and not real GNU awk.
+
 2008-12-18  Jari Aalto  <jari.aalto@cante.net>
 
 	* pm-jamime-kill.rc: Cosmetics. Adjust comments, code layout and

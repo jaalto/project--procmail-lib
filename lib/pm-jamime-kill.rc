@@ -274,6 +274,8 @@
 #        at http://www.blastwave.org
 #
 #	    $ which gawk
+#           $ gawk --version
+#             <syntax error>
 #	    $ ls -l /usr/local/bin/gawk
 #	    /usr/local/bin/gawk -> /usr/bin/nawk
 #
