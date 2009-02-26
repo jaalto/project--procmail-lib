@@ -2,7 +2,7 @@
 #
 #   File id
 #
-#       Copyright (C) 1997-2008 Jari Aalto
+#       Copyright (C) 1997-2009 Jari Aalto
 #
 #       This program is free software; you can redistribute it and/or
 #       modify it under the terms of the GNU General Public License as
@@ -498,7 +498,7 @@ dummy = "Check if running the kill recipe, SHELL= $SHELL"
     {
         dummy = "$NL$NL$id: exactly 3 boundary strings"
 
-        #   - AWK will kill the mime boundary strings, so we must remember
+        #   - AWK removes the mime boundary strings, so we must remember
         #     if the message had quoted printable. The variable MIME_B_QP
         #     contain the qp information.
         #
