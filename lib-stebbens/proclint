@@ -43,7 +43,8 @@ my $FH_TEMPLATE = 'fh00';
 my $ERROR       = 0;
 $|		= 1;
 
-sub Usage (;$) {
+sub Usage (;$)
+{
     my $code = shift || 0;
 
     print <<"EOF"; exit $code;
@@ -74,25 +75,34 @@ when greater than zero.
 EOF
 }
 
-sub Untab ($) {
+sub Untab ($)
+{
     local $_ = shift;
 
-    while (($x = index($_,"\t")) >= $[) {
+    while (($x = index($_,"\t")) >= $[)
+    {
         substr($_,$x,1) = " " x (((($x / 8) + 1) * 8) - $x)
     }
 
     $_;
 }
 
-sub Eval {
+sub Eval
+{
     my $val = shift;
 
-    while( ( $val =~ /\$(\w+)/ ) ) {
-        if( defined( $Assigns{$1} ) ) {
+    while( ( $val =~ /\$(\w+)/ ) )
+    {
+        if( defined( $Assigns{$1} ) )
+	{
             $val = $` . $Assigns{$1} . $';
-        } elsif( defined( $ENV{$1} ) ) {
+        }
+        elsif( defined( $ENV{$1} ) )
+        {
             $val = $` . $ENV{$1} . $';
-        } else {
+        }
+	else
+	{
             $val = $` . $';     # omit the variable -- it's empty
         }
     }
@@ -102,7 +112,8 @@ sub Eval {
 
 sub Scan ($; $$);
 
-sub Scan ($; $$) {
+sub Scan ($; $$)
+{
     my $file      = shift;
     my $fileLevel = shift || 0;
     my $mainLevel = shift || 0;
@@ -116,7 +127,8 @@ sub Scan ($; $$) {
     my($level) = $mainLevel;
     local $_;
 
-    unless ($quiet) {
+    unless ($quiet)
+    {
         print "\n" if $listlines;
         print (" " x $fileLevel);
         print "Scanning file $file:";
@@ -124,7 +136,8 @@ sub Scan ($; $$) {
 
     local($FH) = $FH_TEMPLATE++;
 
-    open( $FH , $file )  or  do {
+    open( $FH , $file )  or  do
+    {
         print "Can't open $file: $!\n";
 	$ERROR = 1;
         return;
@@ -136,31 +149,37 @@ sub Scan ($; $$) {
     my $continuation	= '';
     my $line		= '';
 
-    while( <$FH> ) {
+    while( <$FH> )
+    {
         chomp;
+
         $_ = Untab $_ if /\t/;
 
-        if( $continuation ) {
+        if( $continuation )
+	{
             $line .= "\n".$_;
             $_     = $line;
             $line  = '';
             $continuation = '';
         }
 
-        if( /\\$/ ) {           # continuation?
+        if( /\\$/ )
+	{				# continuation?
             $continuation = 1;
-            chop;               # remove the trailing slash
-            $line = $_;         # make the continuation
+            chop;			# remove the trailing slash
+            $line = $_;			# make the continuation
             next;
         }
 
         $type = ' ';
 
-        if( /^\s*\#/  or  /^\s*$/ ) {     # ignore comments or blank lines
+        if( /^\s*\#/  or  /^\s*$/ )
+	{			      # ignore comments or blank lines
             $type = ' ';
             $_ = ' ' unless length;
         }
-        elsif( ! $recipe  or  /^\s*:/) {  # are we looking for a recipe?
+        elsif( ! $recipe  or  /^\s*:/) # are we looking for a recipe?
+	{
             # This is a state driven scanner
             # State     Parse   Next    What
             #   0        :       1      Start recipe parse
@@ -170,62 +189,96 @@ sub Scan ($; $$) {
             #   1    {   0      Increment recipe level, parse sub-recipe
             #   1        <other> 0      Parse filename path
 
-            if( /^\s*:\s*(\S.*)?/ ) {   # recipe start?
+            if( /^\s*:\s*(\S.*)?/ )	# recipe start?
+	    {
                 $flags = $1;    # get flags
                 $count = $flags =~ /^(\d+)/ ? $1 :
                          $flags =~ /[eEaA]/ ? 0 : 1;
                 $recipe = $.;   # we're in a recipe
                 $conditions = 0;
                 $type = 'R';    # set the type
-            } elsif( /^\s*}/ ) {        # end of a nested recipe?
+            } elsif( /^\s*}/ )	# end of a nested recipe?
+	    {
                 $level--;
                 $type = 'R';
-                if ($level < 0) {
+
+                if ($level < 0)
+		{
                     $errs .= "Too many close brackets!\n";
                     $level = 0;
                 }
-            } elsif( /^\s*(\w+)\s*=\s*(\S.*)?/ ) {      # an assignment?
+            }
+	    elsif( /^\s*(\w+)\s*=\s*(\S.*)?/ )  # an assignment?
+	    {
                 $type = '=';                    # assignment
                 ($var,$val) = ($1,$2);
-                if( $includerc ) {
+
+                if( $includerc )
+		{
                     $Assigns{$var} = $val;
-                    if( $var eq 'INCLUDERC' ) {
+
+                    if( $var eq 'INCLUDERC' )
+		    {
                         $newfile = Eval $val;
-                        if( $newfile && -f $newfile ) {
+
+                        if( $newfile && -f $newfile )
+			{
                             $includefile = $newfile;
-                        } elsif ( $newfile ) {
+                        }
+			elsif ( $newfile )
+			{
                             $errs .= "Included file \"$newfile\" does not exist.\n";
                         }
                     }
                 }
-            } elsif( /^\s*(\w+)\s*$/ ) {        # an un-assignment?
-                $type = '=';                    # unassignment
-            } else {
+            }
+	    elsif( /^\s*(\w+)\s*$/ )	# an un-assignment?
+	    {
+                $type = '=';		# unassignment
+            }
+	    else
+	    {
                 $errs .= "Bad recipe line: \"$_\"\n";
                 $type = 'E';
             }
-        } else {
-            if( /^\s*\*/ )  {   # a condition?
+        }
+	else
+	{
+            if( /^\s*\*/ )		# a condition?
+	    {
                 $conditions++;
-                $type = 'C';    # condition
+                $type = 'C';		# condition
                 $count--;
-            } elsif ( /^\s*!/ && $count <= 0) { # a redirection?
+            }
+	    elsif ( /^\s*!/ && $count <= 0) # a redirection?
+	    {
                 $recipe = '';   # an action, we're out of the recipe
                 $type = 'A';    # Action
-            } elsif ( /^\s*\|/ ) {      # a pipe?
+            }
+	    elsif ( /^\s*\|/ )	# a pipe?
+	    {
                 $recipe = '';   # another action
                 $type = 'A';    # Action
-            } elsif ( /^\s*{/ ) {       # a subrecipe
-                $level++;               # increment the level
-                $recipe = '';   # and we're out of the recipe
-                $type = 'A';    # Action
+            }
+	    elsif ( /^\s*{/ )		# a subrecipe
+	    {
+                $level++;		# increment the level
+                $recipe = '';		# and we're out of the recipe
+                $type = 'A';		# Action
                 $level-- if /\s+}/;     # decrement count if one-liner
-            } elsif ( --$count >= 0 && !/^\s*[\|{]/) { # more conditions?
+            }
+	    elsif ( --$count >= 0 && !/^\s*[\|{]/) # more conditions?
+	    {
                 $conditions++;
-                $type = 'C';    # assume condition
-            } else {            # default is path
+                $type = 'C';		# assume condition
+            }
+	    else			# default is path
+	    {
                 $type = 'F';    # folder
-                if ( /^\s*[\#*(){}|!?]|^\s*\w+ \w+/ ) { # make reasonable mistake guess
+
+                # make reasonable mistake guess
+                if ( /^\s*[\#*(){}|!?]|^\s*\w+ \w+/ )
+		{
                     $errs .= "Possibly bad folder name?\n";
                 }
 
@@ -234,11 +287,13 @@ sub Scan ($; $$) {
         }
 
       Print:
-        if ( $listlines  or  $errs ) {
+        if ( $listlines  or  $errs )
+	{
             @lines = split /\n/;
             $depth = $level > 0 ? sprintf("<%d>",$level) : "   ";
 
-            while ($_ = shift(@lines)) {
+            while ($_ = shift(@lines))
+	    {
                 print (" " x $fileLevel);
                 $_ .= "\\" if @lines;
                 printf "%3d:%1s%s %s\n",$.,$type,$depth,$_;
@@ -246,29 +301,36 @@ sub Scan ($; $$) {
             }
         }
 
-        if( $errs ) {
+        if( $errs )
+	{
             print $errs;
             $ERROR = 1;
             $errs = '';
         }
 
-        if ($includefile) {
+        if ($includefile)
+	{
             Scan( $includefile, $fileLevel + 1, $level );
-            unless ($quiet) {
+
+            unless ($quiet)
+	    {
                 print "\n" if $listlines;
                 print (" " x $fileLevel);
                 print "Back to file $file:\n";
             }
+
             $includefile = '';
         }
     }
 
-    if ($recipe) {
+    if ($recipe)
+    {
         print "$file: EOF: recipe at line $recipe never terminated.\n";
         $ERROR = 1;
     }
 
-    if ($level > $mainLevel) {
+    if ($level > $mainLevel)
+    {
         print "$file: EOF: Unterminated nested recipies.\n";
         $ERROR = 1;
     }
@@ -276,29 +338,47 @@ sub Scan ($; $$) {
     close $FH;
 }
 
-sub Main () {
-    unless ($#ARGV >= $[) {
+sub Main ()
+{
+    unless ($#ARGV >= $[)
+    {
 	Usage 1;
     }
 
-    while( $_ = shift @ARGV ) {
-	if ( /^(-h|--help)/ ) {
+    while( $_ = shift @ARGV )
+    {
+	if ( /^(-h|--help)/ )
+	{
 	    Usage;
-	} elsif (  / ^(-l|--list)/ ) {
+	}
+	elsif (  /^(-l|--list)/ )
+	{
 	    $listlines++;
-	} elsif ( /^(-L|--nolist)/ ) {
+	}
+	elsif ( /^(-L|--nolist)/ )
+	{
 	    $listlines = '';
-	} elsif ( /^(-i|--includerc)/ ) {
+	}
+	elsif ( /^(-i|--includerc)/ )
+	{
 	    $includerc++;
-	} elsif ( /^(-I|--noincluderc)/ ) {
+	}
+	elsif ( /^(-I|--noincluderc)/ )
+	{
 	    $includerc = '';
-	} elsif ( /^(-p|--procmailrc)/ ) {
+	}
+	elsif ( /^(-p|--procmailrc)/ )
+	{
 	    $HOME = $ENV{'HOME'} || (getpwuid($>))[7];
 	    push(@ARGV,"$HOME/.procmailrc");
-	} elsif ( /^-/ ) {
+	}
+	elsif ( /^-/ )
+	{
 	    print "Unknown option: '$_'\n";
 	    next;
-	} else {
+	}
+	else
+	{
 	    Scan $_;
 	}
     }
