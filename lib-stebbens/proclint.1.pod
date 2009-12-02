@@ -71,9 +71,26 @@ when greater than zero.
 =head1 BUGS
 
 There are many bugs. E.g. multiline handling is not done (continued
-strings).
+strings). Please regard the output as advisory only. Patches are welcome
+as there is nobody developing proclint as of 2007-01-12.
 
-Please regard the output as advisory only.x
+=over 4
+
+=item *
+
+Program does not understand comments after environment variable
+assignments.
+
+=item *
+
+Program does not complain when mail is being delivered to mailboxes in
+a directory which does not exist.
+
+=item *
+
+Extraneous locallockfile settings are not detected.
+
+=back
 
 =head1 STATUS CODES
 
