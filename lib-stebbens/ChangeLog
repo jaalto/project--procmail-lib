@@ -1,3 +1,11 @@
+2009-08-17  Jari Aalto  <jari.aalto@cante.net>
+
+	* proclint
+	Convert braces to modern line-up style.
+	(Main): Remove extra space from RE '-l|--list'.
+	Thanks to Dan Garthwaite.
+	Closes: http://savannah.nongnu.org/support/?106985
+
 2008-12-09  Jari Aalto  <jari.aalto@cante.net>
 
 	* proclint.1.pod: Improve manual page.
