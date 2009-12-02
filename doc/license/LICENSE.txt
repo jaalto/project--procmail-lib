@@ -3,7 +3,7 @@ Copyright information
         This program runs solely with Free Software. It does not rely
         on any component of non-Free Software.
 
-        Copyright (C) 1997-2009 Jari Aalto
+        Copyright (C) 1997-2010 Jari Aalto
 
         This program (referring to all files, including documentation,
         distributed in project "Procmail Module Library") is free
@@ -36,7 +36,7 @@ Copyright information
         this dual licence form *or* select the other license (GNU GPL,
         GNU FDL) and remove the unwanted one.
 
-	Copyright (C) 1997-2009 Jari Aalto
+	Copyright (C) 1997-2010 Jari Aalto
 
 	Permission is granted to copy, distribute and/or modify
 	this document under the terms of the GNU Free
