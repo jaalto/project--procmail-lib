@@ -1,3 +1,8 @@
+2009-12-02  Jari Aalto  <jari.aalto@cante.net>
+
+	* proclint.1.pod: (BUG): Document unsupported features; Debian
+	<http://bugs.debian.org/41297>.
+
 2009-08-17  Jari Aalto  <jari.aalto@cante.net>
 
 	* proclint
