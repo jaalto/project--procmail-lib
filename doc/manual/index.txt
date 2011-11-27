@@ -38,8 +38,8 @@ Document id
 
             % perl -S t2html.pl                                           \
               --html-frame                                                \
-              --base http://freshmeat.net/projects/procmail-lib           \
-              --button-previous http://freshmeat.net/projects/procmail-lib \
+              --base http://freecode.net/projects/procmail-lib           \
+              --button-previous http://freecode.net/projects/procmail-lib \
               --title  "Procmail module documentation"                    \
               --author "Jari Aalto"                                       \
               --meta-keywords "procmail, sendmail, programming, library"  \
@@ -53,7 +53,7 @@ Document id
         be found at CPAN entry
         http://www.cpan.org/modules/by-authors/id/J/JA/JARIAALTO/ and
         `t2html.pl' is available at project
-        #URL<http://freshmeat.net/projects/perl-text2html><perl-text2html>.
+        #URL<http://freecode.net/projects/perl-text2html><perl-text2html>.
 
 Pm-jaaddr.rc -- extract 'foo@some.com' email address from variable INPUT
 
@@ -4444,7 +4444,7 @@ Pm-jaube-keywords.rc -- Bare bones word list based UBE filter
 
         The layout of this file is managed by Emacs packages tinyprocmal.el
         and tinytab.el for the 4 tab text placement.
-        See project http://freshmeat.net/projects/emacs-tiny-tools/
+        See project http://freecode.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-spamprobe.rc -- Interface to Annoyance Filter program
 
@@ -4577,7 +4577,7 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Annoyance Filter program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See http://freshmeat.net/projects/emacs-tiny-tools/
+        See http://freecode.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
 
@@ -4638,7 +4638,7 @@ Pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
 
         For serious discussion of strenghts of the different programs,
         refer to a very good article "Spam Filters" by Sam Holden at
-        2004-08-16 <http://freshmeat.net/articles/view/964>. The
+        2004-08-16 <http://freecode.net/articles/view/964>. The
         article evaluated throughly following programs:
 
         o   Bayesian Mail Filter        (bayesian)
@@ -4727,7 +4727,7 @@ Pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://freshmeat.net/projects/emacs-tiny-tools/
+        See project http://freecode.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-bogofilter -- Interface to bogofilter program
 
@@ -4843,7 +4843,7 @@ Pm-jaube-prg-bogofilter -- Interface to bogofilter program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://freshmeat.net/projects/emacs-tiny-tools/
+        See project http://freecode.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-bsfilter.rc -- Interface to Bsfilter program
 
@@ -4956,7 +4956,7 @@ Pm-jaube-prg-bsfilter.rc -- Interface to Bsfilter program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://freshmeat.net/projects/emacs-tiny-tools/
+        See project http://freecode.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-ifile -- Interface to ifile program
 
@@ -4994,7 +4994,7 @@ Pm-jaube-prg-ifile -- Interface to ifile program
 
     Overview of features
 
-        o   Implements interface to http://freshmeat.net/projects/ifile
+        o   Implements interface to http://freecode.net/projects/ifile
             project.
         o   variable `ERROR' is set to the result of ifile check. This
             usually holds the "folder" name the ifile was trained at the
@@ -5082,7 +5082,7 @@ Pm-jaube-prg-ifile -- Interface to ifile program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://freshmeat.net/projects/emacs-tiny-tools/
+        See project http://freecode.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-runall.rc -- Interface to all Bayesian filter programs
 
@@ -5202,7 +5202,7 @@ Pm-jaube-prg-runall.rc -- Interface to all Bayesian filter programs
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://freshmeat.net/projects/emacs-tiny-tools/
+        See project http://freecode.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-spamassassin -- Interface to spamassassin program
 
@@ -5319,7 +5319,7 @@ Pm-jaube-prg-spamassassin -- Interface to spamassassin program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://freshmeat.net/projects/emacs-tiny-tools/
+        See project http://freecode.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-spamoracle.rc -- Interface to Spamoracle program
 
@@ -5359,7 +5359,7 @@ Pm-jaube-prg-spamoracle.rc -- Interface to Spamoracle program
 
     Overview of features
 
-        o   Implements interface to http://freshmeat.net/projects/spamoracle
+        o   Implements interface to http://freecode.net/projects/spamoracle
             OCaml language based Bayesian Mail program.
         o   Variable `ERROR' is set to "yes" if the message was UBE.
         o   Results are available in headers `X-Spam-Spamoracle-Status',
@@ -5462,7 +5462,7 @@ Pm-jaube-prg-spamoracle.rc -- Interface to Spamoracle program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://freshmeat.net/projects/emacs-tiny-tools/
+        See project http://freecode.net/projects/emacs-tiny-tools/
 
 Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
 
@@ -5503,7 +5503,7 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
 
     Overview of features
 
-        o   Implements interface to http://freshmeat.net/projects/spamprobe/
+        o   Implements interface to http://freecode.net/projects/spamprobe/
             project.
         o   variable `ERROR' is set if the message was UBE.
         o   Results are available by default in header
@@ -5581,7 +5581,7 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
 
         The layout of this file is managed by Emacs packages tinyprocmail.el
         and tinytab.el for the 4 tab text placement.
-        See project http://freshmeat.net/projects/emacs-tiny-tools/
+        See project http://freecode.net/projects/emacs-tiny-tools/
 
 Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
 
@@ -5911,7 +5911,7 @@ Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
 
         The layout of this file is managed by Emacs packages tinyprocmal.el
         and tinytab.el for the 4 tab text placement.
-        See project http://freshmeat.net/projects/emacs-tiny-tools/
+        See project http://freecode.net/projects/emacs-tiny-tools/
 
 Pm-javac.rc -- Procmail: Vacation framework recipe (id-cache)
 

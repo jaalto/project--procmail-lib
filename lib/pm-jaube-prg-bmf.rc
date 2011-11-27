@@ -57,7 +57,7 @@
 #
 #       For serious discussion of strenghts of the different programs,
 #       refer to a very good article "Spam Filters" by Sam Holden at
-#       2004-08-16 <http://freshmeat.net/articles/view/964>. The
+#       2004-08-16 <http://freecode.net/articles/view/964>. The
 #       article evaluated throughly following programs:
 #
 #       o   Bayesian Mail Filter        (bayesian)
@@ -146,7 +146,7 @@
 #
 #       The layout of this file is managed by Emacs packages tinyprocmail.el
 #       and tinytab.el for the 4 tab text placement.
-#       See project http://freshmeat.net/projects/emacs-tiny-tools/
+#       See project http://freecode.net/projects/emacs-tiny-tools/
 #
 #   Change Log
 #
