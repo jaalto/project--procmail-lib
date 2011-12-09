@@ -930,7 +930,7 @@
             confirmation request message to the envelope sender asking for a
             reply to confirm delivery. Similar to TMDA.
             http://smarden.org/qconfirm/
-        o   Active Spam Killer (ASK) http://freecode.net/projects/ask/
+        o   Active Spam Killer (ASK) http://freecode.com/projects/ask/
             and http://www.paganini.net/ask/
             by Marco Paganini
         o   Commercial http://www.spamarrest.com/
@@ -1020,8 +1020,8 @@
         meet the expectations to stop Unsolicited Bulk Email. Some known
         procmail projects in this category include:
 
-        o   Spambouncer <http://freecode.net/projects/spambouncer/>
-        o   SPASTIC <http://freecode.net/projects/spastic/>,
+        o   Spambouncer <http://freecode.com/projects/spambouncer/>
+        o   SPASTIC <http://freecode.com/projects/spastic/>,
         o   Procmail module library <http://pm-lib.sf.net>
 
         The instructions given here apply only to features found from
@@ -1123,7 +1123,7 @@
         spent on training. Without a good training they may be no
         better than average rule based solutions. An excellent article
         2003-08-23 on the subject is at
-        <http://freecode.net/articles/view/964/> titled *Spam*
+        <http://freecode.com/articles/view/964/> titled *Spam*
         *Filters* by Sam Holden.
 
         Due to different algorithms used in various programs, there is
@@ -1273,12 +1273,12 @@
         them to the the message recognition chain.
 
         o   *Bogofilter.* Well known and actively developed.
-            http://freecode.net/projects/bogofilter
+            http://freecode.com/projects/bogofilter
         o   *Bayesian* *Mail* *Filter.* Very, very accurate, while
             development activity is unknown.
-            http://freecode.net/projects/bmf
+            http://freecode.com/projects/bmf
         o   *Spamprobe.* Another very accurate Bayesian program.
-            http://freecode.net/projects/spamprobe
+            http://freecode.com/projects/spamprobe
         o   *Ifile.* Yet another classification program, but this one
             can be trained to detect different classes of messages.
             Instead of two category separation into spam and ham, this
@@ -1286,7 +1286,7 @@
             spam, ham, daemon, virus, bugs, work etc. Ifile is not
             well suited for pure spam, ham separation, because it
             does not detect HTML or MIME. The project page is at
-            <http://freecode.net/projects/ifile> and low volume
+            <http://freecode.com/projects/ifile> and low volume
             discussion list at
             <http://lists.gnu.org/archive/html/ifile-discuss>
         o   *Annoyance* *filter* . Development
@@ -1294,10 +1294,10 @@
             http://sourceforge.net/projects/annoyancefilter/
         o   *Bsfilter* Ruby based Japanese aware filter. Development
             activity is unknown.
-            http://freecode.net/projects/bsfilter
+            http://freecode.com/projects/bsfilter
         o   *Spamoracle* OCaml based bayesian filtering. Development
             activity is unknown.
-            http://freecode.net/projects/spamoracle
+            http://freecode.com/projects/spamoracle
 
         Other program that might be of interest:
 

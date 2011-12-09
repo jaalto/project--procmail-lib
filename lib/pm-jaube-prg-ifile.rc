@@ -34,7 +34,7 @@
 #
 #   Overview of features
 #
-#       o   Implements interface to http://freecode.net/projects/ifile
+#       o   Implements interface to http://freecode.com/projects/ifile
 #           project.
 #       o   variable `ERROR' is set to the result of ifile check. This
 #           usually holds the "folder" name the ifile was trained at the
@@ -122,7 +122,7 @@
 #
 #       The layout of this file is managed by Emacs packages tinyprocmail.el
 #       and tinytab.el for the 4 tab text placement.
-#       See project http://freecode.net/projects/emacs-tiny-tools/
+#       See project http://freecode.com/projects/emacs-tiny-tools/
 #
 #   Change Log
 #

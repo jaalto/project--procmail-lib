@@ -36,7 +36,7 @@
 #
 #   Overview of features
 #
-#       o   Implements interface to http://freecode.net/projects/spamoracle
+#       o   Implements interface to http://freecode.com/projects/spamoracle
 #           OCaml language based Bayesian Mail program.
 #       o   Variable `ERROR' is set to "yes" if the message was UBE.
 #       o   Results are available in headers `X-Spam-Spamoracle-Status',
@@ -139,7 +139,7 @@
 #
 #       The layout of this file is managed by Emacs packages tinyprocmail.el
 #       and tinytab.el for the 4 tab text placement.
-#       See project http://freecode.net/projects/emacs-tiny-tools/
+#       See project http://freecode.com/projects/emacs-tiny-tools/
 #
 #   Change Log
 #
