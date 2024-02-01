@@ -9,7 +9,7 @@ Document id
         #T2HTML-OPTION Note:
         #T2HTML-OPTION --simple
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         License: This material may be distributed only subject to
         the terms and conditions set forth in GNU General Public
@@ -59,7 +59,7 @@ Pm-jaaddr.rc -- extract 'foo@some.com' email address from variable INPUT
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -256,7 +256,7 @@ Pm-jabup.rc --  Keeep N arriving message backup in separate directory
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -327,7 +327,7 @@ Pm-jacookie1.rc -- Generate unique id from INPUT variable.
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -372,7 +372,7 @@ Pm-jacookie.rc -- Handle cookie (unique id) confirmations
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -588,7 +588,7 @@ Pm-jacron.rc -- Procmail: Run cron once a day
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -686,7 +686,7 @@ Pm-jadaemon.rc -- Handle DAEMON messages by changing subject
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -781,7 +781,7 @@ Pm-jadate1.rc -- 'Tue, 31 Dec 1997' date parser from variable INPUT
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -867,7 +867,7 @@ Pm-jadate2.rc -- 'YYYY-MM-DD' ISO date parser from variable INPUT
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -924,7 +924,7 @@ Pm-jadate3.rc -- 'Tue Nov 25 19:32:57' date parser from variable INPUT
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -1003,7 +1003,7 @@ Pm-jadate4.rc -- make RFC 'Mon, 1 Dec 1997 17:41:09' and parse values
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -1098,7 +1098,7 @@ Pm-jadate5.rc -- 'Fri Jun 19 18:51:56 1998' date parser from var INPUT
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -1181,7 +1181,7 @@ Pm-jadate.rc -- Read date from the message hdrs: From_, Receved:
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -1239,7 +1239,7 @@ Pm-jadup.rc -- Procmail: Handle duplicates; store to separate folder
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -1326,7 +1326,7 @@ Pm-jaempty.rc -- check if message body is empty
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -1369,7 +1369,7 @@ Pm-jafrom.rc -- get message's best FROM field without calling `formail'
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -1419,7 +1419,7 @@ Pm-jafwd.rc -- Controlling forwarding remotedly
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -1576,7 +1576,7 @@ Pm-jalist.rc -- Subroutine to detect mailing LIST from message.
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -1959,7 +1959,7 @@ Pm-jamime-decode.rc -- decode MIME body contents; quoted-printable, base64
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -2070,7 +2070,7 @@ Pm-jamime-kill.rc -- General MIME attachment killer (vcards, html)
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -2405,7 +2405,7 @@ Pm-jamime.rc -- subroutine to read mime boundary etc. variables
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -2504,7 +2504,7 @@ Pm-jamime-recode.rc -- re-encode MIME Header: Subject, From as quoted-printable
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -2580,7 +2580,7 @@ Pm-jamime-save.rc -- save message's MIME attachement (one file) to a file
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -2690,7 +2690,7 @@ Pm-janetmind.rc -- handle http://minder.netmind.com/ messages
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -2765,7 +2765,7 @@ Pm-janslookup.rc -- run nslookup on variable INPUT
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -2893,7 +2893,7 @@ Pm-jaorig.rc -- Extract embedded original message (simple recipe)
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3050,7 +3050,7 @@ Pm-japing.rc -- reply shortly to message "Subject: ping"; account ok
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3105,7 +3105,7 @@ Pm-japop3.rc -- Remotedly download messages by mail command request
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3208,7 +3208,7 @@ Pm-jarandf.rc -- pick (rand)om line from (f)ile
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3271,7 +3271,7 @@ Pm-jasrv-check.rc -- check FILE validity, subroutine for File Server
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3304,7 +3304,7 @@ Pm-jasrv-daemon.rc -- server request check, subroutine for File Server
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3338,7 +3338,7 @@ Pm-jasrv-err.rc -- send message, subroutine for File Server
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3368,7 +3368,7 @@ Pm-jasrv-from.rc -- compose reply, subroutine for File Server
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3409,7 +3409,7 @@ Pm-jasrv-msg.rc -- send message, subroutine for File Server
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3437,7 +3437,7 @@ Pm-jasrv-multi.rc -- send multipart MIME message, subroutine for FileSrv
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3468,7 +3468,7 @@ Pm-jasrv.rc -- MIME capable Procmail File server
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3843,7 +3843,7 @@ Pm-jasrv-req.rc -- server request check, subroutine for File Server
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3884,7 +3884,7 @@ Pm-jasrv-send.rc -- server request check, subroutine for File Server
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -3942,7 +3942,7 @@ Pm-jastore.rc -- Store messagee to inbox or gzip inbox
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -4005,7 +4005,7 @@ Pm-jasubject.rc -- Subject field cleaner and canonicalizer (Re:)
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -4180,7 +4180,7 @@ Pm-jatime.rc -- "hh:mm:ss" time parser from variable INPUT
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -4250,7 +4250,7 @@ Pm-jaube1.rc -- Jari's UBE filter. Subroutine 1
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -4279,7 +4279,7 @@ Pm-jaube-keywords.rc -- Bare bones word list based UBE filter
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -4450,7 +4450,7 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Annoyance Filter program
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -4583,7 +4583,7 @@ Pm-jaube-prg-bmf.rc -- Interface to Bayesian Mail Filter program
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -4733,7 +4733,7 @@ Pm-jaube-prg-bogofilter -- Interface to bogofilter program
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -4849,7 +4849,7 @@ Pm-jaube-prg-bsfilter.rc -- Interface to Bsfilter program
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -4962,7 +4962,7 @@ Pm-jaube-prg-ifile -- Interface to ifile program
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -5088,7 +5088,7 @@ Pm-jaube-prg-runall.rc -- Interface to all Bayesian filter programs
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -5208,7 +5208,7 @@ Pm-jaube-prg-spamassassin -- Interface to spamassassin program
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -5325,7 +5325,7 @@ Pm-jaube-prg-spamoracle.rc -- Interface to Spamoracle program
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -5468,7 +5468,7 @@ Pm-jaube-prg-spamprobe.rc -- Interface to Spamprobe program
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -5587,7 +5587,7 @@ Pm-jaube.rc -- Unsolicited Bulk Email (UBE) filter.
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -5917,7 +5917,7 @@ Pm-javac.rc -- Procmail: Vacation framework recipe (id-cache)
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
@@ -6001,7 +6001,7 @@ Pm-javar.rc -- Global variable definitions
 
     File id
 
-        Copyright (C) 1997-2010 Jari Aalto
+        Copyright (C) 1997-2024 Jari Aalto
 
         This program is free software; you can redistribute it and/or
         modify it under the terms of the GNU General Public License as
